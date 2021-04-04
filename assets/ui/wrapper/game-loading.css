@@ -1,0 +1,40 @@
+.game-loading {
+	display: none;
+	width: auto;
+	height: auto;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	background-color: #fff;
+	color: #000;
+	cursor: default;
+	z-index: 99
+}
+
+.game-loading #loading_text {
+	display: block;
+	width: 260px;
+	height: 20px;
+	margin: auto;
+	right: 16px;
+	bottom: 16px;
+	position: absolute;
+	background-image: url(../loading/loading_text.gif);
+	background-size: cover;
+	image-rendering: crisp-edges
+}
+
+.game-loading #loading_clock {
+	width: auto; /* base 65 */
+	height: 85%; /* base 224 */
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	image-rendering: crisp-edges
+}

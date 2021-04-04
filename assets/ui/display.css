@@ -1,0 +1,15 @@
+.display {
+	display: block;
+	width: calc(50% - 32px);
+	height: 30px;
+	margin: auto;
+	padding: 16px;
+	bottom: 0;
+	position: absolute;
+	color: #fff;
+	cursor: default;
+	text-align: left;
+	font-size: 24px
+}
+
+.menu-main .display, .menu-pause .display {left: 0}

@@ -1,0 +1,30 @@
+{
+	"en_US": {
+		"UI.play.text": "Play",
+		"UI.close.text": "Close",
+		"UI.next.text": "Next",
+		"NewGame.text": "New Game",
+		"LaunchBackup.text": "Launch Backup",
+		"Options.text": "Options",
+		"Options.key_forward.text": "Move Forward",
+		"Options.key_backward.text": "Move Backward",
+		"Options.key_turnLeft.text": "Turn Left",
+		"Options.key_turnRight.text": "Turn Right",
+		"Options.key_console.text": "Toggle Console",
+		"Credits.text": "Credits",
+		"UI.display.text": "Display:",
+		"UI.version.text": "Version:",
+		"Class.Mage.text": "Mage",
+		"Class.Mage.atk1.text": "",
+		"Class.Mage.atk2.text": "",
+		"Class.Mage.ult.text": "",
+		"Class.Rogue.text": "Rogue",
+		"Class.Rogue.atk1.text": "",
+		"Class.Rogue.atk2.text": "",
+		"Class.Rogue.ult.text": "",
+		"Class.Paladin.text": "Paladin",
+		"Class.Paladin.atk1.text": "",
+		"Class.Paladin.atk2.text": "",
+		"Class.Paladin.ult.text": ""
+	}
+}

@@ -1,0 +1,71 @@
+.credits {
+	display: none;
+	width: auto;
+	height: auto;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	background-image: url(../../background.jpg);
+	background-size: cover;
+	image-rendering: crisp-edges;
+	color: #fff;
+	cursor: default;
+	text-align: center;
+	font-size: 24px;
+	z-index: 99
+}
+
+.credits .overlay-credits {
+	display: none;
+	opacity: 1;
+	background-color: #000;
+	animation: fadeOut 2s linear;
+	z-index: 99
+}
+
+.credits .btn-close {
+	margin: auto;
+	padding: 0;
+	top: 16px;
+	right: 16px;
+	position: absolute;
+	z-index: 99
+}
+
+.credits .return {
+	display: none;
+	margin: auto;
+	bottom: 16px;
+	right: 0;
+	left: 0;
+	position: absolute
+}
+
+.credits #credits {
+	position: absolute;
+	top: -9999px;
+	right: 0;
+	left: 0;
+	animation: credits 20s linear
+}
+
+.credits #credits span {display: block}
+
+.credits #credits .title {
+	padding: 200px 0 300px 0;
+	font-size: 48px
+}
+
+.credits #credits #copyright {padding-bottom: 300px}
+
+.credits #credits .job {
+	padding-bottom: 20px;
+	font-size: 32px
+}
+
+.credits #credits .name {padding-bottom: 150px}
+
+.credits #credits .name:last-child {padding-bottom: 200px}

@@ -1,0 +1,22 @@
+.game {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	height: auto;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	overflow: hidden;
+	background-color: #000;
+	z-index: 1
+}
+
+.game .overlay-shade {
+	/* add some "#000" to make the visible area smaller */
+	background: radial-gradient(circle at 50%, transparent, #000, #000, #000);
+	z-index: 9
+}

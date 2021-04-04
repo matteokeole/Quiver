@@ -1,0 +1,120 @@
+.menu-fight {
+	display: none;
+	width: auto;
+	height: auto;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	background-color: #000;
+	color: #fff;
+	cursor: default;
+	text-align: center;
+	z-index: 69
+}
+
+.menu-fight .title {
+	height: 150px;
+	line-height: 134px;
+	top: 0;
+	right: 0;
+	left: 0;
+	position: relative;
+	color: #fff;
+	cursor: default;
+	text-align: center;
+	font-size: 48px;
+	z-index: 1
+}
+
+.menu-fight .attack_name, .menu-fight .enemy_attack_name {
+	display: none;
+	width: 50%;
+	height: 52px;
+	margin: auto;
+	padding: 8px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	border: 4px solid #000;
+	background-color: #ab9d86;
+	color: #000;
+	cursor: default;
+	font-size: 40px;
+	animation: attack_name 3s infinite linear;
+	z-index: 2
+}
+
+.menu-fight .attack_name {background-color: #ab9d86}
+
+.menu-fight .enemy_attack_name {background-color: #ca302d}
+
+.menu-fight .you {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	background: radial-gradient(circle at 50%, #222, #000, #000)
+}
+
+.menu-fight .vs {
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	font-size: 60px;
+	transform: rotateZ(-15deg);
+	z-index: 1
+}
+
+.menu-fight .enemy {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	background: radial-gradient(circle at 50%, #222, #000, #000)
+}
+
+.menu-fight .you img,
+.menu-fight .enemy img {
+	width: 128px;
+	height: 128px;
+	image-rendering: crisp-edges
+}
+
+.menu-fight .enemy img {transform: rotateY(180deg)}
+
+.menu-fight .actions {
+	width: 448px;
+	margin: 0 auto;
+	bottom: 32px;
+	right: 0;
+	left: 0;
+	position: absolute;
+	text-align: center;
+	z-index: 9
+}
+
+.menu-fight .actions .btn {
+	display: block;
+	margin-top: 8px
+}

@@ -1,0 +1,320 @@
+<!-- 1.0.0: 4801 lines -->
+
+<!DOCTYPE html>
+
+<html lang="fr" oncontextmenu="return false">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+		<meta name="description" content="Quiver">
+		<meta name="version" content="1.0.0">
+		<meta name="author" content="Clarisse Eynard, Léan Houdayer, Mattéo Legagneux">
+		<link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico"> <!-- favicon -->
+		<link rel="stylesheet" type="text/css" href="assets/font/font.css"> <!-- font-face -->
+		<link rel="stylesheet" type="text/css" href="assets/ui/animations.css"> <!-- ui animations -->
+		<link rel="stylesheet" type="text/css" href="assets/ui/btn/btn.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/wrapper/menu-main.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/wrapper/menu-pause.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/wrapper/menu-fight.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/wrapper/game.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/wrapper/game-loading.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/section/death.css"> <!-- rip -->
+		<link rel="stylesheet" type="text/css" href="assets/ui/section/new_game.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/section/launch_backup.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/section/options.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/section/credits.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/section/save.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/section/quit_game.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/dialog.css"> <!-- dialogs -->
+		<link rel="stylesheet" type="text/css" href="assets/ui/subtitle.css"> <!-- subtitles -->
+		<link rel="stylesheet" type="text/css" href="assets/ui/hud.css"> <!-- hud -->
+		<link rel="stylesheet" type="text/css" href="assets/map/structure.css">
+		<link rel="stylesheet" type="text/css" href="assets/entity/player.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/overlay.css"> <!-- overlays -->
+		<link rel="stylesheet" type="text/css" href="assets/ui/display.css"> <!-- display tip -->
+		<link rel="stylesheet" type="text/css" href="assets/ui/version.css"> <!-- version tip -->
+		<link rel="stylesheet" type="text/css" href="assets/border.css"> <!-- borders -->
+		<link rel="stylesheet" type="text/css" href="assets/window.css"> <!-- windowtoosmall section -->
+		<link rel="stylesheet" type="text/css" href="assets/nojs.css"> <!-- nojs section -->
+		<style type="text/css">
+			/* debug console */
+			debug {
+				display: none;
+				width: 250px;
+				height: 400px;
+				margin: auto;
+				padding: 8px;
+				top: 8px;
+				left: 8px;
+				position: fixed;
+				background-color: rgba(0, 0, 0, 0.5);
+				color: #fff;
+				cursor: default;
+				font-family: Courier New, monospace;
+				z-index: 99999
+			}
+
+			debug #dtitle {text-align: center}
+		</style>
+		<script type="text/javascript" src="script/main.js"></script>
+		<script type="text/javascript" src="script/keybinds.js"></script>
+		<script type="text/javascript" src="script/credits.js"></script>
+		<script type="text/javascript" src="script/new_game.js"></script>
+		<script type="text/javascript" src="script/launch_backup.js"></script>
+		<script type="text/javascript" src="script/options.js"></script>
+		<script type="text/javascript" src="script/pause.js"></script>
+		<script type="text/javascript" src="script/save.js"></script>
+		<script type="text/javascript" src="script/quit_game.js"></script>
+		<script type="text/javascript" src="functions/scale.js"></script>
+		<script type="text/javascript" src="functions/class.js"></script>
+		<script type="text/javascript" src="functions/death.js"></script>
+		<script type="text/javascript" src="functions/get_date.js"></script>
+		<script type="text/javascript" src="functions/convert_date.js"></script>
+		<script type="text/javascript" src="functions/launch.js"></script>
+		<script type="text/javascript" src="functions/start_fight.js"></script>
+		<script type="text/javascript" src="functions/quit.js"></script>
+		<script type="text/javascript" src="functions/dialog.js"></script>
+		<script type="text/javascript" src="functions/subtitle.js"></script>
+		<script type="text/javascript" src="functions/story.js"></script>
+		<script type="text/javascript" src="engine/generator.js"></script>
+		<script type="text/javascript" src="engine/change_level.js"></script>
+		<script type="text/javascript" src="engine/movement.js"></script>
+		<script type="text/javascript" src="engine/collisions.js"></script>
+		<script type="text/javascript" src="engine/near.js"></script>
+		<script type="text/javascript" src="maps/lvl_0/lvl_0.js"></script> <!-- lobby (tavern) -->
+		<script type="text/javascript" src="maps/lvl_1/lvl_1.js"></script> <!-- level 1 -->
+		<script type="text/javascript" src="maps/lvl_2/lvl_2.js"></script> <!-- level 2 -->
+		<title>Quiver</title>
+	</head>
+
+	<body onselectstart="return false">
+		<noscript class="nojs">
+			<span>
+				Ce jeu necessite JavaScript pour fonctionner.<br><br>
+				Pour activer JavaScript sur FireFox,<br>
+				veuillez vous rendre a l'adresse about:config et rechercher<br>
+				javascript.enabled dans la barre de recherche.<br>
+				Vous pouvez ensuite modifier la valeur du parametre<br>
+				javascript.enabled pour activer ou desactiver JavaScript.
+			</span>
+			<div class="version">Version : 1.0.0</div>
+		</noscript>
+		<debug>
+			<div id="dtitle">Console</div><br><br>
+			<span class="d1"></span><br>
+			<span class="d2"></span><br>
+			<span class="d3"></span><br>
+			<span class="d4"></span><br>
+			<span class="d5"></span>
+		</debug>
+		<div class="windowtoosmall">
+			La fenetre est trop petite pour permettre<br>
+			un affichage correct du jeu.<br>La taille minimale de fenetre acceptee est 1280x720.
+			<div class="angle" id="angle1"></div>
+			<div class="angle" id="angle2"></div>
+			<div class="angle" id="angle3"></div>
+			<div class="angle" id="angle4"></div>
+		</div>
+		<wrapper class="menu-main">
+			<div class="border border-left"></div>
+			<div class="border border-right"></div>
+			<div class="background bg1"></div>
+			<div class="background bg2"></div>
+			<div class="title"></div>
+			<div class="arrow"></div>
+			<div class="menu">
+				<button class="btn" id="btn-new_game">Nouvelle partie</button>
+				<input type="file" id="btn-launch_backup">
+				<label for="btn-launch_backup" class="btn label-launch_backup">Charger une sauvegarde</label>
+				<button class="btn btn-options">Options</button>
+				<button class="btn" id="btn-open_credits">Credits</button>
+			</div>
+			<div class="display"></div>
+			<div class="version"></div>
+		</wrapper>
+		<section class="section-new_game">
+			<content>
+				<div class="title">Nouvelle partie</div>
+				<section class="step1">
+					Nom de la partie :<br>(permet de differencier les sauvegardes)<br><br>
+					<input type="text" id="game_name"><br><br>
+					Choisissez un pseudo qui sera affiche en jeu :<br><br>
+					<input type="text" id="player_nickname">
+					<button class="btn btn-next btn-disabled" disabled="disabled">Suivant</button>
+				</section>
+				<section class="step2">
+					Choisissez une classe pour votre personnage :<br><br>
+					<button class="btn btn-class" id="select_class1">Mage</button>
+					<button class="btn btn-class" id="select_class2">Roublard</button>
+					<button class="btn btn-class" id="select_class3">Paladin</button>
+					<button class="btn btn-create_game btn-disabled" disabled="disabled">Creer</button>
+				</section>
+				<div class="class_info">
+					<span></span>
+					<button class="btn btn-close b2"></button>
+				</div>
+				<button class="btn btn-close b1"></button>
+			</content>
+		</section>
+		<section class="section-launch_backup">
+			<content>
+				<div class="title">Charger une sauvegarde</div>
+				<span class="backup_info"></span>
+				<textarea class="backup_content" id="old_content" readonly></textarea>
+				<label for="btn-launch_backup" class="btn label-launch_backup">Autres sauvegardes...</label>
+				<button class="btn" id="btn-confirm_backup">Charger</button>
+				<button class="btn btn-close"></button>
+			</content>
+		</section>
+		<section class="section-options">
+			<content>
+				<div class="title">Options</div>
+				<div class="menu">
+					<div class="key">
+						<span class="title_forward">Avancer</span>
+						<button class="btn btn-key" id="btn-key_forward"></button>
+					</div>
+					<div class="key">
+						<span class="title_backward">Reculer</span>
+						<button class="btn btn-key" id="btn-key_backward"></button>
+					</div>
+					<div class="key">
+						<span class="title_strafeLeft">Tourner a gauche</span>
+						<button class="btn btn-key" id="btn-key_strafeLeft"></button>
+					</div>
+					<div class="key">
+						<span class="title_strafeRight">Tourner a droite</span>
+						<button class="btn btn-key" id="btn-key_strafeRight"></button>
+					</div>
+				</div>
+				<button class="btn btn-close"></button>
+			</content>
+		</section>
+		<div class="overlay overlay-options">
+			<span>Appuyez sur une touche</span>
+			<button class="btn btn-close"></button>
+		</div>
+		<section class="credits">
+			<div class="overlay overlay-credits"></div>
+			<div class="border border-top"></div>
+			<div class="border border-bottom"></div>
+			<div id="credits">
+				<span class="title">Credits</span><br>
+				<span id="copyright"></span>
+				<span class="job">Directrice artistique & Scenariste</span>
+				<span class="name">Clarisse Eynard</span>
+				<span class="job">Game Designer</span>
+				<span class="name">Lean Houdayer</span>
+				<span class="job">UI / Level Designer</span>
+				<span class="name">Matteo Legagneux</span>
+			</div>
+			<button class="btn btn-close"></button>
+			<button class="btn return">Menu principal</button>
+		</section>
+		<wrapper class="game">
+			<div class="overlay overlay-shade"></div>
+			<div id="player"></div>
+			<section class="map"></section>
+			<section class="uppermap"></section>
+			<div class="subtitle"></div>
+			<div class="dialog">
+				<span class="dialogContent">[]</span><br>
+				<button id="dialogChoice1">-> [1]</button>
+				<button id="dialogChoice2">-> [2]</button>
+			</div>
+			<div class="hud">
+				<div id="hud_nickname">Joueur</div>
+				<div class="health">
+					<span>Sante (100/100)</span><br>
+					<progress value="100" max="100"></progress>
+				</div>
+				<div class="mp">
+					<span>Mana (100/100)</span><br>
+					<progress value="100" max="100"></progress>
+				</div>
+			</div>
+		</wrapper>
+		<wrapper class="game-loading">
+			<div id="loading_text"></div>
+			<img id="loading_clock" src="assets/ui/loading/clock.png">
+		</wrapper>
+		<wrapper class="menu-fight">
+			<div class="title">Fight!</div>
+			<div class="vs">VS</div>
+			<div class="attack_name">Nom de l'attaque</div>
+			<div class="enemy_attack_name">Nom de l'attaque</div>
+			<div class="mini_hud">
+				<div class="health">
+					<span>Sante (100/100)</span><br>
+					<progress value="100" max="100"></progress>
+				</div>
+				<div class="mp">
+					<span>Mana (100/100)</span><br>
+					<progress value="100" max="100"></progress>
+				</div>
+				<div class="enemy_health">
+					<span>Sante (100/100)</span><br>
+					<progress value="100" max="100"></progress>
+				</div>
+			</div>
+			<div class="you">
+				<img src="assets/entity/something.png">
+			</div>
+			<div class="enemy">
+				<img src="assets/entity/something.png">
+			</div>
+			<div class="actions">
+				<button class="btn attack1">Attaque 1</button>
+				<button class="btn attack2">Attaque 2</button>
+				<button class="btn ult">Ultime</button>
+				<!-- <button class="btn use">Utiliser un objet</button> -->
+				<button class="btn flee">Fuir</button>
+			</div>
+		</wrapper>
+		<section class="menu-death">
+			<div class="death">
+				<span class="death_title">Vous etes mort(e) !</span>
+				<span class="death_info">c'est vraiment dommage...</span>
+			</div>
+			<button class="btn return">Menu principal</button>
+		</section>
+		<wrapper class="menu-pause">
+			<div class="title">Pause</div>
+			<div class="menu">
+				<button class="btn" id="btn-continue">Reprendre le jeu</button>
+				<button class="btn" id="btn-save">Sauvegarder</button>
+				<button class="btn btn-options">Options</button>
+				<button class="btn" id="btn-quit_game">Quitter la partie</button>
+			</div>
+			<div class="display"></div>
+			<div class="version"></div>
+		</wrapper>
+		<section class="section-save">
+			<content>
+				<div class="title">Sauvegarder</div>
+				<span>
+					Copiez-collez la sauvegarde ci-dessous<br>
+					dans un fichier .js que vous creerez<br>
+					dans le dossier /backups.
+				</span>
+				<textarea class="backup_content" id="new_content" readonly></textarea>
+				<button class="btn" id="btn-copy">Copier</button>
+				<button class="btn btn-close"></button>
+			</content>
+		</section>
+		<section class="section-quit_game">
+			<content>
+				<div class="title">Quitter la partie</div>
+				<span>
+					Etes-vous sur de vouloir quitter ?<br><br>
+					Pensez a sauvegarder votre partie<br>
+					avant de quitter.
+				</span>
+				<button class="btn btn-ok">Quitter</button>
+				<button class="btn btn-cancel">Annuler</button>
+			</content>
+		</section>
+	</body>
+
+</html>

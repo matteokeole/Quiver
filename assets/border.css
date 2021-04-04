@@ -1,0 +1,28 @@
+.border {
+	width: auto;
+	height: auto;
+	margin: auto;
+	position: absolute;
+	background-color: #000;
+	z-index: 999
+}
+
+.border.border-top {
+	width: 100%;
+	bottom: 100%
+}
+
+.border.border-bottom {
+	width: 100%;
+	top: 100%
+}
+
+.border.border-left {
+	height: 100%;
+	right: 100%
+}
+
+.border.border-right {
+	height: 100%;
+	left: 100%
+}

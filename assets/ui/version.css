@@ -1,0 +1,22 @@
+.version {
+	display: block;
+	width: calc(50% - 32px);
+	height: 30px;
+	margin: auto;
+	padding: 16px;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	color: #fff;
+	cursor: default;
+	text-align: right;
+	font-size: 24px
+}
+
+.nojs .version {
+	width: 100%;
+	left: 0;
+	background-color: #a41726;
+	cursor: text;
+	text-align: center
+}

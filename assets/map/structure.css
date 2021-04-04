@@ -1,0 +1,32 @@
+.map, .uppermap {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 6400px;
+	height: 6400px;
+	margin: auto;
+	position: absolute;
+	overflow: hidden
+}
+
+.map {background-color: #262626}
+
+.part, .upperpart {
+	position: absolute;
+	background-image: url(textures/error.jpg);
+	background-repeat: repeat;
+	image-rendering: crisp-edges
+}
+
+.uppermap {z-index: 2}
+
+.entity {
+	/* entity size never exceed one case (64px) */
+	width: 64px;
+	height: 64px;
+	position: absolute;
+	background-image: url(../entity/something.png);
+	background-size: cover;
+	image-rendering: crisp-edges;
+	z-index: 99
+}

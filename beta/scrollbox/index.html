@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<style type="text/css">
+			body {background-color: #333}
+
+			.overlay {
+				display: none;
+				width: 100%;
+				height: 100%;
+				margin: auto;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				position: fixed;
+				opacity: 0;
+				background-color: rgba(0, 0, 0, 0.75);
+				z-index: 3
+			}
+
+			.box {
+				display: none;
+				width: 960px;
+				height: 540px;
+				margin: auto;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				position: absolute;
+				opacity: 0;
+				z-index: 4
+			}
+
+			.box .box_top {
+				width: 100%;
+				height: 270px;
+				bottom: 270px;
+				position: absolute;
+				background-image: url(box_top.png);
+				background-size: cover;
+				image-rendering: crisp-edges;
+				z-index: 1
+			}
+
+			.box .box_bottom {
+				width: 100%;
+				height: 270px;
+				top: 270px;
+				position: absolute;
+				background-image: url(box_bottom.png);
+				background-size: cover;
+				image-rendering: crisp-edges;
+				transform: rotateZ(180deg);
+				z-index: 1
+			}
+
+			.box content {
+				width: 928px;
+				height: 436px;
+				margin: auto;
+				padding: 16px;
+				top: 0;
+				bottom: 0;
+				position: absolute;
+				/*background-color: rgba(0, 0, 0, 0.5);*/
+				cursor: default;
+				text-align: center;
+				font-size: 20px;
+				animation-name: content_open;
+				z-index: 2
+			}
+
+			@keyframes overlay_open {
+				from {opacity: 0}
+				to {opacity: 1}
+			}
+
+			@keyframes overlay_close {
+				from {opacity: 1}
+				to {opacity: 0}
+			}
+
+			@keyframes full_open {
+				from {
+					opacity: 0;
+					transform: scale(1)
+				}
+				to {
+					opacity: 1;
+					transform: scale(1.2)
+				}
+			}
+
+			@keyframes full_close {
+				from {
+					opacity: 1;
+					transform: scale(1.2)
+				}
+				to {
+					opacity: 0;
+					transform: scale(1)
+				}
+			}
+
+			@keyframes box_open {
+				from {height: 36px}
+				to {height: 270px}
+			}
+
+			@keyframes box_close {
+				from {height: 270px}
+				to {height: 36px}
+			}
+
+			@keyframes content_open {
+				0%, 49% {opacity: 0}
+				50%, 100% {opacity: 1}
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var overlay = document.querySelector(".overlay"),
+					box = document.querySelector(".box"),
+					box_top = document.querySelector(".box .box_top"),
+					box_bottom = document.querySelector(".box .box_bottom"),
+					box_content = document.querySelector(".box content"),
+					t = 250;
+
+				// animations durations
+				overlay.style.animationDuration = t + "ms";
+				box.style.animationDuration = t + "ms";
+				box_top.style.animationDuration = t + "ms";
+				box_bottom.style.animationDuration = t + "ms";
+				box_content.style.animationDuration = t * 2 + "ms";
+
+				// open function
+				document.querySelector("#open").onclick = function() {
+					// showing overlay & box
+					box.style.display = "block";
+					overlay.style.display = "block";
+					// animations names
+					overlay.style.animationName = "overlay_open";
+					box.style.animationName = "full_open";
+					box_top.style.animationName = "box_open";
+					box_bottom.style.animationName = "box_open";
+					// scale/opacity
+					overlay.style.opacity = 1;
+					box.style.opacity = 1;
+					box.style.transform = "scale(1.2)";
+					box_top.style.height = "270px";
+					box_bottom.style.height = "270px";
+					box_content.style.opacity = 1
+				}
+
+				// close function
+				document.querySelector("#close").onclick = function() {
+					// animations names
+					overlay.style.animationName = "overlay_close";
+					box.style.animationName = "full_close";
+					box_top.style.animationName = "box_close";
+					box_bottom.style.animationName = "box_close";
+					// scale/opacity
+					overlay.style.opacity = 0;
+					box.style.opacity = 0;
+					box.style.transform = "scale(1)";
+					box_top.style.height = "36px";
+					box_bottom.style.height = "36px";
+					box_content.style.opacity = 0;
+					// hiding overlay & box
+					setTimeout(function() {
+						overlay.style.display = "none";
+						box.style.display = "none"
+					}, t)
+				}
+			}
+		</script>
+		<title>Scrollbox</title>
+	</head>
+
+	<body>
+		<button id="open">Open scrollbox</button>
+		<div class="overlay"></div>
+		<div class="box">
+			<div class="box_top"></div>
+			<div class="box_bottom"></div>
+			<content>Scrollbox<br><br>
+				<button id="close">Close scrollbox</button>
+			</content>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,51 @@
+.btn {
+	width: 448px; /* original width = 112px */
+	height: 52px; /* original height = 13px */
+	padding: 0;
+	outline: none;
+	border: none;
+	background-image: url(btn-normal.png);
+	background-color: transparent;
+	background-size: cover !important;
+	color: #000;
+	cursor: pointer;
+	image-rendering: crisp-edges;
+	font-size: 24px
+}
+
+.btn:active {background-image: url(btn-normal_pressed.png)}
+
+.btn-disabled {
+	background-image: url(btn-disabled.png);
+	color: #776952;
+	cursor: default
+}
+
+.btn-disabled:active {background-image: url(btn-disabled.png)}
+
+.btn-close {
+	width: 52px;
+	background-image: url(btn-close.png)
+}
+
+.btn-close:active {background-image: url(btn-close_pressed.png)}
+
+
+.btn-key {
+	width: 52px;
+	background-image: url(btn-key.png)
+}
+
+.btn-key:active {background-image: url(btn-key_pressed.png)}
+
+.btn-class {
+	width: 208px; /* original width = 52px */
+	height: 208px; /* original width = 52px */
+	margin: 0 16px;
+	background-image: url(btn-class.png)
+}
+
+.btn-class:active {background-image: url(btn-class.png)}
+
+.btn-class_selected,
+.btn-class_selected:active {background-image: url(btn-class_selected.png)}

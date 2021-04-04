@@ -1,0 +1,42 @@
+.menu-pause {
+	display: none;
+	width: auto;
+	height: auto;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	cursor: default;
+	text-align: center;
+	z-index: 99
+}
+
+.menu-pause .title {
+	height: 150px;
+	line-height: 134px;
+	top: 35px;
+	right: 0;
+	left: 0;
+	position: absolute;
+	color: #fff;
+	cursor: default;
+	text-align: center;
+	font-size: 48px
+}
+
+.menu-pause .menu {
+	width: 448px;
+	margin: auto;
+	padding-top: 32px;
+	top: 200px;
+	right: 0;
+	left: 0;
+	position: absolute;
+	text-align: center
+}
+
+.menu-pause .menu .btn {margin-bottom: 24px}

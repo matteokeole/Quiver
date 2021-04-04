@@ -1,0 +1,32 @@
+@font-face {
+	/* title font - no accents */
+	font-family: pixelbit;
+	src: url(pixelbit.ttf)
+}
+
+@font-face {
+	/* global font - no accents */
+	font-family: retrocomputer;
+	src: url(retrocomputer.ttf)
+}
+
+
+
+.title {font-family: pixelbit}
+
+.nojs,
+.windowtoosmall,
+.display,
+.version,
+wrapper,
+.overlay-options,
+section,
+button,
+input,
+.subtitle,
+.hud {
+	font-family: retrocomputer
+}
+
+/* mono font (for backup contents) */
+.backup_content {font-family: "Courier New", monospace}

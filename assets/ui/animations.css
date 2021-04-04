@@ -1,0 +1,57 @@
+/* ui animations */
+
+
+
+/* first background */
+@keyframes travelling1 {
+	from {right: 0}
+	to {right: 100%}
+}
+
+/* second background */
+@keyframes travelling2 {
+	from {right: -100%}
+	to {right: 0}
+}
+
+/* arrow animation */
+@keyframes arrow {
+	from {transform: translateX(-100vw)}
+	to {transform: translateX(0)}
+}
+
+/* credits fading out (opening) */
+@keyframes fadeOut {
+	0%, 20% {opacity: 1}
+	100% {opacity: 0}
+}
+
+/* credits scrolling */
+@keyframes credits {
+	0%, 2% {top: 0}
+	100% {top: -1731px} /* credits height */
+}
+
+/* dialog opening */
+@keyframes open_dialog {
+	from {bottom: -100px}
+	to {bottom: 50px}
+}
+
+/* dialog closing */
+@keyframes close_dialog {
+	from {bottom: 50px}
+	to {bottom: -100px}
+}
+
+/* attack name fadeout */
+@keyframes attack_name {
+	from {opacity: 1}
+	to {opacity: 0}
+}
+
+/* death menu fadein */
+@keyframes death {
+	from {opacity: 0}
+	to {opacity: 1}
+}

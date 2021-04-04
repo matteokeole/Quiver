@@ -1,0 +1,82 @@
+.menu-main {
+	display: block;
+	width: auto;
+	height: auto;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	z-index: 8
+}
+
+.menu-main .background {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-image: url(../../background.jpg);
+	background-size: cover;
+	image-rendering: crisp-edges
+}
+
+.menu-main .bg1 {
+	right: 0;
+	animation: travelling1 60s linear infinite
+}
+
+.menu-main .bg2 {
+	right: 100%;
+	animation: travelling2 60s linear infinite
+}
+
+.menu-main .title {
+	width: 600px; /* original width = 150px */
+	height: 120px; /* original height = 30px */
+	margin: 0 auto;
+	top: 100px;
+	right: 0;
+	left: 0;
+	position: absolute;
+	background-image: url(../title.png);
+	background-size: cover;
+	image-rendering: crisp-edges;
+	z-index: 1
+}
+
+.menu-main .arrow {
+	width: 600px; /* original width = 150px */
+	height: 120px; /* original height = 30px */
+	margin: 0 auto;
+	top: 100px;
+	right: 0;
+	left: 0;
+	position: absolute;
+	background-image: url(../arrow.png);
+	background-size: cover;
+	image-rendering: crisp-edges;
+	animation: arrow 1s linear
+}
+
+.menu-main .menu {
+	width: 448px;
+	margin: auto;
+	padding-top: 32px;
+	top: 270px;
+	right: 0;
+	left: 0;
+	position: absolute;
+	text-align: center
+}
+
+.menu #btn-launch_backup,
+.backup {display: none}
+
+.menu .label-launch_backup,
+.section-launch_backup content .label-launch_backup {
+	display: block;
+	line-height: 52px;
+	text-align: center
+}
+
+.menu-main .menu .btn {margin-bottom: 24px}

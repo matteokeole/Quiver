@@ -1,0 +1,13 @@
+#player {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 64px;
+	height: 64px;
+	position: absolute;
+	/*background-color: rgba(0, 0, 0, 0.5);*/
+	background-image: url(something.png);
+	background-size: cover;
+	image-rendering: crisp-edges;
+	z-index: 1
+}

@@ -1,0 +1,45 @@
+.section-quit_game {
+	display: none;
+	width: auto;
+	height: auto;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 99
+}
+
+.section-quit_game content {
+	display: none;
+	width: 960px;
+	height: 540px;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	background-image: url(../scrollbox.png);
+	background-size: cover;
+	image-rendering: crisp-edges;
+	cursor: default;
+	text-align: center;
+	font-size: 20px;
+	z-index: 999
+}
+
+.section-quit_game content .title {
+	height: 52px;
+	line-height: 52px;
+	margin: 36px 0;
+	text-align: center;
+	font-size: 24px
+}
+
+.section-quit_game content .btn {
+	display: block;
+	margin: 20px auto
+}

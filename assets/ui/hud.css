@@ -1,0 +1,78 @@
+.hud {
+	display: block;
+	width: 300px;
+	height: 180px;
+	margin: 0 auto;
+	top: 16px;
+	left: 16px;
+	position: absolute;
+	border: 4px solid #000;
+	opacity: 0.8;
+	background-color: #ab9d86;
+	text-align: center;
+	z-index: 99;
+	transition: 0.2s
+}
+
+.mini_hud {
+	display: block;
+	height: 180px;
+	margin: 0 auto;
+	top: 16px;
+	right: 16px;
+	left: 16px;
+	position: absolute;
+	z-index: 9
+}
+
+.hud:hover {opacity: 1}
+
+#hud_nickname {
+	margin: 8px;
+	font-size: 18px;
+	font-style: italic;
+	cursor: default
+}
+
+.health, .mp {text-align: left}
+
+.enemy_health {
+	top: 0;
+	right: 0;
+	position: absolute;
+	text-align: right
+}
+
+.health span, .mp span, .enemy_health span {
+	margin: 0 8px;
+	font-size: 16px;
+	cursor: default
+}
+
+.hud progress, .mini_hud progress {
+	width: 276px;
+	height: 20px;
+	margin: 8px;
+	border: 4px solid #000;
+	opacity: 1
+}
+
+.hud progress {background-color: rgba(0, 0, 0, 0.2)}
+
+.mini_hud progress {background-color: rgba(255, 255, 255, 0.1)}
+
+.health progress::-moz-progress-bar, /* firefox */
+.enemy_health progress::-moz-progress-bar,
+.health progress::-webkit-progress-value /* chrome, safari */,
+.enemy_health progress::-webkit-progress-value {
+	background-color: #ca302d
+}
+.health progress, .enemy_health progress {color: #ca302d} /* ie */
+
+.enemy_health progress {transform: rotateY(180deg)}
+
+.mp progress::-moz-progress-bar, /* firefox */
+.mp progress::-webkit-progress-value /* chrome, safari */ {
+	background-color: #0f056b
+}
+.mp progress {color: #0f056b} /* ie */
