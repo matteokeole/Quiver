@@ -1,6 +1,6 @@
 @font-face {
 	font-family: Quiver;
-	src: url(quiver.ttf)
+	src: url(quiver.ttf) format("truetype")
 }
 
 noscript,

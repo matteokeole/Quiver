@@ -1,11 +1,22 @@
 var Game = {
-	init: function() {},
+	construct: function() {
+		var main = document.querySelector("main");
+		// main.appendChild(UI.new.menu);
+		// adding the game content in the body
+		// document.body.appendChild(main)
+	},
+	init: function() {
+		Game.construct()
+	},
 	scale: function() {},
 	aspectRatio: "16/9",
 	version: "1.1.0"
 }
 
 var UI = {
+	new: {
+		menu: document.createElement("section"),
+	},
 	play: {
 		text: ""
 	},
@@ -56,23 +67,4 @@ var Options = {
 	}
 }
 
-var Class = {
-	Mage: {
-		id: "mage",
-		text: "",
-		max_health: 0,
-		max_mana: 0
-	},
-	Rogue: {
-		id: "rogue",
-		text: "",
-		max_health: 0,
-		max_mana: 0
-	}
-	Paladin: {
-		id: "mage",
-		text: "",
-		max_health: 0,
-		max_mana: 0
-	}
-}
+window.addEventListener("load", Game.init)
