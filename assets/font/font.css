@@ -1,19 +1,9 @@
 @font-face {
-	/* title font - no accents */
-	font-family: pixelbit;
-	src: url(pixelbit.ttf)
+	font-family: Quiver;
+	src: url(quiver.ttf)
 }
 
-@font-face {
-	/* global font - no accents */
-	font-family: retrocomputer;
-	src: url(retrocomputer.ttf)
-}
-
-
-
-.title {font-family: pixelbit}
-
+.title,
 .nojs,
 .windowtoosmall,
 .display,
@@ -25,7 +15,8 @@ button,
 input,
 .subtitle,
 .hud {
-	font-family: retrocomputer
+	font-family: Quiver;
+	font-variant: small-caps;
 }
 
 /* mono font (for backup contents) */
