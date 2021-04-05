@@ -3,8 +3,7 @@
 	src: url(quiver.ttf) format("truetype")
 }
 
-noscript,
-.version {
+* {
 	font-family: Quiver;
 	font-size: 24px
 }

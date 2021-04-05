@@ -1,70 +1,42 @@
 var Game = {
-	construct: function() {
-		var main = document.querySelector("main");
-		// main.appendChild(UI.new.menu);
-		// adding the game content in the body
-		// document.body.appendChild(main)
-	},
+	construct: function() {},
 	init: function() {
-		Game.construct()
+		document.querySelector("title").innerHTML = "Quiver " + Game.version
 	},
-	scale: function() {},
+	lang: function(l) {
+		var path = `../assets/lang/${l}.json`,
+			request = new XMLHttpRequest();
+		request.open("GET", path);
+		request.responseType = "json";
+		request.send();
+		request.addEventListener("load", function() {
+			var r = request.response;
+			// applying the recovered language data to UI elements
+			UI.btn.new_game.innerHTML = r.en_US["UI.btn.new_game.text"];
+			UI.btn.launch_backup.innerHTML = r.en_US["UI.btn.launch_backup.text"];
+			UI.btn.options.innerHTML = r.en_US["UI.btn.options.text"]
+		})
+	},
 	aspectRatio: "16/9",
 	version: "1.1.0"
 }
 
 var UI = {
-	new: {
-		menu: document.createElement("section"),
-	},
-	play: {
-		text: ""
-	},
-	close: {
-		text: ""
-	},
-	next: {
-		text: ""
-	},
-	new_game: {
-		text: ""
-	},
-	launch_backup: {
-		text: ""
-	},
-	credits: {
-		text: ""
-	},
-	display: {
-		text: ""
-	},
-	version: {
-		text: ""
+	btn: {
+		new_game: null,
+		launch_backup: null,
+		options: null
 	}
 }
 
-var Options = {
-	text: "",
-	key_forward: {
-		value: 0,
-		text: ""
-	},
-	key_backward: {
-		value: 0,
-		text: ""
-	},
-	key_turnLeft: {
-		value: 0,
-		text: ""
-	},
-	key_turnRight: {
-		value: 0,
-		text: ""
-	},
-	key_console: {
-		value: 0,
-		text: ""
+window.addEventListener("load", function() {
+	with (UI) {
+		with (btn) {
+			new_game = document.querySelector(".btn-new_game");
+			launch_backup = document.querySelector(".btn-launch_backup");
+			options = document.querySelector(".btn-options")
+		}
 	}
-}
-
-window.addEventListener("load", Game.init)
+	Game.init();
+	Game.lang("en_US")
+})

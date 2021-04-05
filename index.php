@@ -11,11 +11,12 @@
 		<meta name="copyright" content="© 2021 Quiver. All right reserved.">
 		<link rel="stylesheet" type="text/css" href="assets/ui/noscript.css"> <!-- noscript style -->
 		<link rel="stylesheet" type="text/css" href="assets/font/font.css"> <!-- font-face -->
+		<link rel="stylesheet" type="text/css" href="assets/ui/main_menu.css">
 		<script type="text/javascript" src="script/main.js"></script>
 		<title>Quiver</title>
 	</head>
 
-	<body bgcolor="black">
+	<body style="margin: 0; background-color: #333">
 		<noscript>
 			<p>
 				Ce jeu nécessite JavaScript pour fonctionner.<br>
