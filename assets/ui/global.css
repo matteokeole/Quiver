@@ -1,6 +1,7 @@
 body {
 	margin: 0;
-	background-color: #333
+	background-color: #000;
+	cursor: default
 }
 
 .menu-main {
@@ -45,7 +46,6 @@ body {
 }
 
 .scrollbox-top {
-	height: 36px;
 	position: relative;
 	background-image: url(box_top.png);
 	background-repeat: no-repeat;
@@ -55,7 +55,6 @@ body {
 }
 
 .scrollbox-bottom {
-	height: 36px;
 	position: relative;
 	background-image: url(box_bottom.png);
 	background-repeat: no-repeat;
@@ -65,15 +64,17 @@ body {
 	animation: scrollbox-open 0.2s linear
 }
 
+/* menu content */
+/* light #f5e0bf */
+/* dark #c4b399 */
+
 .title {
 	display: block;
 	height: 40px;
 	line-height: 40px;
-	font-size: 30px;
+	font-size: 34px;
 	z-index: 1
 }
-
-.options {background-color: grey}
 
 .option-title {
 	height: 30px;
@@ -81,28 +82,51 @@ body {
 	top: 0;
 	position: sticky;
 	background-color: #f5e0bf;
-	font-size: 20px
+	font-size: 22px
 }
 
 .option-name {
 	height: 30px;
 	line-height: 30px;
-	font-size: 20px
+	padding: 0 10px;
+	cursor: pointer;
+	font-size: 18px
 }
+
+.option-name:hover {background-color: #c4b399}
 
 .options {
 	height: calc(100% - 80px);
 	overflow-y: scroll;
-	background-color: #c4b399
+	scroll-behavior: smooth;
+	background-color: #f5e0bf
+}
+
+.blank {
+	width: 100%;
+	height: 30px
 }
 
 .actions {
-	height: 40px;
-	line-height: 40px
+	height: 30px;
+	margin-top: 10px
 }
 
+.actions .btn {
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 10px;
+	padding: 0 10px;
+	background-color: #c4b399;
+	cursor: pointer;
+	font-size: 20px
+}
+
+.actions .btn:hover {background-color: rgba(0, 0, 0, .4)}
+
 .content {
-	display: none;
+	visibility: hidden;
 	width: 90%;
 	height: 80%;
 	margin: auto;
@@ -124,7 +148,7 @@ body {
 }
 
 @media screen and (max-width: 1200px) {
-	.box {
+	.menu {
 		width: 80vw;
 		height: 45vw
 	}

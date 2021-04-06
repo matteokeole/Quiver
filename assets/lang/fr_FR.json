@@ -1,28 +1,37 @@
 {
 	"fr_FR": {
-		"UI": {
-			"btn": {
-				"play.text": "Jouer",
-				"close.text": "Fermer",
-				"next.text": "Suivant",
-				"new_game.text": "Nouvelle partie",
-				"launch_backup.text": "Charger une sauvegarde",
-				"options.text": "Options"
-			},
-			"menu": {
-				"options": {
-					"key_forward.text": "Avancer",
-					"key_backward.text": "Reculer",
-					"key_turnLeft.text": "Tourner à gauche",
-					"key_turnRight.text": "Tourner à droite",
-					"key_console.text": "Afficher/masquer la console"
-				}
-			}
-		},
-		"Class": {
-			"Mage.text": "Mage",
-			"Rogue.text": "Roublard",
-			"Paladin.text": "Paladin"
+		"play.text": "Jouer",
+		"close.text": "Fermer",
+		"back.text": "Annuler",
+		"next.text": "Suivant",
+		"prev.text": "Précédent",
+		"new_game.text": "Nouvelle partie",
+		"launch_backup.text": "Charger une sauvegarde",
+		"options.text": "Options",
+		"options": {
+			"keybinds.text": "Contrôles",
+			"keybinds:forward.text": "Avancer",
+			"keybinds:backward.text": "Reculer",
+			"keybinds:left.text": "Tourner à gauche",
+			"keybinds:right.text": "Tourner à droite",
+			"keybinds:console.text": "Afficher/masquer la console",
+			"display.text": "Affichage",
+			"display:borders.text": "Bordures d'écran",
+			"display:animations.text": "Animations",
+			"audio.text": "Audio",
+			"audio:music.text": "Musique",
+			"audio:music_volume.text": "Volume de la musique",
+			"audio:sound.text": "Sons",
+			"audio:sound_volume.text": "Volume des sons",
+			"saves.text": "Sauvegardes",
+			"saves:advanced.text": "Options avancées des sauvegardes",
+			"lang.text": "Langue",
+			"lang:en_US.text": "Anglais",
+			"lang:es_ES.text": "Espagnol",
+			"lang:fr_FR.text": "Français",
+			"about.text": "A propos",
+			"about:updates.text": "Notes de mise à jour",
+			"about:credits.text": "Crédits"
 		}
 	}
 }

@@ -1,28 +1,37 @@
 {
 	"es_ES": {
-		"UI": {
-			"btn": {
-				"play.text": "Jugar",
-				"close.text": "Cerrar",
-				"next.text": "Siguiente",
-				"new_game.text": "Nuevo juego",
-				"launch_backup.text": "Lanzar una copia de respaldo",
-				"options.text": "Opciones"
-			},
-			"menu": {
-				"options": {
-					"key_forward.text": "Avanzar",
-					"key_backward.text": "Retroceder",
-					"key_turnLeft.text": "Girar a la izquierda",
-					"key_turnRight.text": "Girar a la derecha",
-					"key_console.text": "Mostrar/esconder la consola"
-				}
-			}
-		},
-		"Class": {
-			"Mage.text": "Mago",
-			"Rogue.text": "Pícaro",
-			"Paladin.text": "Paladin"
+		"play.text": "Jugar",
+		"close.text": "Cerrar",
+		"back.text": "Cancelar",
+		"next.text": "Siguiente",
+		"prev.text": "Anterior",
+		"new_game.text": "Nuevo juego",
+		"launch_backup.text": "Lanzar una copia de respaldo",
+		"options.text": "Opciones",
+		"options": {
+			"keybinds.text": "Controles",
+			"keybinds:forward.text": "Avanzar",
+			"keybinds:backward.text": "Retroceder",
+			"keybinds:left.text": "Girar a la izquierda",
+			"keybinds:right.text": "Girar a la derecha",
+			"keybinds:console.text": "Mostrar/esconder la consola",
+			"display.text": "Visualización",
+			"display:borders.text": "Fronteras de la pantalla",
+			"display:animations.text": "Animaciones",
+			"audio.text": "Audio",
+			"audio:music.text": "Música",
+			"audio:music_volume.text": "Volumen de la música",
+			"audio:sound.text": "Sonidos",
+			"audio:sound_volume.text": "Volumen de los sonidos",
+			"saves.text": "Copias de respaldo",
+			"saves:advanced.text": "Opciones avanzadas de las copias de respaldo",
+			"lang.text": "Idioma",
+			"lang:en_US.text": "Inglés",
+			"lang:es_ES.text": "Español",
+			"lang:fr_FR.text": "Francés",
+			"about.text": "A proposito",
+			"about:updates.text": "Notas des actualizaciones",
+			"about:credits.text": "Creditos"
 		}
 	}
 }

@@ -1,28 +1,37 @@
 {
 	"en_US": {
-		"UI": {
-			"btn": {
-				"play.text": "Play",
-				"close.text": "Close",
-				"next.text": "Next",
-				"new_game.text": "New Game",
-				"launch_backup.text": "Launch Backup",
-				"options.text": "Options"
-			},
-			"menu": {
-				"options": {
-					"key_forward.text": "Move Forward",
-					"key_backward.text": "Move Backward",
-					"key_turnLeft.text": "Turn Left",
-					"key_turnRight.text": "Turn Right",
-					"key_console.text": "Toggle Console"
-				}
-			}
-		},
-		"Class": {
-			"Mage.text": "Mage",
-			"Rogue.text": "Rogue",
-			"Paladin.text": "Paladin"
-		}	
+		"play.text": "Play",
+		"close.text": "Close",
+		"back.text": "Back",
+		"next.text": "Next",
+		"prev.text": "Previous",
+		"new_game.text": "New Game",
+		"launch_backup.text": "Launch Backup",
+		"options.text": "Options",
+		"options": {
+			"keybinds.text": "Controls",
+			"keybinds:forward.text": "Move Forward",
+			"keybinds:backward.text": "Move Backward",
+			"keybinds:left.text": "Turn Left",
+			"keybinds:right.text": "Turn Right",
+			"keybinds:console.text": "Toggle Console",
+			"display.text": "Display",
+			"display:borders.text": "Screen Borders",
+			"display:animations.text": "Animations",
+			"audio.text": "Audio",
+			"audio:music.text": "Music",
+			"audio:music_volume.text": "Music Volume",
+			"audio:sound.text": "Sounds",
+			"audio:sound_volume.text": "Sound Volume",
+			"saves.text": "Saves",
+			"saves:advanced.text": "Advanced Saves Options",
+			"lang.text": "Language",
+			"lang:en_US.text": "English",
+			"lang:es_ES.text": "Spanish",
+			"lang:fr_FR.text": "French",
+			"about.text": "About",
+			"about:updates.text": "Update Notes",
+			"about:credits.text": "Credits"
+		}
 	}
 }
