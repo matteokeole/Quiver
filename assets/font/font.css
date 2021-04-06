@@ -3,7 +3,4 @@
 	src: url(quiver.ttf) format("truetype")
 }
 
-* {
-	font-family: Quiver;
-	font-size: 24px
-}
+* {font-family: Quiver}

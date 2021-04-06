@@ -1,0 +1,131 @@
+body {
+	margin: 0;
+	background-color: #333
+}
+
+.menu-main {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: #555
+}
+
+.menu-main-title {
+	height: calc(100vh / 3);
+	position: relative;
+	background-color: #777
+}
+
+.menu-main-actions button {display: block}
+
+/* menus */
+
+.overlay {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.75)
+}
+
+.menu {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 960px;
+	height: 540px;
+	position: relative
+}
+
+.scrollbox-top {
+	height: 36px;
+	position: relative;
+	background-image: url(box_top.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	image-rendering: crisp-edges;
+	animation: scrollbox-open 0.2s linear
+}
+
+.scrollbox-bottom {
+	height: 36px;
+	position: relative;
+	background-image: url(box_bottom.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	image-rendering: crisp-edges;
+	transform: rotateZ(180deg);
+	animation: scrollbox-open 0.2s linear
+}
+
+.title {
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	font-size: 30px;
+	z-index: 1
+}
+
+.options {background-color: grey}
+
+.option-title {
+	height: 30px;
+	line-height: 30px;
+	top: 0;
+	position: sticky;
+	background-color: #f5e0bf;
+	font-size: 20px
+}
+
+.option-name {
+	height: 30px;
+	line-height: 30px;
+	font-size: 20px
+}
+
+.options {
+	height: calc(100% - 80px);
+	overflow-y: scroll;
+	background-color: #c4b399
+}
+
+.actions {
+	height: 40px;
+	line-height: 40px
+}
+
+.content {
+	display: none;
+	width: 90%;
+	height: 80%;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute
+}
+
+@keyframes scrollbox-open {
+	from {height: 36px}
+	to {height: 50%}
+}
+
+@keyframes scrollbox-close {
+	from {height: 50%}
+	to {height: 36px}
+}
+
+@media screen and (max-width: 1200px) {
+	.box {
+		width: 80vw;
+		height: 45vw
+	}
+}

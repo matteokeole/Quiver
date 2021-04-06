@@ -9,9 +9,9 @@
 		<meta name="version" content="1.1.0">
 		<meta name="author" content="Clarisse Eynard, Léan Houdayer, Mattéo Legagneux">
 		<meta name="copyright" content="© 2021 Quiver. All right reserved.">
-		<link rel="stylesheet" type="text/css" href="assets/ui/noscript.css"> <!-- noscript style -->
-		<link rel="stylesheet" type="text/css" href="assets/font/font.css"> <!-- font-face -->
-		<link rel="stylesheet" type="text/css" href="assets/ui/main_menu.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/noscript.css">
+		<link rel="stylesheet" type="text/css" href="assets/font/font.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/global.css">
 		<script type="text/javascript" src="script/main.js"></script>
 		<title>Quiver</title>
 	</head>
@@ -26,7 +26,8 @@
 			<div class="version">Version : 1.1.0</div>
 		</noscript>
 		<main>
-			<?php include "assets/ui/main_menu.html"; ?>
+			<?php include "assets/ui/menu-main.html"; ?>
+			<?php include "assets/ui/menu-options.html"; ?>
 		</main>
 	</body>
 
