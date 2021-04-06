@@ -9,14 +9,24 @@
 		<meta name="version" content="1.1.0">
 		<meta name="author" content="Clarisse Eynard, Léan Houdayer, Mattéo Legagneux">
 		<meta name="copyright" content="© 2021 Quiver. All right reserved.">
-		<link rel="stylesheet" type="text/css" href="assets/ui/noscript.css">
 		<link rel="stylesheet" type="text/css" href="assets/font/font.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/noscript.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/global.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu.css">
+		<style type="text/css">
+			body {
+				margin: 0;
+				background-color: #000;
+				cursor: default
+			}
+
+			::selection {background-color: rgba(0, 0, 0, 0.2)} /* text selection color */
+		</style>
 		<script type="text/javascript" src="script/main.js"></script>
 		<title>Quiver</title>
 	</head>
 
-	<body style="margin: 0; background-color: #333">
+	<body>
 		<noscript>
 			<p>
 				Ce jeu nécessite JavaScript pour fonctionner.<br>

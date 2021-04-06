@@ -1,0 +1,105 @@
+/* menu content
+light #f5e0bf
+dark #c4b399 */
+
+.overlay {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.75)
+}
+
+.menu {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 960px;
+	height: 540px;
+	position: relative
+}
+
+/* opening/closing animations */
+
+.scrollbox-top {
+	position: relative;
+	background-image: url(box_top.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	image-rendering: crisp-edges;
+	animation: scrollbox-open 0.2s linear
+}
+
+.scrollbox-bottom {
+	position: relative;
+	background-image: url(box_bottom.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	image-rendering: crisp-edges;
+	transform: rotateZ(180deg);
+	animation: scrollbox-open 0.2s linear
+}
+
+@keyframes scrollbox-open {
+	from {height: 36px}
+	to {height: 50%}
+}
+
+@keyframes scrollbox-close {
+	from {height: 50%}
+	to {height: 36px}
+}
+
+/* content */
+
+.title {
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	font-size: 34px;
+	z-index: 1
+}
+
+.content {
+	visibility: hidden;
+	width: 90%;
+	height: 80%;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute
+}
+
+.actions {
+	height: 30px;
+	margin-top: 10px
+}
+
+.actions .btn {
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 10px;
+	padding: 0 10px;
+	background-color: #c4b399;
+	cursor: pointer;
+	font-size: 20px
+}
+
+.actions .btn:hover {background-color: rgba(0, 0, 0, .4)}
+
+@media screen and (max-width: 1200px) {
+	.menu {
+		width: 80vw;
+		height: 45vw
+	}
+}
