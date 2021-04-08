@@ -12,7 +12,9 @@
 		<link rel="stylesheet" type="text/css" href="assets/font/font.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/noscript.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/global.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/menu.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu/options.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/button.css">
 		<style type="text/css">
 			body {
 				margin: 0;
@@ -36,8 +38,12 @@
 			<div class="version">Version : 1.1.0</div>
 		</noscript>
 		<main>
-			<?php include "assets/ui/menu-main.html"; ?>
-			<?php include "assets/ui/menu-options.html"; ?>
+			<?php include "assets/ui/menu/menu-main.html"; ?>
+			<div class="overlay">
+				<?php include "assets/ui/menu/menu-new_game.html"; ?>
+				<?php include "assets/ui/menu/menu-launch_backup.html"; ?>
+				<?php include "assets/ui/menu/menu-options.html"; ?>
+			</div>
 		</main>
 	</body>
 

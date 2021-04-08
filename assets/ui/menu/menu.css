@@ -18,7 +18,7 @@ dark #c4b399 */
 }
 
 .menu {
-	display: flex;
+	display: none;
 	flex-direction: column;
 	justify-content: center;
 	width: 960px;
@@ -30,7 +30,7 @@ dark #c4b399 */
 
 .scrollbox-top {
 	position: relative;
-	background-image: url(box_top.png);
+	background-image: url(scrollbox-top.png);
 	background-repeat: no-repeat;
 	background-size: 100%;
 	image-rendering: crisp-edges;
@@ -39,7 +39,7 @@ dark #c4b399 */
 
 .scrollbox-bottom {
 	position: relative;
-	background-image: url(box_bottom.png);
+	background-image: url(scrollbox-bottom.png);
 	background-repeat: no-repeat;
 	background-size: 100%;
 	image-rendering: crisp-edges;
@@ -48,23 +48,30 @@ dark #c4b399 */
 }
 
 @keyframes scrollbox-open {
-	from {height: 36px}
+	from {height: 0}
 	to {height: 50%}
 }
 
 @keyframes scrollbox-close {
 	from {height: 50%}
-	to {height: 36px}
+	to {height: 0}
 }
 
 /* content */
 
-.title {
+.menu-title {
 	display: block;
 	height: 40px;
 	line-height: 40px;
 	font-size: 34px;
 	z-index: 1
+}
+
+.menu-title .title {float: left}
+
+.menu-title .btn {
+	margin: 5px;
+	float: right
 }
 
 .content {
@@ -79,23 +86,16 @@ dark #c4b399 */
 	position: absolute
 }
 
-.actions {
+.content .scrollable {
+	height: calc(100% - 80px);
+	overflow-y: auto;
+	background-color: #f5e0bf
+}
+
+.content .actions {
 	height: 30px;
 	margin-top: 10px
 }
-
-.actions .btn {
-	display: inline-block;
-	height: 30px;
-	line-height: 30px;
-	margin-right: 10px;
-	padding: 0 10px;
-	background-color: #c4b399;
-	cursor: pointer;
-	font-size: 20px
-}
-
-.actions .btn:hover {background-color: rgba(0, 0, 0, .4)}
 
 @media screen and (max-width: 1200px) {
 	.menu {

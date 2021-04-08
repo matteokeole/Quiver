@@ -1,0 +1,23 @@
+.option-title {
+	height: 30px;
+	line-height: 30px;
+	top: 0;
+	position: sticky;
+	background-color: #f5e0bf;
+	font-size: 22px
+}
+
+.option-name {
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+	cursor: pointer;
+	font-size: 18px
+}
+
+.option-name:hover {background-color: #c4b399}
+
+.blank {
+	width: 100%;
+	height: 30px
+}

@@ -1,10 +1,13 @@
 var Game = {
 	init: function() {
-		$("title").innerHTML = `Quiver ${Game.version}`;
-		Game.lang("en_US")
+		$("title").textContent = `Quiver ${Game.version}`; // updating the title with the last version
+		UI.menu.options.scrollTop = 0;
+		UI.menu.options.style.scrollBehavior = "smooth";
+		Game.lang("en_US"); // setting the game language to english (USA) - can be modified in the options
+		$("main").style.display = "block" // opening the game window
 	},
 	lang: function(l) {
-		// l: lang name (str)
+		// l: language name (str)
 		// requesting the JSON file
 		var path = `../assets/lang/${l}.json`,
 			request = new XMLHttpRequest();
@@ -12,14 +15,20 @@ var Game = {
 		request.responseType = "json";
 		request.send();
 		request.addEventListener("load", function() {
-			// the request has been
+			// the request has been accepted, recovering file content
 			var r = this.response[l];
 			// applying the recovered language data to UI elements
+			// unique buttons
 			UI.btn.new_game.textContent = r["new_game.text"];
 			UI.btn.launch_backup.textContent = r["launch_backup.text"];
 			UI.btn.options.textContent = r["options.text"];
-			// options section
-			options._title_.textContent = r["options.text"];
+			// data-function buttons
+			UI.btn.data_function.close.forEach(function(e) {e.textContent = r["close.text"]});
+			// menu titles
+			menu.new_game.textContent = r["new_game.text"];
+			menu.launch_backup.textContent = r["launch_backup.text"];
+			menu.options.textContent = r["options.text"];
+			// options
 			// keybinds
 			options.keybinds._title_.textContent = r.options["keybinds.text"];
 			options.keybinds.forward.textContent = r.options["keybinds:forward.text"];
@@ -54,26 +63,34 @@ var Game = {
 	toggle_menu: function(m, s) {
 		// m: menu name (str)
 		// s: status (1: open or 0: close)
-		var overlay = $(`.overlay-${m}`),
-			menu = overlay.querySelector(".menu"),
+		var overlay = document.querySelector(".overlay"),
+			menu = document.querySelector(`.${m}`),
 			st = menu.querySelector(".scrollbox-top"),
 			sb = menu.querySelector(".scrollbox-bottom"),
 			content = menu.querySelector(".content");
-		if (s) {
+		if (s == "open") {
+			// opening
 			overlay.style.display = "flex";
+			menu.style.display = "flex";
 			st.style.animationName = "scrollbox-open";
 			sb.style.animationName = "scrollbox-open";
 			st.style.height = "50%";
 			sb.style.height = "50%";
 			setTimeout(function() {content.style.visibility = "visible"}, 200)
-		} else {
+		} else if (s == "close") {
+			// closing
 			content.style.visibility = "hidden";
-			content.querySelector(".options").scrollTop = 0;
+			UI.menu.options.style.scrollBehavior = "auto";
+			UI.menu.options.scrollTop = 0;
+			UI.menu.options.style.scrollBehavior = "smooth";
 			st.style.animationName = "scrollbox-close";
 			sb.style.animationName = "scrollbox-close";
 			st.style.height = 0;
 			sb.style.height = 0;
-			setTimeout(function() {overlay.style.display = "none"}, 200)
+			setTimeout(function() {
+				menu.style.display = "none";
+				overlay.style.display = "none"
+			}, 200)
 		}
 	},
 	version: "1.1.0"
@@ -83,15 +100,23 @@ var UI = {
 	btn: {
 		new_game: null,
 		launch_backup: null,
-		options: null
+		options: null,
+		data_function: {
+			close: null
+		}
 	},
 	menu: {
+		new_game: null,
+		launch_backup: null,
 		options: null
 	}
-};
-
-var options = {
-	_title_: null,
+},
+menu = {
+	new_game: null,
+	launch_backup: null,
+	options: null
+},
+options = {
 	keybinds: {
 		_title_: null,
 		forward: null,
@@ -129,30 +154,25 @@ var options = {
 	}
 };
 
-function disp(e, d) {
-	// e: selected element
-	// d: display value (block, flex...)
-	// this sets the element's display value to d, or block if d is not provided
-	// this can be used also for hiding elements
-	e.style.display = (d === undefined) ? "block" : d
-}
-
-function css(e, p, v) {
-	// e: selected element
-	// p: property
-	// v: value
-	// this sets a CSS style for the selected element
-	e.style[p] = v
-}
-
 function $(e) {return document.querySelector(e)}
 
+
+
 window.addEventListener("load", function() {
+	// buttons
 	UI.btn.new_game = $(".btn-new_game");
 	UI.btn.launch_backup = $(".btn-launch_backup");
 	UI.btn.options = $(".btn-options");
-	UI.menu.options = $(".options");
-	options._title_ = $(".menu-options .title");
+	UI.btn.data_function.close = document.querySelectorAll(".btn[data-function='close']");
+	// menus
+	UI.menu.new_game = $(".menu-new_game .scrollable");
+	UI.menu.launch_backup = $(".menu-launch_backup .scrollable");
+	UI.menu.options = $(".menu-options .scrollable");
+	// menu titles
+	menu.new_game = $(".content-new_game .title");
+	menu.launch_backup = $(".content-launch_backup .title");
+	menu.options = $(".content-options .title");
+	// options
 	// keybinds
 	options.keybinds._title_ = $(".keybinds .option-title");
 	options.keybinds.forward = $(".keybinds .forward");
@@ -185,11 +205,8 @@ window.addEventListener("load", function() {
 
 	Game.init();
 
-	document.querySelectorAll(".btn[data-function='open']").forEach(function(e) {
-		e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), 1)})
-	});
-	document.querySelectorAll(".btn[data-function='close']").forEach(function(e) {
-		e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), 0)})
+	document.querySelectorAll(".btn").forEach(function(e) {
+		e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), this.getAttribute("data-function"))})
 	});
 
 	document.querySelectorAll(".option-title").forEach(function(e) {
