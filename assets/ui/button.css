@@ -9,6 +9,16 @@
 	font-size: 20px
 }
 
-.btn:hover {
-	background-color: rgba(0, 0, 0, 0.4)
+.btn:hover {background-color: rgba(0, 0, 0, 0.4)}
+
+.btn[data-function="close"] {
+	display: inline-block;
+	width: 36px;
+	height: 36px;
+	padding: 2px 0;
+	background: url(btn/btn-close.png) no-repeat;
+	background-size: 100%;
+	image-rendering: crisp-edges
 }
+
+.btn[data-function="close"]:active {background-image: url(btn/btn-close_pressed.png)}

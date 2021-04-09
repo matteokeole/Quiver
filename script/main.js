@@ -23,7 +23,7 @@ var Game = {
 			UI.btn.launch_backup.textContent = r["launch_backup.text"];
 			UI.btn.options.textContent = r["options.text"];
 			// data-function buttons
-			UI.btn.data_function.close.forEach(function(e) {e.textContent = r["close.text"]});
+			// UI.btn.data_function.close.forEach(function(e) {e.textContent = r["close.text"]});
 			// menu titles
 			menu.new_game.textContent = r["new_game.text"];
 			menu.launch_backup.textContent = r["launch_backup.text"];
