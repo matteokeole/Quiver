@@ -19,14 +19,10 @@ var Game = {
 			var r = this.response[l];
 			// applying the recovered language data to UI elements
 			// unique buttons
-			UI.btn.new_game.textContent = r["new_game.text"];
-			UI.btn.launch_backup.textContent = r["launch_backup.text"];
+			UI.btn.play.textContent = r["play.text"];
 			UI.btn.options.textContent = r["options.text"];
-			// data-function buttons
-			// UI.btn.data_function.close.forEach(function(e) {e.textContent = r["close.text"]});
 			// menu titles
-			menu.new_game.textContent = r["new_game.text"];
-			menu.launch_backup.textContent = r["launch_backup.text"];
+			menu.play.textContent = r["play.text"];
 			menu.options.textContent = r["options.text"];
 			// options
 			// keybinds
@@ -98,22 +94,19 @@ var Game = {
 
 var UI = {
 	btn: {
-		new_game: null,
-		launch_backup: null,
+		play: null,
 		options: null,
 		data_function: {
 			close: null
 		}
 	},
 	menu: {
-		new_game: null,
-		launch_backup: null,
+		play: null,
 		options: null
 	}
 },
 menu = {
-	new_game: null,
-	launch_backup: null,
+	play: null,
 	options: null
 },
 options = {
@@ -160,17 +153,14 @@ function $(e) {return document.querySelector(e)}
 
 window.addEventListener("load", function() {
 	// buttons
-	UI.btn.new_game = $(".btn-new_game");
-	UI.btn.launch_backup = $(".btn-launch_backup");
+	UI.btn.play = $(".btn-play");
 	UI.btn.options = $(".btn-options");
 	UI.btn.data_function.close = document.querySelectorAll(".btn[data-function='close']");
 	// menus
-	UI.menu.new_game = $(".menu-new_game .scrollable");
-	UI.menu.launch_backup = $(".menu-launch_backup .scrollable");
+	UI.menu.play = $(".menu-play .scrollable");
 	UI.menu.options = $(".menu-options .scrollable");
 	// menu titles
-	menu.new_game = $(".content-new_game .title");
-	menu.launch_backup = $(".content-launch_backup .title");
+	menu.play = $(".content-play .title");
 	menu.options = $(".content-options .title");
 	// options
 	// keybinds

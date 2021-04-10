@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="fr">
+<html>
 
 	<head>
 		<meta charset="utf-8">
@@ -40,8 +40,7 @@
 		<main>
 			<?php include "assets/ui/menu/menu-main.html"; ?>
 			<div class="overlay">
-				<?php include "assets/ui/menu/menu-new_game.html"; ?>
-				<?php include "assets/ui/menu/menu-launch_backup.html"; ?>
+				<?php include "assets/ui/menu/menu-play.html"; ?>
 				<?php include "assets/ui/menu/menu-options.html"; ?>
 			</div>
 		</main>

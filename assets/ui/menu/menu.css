@@ -69,10 +69,7 @@ dark #c4b399 */
 
 .menu-title .title {float: left}
 
-.menu-title .btn {
-	margin: 5px;
-	float: right
-}
+.menu-title .btn {float: right}
 
 .content {
 	visibility: hidden;

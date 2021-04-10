@@ -15,6 +15,7 @@
 	display: inline-block;
 	width: 36px;
 	height: 36px;
+	margin: 0;
 	padding: 2px 0;
 	background: url(btn/btn-close.png) no-repeat;
 	background-size: 100%;
