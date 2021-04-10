@@ -94,9 +94,16 @@ dark #c4b399 */
 	margin-top: 10px
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1200px) and (max-aspect-ratio: 1.78) {
 	.menu {
 		width: 80vw;
-		height: 45vw
+		height: calc(80vw / 1.78)
+	}
+}
+
+@media screen and (max-height: 675px) and (min-aspect-ratio: 1.78) {
+	.menu {
+		width: calc(80vh * 1.78);
+		height: 80vh
 	}
 }

@@ -4,11 +4,12 @@ main {display: none}
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	background-color: #555
+	background: url(background.jpg) center;
+	background-size: 100%
 }
 
 .menu-main-title {
 	height: calc(100vh / 3);
 	position: relative;
-	background-color: #777
+	background-color: rgba(0, 0, 0, 0.4)
 }

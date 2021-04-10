@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<style type="text/css">
+			body {margin: 0}
+
+			.overlay {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				background-color: #000
+			}
+
+			.menu {
+				width: 960px;
+				height: 540px;
+				background: url(scrollbox.png) no-repeat;
+				background-size: 100%;
+				image-rendering: crisp-edges
+			}
+
+			@media screen and (max-width: 1200px) and (max-aspect-ratio: 1.78) {
+				.menu {
+					width: 80vw;
+					height: calc(80vw / 1.78)
+				}
+			}
+
+			@media screen and (max-height: 675px) and (min-aspect-ratio: 1.78) {
+				.menu {
+					width: calc(80vh * 1.78);
+					height: 80vh
+				}
+			}
+		</style>
+		<title>Responsive Menu</title>
+	</head>
+
+	<body>
+		<div class="overlay">
+			<div class="menu"></div>
+		</div>
+	</body>
+
+</html>

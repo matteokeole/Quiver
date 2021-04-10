@@ -1,25 +1,26 @@
 .btn {
 	display: inline-block;
-	height: 30px;
-	line-height: 30px;
-	margin-right: 10px;
-	padding: 0 10px;
-	background-color: #c4b399;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	image-rendering: crisp-edges;
 	cursor: pointer;
+	text-align: center;
 	font-size: 20px
 }
 
-.btn:hover {background-color: rgba(0, 0, 0, 0.4)}
+.btn[data-function="open"] {
+	width: 448px;
+	height: 52px;
+	line-height: 52px;
+	background-image: url(btn/btn-open.png)
+}
+
+.btn[data-function="open"]:active {background-image: url(btn/btn-open_pressed.png)}
 
 .btn[data-function="close"] {
-	display: inline-block;
 	width: 36px;
 	height: 36px;
-	margin: 0;
-	padding: 2px 0;
-	background: url(btn/btn-close.png) no-repeat;
-	background-size: 100%;
-	image-rendering: crisp-edges
+	background-image: url(btn/btn-close.png)
 }
 
 .btn[data-function="close"]:active {background-image: url(btn/btn-close_pressed.png)}
