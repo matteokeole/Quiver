@@ -1,8 +1,6 @@
 var Game = {
 	init: function() {
 		$("title").textContent = `Quiver ${Game.version}`; // updating the title with the last version
-		UI.menu.options.scrollTop = 0;
-		UI.menu.options.style.scrollBehavior = "smooth";
 		Game.lang("en_US"); // setting the game language to english (USA) - can be modified in the options
 		$("main").style.display = "block" // opening the game window
 	},
@@ -39,9 +37,7 @@ var Game = {
 			// audio
 			options.audio._title_.textContent = r.options["audio.text"];
 			options.audio.music.textContent = r.options["audio:music.text"];
-			options.audio.music_volume.textContent = r.options["audio:music_volume.text"];
 			options.audio.sound.textContent = r.options["audio:sound.text"];
-			options.audio.sound_volume.textContent = r.options["audio:sound_volume.text"];
 			// saves
 			options.saves._title_.textContent = r.options["saves.text"];
 			options.saves.advanced.textContent = r.options["saves:advanced.text"];
@@ -67,22 +63,32 @@ var Game = {
 		if (s == "open") {
 			// opening
 			overlay.style.display = "flex";
+			overlay.style["-webkit-animation-name"] = "overlay_fade_in";
+			overlay.style["animation-name"] = "overlay_fade_in";
+			overlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
 			menu.style.display = "flex";
 			st.style.animationName = "scrollbox-open";
 			sb.style.animationName = "scrollbox-open";
 			st.style.height = "50%";
 			sb.style.height = "50%";
-			setTimeout(function() {content.style.visibility = "visible"}, 200)
-		} else if (s == "close") {
-			// closing
-			content.style.visibility = "hidden";
 			UI.menu.options.style.scrollBehavior = "auto";
 			UI.menu.options.scrollTop = 0;
 			UI.menu.options.style.scrollBehavior = "smooth";
+			setTimeout(function() {
+				content.style.visibility = "visible";
+				document.addEventListener("keydown", esc)
+			}, 200)
+		} else if (s == "close") {
+			// closing with button
+			document.removeEventListener("keydown", esc);
+			content.style.visibility = "hidden";
 			st.style.animationName = "scrollbox-close";
 			sb.style.animationName = "scrollbox-close";
 			st.style.height = 0;
 			sb.style.height = 0;
+			overlay.style["-webkit-animation-name"] = "overlay_fade_out";
+			overlay.style["animation-name"] = "overlay_fade_out";
+			overlay.style.backgroundColor = "transparent";
 			setTimeout(function() {
 				menu.style.display = "none";
 				overlay.style.display = "none"
@@ -104,12 +110,14 @@ var UI = {
 		play: null,
 		options: null
 	}
-},
-menu = {
+};
+
+var menu = {
 	play: null,
 	options: null
-},
-options = {
+};
+
+var options = {
 	keybinds: {
 		_title_: null,
 		forward: null,
@@ -126,9 +134,7 @@ options = {
 	audio: {
 		_title_: null,
 		music: null,
-		music_volume: null,
-		sound: null,
-		sound_volume: null
+		sound: null
 	},
 	saves: {
 		_title_: null,
@@ -148,6 +154,15 @@ options = {
 };
 
 function $(e) {return document.querySelector(e)}
+
+function esc(e) {
+	var raw_menus = ["menu-play", "menu-options"];
+	if (e.keyCode == 27) {
+		for (i = 0; i < raw_menus.length; i++) {
+			if (document.querySelector(`.${raw_menus[i]}`).style.display == "flex") Game.toggle_menu(raw_menus[i], "close")
+		}
+	}
+}
 
 
 
@@ -177,9 +192,7 @@ window.addEventListener("load", function() {
 	// audio
 	options.audio._title_ = $(".audio .option-title");
 	options.audio.music = $(".audio .music");
-	options.audio.music_volume = $(".audio .music_volume");
 	options.audio.sound = $(".audio .sound");
-	options.audio.sound_volume =$(".audio .sound_volume");
 	// saves
 	options.saves._title_ = $(".saves .option-title");
 	options.saves.advanced = $(".saves .advanced");

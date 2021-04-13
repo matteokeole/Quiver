@@ -14,7 +14,30 @@ dark #c4b399 */
 	left: 0;
 	right: 0;
 	position: absolute;
-	background-color: rgba(0, 0, 0, 0.75)
+	background-color: transparent;
+	-webkit-animation: overlay_fade_in 0.2s linear;
+	animation: overlay_fade_in 0.2s linear;
+	transition-duration: 0.2s
+}
+
+@-webkit-keyframes overlay_fade_in {
+	from {background-color: transparent}
+	to {background-color: rgba(0, 0, 0, 0.8)}
+}
+
+@keyframes overlay_fade_in {
+	from {background-color: transparent}
+	to {background-color: rgba(0, 0, 0, 0.8)}
+}
+
+@-webkit-keyframes overlay_fade_out {
+	from {background-color: rgba(0, 0, 0, 0.8)}
+	to {background-color: transparent}
+}
+
+@keyframes overlay_fade_out {
+	from {background-color: rgba(0, 0, 0, 0.8)}
+	to {background-color: transparent}
 }
 
 .menu {
@@ -34,6 +57,7 @@ dark #c4b399 */
 	background-repeat: no-repeat;
 	background-size: 100%;
 	image-rendering: crisp-edges;
+	-webkit-animation: scrollbox-open 0.2s linear;
 	animation: scrollbox-open 0.2s linear
 }
 
@@ -43,13 +67,26 @@ dark #c4b399 */
 	background-repeat: no-repeat;
 	background-size: 100%;
 	image-rendering: crisp-edges;
+	-webkit-transform: rotateZ(180deg);
+	-ms-transform: rotateZ(180deg);
 	transform: rotateZ(180deg);
+	-webkit-animation: scrollbox-open 0.2s linear;
 	animation: scrollbox-open 0.2s linear
+}
+
+@-webkit-keyframes scrollbox-open {
+	from {height: 0}
+	to {height: 50%}
 }
 
 @keyframes scrollbox-open {
 	from {height: 0}
 	to {height: 50%}
+}
+
+@-webkit-keyframes scrollbox-close {
+	from {height: 50%}
+	to {height: 0}
 }
 
 @keyframes scrollbox-close {

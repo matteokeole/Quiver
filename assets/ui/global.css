@@ -1,15 +1,1 @@
 main {display: none}
-
-.menu-main {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	background: url(background.jpg) center;
-	background-size: 100%
-}
-
-.menu-main-title {
-	height: calc(100vh / 3);
-	position: relative;
-	background-color: rgba(0, 0, 0, 0.4)
-}

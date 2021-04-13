@@ -12,6 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="assets/font/font.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/noscript.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/global.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu/main.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/options.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/button.css">
@@ -28,7 +29,7 @@
 		<title>Quiver</title>
 	</head>
 
-	<body>
+	<body onselectstart="return false">
 		<noscript>
 			<p>
 				Ce jeu nécessite JavaScript pour fonctionner.<br>
