@@ -4,8 +4,22 @@
 	<div class="content content-play">
 		<div class="menu-title">
 			<div class="title"></div>
-			<div class="btn" data-function="close" data-target="menu-play"></div>
+			<div class="btn small" data-function="close" data-target="menu-play"></div>
 		</div>
-		<div class="scrollable"></div>
+		<div class="scrollable">
+			<div class="new_game">
+				<div class="subtitle-new_game"></div>
+				<div class="btn btn-play" data-function="close" data-target="menu-play"></div>
+			</div>
+			<div class="launch-backup">
+				<div class="subtitle-launch-backup"></div>
+				<input type="file" id="open-backup">
+				<label for="open_backup" class="btn-open_backup" data-function="open" data-target="container-backup"></label>
+				<div class="container-backup">
+					<textarea class="backup" readonly></textarea>
+					<div class="btn btn-launch_backup" data-function="close" data-target="menu-play"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

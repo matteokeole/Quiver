@@ -1,6 +1,6 @@
 var Game = {
 	init: function() {
-		$("title").textContent = `Quiver ${Game.version}`; // updating the title with the last version
+		$("title").textContent = `Quiver ${Game.version}`; // updating the window title with the last version
 		Game.lang("en_US"); // setting the game language to english (USA) - can be modified in the options
 		$("main").style.display = "block" // opening the game window
 	},
@@ -22,31 +22,31 @@ var Game = {
 			// menu titles
 			menu.play.textContent = r["play.text"];
 			menu.options.textContent = r["options.text"];
-			// options
-			// keybinds
+			// option menu
+			// keybinds settings
 			options.keybinds._title_.textContent = r.options["keybinds.text"];
 			options.keybinds.forward.textContent = r.options["keybinds:forward.text"];
 			options.keybinds.backward.textContent = r.options["keybinds:backward.text"];
 			options.keybinds.left.textContent = r.options["keybinds:left.text"];
 			options.keybinds.right.textContent = r.options["keybinds:right.text"];
 			options.keybinds.console.textContent = r.options["keybinds:console.text"];
-			// display
+			// display settings
 			options.display._title_.textContent = r.options["display.text"];
 			options.display.borders.textContent = r.options["display:borders.text"];
 			options.display.animations.textContent = r.options["display:animations.text"];
-			// audio
+			// audio settings
 			options.audio._title_.textContent = r.options["audio.text"];
 			options.audio.music.textContent = r.options["audio:music.text"];
 			options.audio.sound.textContent = r.options["audio:sound.text"];
-			// saves
+			// saves settings
 			options.saves._title_.textContent = r.options["saves.text"];
 			options.saves.advanced.textContent = r.options["saves:advanced.text"];
-			// language
+			// language settings
 			options.lang._title_.textContent = r.options["lang.text"];
 			options.lang.en_US.textContent = r.options["lang:en_US.text"];
 			options.lang.es_ES.textContent = r.options["lang:es_ES.text"];
 			options.lang.fr_FR.textContent = r.options["lang:fr_FR.text"];
-			// about
+			// about settings
 			options.about._title_.textContent = r.options["about.text"];
 			options.about.updates.textContent = r.options["about:updates.text"];
 			options.about.credits.textContent = r.options["about:credits.text"]
@@ -56,7 +56,7 @@ var Game = {
 		// m: menu name (str)
 		// s: status (1: open or 0: close)
 		var overlay = document.querySelector(".overlay"),
-			menu = document.querySelector(`.${m}`),
+			menu = overlay.querySelector(`.${m}`),
 			st = menu.querySelector(".scrollbox-top"),
 			sb = menu.querySelector(".scrollbox-bottom"),
 			content = menu.querySelector(".content");
@@ -67,9 +67,11 @@ var Game = {
 			overlay.style["animation-name"] = "overlay_fade_in";
 			overlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
 			menu.style.display = "flex";
-			st.style.animationName = "scrollbox-open";
-			sb.style.animationName = "scrollbox-open";
+			st.style["-webkit-animation-name"] = "scrollbox-open";
+			st.style["animation-name"] = "scrollbox-open";
 			st.style.height = "50%";
+			sb.style["-webkit-animation-name"] = "scrollbox-open";
+			sb.style["animation-name"] = "scrollbox-open";
 			sb.style.height = "50%";
 			UI.menu.options.style.scrollBehavior = "auto";
 			UI.menu.options.scrollTop = 0;
@@ -82,9 +84,11 @@ var Game = {
 			// closing with button
 			document.removeEventListener("keydown", esc);
 			content.style.visibility = "hidden";
-			st.style.animationName = "scrollbox-close";
-			sb.style.animationName = "scrollbox-close";
+			st.style["-webkit-animation-name"] = "scrollbox-close";
+			st.style["animation-name"] = "scrollbox-close";
 			st.style.height = 0;
+			sb.style["-webkit-animation-name"] = "scrollbox-close";
+			sb.style["animation-name"] = "scrollbox-close";
 			sb.style.height = 0;
 			overlay.style["-webkit-animation-name"] = "overlay_fade_out";
 			overlay.style["animation-name"] = "overlay_fade_out";

@@ -14,7 +14,8 @@
 		<link rel="stylesheet" type="text/css" href="assets/ui/global.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/main.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/menu/options.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-options.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-play.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/button.css">
 		<style type="text/css">
 			body {

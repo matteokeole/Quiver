@@ -16,8 +16,7 @@ dark #c4b399 */
 	position: absolute;
 	background-color: transparent;
 	-webkit-animation: overlay_fade_in 0.2s linear;
-	animation: overlay_fade_in 0.2s linear;
-	transition-duration: 0.2s
+	animation: overlay_fade_in 0.2s linear
 }
 
 @-webkit-keyframes overlay_fade_in {
