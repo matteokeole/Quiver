@@ -8,6 +8,7 @@
 		"prev.text": "Previous",
 		"new_game.text": "New Game",
 		"launch_backup.text": "Launch Backup",
+		"open_backup.text": "Open Backup",
 		"options.text": "Options",
 		"options": {
 			"keybinds.text": "Controls",

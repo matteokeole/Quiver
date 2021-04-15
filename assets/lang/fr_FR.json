@@ -8,6 +8,7 @@
 		"prev.text": "Précédent",
 		"new_game.text": "Nouvelle partie",
 		"launch_backup.text": "Charger une sauvegarde",
+		"open_backup.text": "Ouvrir une sauvegarde",
 		"options.text": "Options",
 		"options": {
 			"keybinds.text": "Contrôles",

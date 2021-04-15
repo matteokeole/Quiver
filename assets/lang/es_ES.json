@@ -8,6 +8,7 @@
 		"prev.text": "Anterior",
 		"new_game.text": "Nuevo juego",
 		"launch_backup.text": "Lanzar una copia de respaldo",
+		"open_backup.text": "Abrir una copia de respaldo",
 		"options.text": "Opciones",
 		"options": {
 			"keybinds.text": "Controles",
@@ -29,7 +30,7 @@
 			"lang:es_ES.text": "Español",
 			"lang:fr_FR.text": "Francés",
 			"about.text": "A proposito",
-			"about:updates.text": "Notas des actualizaciones",
+			"about:updates.text": "Notas de las actualizaciones",
 			"about:credits.text": "Creditos"
 		}
 	}

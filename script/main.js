@@ -23,35 +23,75 @@ var Game = {
 			// menu titles
 			menu.play.textContent = r["play.text"];
 			menu.options.textContent = r["options.text"];
+			// play menu
+			// new game section
+			play.new_game.subtitle.textContent = r["new_game.text"];
+			play.new_game.play.textContent = r["new_game.text"];
+			// launch backup section
+			play.launch_backup.subtitle.textContent = r["launch_backup.text"];
+			play.launch_backup.open.textContent = r["open_backup.text"];
+			play.launch_backup.launch.textContent = r["launch_backup.text"];
 			// option menu
-			// keybinds settings
-			options.keybinds._title_.textContent = r.options["keybinds.text"];
+			// keybind settings
+			options.keybinds.subtitle.textContent = r.options["keybinds.text"];
 			options.keybinds.forward.textContent = r.options["keybinds:forward.text"];
 			options.keybinds.backward.textContent = r.options["keybinds:backward.text"];
 			options.keybinds.left.textContent = r.options["keybinds:left.text"];
 			options.keybinds.right.textContent = r.options["keybinds:right.text"];
 			options.keybinds.console.textContent = r.options["keybinds:console.text"];
 			// display settings
-			options.display._title_.textContent = r.options["display.text"];
+			options.display.subtitle.textContent = r.options["display.text"];
 			options.display.borders.textContent = r.options["display:borders.text"];
 			options.display.animations.textContent = r.options["display:animations.text"];
 			// audio settings
-			options.audio._title_.textContent = r.options["audio.text"];
+			options.audio.subtitle.textContent = r.options["audio.text"];
 			options.audio.music.textContent = r.options["audio:music.text"];
 			options.audio.sound.textContent = r.options["audio:sound.text"];
-			// saves settings
-			options.saves._title_.textContent = r.options["saves.text"];
+			// savey settings
+			options.saves.subtitle.textContent = r.options["saves.text"];
 			options.saves.advanced.textContent = r.options["saves:advanced.text"];
 			// language settings
-			options.lang._title_.textContent = r.options["lang.text"];
+			options.lang.subtitle.textContent = r.options["lang.text"];
 			options.lang.en_US.textContent = r.options["lang:en_US.text"];
 			options.lang.es_ES.textContent = r.options["lang:es_ES.text"];
 			options.lang.fr_FR.textContent = r.options["lang:fr_FR.text"];
 			// about settings
-			options.about._title_.textContent = r.options["about.text"];
+			options.about.subtitle.textContent = r.options["about.text"];
 			options.about.updates.textContent = r.options["about:updates.text"];
 			options.about.credits.textContent = r.options["about:credits.text"]
 		})
+	},
+	launch_new_game: function() {
+		Game.toggle_menu("menu-play", "close");
+		alert("Creating a new game...")
+	},
+	open_backup: function(e) {
+		var file = e.target.files[0];
+		if (!file) return;
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			// opening
+			var backup = UI.menu.play.querySelector(".container-backup");
+			backup.style.visibility = "visible";
+			backup.querySelector(".backup").value = e.target.result; // showing backup content
+			// getting the backup content as a js object
+			var script_backup = document.createElement("script");
+			script_backup.setAttribute("type", "text/javascript");
+			script_backup.innerHTML = e.target.result;
+			document.head.append(script_backup);
+			/*UI.menu.play.querySelector(".backup_info").textContent = "\"" +
+				Backup.name + "\" - " +
+				Backup.player.nickname + " (niveau " +
+				Backup.player.level + ", " +
+				Backup.player.class + ")<br>Creee le : " +
+				convert_date(Backup.date.creation) + "<br>Derniere connexion le : " +
+				convert_date(Backup.date.lastConnection)*/
+		}
+		reader.readAsText(file)
+	},
+	launch_backup: function() {
+		Game.toggle_menu("menu-play", "close");
+		alert("Launching a backup...")
 	},
 	toggle_menu: function(m, s) {
 		// m: menu name (str)
@@ -122,9 +162,22 @@ var menu = {
 	options: null
 };
 
+var play = {
+	new_game: {
+		subtitle: null,
+		play: null
+	},
+	launch_backup: {
+		subtitle: null,
+		open: null,
+		backup_info: null,
+		launch: null
+	}
+};
+
 var options = {
 	keybinds: {
-		_title_: null,
+		subtitle: null,
 		forward: null,
 		backward: null,
 		left: null,
@@ -132,27 +185,27 @@ var options = {
 		console: null
 	},
 	display: {
-		_title_: null,
+		subtitle: null,
 		borders: null,
 		animations: null
 	},
 	audio: {
-		_title_: null,
+		subtitle: null,
 		music: null,
 		sound: null
 	},
 	saves: {
-		_title_: null,
+		subtitle: null,
 		advanced: null
 	},
 	lang: {
-		_title_: null,
+		subtitle: null,
 		en_US: null,
 		es_ES: null,
 		fr_FR: null
 	},
 	about: {
-		_title_: null,
+		subtitle: null,
 		updates: null,
 		credits: null
 	}
@@ -169,6 +222,12 @@ function esc(e) {
 	}
 }
 
+function convert_date(date) {
+	date = date.split("-");
+	var new_date = date[2] + "/" + date[1] + "/" + date[0] + " a " + date[3] + ":" + date[4] + ":" + date[5];
+	return new_date
+}
+
 
 
 window.addEventListener("load", function() {
@@ -182,40 +241,52 @@ window.addEventListener("load", function() {
 	// menu titles
 	menu.play = $(".content-play .title");
 	menu.options = $(".content-options .title");
-	// options
-	// keybinds
-	options.keybinds._title_ = $(".keybinds .option-title");
+	// play menu
+	// new game section
+	play.new_game.subtitle = $(".new_game .subtitle");
+	play.new_game.play = $(".new_game .btn-play");
+	// launch backup section
+	play.launch_backup.subtitle = $(".launch_backup .subtitle");
+	play.launch_backup.open = $(".launch_backup .btn-open_backup");
+	play.launch_backup.backup_info = $(".launch_backup .backup_info");
+	play.launch_backup.launch = $(".launch_backup .btn-launch_backup");
+	// option menu
+	// keybind settings
+	options.keybinds.subtitle = $(".keybinds .subtitle");
 	options.keybinds.forward = $(".keybinds .forward");
 	options.keybinds.backward = $(".keybinds .backward");
 	options.keybinds.left = $(".keybinds .left");
 	options.keybinds.right = $(".keybinds .right");
 	options.keybinds.console = $(".keybinds .console");
-	// display
-	options.display._title_ = $(".display .option-title");
+	// display settings
+	options.display.subtitle = $(".display .subtitle");
 	options.display.borders = $(".display .borders");
 	options.display.animations = $(".display .animations");
-	// audio
-	options.audio._title_ = $(".audio .option-title");
+	// audio settings
+	options.audio.subtitle = $(".audio .subtitle");
 	options.audio.music = $(".audio .music");
 	options.audio.sound = $(".audio .sound");
-	// saves
-	options.saves._title_ = $(".saves .option-title");
+	// save settings
+	options.saves.subtitle = $(".saves .subtitle");
 	options.saves.advanced = $(".saves .advanced");
-	// language
-	options.lang._title_ = $(".lang .option-title");
+	// language settings
+	options.lang.subtitle = $(".lang .subtitle");
 	options.lang.en_US = $(".lang .en_US");
 	options.lang.es_ES = $(".lang .es_ES");
 	options.lang.fr_FR = $(".lang .fr_FR");
-	// about
-	options.about._title_ = $(".about .option-title");
+	// about settings
+	options.about.subtitle = $(".about .subtitle");
 	options.about.updates = $(".about .updates");
 	options.about.credits = $(".about .credits");
 
 	Game.init();
 
-	document.querySelectorAll(".btn").forEach(function(e) {
+	document.querySelectorAll(".btn[data-function]").forEach(function(e) {
 		e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), this.getAttribute("data-function"))})
 	});
+	play.new_game.play.addEventListener("click", function() {Game.launch_new_game()});
+	play.launch_backup.open.addEventListener("change", Game.open_backup);
+	play.launch_backup.launch.addEventListener("click", function() {Game.launch_backup()});
 
 	document.querySelectorAll(".option-title").forEach(function(e) {
 		e.addEventListener("click", function() {UI.menu.options.scrollTop = (this.parentNode.offsetTop - 40)})

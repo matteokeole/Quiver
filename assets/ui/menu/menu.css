@@ -107,6 +107,15 @@ dark #c4b399 */
 
 .menu-title .btn {float: right}
 
+.subtitle {
+	height: 30px;
+	line-height: 30px;
+	top: 0;
+	position: sticky;
+	background-color: #f5e0bf;
+	font-size: 22px
+}
+
 .content {
 	visibility: hidden;
 	width: 90%;

@@ -1,1 +1,17 @@
-.open-backup {display: none}
+#open_backup {display: none}
+
+.container-backup {
+	visibility: hidden;
+	width: 80%;
+	height: 200px;
+	padding: 8px;
+	outline: none;
+	border: 4px inset #000;
+	background-color: rgba(0, 0, 0, 0.3);
+	color: #000;
+	cursor: text;
+	font-size: 18px;
+	font-weight: bold;
+	resize: none;
+	word-break: break-all
+}
