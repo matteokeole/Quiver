@@ -1,6 +1,9 @@
 .btn {
 	display: inline-block;
-	background-repeat: no-repeat;
+	width: 448px;
+	height: 52px;
+	line-height: 52px;
+	background: url(btn/btn.png) no-repeat;
 	background-size: 100%;
 	image-rendering: crisp-edges;
 	cursor: pointer;
@@ -8,18 +11,12 @@
 	font-size: 24px
 }
 
-.btn[data-function="open"] {
-	width: 448px;
-	height: 52px;
-	line-height: 52px;
-	background-image: url(btn/btn-open.png)
-}
-
-.btn[data-function="open"]:active {background-image: url(btn/btn-open_pressed.png)}
+.btn:active {background-image: url(btn/btn_pressed.png)}
 
 .btn.small[data-function="close"] {
 	width: 36px;
 	height: 36px;
+	line-height: 0;
 	background-image: url(btn/btn-close.png)
 }
 

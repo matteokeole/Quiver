@@ -13,8 +13,9 @@ var Game = {
 		request.responseType = "json";
 		request.send();
 		request.addEventListener("load", function() {
-			// the request has been accepted, recovering file content
+			// the request has been accepted, recovering file content and changing the default language of the page
 			var r = this.response[l];
+			document.querySelector("html").setAttribute("lang", r["lang"]);
 			// applying the recovered language data to UI elements
 			// unique buttons
 			UI.btn.play.textContent = r["play.text"];

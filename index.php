@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 
 	<head>
 		<meta charset="utf-8">
@@ -14,8 +14,8 @@
 		<link rel="stylesheet" type="text/css" href="assets/ui/global.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/main.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-options.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-play.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-options.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/button.css">
 		<style type="text/css">
 			body {
@@ -33,11 +33,11 @@
 	<body onselectstart="return false">
 		<noscript>
 			<p>
-				Ce jeu nécessite JavaScript pour fonctionner.<br>
-				Activez JavaScript dans votre navigateur puis réessayez.<br><br>
-				<a href="">Actualiser</a>
+				This game needs JavaScript to work.<br>
+				Enable JavaScript in your browser, then retry.<br><br>
+				<a href="">Reload</a>
 			</p>
-			<div class="version">Version : 1.1.0</div>
+			<div class="version">1.1.0</div>
 		</noscript>
 		<main>
 			<?php include "assets/ui/menu/menu-main.html"; ?>
