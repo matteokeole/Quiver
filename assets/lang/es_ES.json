@@ -7,8 +7,9 @@
 		"next.text": "Siguiente",
 		"prev.text": "Anterior",
 		"new_game.text": "Nuevo juego",
-		"launch_backup.text": "Lanzar una copia de respaldo",
 		"open_backup.text": "Abrir una copia de respaldo",
+		"launch_backup.text": "Lanzar esta copia de respaldo",
+		"backup_tip.text": "El archivo debe estar en formato JSON.",
 		"options.text": "Opciones",
 		"options": {
 			"keybinds.text": "Controles",

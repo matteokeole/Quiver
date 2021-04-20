@@ -21,3 +21,10 @@
 }
 
 .btn.small[data-function="close"]:active {background-image: url(btn/btn-close_pressed.png)}
+
+.btn-new_game, .btn-open_backup {margin: 20px}
+
+.btn-open_backup {
+	display: block;
+	font-weight: normal
+}

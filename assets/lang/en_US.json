@@ -7,8 +7,9 @@
 		"next.text": "Next",
 		"prev.text": "Previous",
 		"new_game.text": "New Game",
-		"launch_backup.text": "Launch Backup",
 		"open_backup.text": "Open Backup",
+		"launch_backup.text": "Launch Backup",
+		"backup_tip.text": "The file must be in JSON format.",
 		"options.text": "Options",
 		"options": {
 			"keybinds.text": "Controls",

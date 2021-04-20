@@ -7,8 +7,9 @@
 		"next.text": "Suivant",
 		"prev.text": "Précédent",
 		"new_game.text": "Nouvelle partie",
-		"launch_backup.text": "Charger une sauvegarde",
 		"open_backup.text": "Ouvrir une sauvegarde",
+		"launch_backup.text": "Charger cette sauvegarde",
+		"backup_tip.text": "Le fichier doit être au format JSON.",
 		"options.text": "Options",
 		"options": {
 			"keybinds.text": "Contrôles",

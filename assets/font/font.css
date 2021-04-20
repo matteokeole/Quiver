@@ -4,3 +4,8 @@
 }
 
 * {font-family: Quiver}
+
+textarea {
+	font-family: monospace;
+	font-weight: bold
+}

@@ -1,17 +1,23 @@
 #open_backup {display: none}
 
+.backup_tip, .backup_info {font-size: 18px}
+
 .container-backup {
-	visibility: hidden;
-	width: 80%;
-	height: 200px;
-	padding: 8px;
-	outline: none;
-	border: 4px inset #000;
-	background-color: rgba(0, 0, 0, 0.3);
-	color: #000;
-	cursor: text;
-	font-size: 18px;
-	font-weight: bold;
-	resize: none;
-	word-break: break-all
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center
 }
+
+.backup {
+	width: calc(100% - 24px);
+	height: 184px;
+	margin-bottom: 20px;
+	padding: 8px;
+	border: 4px solid #000;
+	background-color: rgba(0, 0, 0, 0.3);
+	font-size: 18px;
+	resize: none
+}
+
+.btn-launch_backup {margin-top: 20px}
