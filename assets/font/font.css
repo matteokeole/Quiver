@@ -3,7 +3,7 @@
 	src: url(quiver.ttf) format("truetype")
 }
 
-* {font-family: Quiver}
+div {font-family: Quiver}
 
 textarea {
 	font-family: monospace;

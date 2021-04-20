@@ -11,18 +11,21 @@
 		<meta name="copyright" content="© 2021 Quiver. All right reserved.">
 		<link rel="stylesheet" type="text/css" href="assets/font/font.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/noscript.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/global.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/menu/main.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/overlay.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/btn/btn.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-main.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-play.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-options.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/button.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-load.css">
 		<style type="text/css">
 			body {
 				margin: 0;
 				background-color: #000;
 				cursor: default
 			}
+
+			main {display: none}
 
 			::selection {background-color: rgba(0, 0, 0, 0.2)} /* text selection color */
 		</style>
@@ -235,8 +238,8 @@
 				},
 				launch_new_game: function() {
 					Game.toggle_menu("menu-play", "close");
-					alert("Creating a new game...");
-					var Backup = Game.create_backup()
+					var Backup = Game.create_backup();
+					load()
 				},
 				open_backup: function(e) {
 					var file = e.target.files[0];
@@ -269,23 +272,22 @@
 				},
 				launch_backup: function() {
 					Game.toggle_menu("menu-play", "close");
-					alert("Launching a backup...")
+					load()
 				},
 				toggle_menu: function(m, s) {
 					// m: menu name (str)
 					// s: status (1: open or 0: close)
-					var overlay = document.querySelector(".overlay"),
-						menu = overlay.querySelector(`.${m}`),
+					var menu = UI.overlay.menu.querySelector(`.${m}`),
 						st = menu.querySelector(".scrollbox-top"),
 						sb = menu.querySelector(".scrollbox-bottom"),
 						content = menu.querySelector(".content"),
 						scrollable = content.querySelector(".scrollable");
 					if (s == "open") {
 						// opening
-						overlay.style.display = "flex";
-						overlay.style["-webkit-animation-name"] = "overlay_fade_in";
-						overlay.style["animation-name"] = "overlay_fade_in";
-						overlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+						UI.overlay.menu.style.display = "flex";
+						UI.overlay.menu.style["-webkit-animation-name"] = "overlay_menu_fade_in";
+						UI.overlay.menu.style["animation-name"] = "overlay_menu_fade_in";
+						UI.overlay.menu.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
 						menu.style.display = "flex";
 						st.style["-webkit-animation-name"] = "scrollbox-open";
 						st.style["animation-name"] = "scrollbox-open";
@@ -310,12 +312,12 @@
 						sb.style["-webkit-animation-name"] = "scrollbox-close";
 						sb.style["animation-name"] = "scrollbox-close";
 						sb.style.height = 0;
-						overlay.style["-webkit-animation-name"] = "overlay_fade_out";
-						overlay.style["animation-name"] = "overlay_fade_out";
-						overlay.style.backgroundColor = "transparent";
+						UI.overlay.menu.style["-webkit-animation-name"] = "overlay_menu_fade_out";
+						UI.overlay.menu.style["animation-name"] = "overlay_menu_fade_out";
+						UI.overlay.menu.style.backgroundColor = "transparent";
 						setTimeout(function() {
 							menu.style.display = "none";
-							overlay.style.display = "none"
+							UI.overlay.menu.style.display = "none"
 						}, 200)
 					}
 				},
@@ -326,13 +328,16 @@
 				btn: {
 					play: null,
 					options: null,
-					data_function: {
-						close: null
-					}
+					data_function: {close: null}
 				},
 				menu: {
 					play: null,
-					options: null
+					options: null,
+					load: null
+				},
+				overlay: {
+					menu: null,
+					load: null
 				}
 			};
 
@@ -567,6 +572,19 @@
 
 			function $(e) {return document.querySelector(e)}
 
+			function load() {
+				UI.overlay.load.style.display = "block";
+				UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
+				UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
+				UI.overlay.load.style.backgroundColor = "#000";
+				setTimeout(function() {UI.menu.load.style.display = "flex"}, 600);
+				setTimeout(function() {
+					UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
+					UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
+					UI.overlay.load.style.backgroundColor = "transparent"
+				}, 1200)
+			}
+
 			function esc(e) {
 				var raw_menus = ["menu-play", "menu-options"];
 				if (e.keyCode == 27) {
@@ -590,6 +608,10 @@
 				// menus
 				UI.menu.play = $(".menu-play .scrollable");
 				UI.menu.options = $(".menu-options .scrollable");
+				UI.menu.load = $(".menu-load")
+				// overlays
+				UI.overlay.menu = $(".overlay-menu");
+				UI.overlay.load = $(".overlay-load");
 				// menu titles
 				menu.play = $(".content-play .title");
 				menu.options = $(".content-options .title");
@@ -641,7 +663,7 @@
 				document.querySelector("#open_backup").onchange = Game.open_backup;
 				play.launch_backup.launch.addEventListener("click", function() {Game.launch_backup()});
 
-				document.querySelectorAll(".option-title").forEach(function(e) {
+				document.querySelectorAll(".option .subtitle").forEach(function(e) {
 					e.addEventListener("click", function() {UI.menu.options.scrollTop = (this.parentNode.offsetTop - 40)})
 				})
 			})
@@ -665,6 +687,8 @@
 				<?php include "assets/ui/menu/menu-play.html"; ?>
 				<?php include "assets/ui/menu/menu-options.html"; ?>
 			</div>
+			<div class="overlay overlay-load"></div>
+			<?php include "assets/ui/menu/menu-load.html"; ?>
 		</main>
 	</body>
 

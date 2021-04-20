@@ -1,0 +1,23 @@
+.btn {
+	display: inline-block;
+	width: 448px;
+	height: 52px;
+	line-height: 52px;
+	background: url(btn.png) no-repeat;
+	background-size: 100%;
+	image-rendering: crisp-edges;
+	cursor: pointer;
+	text-align: center;
+	font-size: 24px
+}
+
+.btn:active {background-image: url(btn_pressed.png)}
+
+.btn.small[data-function="close"] {
+	width: 36px;
+	height: 36px;
+	line-height: 0;
+	background-image: url(btn-close.png)
+}
+
+.btn.small[data-function="close"]:active {background-image: url(btn-close_pressed.png)}

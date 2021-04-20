@@ -1,3 +1,12 @@
+.btn-new_game, .btn-open_backup {
+	left: calc(50% - 224px);
+	position: relative
+}
+
+.btn-new_game, .btn-open_backup {margin: 20px 0}
+
+.btn-open_backup {font-weight: normal}
+
 #open_backup {display: none}
 
 .backup_tip, .backup_info {font-size: 18px}

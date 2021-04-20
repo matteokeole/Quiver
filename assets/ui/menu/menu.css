@@ -2,43 +2,6 @@
 light #f5e0bf
 dark #c4b399 */
 
-.overlay {
-	display: none;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-	margin: auto;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	position: absolute;
-	background-color: transparent;
-	-webkit-animation: overlay_fade_in 0.2s linear;
-	animation: overlay_fade_in 0.2s linear
-}
-
-@-webkit-keyframes overlay_fade_in {
-	from {background-color: transparent}
-	to {background-color: rgba(0, 0, 0, 0.8)}
-}
-
-@keyframes overlay_fade_in {
-	from {background-color: transparent}
-	to {background-color: rgba(0, 0, 0, 0.8)}
-}
-
-@-webkit-keyframes overlay_fade_out {
-	from {background-color: rgba(0, 0, 0, 0.8)}
-	to {background-color: transparent}
-}
-
-@keyframes overlay_fade_out {
-	from {background-color: rgba(0, 0, 0, 0.8)}
-	to {background-color: transparent}
-}
-
 .menu {
 	display: none;
 	flex-direction: column;
@@ -113,7 +76,8 @@ dark #c4b399 */
 	top: 0;
 	position: sticky;
 	background-color: #f5e0bf;
-	font-size: 22px
+	font-size: 22px;
+	z-index: 1
 }
 
 .content {
