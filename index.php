@@ -18,6 +18,7 @@
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-play.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-options.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-load.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/icon/icon.css">
 		<style type="text/css">
 			body {
 				margin: 0;
@@ -34,6 +35,7 @@
 				init: function() {
 					$("title").textContent = `Quiver ${Game.version}`; // updating the window title with the last version
 					Game.lang("en_US"); // setting the game language to english (USA) - can be modified in the options
+					document.querySelectorAll("input").forEach(function(e) {e.value = ""}); // resetting input values
 					$("main").style.display = "block" // opening the game window
 				},
 				lang: function(l) {
@@ -49,15 +51,21 @@
 						var r = this.response[l];
 						document.querySelector("html").setAttribute("lang", r["lang"]);
 						// applying the recovered language data to UI elements
+						// global buttons
+						document.querySelectorAll(".btn-prev").forEach(function(btn) {btn.textContent = r["prev.text"]});
+						document.querySelectorAll(".btn-next").forEach(function(btn) {btn.textContent = r["next.text"]});
 						// unique buttons
 						UI.btn.play.textContent = r["play.text"];
 						UI.btn.options.textContent = r["options.text"];
 						// menu titles
-						menu.play.textContent = r["play.text"];
-						menu.options.textContent = r["options.text"];
+						title.play.textContent = r["play.text"];
+						title.options.textContent = r["options.text"];
 						// play menu
 						// new game section
 						play.new_game.subtitle.textContent = r["new_game.text"];
+						play.new_game.player_name_tip.textContent = r.new_game["player_name_tip.text"];
+						play.new_game.game_name_tip.textContent = r.new_game["game_name_tip.text"];
+						play.new_game.character_selection_tip.textContent = r.new_game["character_selection_tip.text"];
 						play.new_game.play.textContent = r["new_game.text"];
 						// launch backup section
 						play.launch_backup.subtitle.textContent = r["launch_backup.text"];
@@ -328,6 +336,7 @@
 				btn: {
 					play: null,
 					options: null,
+					create: null,
 					data_function: {close: null}
 				},
 				menu: {
@@ -341,7 +350,7 @@
 				}
 			};
 
-			var menu = {
+			var title = {
 				play: null,
 				options: null
 			};
@@ -349,6 +358,9 @@
 			var play = {
 				new_game: {
 					subtitle: null,
+					player_name_tip: null,
+					game_name_tip: null,
+					character_selection_tip: null,
 					play: null
 				},
 				launch_backup: {
@@ -604,20 +616,24 @@
 				// buttons
 				UI.btn.play = $(".btn-play");
 				UI.btn.options = $(".btn-options");
+				UI.btn.create = $(".menu-new_game .btn-create");
 				UI.btn.data_function.close = document.querySelectorAll(".btn[data-function='close']");
 				// menus
 				UI.menu.play = $(".menu-play .scrollable");
 				UI.menu.options = $(".menu-options .scrollable");
-				UI.menu.load = $(".menu-load")
+				UI.menu.load = $(".menu-load");
 				// overlays
 				UI.overlay.menu = $(".overlay-menu");
 				UI.overlay.load = $(".overlay-load");
 				// menu titles
-				menu.play = $(".content-play .title");
-				menu.options = $(".content-options .title");
+				title.play = $(".content-play .title");
+				title.options = $(".content-options .title");
 				// play menu
 				// new game section
 				play.new_game.subtitle = $(".new_game .subtitle");
+				play.new_game.player_name_tip = $(".new_game .player_name_tip");
+				play.new_game.game_name_tip = $(".new_game .game_name_tip");
+				play.new_game.character_selection_tip = $(".new_game .character_selection_tip");
 				play.new_game.play = $(".new_game .btn-new_game");
 				// launch backup section
 				play.launch_backup.subtitle = $(".launch_backup .subtitle");
@@ -652,7 +668,7 @@
 				// about settings
 				options.about.subtitle = $(".about .subtitle");
 				options.about.updates = $(".about .updates");
-				options.about.credits = $(".about .credits");
+				options.about.credits = $(".about .credits")
 
 				Game.init();
 
@@ -663,8 +679,8 @@
 				document.querySelector("#open_backup").onchange = Game.open_backup;
 				play.launch_backup.launch.addEventListener("click", function() {Game.launch_backup()});
 
-				document.querySelectorAll(".option .subtitle").forEach(function(e) {
-					e.addEventListener("click", function() {UI.menu.options.scrollTop = (this.parentNode.offsetTop - 40)})
+				document.querySelectorAll(".subtitle").forEach(function(e) {
+					e.addEventListener("click", function() {e.parentNode.parentNode.scrollTop = (this.parentNode.offsetTop - 60)})
 				})
 			})
 		</script>

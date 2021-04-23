@@ -1,15 +1,53 @@
-.btn-new_game, .btn-open_backup {
-	left: calc(50% - 224px);
-	position: relative
-}
+/* buttons */
 
 .btn-new_game, .btn-open_backup {margin: 20px 0}
 
 .btn-open_backup {font-weight: normal}
 
-#open_backup {display: none}
+/* new game section */
 
-.backup_tip, .backup_info {font-size: 18px}
+.new_game, .launch_backup {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center
+}
+
+.new_game {padding-bottom: 40px}
+
+.player_name_tip,
+.game_name_tip,
+.character_selection_tip,
+.backup_info {
+	font-size: 18px;
+	text-align: center;
+	white-space: pre
+}
+
+input {
+	width: 300px;
+	margin: 10px 0 40px 0;
+	padding: 8px;
+	border: 4px solid #000;
+	background-color: rgba(0, 0, 0, 0.3);
+	font-size: 20px
+}
+
+.character_selection {
+	margin: 10px 0 40px 0
+}
+
+.health_value,
+.shield_value,
+.mana_value {
+	display: inline-block;
+	margin: 4px 0;
+	font-size: 18px
+}
+
+/* launch backup section */
+
+#open_backup {display: none}
 
 .container-backup {
 	display: none;
@@ -18,8 +56,13 @@
 	justify-content: center
 }
 
-.backup {
-	width: calc(100% - 24px);
+.backup_tip {
+	width: 100%;
+	font-size: 18px
+}
+
+textarea {
+	width: 700px;
 	height: 184px;
 	margin-bottom: 20px;
 	padding: 8px;

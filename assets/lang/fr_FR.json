@@ -6,8 +6,14 @@
 		"back.text": "Annuler",
 		"next.text": "Suivant",
 		"prev.text": "Précédent",
+		"create.text": "Créer",
 		"new_game.text": "Nouvelle partie",
-		"open_backup.text": "Ouvrir une sauvegarde",
+		"new_game": {
+			"player_name_tip.text": "Comment vous appelez-vous ?\nCe nom sera utilisé pour vous identifier dans cette partie.",
+			"game_name_tip.text": "Donnez un nom à votre partie.",
+			"character_selection_tip.text": "Choisissez le personnage que vous voulez jouer.\nLes personnages se différencient par leurs points de vie,\nleurs points de mana et leurs attaques."
+		},
+		"open_backup.text": "Ouvrir un fichier de sauvegarde",
 		"launch_backup.text": "Charger cette sauvegarde",
 		"backup_tip.text": "Le fichier doit être au format JSON.",
 		"options.text": "Options",

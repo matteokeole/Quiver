@@ -1,0 +1,13 @@
+.icon {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	background-size: cover;
+	image-rendering: crisp-edges
+}
+
+.health {background-image: url(health.png)}
+
+.shield {background-image: url(shield.png)}
+
+.mana {background-image: url(mana.png)}

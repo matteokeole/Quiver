@@ -6,8 +6,14 @@
 		"back.text": "Back",
 		"next.text": "Next",
 		"prev.text": "Previous",
+		"create.text": "Create",
 		"new_game.text": "New Game",
-		"open_backup.text": "Open Backup",
+		"new_game": {
+			"player_name_tip.text": "What's your name?\nIt'll be used to identify you in this new game.",
+			"game_name_tip.text": "Give a name to your new game.",
+			"character_selection_tip.text": "Pick the character you want to play with.\nCharacters are differentiated by their health points,\ntheir mana points and their attacks."
+		},
+		"open_backup.text": "Open Backup File",
 		"launch_backup.text": "Launch Backup",
 		"backup_tip.text": "The file must be in JSON format.",
 		"options.text": "Options",
