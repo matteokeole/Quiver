@@ -10,7 +10,9 @@
 		"new_game.text": "Nuevo juego",
 		"new_game": {
 			"player_name_tip.text": "¿Cómo te llamas?\nEste nombre será usado para identificarte en este nuevo juego.",
+			"player_name_placeholder.text": "Es la historia de...",
 			"game_name_tip.text": "Dale un nombre a tu nuevo juego.",
+			"game_name_placeholder.text": "Juego de...",
 			"character_selection_tip.text": "Elige el personaje que quieres jugar.\nLos personajes se diferencian por sus puntos de vida,\nsus puntos de mana y sus ataques."
 		},
 		"open_backup.text": "Abrir un archivo de respaldo",

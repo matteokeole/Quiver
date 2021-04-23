@@ -10,7 +10,9 @@
 		"new_game.text": "Nouvelle partie",
 		"new_game": {
 			"player_name_tip.text": "Comment vous appelez-vous ?\nCe nom sera utilisé pour vous identifier dans cette partie.",
+			"player_name_placeholder.text": "C'est l'histoire de...",
 			"game_name_tip.text": "Donnez un nom à votre partie.",
+			"game_name_placeholder.text": "Partie de...",
 			"character_selection_tip.text": "Choisissez le personnage que vous voulez jouer.\nLes personnages se différencient par leurs points de vie,\nleurs points de mana et leurs attaques."
 		},
 		"open_backup.text": "Ouvrir un fichier de sauvegarde",
