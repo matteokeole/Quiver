@@ -17,9 +17,7 @@
 	cursor: default
 }
 
-.btn[disabled="disabled"]:active {background-image: url(btn-disabled.png)}
-
-.btn:active {background-image: url(btn_pressed.png)}
+.btn:not([disabled="disabled"]):active {background-image: url(btn_pressed.png)}
 
 .btn-small {
 	width: 144px;
