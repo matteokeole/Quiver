@@ -4,7 +4,7 @@
 	<div class="content content-play">
 		<div class="menu-title">
 			<div class="title"></div>
-			<div class="btn small" data-function="close" data-target="menu-play"></div>
+			<div class="btn btn-small" data-function="close" data-target="menu-play"></div>
 		</div>
 		<div class="scrollable">
 			<div class="new_game">
@@ -15,9 +15,18 @@
 				<input type="text" name="game_name" id="game_name">
 				<div class="character_selection_tip"></div>
 				<div class="character_selection">
-					<div class="btn class mage"></div>
-					<div class="btn class rogue"></div>
-					<div class="btn class paladin"></div>
+					<div class="btn btn-class mage">
+						<div class="character_title"></div>
+						<span class="icon character mage"></span>
+					</div>
+					<div class="btn btn-class rogue">
+						<div class="character_title"></div>
+						<span class="icon character rogue"></span>
+					</div>
+					<div class="btn btn-class paladin">
+						<div class="character_title"></div>
+						<span class="icon character paladin"></span>
+					</div>
 					<div class="character_info">
 						<div class="health_info">
 							<span class="health_value">20</span>
@@ -41,7 +50,7 @@
 				<div class="backup_tip"></div>
 				<label for="open_backup" class="btn btn-open_backup"></label>
 				<div class="container-backup">
-					<textarea class="backup" readonly></textarea>
+					<textarea id="backup" readonly></textarea>
 					<div class="backup_info"></div>
 					<div class="btn btn-launch_backup" data-function="close" data-target="menu-play"></div>
 				</div>

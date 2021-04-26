@@ -41,6 +41,17 @@
 			"about.text": "A proposito",
 			"about:updates.text": "Notas de las actualizaciones",
 			"about:credits.text": "Creditos"
+		},
+		"class": {
+			"mage": {
+				"name.text": "Mago"
+			},
+			"rogue": {
+				"name.text": "Pícaro"
+			},
+			"paladin": {
+				"name.text": "Paladin"
+			}
 		}
 	}
 }

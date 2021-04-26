@@ -1,0 +1,62 @@
+{
+	"Backup": {
+		"name": "Partie de Shixxbowat",
+		"date": {
+			"creation": "2021-01-20-21-49-10",
+			"lastConnection": "2021-01-20-21-49-10"
+		},
+		"player": {
+			"nickname": "Shixxbowat",
+			"class": "mage",
+			"level": 2,
+			"health": 20,
+			"maxhealth": 20,
+			"mp": 25,
+			"maxmp": 25,
+			"resistance": 1,
+			"base_resistance": 1,
+			"pos": [0, 0],
+			"orientation": "right"
+		},
+		"stats": {
+			"kill_total": 0,
+			"kill_goblin": 0,
+			"kill_skeleton1": 0,
+			"kill_skeleton2": 0,
+			"flight_total": 0,
+			"flight_goblin": 0,
+			"flight_skeleton1": 0,
+			"flight_skeleton2": 0
+		},
+		"entity": {
+			"Entity0": {
+				"isDead": false,
+				"hasFled": false
+			},
+			"Entity1": {
+				"isDead": false,
+				"hasFled": false
+			},
+			"Entity2": {
+				"isDead": false,
+				"hasFled": false
+			},
+			"Entity3": {
+				"isDead": false,
+				"hasFled": false
+			},
+			"Entity4": {
+				"isDead": false,
+				"hasFled": false
+			},
+			"Entity5": {
+				"isDead": false,
+				"hasFled": false
+			},
+			"Entity6": {
+				"isDead": false,
+				"hasFled": false
+			}
+		}
+	}
+}

@@ -31,17 +31,20 @@
 
 .btn-small:active {background-image: url(btn-small_pressed.png)}
 
-.btn.small[data-function="close"] {
+.btn-small[data-function="close"] {
 	width: 36px;
 	background-image: url(btn-close.png)
 }
 
-.btn.small[data-function="close"]:active {background-image: url(btn-close_pressed.png)}
+.btn-small[data-function="close"]:active {background-image: url(btn-close_pressed.png)}
 
-.btn.class {
+.btn-class {
 	width: 208px;
 	height: 208px;
+	float: left;
+	position: relative;
+	vertical-align: top;
 	background-image: url(btn-class.png)
 }
 
-.btn.class:active {background-image: url(btn-class_selected.png)}
+.btn-class:active {background-image: url(btn-class_selected.png)}

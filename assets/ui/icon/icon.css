@@ -6,8 +6,25 @@
 	image-rendering: crisp-edges
 }
 
-.health {background-image: url(health.png)}
+.icon.character {
+	width: 64px;
+	height: 64px;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute
+}
 
-.shield {background-image: url(shield.png)}
+.icon.health {background-image: url(health.png)}
 
-.mana {background-image: url(mana.png)}
+.icon.shield {background-image: url(shield.png)}
+
+.icon.mana {background-image: url(mana.png)}
+
+.icon.mage {background-image: url(mage.png)}
+
+.icon.rogue {background-image: url(rogue.png)}
+
+.icon.paladin {background-image: url(paladin.png)}

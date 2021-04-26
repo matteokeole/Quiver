@@ -34,8 +34,12 @@ input {
 }
 
 .character_selection {
-	margin: 10px 0 40px 0
+	width: 624px;
+	margin: 10px 0 40px 0;
+	background-color: orange
 }
+
+.character_title {margin-top: 10px}
 
 .health_value,
 .shield_value,
@@ -61,7 +65,7 @@ input {
 	font-size: 18px
 }
 
-textarea {
+#backup {
 	width: 700px;
 	height: 184px;
 	margin-bottom: 20px;
@@ -70,6 +74,11 @@ textarea {
 	background-color: rgba(0, 0, 0, 0.3);
 	font-size: 18px;
 	resize: none
+}
+
+.error {
+	color: #ba262b;
+	font-style: italic
 }
 
 .btn-launch_backup {margin-top: 20px}

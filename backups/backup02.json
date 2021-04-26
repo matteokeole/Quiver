@@ -1,0 +1,62 @@
+{
+	"Backup": {
+		"name": "Partie de KitsuneDa",
+		"date": {
+			"creation": "2021-01-14-11-32-40",
+			"lastConnection": "2021-01-15-23-27-49"
+		},
+		"player": {
+			"nickname": "KitsuneDa",
+			"class": "paladin",
+			"level": 1,
+			"health": 25,
+			"maxhealth": 25,
+			"mp": 20,
+			"maxmp": 20,
+			"resistance": 3,
+			"base_resistance": 3,
+			"pos": [0, 0],
+			"orientation": "right"
+		},
+		"stats": {
+			"kill_total": 0,
+			"kill_goblin": 0,
+			"kill_skeleton1": 0,
+			"kill_skeleton2": 0,
+			"flight_total": 0,
+			"flight_goblin": 0,
+			"flight_skeleton1": 0,
+			"flight_skeleton2": 0
+		},
+		"entity": {
+			"Entity0": {
+				"isDead": false,
+				"hasFled": false
+			},
+			"Entity1": {
+				"isDead": false,
+				"hasFled": false
+			},
+			"Entity2": {
+				"isDead": false,
+				"hasFled": false
+			},
+			"Entity3": {
+				"isDead": false,
+				"hasFled": false
+			},
+			"Entity4": {
+				"isDead": false,
+				"hasFled": false
+			},
+			"Entity5": {
+				"isDead": false,
+				"hasFled": false
+			},
+			"Entity6": {
+				"isDead": false,
+				"hasFled": false
+			}
+		}
+	}
+}

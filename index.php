@@ -38,11 +38,12 @@
 					// resetting input values
 					play.new_game.player_name.value = "";
 					play.new_game.game_name.value = "";
-					$("main").style.display = "block"; // opening the game window
+					play.launch_backup.backup.value = "";
+					show($("main")); // opening the game window
 					play.new_game.player_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.player_name)});
-					play.new_game.game_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.game_name)});
+					play.new_game.game_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.game_name)})
 				},
-				rickroll: function() {alert("YOU'VE BEEN RICKROLLED :-)")},
+				rickroll: function() {location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"},
 				check_input_value: function(input) {
 					if (/^\s+$/.test(input.value) || input.value.length === 0) {
 						// the input value is composed only of whitespaces or is empty
@@ -51,7 +52,6 @@
 						play.new_game.play.removeEventListener("click", Game.launch_new_game)
 					} else (input.getAttribute("id") === "player_name") ? player_name_ok = true : game_name_ok = true; // no errors
 					if (player_name_ok && game_name_ok) {
-						console.log("les deux sont ok")
 						play.new_game.play.removeAttribute("disabled");
 						play.new_game.play.addEventListener("click", Game.launch_new_game)
 					}
@@ -70,8 +70,9 @@
 						document.querySelector("html").setAttribute("lang", r["lang"]);
 						// applying the recovered language data to UI elements
 						// global buttons
-						document.querySelectorAll(".btn-prev").forEach(function(btn) {btn.textContent = r["prev.text"]});
-						document.querySelectorAll(".btn-next").forEach(function(btn) {btn.textContent = r["next.text"]});
+						document.querySelectorAll(".btn-prev").forEach(function(e) {e.textContent = r["prev.text"]});
+						document.querySelectorAll(".btn-next").forEach(function(e) {e.textContent = r["next.text"]});
+						document.querySelectorAll(".btn-class").forEach(function(e) {e.querySelector(".character_title").textContent = r.class[e.classList[2]]["name.text"]});
 						// unique buttons
 						UI.btn.play.textContent = r["play.text"];
 						UI.btn.options.textContent = r["options.text"];
@@ -274,27 +275,23 @@
 					if (!file) return;
 					var reader = new FileReader();
 					reader.onload = function(e) {
-						// opening
-						// e.target.result = backup content
-						var backup = UI.menu.play.querySelector(".container-backup");
-						backup.style.display = "flex";
-						backup.querySelector(".backup").value = e.target.result; // showing backup content
-						// getting the backup content as a js object
-						if (typeof Backup !== "undefined") {
-							// deleting the old backup
-							delete Backup
+						show(document.querySelector(".container-backup"), "flex"); // opening
+						try {
+							var temp = JSON.parse(e.target.result); // e.target.result = backup content
+							temp = temp.Backup;
+							// showing backup content
+							play.launch_backup.backup.value = e.target.result;
+							show(play.launch_backup.backup, "flex");
+							play.launch_backup.backup_info.classList.remove("error");
+							play.launch_backup.backup_info.innerHTML = `"${temp.name}" - ${temp.player.nickname} (level ${temp.player.level}, ${temp.player.class})<br>Creation: ${convert_date(temp.date.creation)}<br>Last connection: ${convert_date(temp.date.lastConnection)}`;
+							show(play.launch_backup.launch)
+						} catch (e) {
+							hide(play.launch_backup.launch);
+							hide(play.launch_backup.backup);
+							play.launch_backup.backup_info.classList.add("error");
+							play.launch_backup.backup_info.textContent = `${file.name} n'est pas un fichier JSON valide.`
+							return e
 						}
-						var backup_old_script = document.querySelector("script[data-function='backup']");
-						if (backup_old_script !== null) {
-							// deleting the old backup script
-							backup_old_script.remove()
-						}
-						// adding a new backup script
-						var backup_script = document.createElement("script");
-						backup_script.setAttribute("data-function", "backup");
-						backup_script.textContent = `var Backup = Game.create_backup(); ${e.target.result}`;
-						document.head.append(backup_script);
-						document.querySelector(".backup_info").innerHTML = `"${Backup.name}" - ${Backup.player.nickname} (level ${Backup.player.level}, ${Backup.player.class})<br>Creation: ${convert_date(Backup.date.creation)}<br>Last connection: ${convert_date(Backup.date.lastConnection)}`
 					}
 					reader.readAsText(file)
 				},
@@ -312,11 +309,11 @@
 						scrollable = content.querySelector(".scrollable");
 					if (s == "open") {
 						// opening
-						UI.overlay.menu.style.display = "flex";
+						show(UI.overlay.menu, "flex");
 						UI.overlay.menu.style["-webkit-animation-name"] = "overlay_menu_fade_in";
 						UI.overlay.menu.style["animation-name"] = "overlay_menu_fade_in";
 						UI.overlay.menu.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-						menu.style.display = "flex";
+						show(menu, "flex");
 						st.style["-webkit-animation-name"] = "scrollbox-open";
 						st.style["animation-name"] = "scrollbox-open";
 						st.style.height = "50%";
@@ -344,8 +341,8 @@
 						UI.overlay.menu.style["animation-name"] = "overlay_menu_fade_out";
 						UI.overlay.menu.style.backgroundColor = "transparent";
 						setTimeout(function() {
-							menu.style.display = "none";
-							UI.overlay.menu.style.display = "none"
+							hide(menu);
+							hide(UI.overlay.menu)
 						}, 200)
 					}
 				},
@@ -389,6 +386,7 @@
 					subtitle: null,
 					open: null,
 					backup_tip: null,
+					backup: null,
 					backup_info: null,
 					launch: null
 				}
@@ -609,8 +607,12 @@
 
 			function $(e) {return document.querySelector(e)}
 
+			function show(e, v) {return e.style.display = (v === undefined) ? "block" : v}
+
+			function hide(e) {return e.style.display = "none"}
+
 			function load() {
-				UI.overlay.load.style.display = "block";
+				show(UI.overlay.load);
 				UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 				UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
 				UI.overlay.load.style.backgroundColor = "#000";
@@ -666,6 +668,7 @@
 				play.launch_backup.subtitle = $(".launch_backup .subtitle");
 				play.launch_backup.open = $(".launch_backup .btn-open_backup");
 				play.launch_backup.backup_tip = $(".launch_backup .backup_tip");
+				play.launch_backup.backup = $(".launch_backup #backup");
 				play.launch_backup.backup_info = $(".launch_backup .backup_info");
 				play.launch_backup.launch = $(".launch_backup .btn-launch_backup");
 				// option menu
@@ -695,8 +698,8 @@
 				// about settings
 				options.about.subtitle = $(".about .subtitle");
 				options.about.updates = $(".about .updates");
-				options.about.credits = $(".about .credits")
-
+				options.about.credits = $(".about .credits");
+				
 				Game.init();
 
 				document.querySelectorAll(".btn[data-function]").forEach(function(e) {
