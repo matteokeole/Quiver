@@ -24,7 +24,7 @@
 	white-space: pre
 }
 
-input {
+.new_game input[type="text"] {
 	width: 300px;
 	margin: 10px 0 40px 0;
 	padding: 8px;

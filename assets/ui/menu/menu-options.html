@@ -7,37 +7,69 @@
 			<div class="btn btn-small" data-function="close" data-target="menu-options"></div>
 		</div>
 		<div class="scrollable">
-			<div class="option keybinds">
+			<div class="option keybind">
 				<div class="subtitle"></div>
-				<div class="option-name forward"></div>
-				<div class="option-name backward"></div>
-				<div class="option-name left"></div>
-				<div class="option-name right"></div>
-				<div class="option-name console"></div>
+				<div class="option-name forward">
+					<span class="keybind"></span>
+					<span class="icon letter">Z</span>
+				</div>
+				<div class="option-name backward">
+					<span class="keybind"></span>
+					<span class="icon letter">S</span>
+				</div>
+				<div class="option-name left">
+					<span class="keybind"></span>
+					<span class="icon letter">Q</span>
+				</div>
+				<div class="option-name right">
+					<span class="keybind"></span>
+					<span class="icon letter">D</span>
+				</div>
+				<div class="option-name console">
+					<span class="keybind"></span>
+					<span class="icon letter">F1</span>
+				</div>
 				<div class="blank"></div>
 			</div>
-			<div class="option display">
+			<!-- <div class="option display">
 				<div class="subtitle"></div>
 				<div class="option-name borders"></div>
 				<div class="option-name animations"></div>
 				<div class="blank"></div>
-			</div>
+			</div> -->
 			<div class="option audio">
 				<div class="subtitle"></div>
-				<div class="option-name music"></div>
-				<div class="option-name sound"></div>
+				<div class="option-name music">
+					<span class="audio"></span>
+					<span class="icon letter">100</span>
+					<input type="range" name="music_volume" min="0" max="100">
+				</div>
+				<div class="option-name sound">
+					<span class="audio"></span>
+					<span class="icon letter">100</span>
+					<input type="range" name="sound_volume" min="0" max="100">
+				</div>
 				<div class="blank"></div>
 			</div>
-			<div class="option saves">
+			<!-- <div class="option saves">
 				<div class="subtitle"></div>
 				<div class="option-name advanced"></div>
 				<div class="blank"></div>
-			</div>
+			</div> -->
 			<div class="option lang">
 				<div class="subtitle"></div>
-				<div class="option-name en_US" onclick="Game.lang('en_US')"></div>
-				<div class="option-name es_ES" onclick="Game.lang('es_ES')"></div>
-				<div class="option-name fr_FR" onclick="Game.lang('fr_FR')"></div>
+				<div class="option-name en_US" onclick="Game.lang('en_US')">
+					<span class="lang"></span>
+					<span class="icon check"></span>
+				</div>
+				<div class="option-name es_ES" onclick="Game.lang('es_ES')">
+					<span class="lang"></span>
+					<span class="icon check"></span>
+				</div>
+				<div class="option-name fr_FR" onclick="Game.lang('fr_FR')">
+					<span class="lang"></span>
+					<span class="icon check"></span>
+				</div>
 				<div class="blank"></div>
 			</div>
 			<div class="option about">

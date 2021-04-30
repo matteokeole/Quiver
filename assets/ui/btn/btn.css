@@ -41,13 +41,8 @@
 	height: 208px;
 	float: left;
 	position: relative;
-	vertical-align: top
+	vertical-align: top;
+	background-image: url(btn-class.png)
 }
 
-.btn-class.mage {background-image: url(btn-class-mage.png)}
-.btn-class.rogue {background-image: url(btn-class-rogue.png)}
-.btn-class.paladin {background-image: url(btn-class-paladin.png)}
-
-.btn-class.mage:active {background-image: url(btn-class-mage-selected.png)}
-.btn-class.rogue:active {background-image: url(btn-class-rogue-selected.png)}
-.btn-class.paladin:active {background-image: url(btn-class-paladin-selected.png)}
+.btn-class:active {background-image: url(btn-class-selected.png)}

@@ -1,6 +1,6 @@
 .option-name {
-	height: 30px;
-	line-height: 30px;
+	height: 32px;
+	line-height: 32px;
 	padding: 0 10px;
 	cursor: pointer;
 	font-size: 18px
@@ -10,5 +10,16 @@
 
 .blank {
 	width: 100%;
-	height: 30px
+	height: 32px
+}
+
+.option-name input[type="text"] {}
+
+.option-name input[type="range"] {
+	display: inline-block;
+	-webkit-appearance: none;
+	height: 4px;
+	margin: 14px;
+	float: right;
+	cursor: pointer
 }

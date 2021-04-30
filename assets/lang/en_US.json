@@ -21,12 +21,12 @@
 		"backup_tip.text": "The file must be in JSON format.",
 		"options.text": "Options",
 		"options": {
-			"keybinds.text": "Controls",
-			"keybinds:forward.text": "Move Forward",
-			"keybinds:backward.text": "Move Backward",
-			"keybinds:left.text": "Turn Left",
-			"keybinds:right.text": "Turn Right",
-			"keybinds:console.text": "Toggle Console",
+			"keybind.text": "Controls",
+			"keybind:forward.text": "Move Forward",
+			"keybind:backward.text": "Move Backward",
+			"keybind:left.text": "Turn Left",
+			"keybind:right.text": "Turn Right",
+			"keybind:console.text": "Toggle Console",
 			"display.text": "Display",
 			"display:borders.text": "Screen Borders",
 			"display:animations.text": "Animations",
@@ -53,6 +53,9 @@
 			"paladin": {
 				"name.text": "Paladin"
 			}
+		},
+		"error": {
+			"json_error.text": "%e is not a valid JSON file."
 		}
 	}
 }

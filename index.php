@@ -51,7 +51,10 @@
 						play.new_game.play.setAttribute("disabled", "disabled");
 						play.new_game.play.removeEventListener("click", Game.launch_new_game)
 					} else (input.getAttribute("id") === "player_name") ? player_name_ok = true : game_name_ok = true; // no errors
-					if (player_name_ok && game_name_ok) {
+					Game.check_new_game_validity()
+				},
+				check_new_game_validity: function() {
+					if (player_name_ok && game_name_ok && character_selected) {
 						play.new_game.play.removeAttribute("disabled");
 						play.new_game.play.addEventListener("click", Game.launch_new_game)
 					}
@@ -89,39 +92,44 @@
 						play.new_game.character_selection_tip.textContent = r.new_game["character_selection_tip.text"];
 						play.new_game.play.textContent = r["new_game.text"];
 						// launch backup section
-						play.launch_backup.subtitle.textContent = r["launch_btackup.text"];
+						play.launch_backup.subtitle.textContent = r["launch_backup.text"];
 						play.launch_backup.open.textContent = r["open_backup.text"];
 						play.launch_backup.backup_tip.textContent = r["backup_tip.text"];
 						play.launch_backup.launch.textContent = r["launch_this_backup.text"];
 						// option menu
 						// keybind settings
-						options.keybinds.subtitle.textContent = r.options["keybinds.text"];
-						options.keybinds.forward.textContent = r.options["keybinds:forward.text"];
-						options.keybinds.backward.textContent = r.options["keybinds:backward.text"];
-						options.keybinds.left.textContent = r.options["keybinds:left.text"];
-						options.keybinds.right.textContent = r.options["keybinds:right.text"];
-						options.keybinds.console.textContent = r.options["keybinds:console.text"];
-						// display settings
-						options.display.subtitle.textContent = r.options["display.text"];
+						options.keybind.subtitle.textContent = r.options["keybind.text"];
+						options.keybind.forward.firstChild.textContent = r.options["keybind:forward.text"];
+						options.keybind.backward.firstChild.textContent = r.options["keybind:backward.text"];
+						options.keybind.left.firstChild.textContent = r.options["keybind:left.text"];
+						options.keybind.right.firstChild.textContent = r.options["keybind:right.text"];
+						options.keybind.console.firstChild.textContent = r.options["keybind:console.text"];
+						// display settings (not used)
+						/*options.display.subtitle.textContent = r.options["display.text"];
 						options.display.borders.textContent = r.options["display:borders.text"];
-						options.display.animations.textContent = r.options["display:animations.text"];
+						options.display.animations.textContent = r.options["display:animations.text"];*/
 						// audio settings
 						options.audio.subtitle.textContent = r.options["audio.text"];
-						options.audio.music.textContent = r.options["audio:music.text"];
-						options.audio.sound.textContent = r.options["audio:sound.text"];
-						// savey settings
-						options.saves.subtitle.textContent = r.options["saves.text"];
-						options.saves.advanced.textContent = r.options["saves:advanced.text"];
+						options.audio.music.firstChild.textContent = r.options["audio:music.text"];
+						options.audio.sound.firstChild.textContent = r.options["audio:sound.text"];
+						// save settings (not used)
+						/*options.saves.subtitle.textContent = r.options["saves.text"];
+						options.saves.advanced.textContent = r.options["saves:advanced.text"];*/
 						// language settings
 						options.lang.subtitle.textContent = r.options["lang.text"];
-						options.lang.en_US.textContent = r.options["lang:en_US.text"];
-						options.lang.es_ES.textContent = r.options["lang:es_ES.text"];
-						options.lang.fr_FR.textContent = r.options["lang:fr_FR.text"];
+						options.lang.en_US.firstChild.textContent = r.options["lang:en_US.text"];
+						options.lang.es_ES.firstChild.textContent = r.options["lang:es_ES.text"];
+						options.lang.fr_FR.firstChild.textContent = r.options["lang:fr_FR.text"];
 						// about settings
 						options.about.subtitle.textContent = r.options["about.text"];
 						options.about.updates.textContent = r.options["about:updates.text"];
-						options.about.credits.textContent = r.options["about:credits.text"]
-					})
+						options.about.credits.textContent = r.options["about:credits.text"];
+						// errors
+						json_error = r.error["json_error.text"]
+					});
+					// showing the check mark on the selected language
+					document.querySelectorAll(".option.lang .option-name").forEach(function(e) {e.querySelector(".icon").style.visibility = "hidden"});
+					document.querySelector(`.option.lang .option-name.${l}`).querySelector(".icon").style.visibility = "visible"
 				},
 				create_backup: function() {
 					var Backup = {
@@ -289,9 +297,10 @@
 							hide(play.launch_backup.launch);
 							hide(play.launch_backup.backup);
 							play.launch_backup.backup_info.classList.add("error");
-							play.launch_backup.backup_info.textContent = `${file.name} is not a valid JSON file.`
+							play.launch_backup.backup_info.textContent = json_error.split("%e").join(file.name)
 							return e
 						}
+						UI.menu.play.scrollTop = UI.menu.play.scrollHeight
 					}
 					reader.readAsText(file)
 				},
@@ -309,6 +318,7 @@
 						scrollable = content.querySelector(".scrollable");
 					if (s == "open") {
 						// opening
+						if (play.launch_backup.backup_info.classList.contains("error")) play.launch_backup.backup_info.textContent = ""; // removing JSON error
 						show(UI.overlay.menu, "flex");
 						UI.overlay.menu.style["-webkit-animation-name"] = "overlay_menu_fade_in";
 						UI.overlay.menu.style["animation-name"] = "overlay_menu_fade_in";
@@ -380,6 +390,10 @@
 					game_name_tip: null,
 					game_name: null,
 					character_selection_tip: null,
+					character_info: null,
+					health_value: null,
+					shield_value: null,
+					mana_value: null,
 					play: null
 				},
 				launch_backup: {
@@ -393,7 +407,7 @@
 			};
 
 			var options = {
-				keybinds: {
+				keybind: {
 					subtitle: null,
 					forward: null,
 					backward: null,
@@ -428,16 +442,15 @@
 				}
 			};
 
-			var Entity = {
-				Mage: {
+			var Character = {
+				mage: {
 					id: "mage",
-					name: "Mage",
 					type: "player",
 					texture: "assets/entity/mage_idle.gif",
 					roundActions: ["attack", "use", "flee"],
 					health: 20,
-					mp: 25,
-					resistance: 1,
+					shield: 1,
+					mana: 25,
 					attack1: {
 						id: "fireball",
 						name: "Boule de feu",
@@ -458,15 +471,14 @@
 						hitAllMobs: true
 					}
 				},
-				Rogue: {
+				rogue: {
 					id: "rogue",
-					name: "Roublard",
 					type: "player",
 					texture: "assets/entity/rogue.png",
 					roundActions: ["attack", "use", "flee"],
 					health: 22,
-					mp: 15,
-					resistance: 2,
+					shield: 2,
+					mana: 15,
 					attack1: {
 						id: "doubledaggers",
 						name: "Doubles dagues",
@@ -489,15 +501,14 @@
 						damage: 0
 					}
 				},
-				Paladin: {
+				paladin: {
 					id: "paladin",
-					name: "Paladin",
 					type: "player",
 					texture: "assets/entity/paladin.png",
 					roundActions: ["attack", "use", "flee"],
 					health: 25,
-					mp: 20,
-					resistance: 3,
+					shield: 3,
+					mana: 20,
 					attack1: {
 						id: "sword",
 						name: "Coup d'epee",
@@ -518,7 +529,10 @@
 						damage: 0,
 						healthAmount: 5
 					}
-				},
+				}
+			};
+
+			var Entity = {
 				Goblin: {
 					id: "goblin",
 					name: "Gobelin",
@@ -603,7 +617,9 @@
 			};
 
 			var player_name_ok = false,
-				game_name_ok = false;
+				game_name_ok = false,
+				character_selected = false,
+				json_error = "";
 
 			function $(e) {return document.querySelector(e)}
 
@@ -634,10 +650,13 @@
 			}
 
 			function select_character(c) {
-				document.querySelectorAll(".btn[data-character").forEach(function(e) {
-					e.style.backgroundImage = `url(assets/ui/btn/btn-class-${e.getAttribute("data-character")}.png)`
-				});
-				document.querySelector(`.btn[data-character=${c}]`).style.backgroundImage = `url(assets/ui/btn/btn-class-${c}-selected.png)`
+				if (character_selected === false) character_selected = true;
+				Game.check_new_game_validity();
+				document.querySelectorAll(".btn[data-character").forEach(function(e) {e.style.backgroundImage = "url(assets/ui/btn/btn-class.png)"});
+				document.querySelector(`.btn[data-character=${c}]`).style.backgroundImage = "url(assets/ui/btn/btn-class-selected.png)";
+				play.new_game.health_value.textContent = Character[c].health;
+				play.new_game.shield_value.textContent = Character[c].shield;
+				play.new_game.mana_value.textContent = Character[c].mana
 			}
 
 			function convert_date(date) {
@@ -670,6 +689,10 @@
 				play.new_game.game_name_tip = $(".new_game .game_name_tip");
 				play.new_game.game_name = $(".new_game #game_name");
 				play.new_game.character_selection_tip = $(".new_game .character_selection_tip");
+				play.new_game.character_info = $(".character_info");
+				play.new_game.health_value = $(".health_value");
+				play.new_game.shield_value = $(".shield_value");
+				play.new_game.mana_value = $(".mana_value");
 				play.new_game.play = $(".new_game .btn-new_game");
 				// launch backup section
 				play.launch_backup.subtitle = $(".launch_backup .subtitle");
@@ -680,32 +703,32 @@
 				play.launch_backup.launch = $(".launch_backup .btn-launch_backup");
 				// option menu
 				// keybind settings
-				options.keybinds.subtitle = $(".keybinds .subtitle");
-				options.keybinds.forward = $(".keybinds .forward");
-				options.keybinds.backward = $(".keybinds .backward");
-				options.keybinds.left = $(".keybinds .left");
-				options.keybinds.right = $(".keybinds .right");
-				options.keybinds.console = $(".keybinds .console");
-				// display settings
-				options.display.subtitle = $(".display .subtitle");
-				options.display.borders = $(".display .borders");
-				options.display.animations = $(".display .animations");
+				options.keybind.subtitle = $(".option.keybind .subtitle");
+				options.keybind.forward = $(".option.keybind .forward");
+				options.keybind.backward = $(".option.keybind .backward");
+				options.keybind.left = $(".option.keybind .left");
+				options.keybind.right = $(".option.keybind .right");
+				options.keybind.console = $(".option.keybind .console");
+				// display settings (not used)
+				/*options.display.subtitle = $(".option.display .subtitle");
+				options.display.borders = $(".option.display .borders");
+				options.display.animations = $(".option.display .animations");*/
 				// audio settings
-				options.audio.subtitle = $(".audio .subtitle");
-				options.audio.music = $(".audio .music");
-				options.audio.sound = $(".audio .sound");
-				// save settings
-				options.saves.subtitle = $(".saves .subtitle");
-				options.saves.advanced = $(".saves .advanced");
+				options.audio.subtitle = $(".option.audio .subtitle");
+				options.audio.music = $(".option.audio .music");
+				options.audio.sound = $(".option.audio .sound");
+				// save settings (not used)
+				/*options.saves.subtitle = $(".option.saves .subtitle");
+				options.saves.advanced = $(".option.saves .advanced");*/
 				// language settings
-				options.lang.subtitle = $(".lang .subtitle");
-				options.lang.en_US = $(".lang .en_US");
-				options.lang.es_ES = $(".lang .es_ES");
-				options.lang.fr_FR = $(".lang .fr_FR");
+				options.lang.subtitle = $(".option.lang .subtitle");
+				options.lang.en_US = $(".option.lang .en_US");
+				options.lang.es_ES = $(".option.lang .es_ES");
+				options.lang.fr_FR = $(".option.lang .fr_FR");
 				// about settings
-				options.about.subtitle = $(".about .subtitle");
-				options.about.updates = $(".about .updates");
-				options.about.credits = $(".about .credits");
+				options.about.subtitle = $(".option.about .subtitle");
+				options.about.updates = $(".option.about .updates");
+				options.about.credits = $(".option.about .credits");
 				
 				Game.init();
 
