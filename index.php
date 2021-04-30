@@ -89,10 +89,10 @@
 						play.new_game.character_selection_tip.textContent = r.new_game["character_selection_tip.text"];
 						play.new_game.play.textContent = r["new_game.text"];
 						// launch backup section
-						play.launch_backup.subtitle.textContent = r["launch_backup.text"];
+						play.launch_backup.subtitle.textContent = r["launch_btackup.text"];
 						play.launch_backup.open.textContent = r["open_backup.text"];
 						play.launch_backup.backup_tip.textContent = r["backup_tip.text"];
-						play.launch_backup.launch.textContent = r["launch_backup.text"];
+						play.launch_backup.launch.textContent = r["launch_this_backup.text"];
 						// option menu
 						// keybind settings
 						options.keybinds.subtitle.textContent = r.options["keybinds.text"];
@@ -289,7 +289,7 @@
 							hide(play.launch_backup.launch);
 							hide(play.launch_backup.backup);
 							play.launch_backup.backup_info.classList.add("error");
-							play.launch_backup.backup_info.textContent = `${file.name} n'est pas un fichier JSON valide.`
+							play.launch_backup.backup_info.textContent = `${file.name} is not a valid JSON file.`
 							return e
 						}
 					}
@@ -633,6 +633,13 @@
 				}
 			}
 
+			function select_character(c) {
+				document.querySelectorAll(".btn[data-character").forEach(function(e) {
+					e.style.backgroundImage = `url(assets/ui/btn/btn-class-${e.getAttribute("data-character")}.png)`
+				});
+				document.querySelector(`.btn[data-character=${c}]`).style.backgroundImage = `url(assets/ui/btn/btn-class-${c}-selected.png)`
+			}
+
 			function convert_date(date) {
 				date = date.split("-");
 				var new_date = `${date[0]}/${date[1]}/${date[2]} ${date[3]}:${date[4]}:${date[5]}`;
@@ -704,6 +711,9 @@
 
 				document.querySelectorAll(".btn[data-function]").forEach(function(e) {
 					e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), this.getAttribute("data-function"))})
+				});
+				document.querySelectorAll(".btn[data-character").forEach(function(e) {
+					e.addEventListener("click", function() {select_character(this.getAttribute("data-character"))})
 				});
 				document.querySelector("#open_backup").onchange = Game.open_backup;
 				play.launch_backup.launch.addEventListener("click", function() {Game.launch_backup()});

@@ -11,13 +11,13 @@
 	font-size: 24px
 }
 
-.btn[disabled="disabled"] {
+.btn[disabled] {
 	background-image: url(btn-disabled.png);
 	color: #776952;
 	cursor: default
 }
 
-.btn:not([disabled="disabled"]):active {background-image: url(btn_pressed.png)}
+.btn:not([disabled]):active {background-image: url(btn-pressed.png)}
 
 .btn-small {
 	width: 144px;
@@ -27,22 +27,27 @@
 	font-size: 16px
 }
 
-.btn-small:active {background-image: url(btn-small_pressed.png)}
+.btn-small:active {background-image: url(btn-small-pressed.png)}
 
 .btn-small[data-function="close"] {
 	width: 36px;
 	background-image: url(btn-close.png)
 }
 
-.btn-small[data-function="close"]:active {background-image: url(btn-close_pressed.png)}
+.btn-small[data-function="close"]:active {background-image: url(btn-close-pressed.png)}
 
 .btn-class {
 	width: 208px;
 	height: 208px;
 	float: left;
 	position: relative;
-	vertical-align: top;
-	background-image: url(btn-class.png)
+	vertical-align: top
 }
 
-.btn-class:active {background-image: url(btn-class_selected.png)}
+.btn-class.mage {background-image: url(btn-class-mage.png)}
+.btn-class.rogue {background-image: url(btn-class-rogue.png)}
+.btn-class.paladin {background-image: url(btn-class-paladin.png)}
+
+.btn-class.mage:active {background-image: url(btn-class-mage-selected.png)}
+.btn-class.rogue:active {background-image: url(btn-class-rogue-selected.png)}
+.btn-class.paladin:active {background-image: url(btn-class-paladin-selected.png)}
