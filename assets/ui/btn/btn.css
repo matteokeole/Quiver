@@ -17,8 +17,6 @@
 	cursor: default
 }
 
-.btn:not([disabled]):active {background-image: url(btn-pressed.png)}
-
 .btn-small {
 	width: 144px;
 	height: 36px;
@@ -26,8 +24,6 @@
 	background-image: url(btn-small.png);
 	font-size: 16px
 }
-
-.btn-small:active {background-image: url(btn-small-pressed.png)}
 
 .btn-small[data-function="close"] {
 	width: 36px;
@@ -44,5 +40,13 @@
 	vertical-align: top;
 	background-image: url(btn-class.png)
 }
+
+/* active effects */
+
+.btn:active {background-image: url(btn-pressed.png)}
+
+.btn[disabled]:active {background-image: url(btn-disabled.png)}
+
+.btn-small:active {background-image: url(btn-small-pressed.png)}
 
 .btn-class:active {background-image: url(btn-class-selected.png)}

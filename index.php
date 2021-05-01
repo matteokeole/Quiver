@@ -19,6 +19,7 @@
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-options.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-load.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/icon/icon.css">
+		<link rel="stylesheet" type="text/css" href="assets/map.css">
 		<style type="text/css">
 			body {
 				margin: 0;
@@ -665,6 +666,15 @@
 				return new_date
 			}
 
+			function set_volume_range(input, target) {
+				if (input.value.length !== 0 && /^\d*\.?\d*$/.test(input.value)) {
+					// a number has been entered
+					if (input.value >= 0 && input.value <= 100) return target.value = input.value
+				}
+			}
+
+			function set_volume_nb(input, target) {return target.value = input.value}
+
 			window.addEventListener("load", function() {
 				// buttons
 				UI.btn.play = $(".btn-play");
@@ -740,10 +750,17 @@
 				});
 				document.querySelector("#open_backup").onchange = Game.open_backup;
 				play.launch_backup.launch.addEventListener("click", function() {Game.launch_backup()});
-
 				document.querySelectorAll(".subtitle").forEach(function(e) {
 					e.addEventListener("click", function() {e.parentNode.parentNode.scrollTop = (this.parentNode.offsetTop - 60)})
-				})
+				});
+				document.querySelector(".music .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling)}); // chrome/safari/ff
+				document.querySelector(".music .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling)}); // ie
+				document.querySelector(".music .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling)});
+				document.querySelector(".sound .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling)}); // chrome/safari/ff
+				document.querySelector(".sound .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling)}); // ie
+				document.querySelector(".sound .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling)});
+
+				$("body > div").style.right = "unset" // aligning the "Powered by 000webhost" div to the left to avoid layering
 			})
 		</script>
 		<title translate="no">Quiver</title>
@@ -767,6 +784,7 @@
 			</div>
 			<div class="overlay overlay-load"></div>
 			<?php include "assets/ui/menu/menu-load.html"; ?>
+			<?php include "assets/map.html"; ?>
 		</main>
 	</body>
 

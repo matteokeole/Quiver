@@ -1,7 +1,7 @@
-// lvl size = 21x17.5
-// tavern used as a lobby
-// the upper-bar section is not used as an upper level
-// because the player can't and doesn't need to access it
+/*	lvl size = 21x17.5
+	tavern used as a lobby
+	the upper-bar section is not used as an upper level
+	because the player can't and doesn't need to access it */
 
 {
 	"lobby": {

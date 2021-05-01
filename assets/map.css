@@ -1,0 +1,68 @@
+/* map container */
+
+.map-container {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	height: auto;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	overflow: hidden;
+	background-color: #000;
+	z-index: 1
+}
+
+/* overlay */
+
+.map-container .overlay-shade {
+	/* add some "#000" to make the visible area smaller */
+	background: radial-gradient(circle at 50%, transparent, #000, #000, #000);
+	z-index: 9
+}
+
+/* map and uppermap */
+
+#map, #uppermap {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 9999px;
+	height: 9999px;
+	margin: auto;
+	position: absolute;
+	overflow: hidden
+}
+
+#map {background-color: #262626}
+
+#uppermap {z-index: 2}
+
+/* parts */
+
+.part, .upperpart {
+	position: absolute;
+	background-image: url(textures/error.jpg);
+	background-repeat: repeat;
+	image-rendering: crisp-edges
+}
+
+/* player */
+
+#player {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 64px;
+	height: 64px;
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.5);
+	background-image: url(something.png);
+	background-size: cover;
+	image-rendering: crisp-edges;
+	z-index: 1
+}

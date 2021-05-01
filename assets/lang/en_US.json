@@ -13,7 +13,7 @@
 			"player_name_tip.text": "What's your name?\nIt'll be used to identify you in this new game.",
 			"player_name_placeholder.text": "This is the tale of...",
 			"game_name_tip.text": "Give a name to your new game.",
-			"game_name_placeholder.text": "Game of...",
+			"game_name_placeholder.text": "My new game...",
 			"character_selection_tip.text": "Pick the character you want to play with.\nCharacters are differentiated by their health points,\ntheir mana points and their attacks."
 		},
 		"open_backup.text": "Open Backup File",
