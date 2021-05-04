@@ -1,167 +1,157 @@
-/*	lvl size = 21x17.5
-	tavern used as a lobby
-	the upper-bar section is not used as an upper level
-	because the player can't and doesn't need to access it */
-
 {
 	"lobby": {
-		"spawn": [
-			"empty",
-			[1, 1],
-			[0, 0]
+		"map": [
+			{
+				"part": "spawn",
+				"texture": "empty.png",
+				"size": [1, 1],
+				"origin": [0, 0]
+			}, {
+				"part": "floor",
+				"texture": "brick.png",
+				"size": [19, 17],
+				"origin": [0, 3]
+			}, {
+				"part": "hwall1_side",
+				"texture": "darkbrick_side.png",
+				"size": [19, 1],
+				"origin": [0, 11]
+			}, {
+				"part": "hwall2_side",
+				"texture": "darkbrick_side.png",
+				"size": [9, 1],
+				"origin": [-6, -5]
+			}, {
+				"part": "hwall3_side",
+				"texture": "darkbrick_side.png",
+				"size": [9, 1],
+				"origin": [6, -5]
+			}, {
+				"part": "vwall1",
+				"texture": "darkbrick.png",
+				"size": [1, 15],
+				"origin": [-10, 3.5]
+			}, {
+				"part": "vwall2",
+				"texture": "darkbrick.png",
+				"size": [1, 15],
+				"origin": [10, 3.5]
+			}, {
+				"part": "bar",
+				"texture": "wood.png",
+				"size": [19, 1],
+				"origin": [0, 7.5]
+			}, {
+				"part": "bar_side",
+				"texture": "table_side.png",
+				"size": [19, 1],
+				"origin": [0, 7]
+			}, {
+				"part": "pnj",
+				"texture": "pnj.png",
+				"size": [1, 1],
+				"origin": [0, 8.5]
+			}, {
+				"part": "chest1",
+				"texture": "chest.png",
+				"size": [1, 1],
+				"origin": [-7, 10.5]
+			}, {
+				"part": "chest1_side",
+				"texture": "chest_side.png",
+				"size": [1, 1],
+				"origin": [-7, 10]
+			}, {
+				"part": "chest2",
+				"texture": "chest.png",
+				"size": [1, 1],
+				"origin": [-1, 10.5]
+			}, {
+				"part": "chest2_side",
+				"texture": "pnchest_sidej.png",
+				"size": [1, 1],
+				"origin": [-1, 10]
+			}, {
+				"part": "chest3",
+				"texture": "chest.png",
+				"size": [1, 1],
+				"origin": [5, 10.5]
+			}, {
+				"part": "chest3_side",
+				"texture": "chest_side.png",
+				"size": [1, 1],
+				"origin": [5, 10]
+			}, {
+				"part": "carpet1",
+				"texture": "carpet.png",
+				"size": [3, 1],
+				"origin": [-6, 6]
+			}, {
+				"part": "carpet2",
+				"texture": "carpet.png",
+				"size": [5, 2],
+				"origin": [0, 5.5]
+			}, {
+				"part": "carpet3",
+				"texture": "carpet.png",
+				"size": [3, 1],
+				"origin": [6, 6]
+			}, {
+				"part": "carpet4",
+				"texture": "carpet.png",
+				"size": [3, 2],
+				"origin": [0, -4.5]
+			}, {
+				"part": "table1_side",
+				"texture": "table_side.png",
+				"size": [3, 1],
+				"origin": [-6, 1]
+			}, {
+				"part": "table2_side",
+				"texture": "table_side.png",
+				"size": [3, 1],
+				"origin": [6, 1]
+			}
 		],
-		// floor
-		"floor": [
-			"brick",
-			[19, 17],
-			[0, 3]
+		"uppermap": [
+			{
+				"part": "weapons",
+				"texture": "wood.png",
+				"size": [3, 1],
+				"origin": [-8, -4]
+			}, {
+				"part": "hwall1",
+				"texture": "darkbrick.png",
+				"size": [21, 1],
+				"origin": [0, 11.5]
+			}, {
+				"part": "hwall2",
+				"texture": "darkbrick.png",
+				"size": [9, 1],
+				"origin": [-6, -4.5]
+			}, {
+				"part": "hwall3",
+				"texture": "darkbrick.png",
+				"size": [9, 1],
+				"origin": [6, -4.5]
+			}, {
+				"part": "table1",
+				"texture": "wood.png",
+				"size": [3, 4],
+				"origin": [-6, 1]
+			}, {
+				"part": "table2",
+				"texture": "wood.png",
+				"size": [3, 4],
+				"origin": [6, 1]
+			}, {
+				"part": "map_border",
+				"texture": "border_bottom.png",
+				"size": [3, 1],
+				"origin": [0, -5]
+			}
 		],
-		// horizontal wall sides
-		"hwall1_side": [
-			"darkbrick_side",
-			[19, 1],
-			[0, 11]
-		],
-		"hwall2_side": [
-			"darkbrick_side",
-			[9, 1],
-			[-6, -5]
-		],
-		"hwall3_side": [
-			"darkbrick_side",
-			[9, 1],
-			[6, -5]
-		],
-		// vertical walls
-		"vwall1": [
-			"darkbrick",
-			[1, 15],
-			[-10, 3.5]
-		],
-		"vwall2": [
-			"darkbrick",
-			[1, 15],
-			[10, 3.5]
-		],
-		// bar
-		"bar": [
-			"wood",
-			[19, 1],
-			[0, 7.5]
-		],
-		"bar_side": [
-			"table_side",
-			[19, 1],
-			[0, 7]
-		],
-		// decorations
-		"pnj": [
-			"pnj",
-			[1, 1],
-			[0, 8.5]
-		],
-		"chest1": [
-			"chest",
-			[1, 1],
-			[-1, 10.5]
-		],
-		"chest1_side": [
-			"chest_side",
-			[1, 1],
-			[-1, 10]
-		],
-		"chest2": [
-			"chest",
-			[1, 1],
-			[-7, 10.5]
-		],
-		"chest2_side": [
-			"chest_side",
-			[1, 1],
-			[-7, 10]
-		],
-		"chest3": [
-			"chest",
-			[1, 1],
-			[5, 10.5]
-		],
-		"chest3_side": [
-			"chest_side",
-			[1, 1],
-			[5, 10]
-		],
-		"carpet1": [
-			"carpet",
-			[3, 1],
-			[-6, 6]
-		],
-		"carpet2": [
-			"carpet",
-			[5, 2],
-			[0, 5.5]
-		],
-		"carpet3": [
-			"carpet",
-			[3, 1],
-			[6, 6]
-		],
-		"carpet4": [
-			"carpet",
-			[3, 2],
-			[0, -4.5]
-		],
-		"table1_side": [
-			"table_side",
-			[3, 1],
-			[-6, -1]
-		],
-		"table2_side": [
-			"table_side",
-			[3, 1],
-			[6, -1]
-		],
-		// no entities in this level, the pnj is a decoration
-		"noentity": true
-	},
-	"upper": {
-		// weapons
-		"weapons": [
-			"wood",
-			[3, 1],
-			[-8, -4]
-		],
-		// horizontal walls
-		"hwall1": [
-			"darkbrick",
-			[21, 1],
-			[0, 11.5]
-		],
-		"hwall2": [
-			"darkbrick",
-			[9, 1],
-			[-6, -4.5]
-		],
-		"hwall3": [
-			"darkbrick",
-			[9, 1],
-			[6, -4.5]
-		],
-		// decorations
-		"table1": [
-			"wood",
-			[3, 4],
-			[-6, 1]
-		],
-		"table2": [
-			"wood",
-			[3, 4],
-			[6, 1]
-		],
-		// map borders
-		"map_border": [
-			"border_bottom",
-			[3, 1],
-			[0, -5]
-		]
+		"entity": [],
+		"next_level": "lvl_1"
 	}
 }

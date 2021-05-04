@@ -1,0 +1,35 @@
+/* buttons */
+
+.btn {background-image: url(btn/btn.png)}
+.btn:active {background-image: url(btn/btn-pressed.png)}
+.btn[disabled] {background-image: url(btn/btn-disabled.png)}
+.btn[disabled]:active {background-image: url(btn/btn-disabled.png)}
+.btn-small {background-image: url(btn/btn-small.png)}
+.btn-small:active {background-image: url(btn/btn-small-pressed.png)}
+.btn-small[data-function="close"] {background-image: url(btn/btn-close.png)}
+.btn-small[data-function="close"]:active {background-image: url(btn/btn-close-pressed.png)}
+.btn-class {background-image: url(btn/btn-class.png)}
+.btn-class:active {background-image: url(btn/btn-class-selected.png)}
+
+/* icons */
+
+.icon.health {background-image: url(icon/health.png)}
+.icon.shield {background-image: url(icon/shield.png)}
+.icon.mana {background-image: url(icon/mana.png)}
+.icon.mage {background-image: url(icon/mage.png)}
+.icon.rogue {background-image: url(icon/rogue.png)}
+.icon.paladin {background-image: url(icon/paladin.png)}
+.icon.check {background-image: url(icon/check.png)}
+
+/* map parts */
+
+/*.part {background-image: url(map/error.png)}*/
+
+/* menus */
+
+.menu-main {background-image: url(menu/background.jpg)}
+.menu-main-title {background-image: url(menu/main-title.png)}
+.menu-load .clock {background-image: url(menu/clock.png)}
+.menu-load .loading {background-image: url(menu/loading.gif)}
+.scrollbox-top {background-image: url(scrollbox-top.png)}
+.scrollbox-bottom {background-image: url(scrollbox-bottom.png)}

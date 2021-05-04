@@ -8,7 +8,7 @@
 		"player": {
 			"nickname": "jett rebibe me",
 			"class": "paladin",
-			"level": 0,
+			"level": "lobby",
 			"health": 25,
 			"maxhealth": 25,
 			"mp": 20,

@@ -11,7 +11,6 @@
 .menu-load .clock {
 	width: 260px;
 	height: 896px;
-	background-image: url(clock.png);
 	background-size: cover;
 	image-rendering: crisp-edges
 }
@@ -21,10 +20,10 @@
 	width: 260px;
 	height: 20px;
 	margin: auto;
-	right: 16px;
 	bottom: 16px;
+	right: 0;
+	left: 0;
 	position: absolute;
-	background-image: url(loading.gif);
 	background-size: cover;
 	image-rendering: crisp-edges
 }

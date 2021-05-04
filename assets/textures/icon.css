@@ -34,17 +34,3 @@
 	text-align: right;
 	font-size: 18px
 }
-
-.icon.health {background-image: url(health.png)}
-
-.icon.shield {background-image: url(shield.png)}
-
-.icon.mana {background-image: url(mana.png)}
-
-.icon.mage {background-image: url(mage.png)}
-
-.icon.rogue {background-image: url(rogue.png)}
-
-.icon.paladin {background-image: url(paladin.png)}
-
-.icon.check {background-image: url(check.png)}

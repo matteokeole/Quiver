@@ -15,7 +15,6 @@ dark #c4b399 */
 
 .scrollbox-top {
 	position: relative;
-	background-image: url(scrollbox-top.png);
 	background-repeat: no-repeat;
 	background-size: 100%;
 	image-rendering: crisp-edges;
@@ -25,7 +24,6 @@ dark #c4b399 */
 
 .scrollbox-bottom {
 	position: relative;
-	background-image: url(scrollbox-bottom.png);
 	background-repeat: no-repeat;
 	background-size: 100%;
 	image-rendering: crisp-edges;

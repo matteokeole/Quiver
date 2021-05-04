@@ -7,20 +7,28 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="A rogue-like web video game.">
 		<meta name="version" content="1.1.0">
-		<meta name="author" content="Clarisse Eynard, Léan Houdayer, Mattéo Legagneux">
-		<meta name="copyright" content="© 2021 Quiver. All right reserved.">
-		<link rel="stylesheet" type="text/css" href="assets/font/font.css">
+		<meta name="author" content="Clarisse Eynard">
+		<meta name="author" content="Léan Houdayer">
+		<meta name="author" content="Mattéo Legagneux">
+		<meta name="copyright" content="© 2021 Quiver. All rights reserved.">
 		<link rel="stylesheet" type="text/css" href="assets/ui/noscript.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/overlay.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/btn/btn.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-main.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-play.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-options.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/menu/menu-load.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/icon/icon.css">
-		<link rel="stylesheet" type="text/css" href="assets/map.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu-main.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu-play.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu-options.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu-load.css">
+		<link rel="stylesheet" type="text/css" href="assets/textures/btn.css">
+		<link rel="stylesheet" type="text/css" href="assets/textures/icon.css">
+		<link rel="stylesheet" type="text/css" href="assets/textures/map.css">
 		<style type="text/css">
+			@font-face {
+				font-family: Quiver;
+				src: url(assets/font/Quiver.ttf) format("truetype")
+			}
+
+			::selection {background-color: rgba(0, 0, 0, 0.2)} /* text selection color */
+
 			body {
 				margin: 0;
 				background-color: #000;
@@ -29,7 +37,12 @@
 
 			main {display: none}
 
-			::selection {background-color: rgba(0, 0, 0, 0.2)} /* text selection color */
+			div, input {font-family: Quiver}
+
+			textarea {
+				font-family: monospace;
+				font-weight: bold
+			}
 		</style>
 		<script type="text/javascript" data-function="main">
 			var Game = {
@@ -63,7 +76,7 @@
 				lang: function(l) {
 					// l: language name (str)
 					// requesting the JSON file
-					var path = `../assets/lang/${l}.json`,
+					var path = `assets/lang/${l}.json`,
 						request = new XMLHttpRequest();
 					request.open("GET", path);
 					request.responseType = "json";
@@ -134,34 +147,34 @@
 				},
 				create_backup: function() {
 					var Backup = {
-						name: null,
+						name: play.new_game.game_name.value,
 						date: {
-							creation: null,
-							lastConnection: null
+							creation: now(),
+							lastConnection: now()
 						},
 						player: {
-							nickname: null,
+							nickname: play.new_game.player_name.value,
 							class: null,
-							level: null,
+							level: "lobby",
 							health: null,
 							maxhealth: null,
 							mp: null,
 							maxmp: null,
 							resistance: null,
 							base_resistance: null,
-							pos: [null, null],
-							orientation: null,
+							pos: [0, 0],
+							orientation: "right",
 							hasBlocked: false
 						},
 						stats: {
-							kill_total: null,
-							kill_goblin: null,
-							kill_skeleton1: null,
-							kill_skeleton2: null,
-							flight_total: null,
-							flight_goblin: null,
-							flight_skeleton1: null,
-							flight_skeleton2: null
+							kill_total: 0,
+							kill_goblin: 0,
+							kill_skeleton1: 0,
+							kill_skeleton2: 0,
+							flight_total: 0,
+							flight_goblin: 0,
+							flight_skeleton1: 0,
+							flight_skeleton2: 0
 						},
 						entity: {
 							// entity data
@@ -277,7 +290,7 @@
 				launch_new_game: function() {
 					Game.toggle_menu("menu-play", "close");
 					var Backup = Game.create_backup();
-					load()
+					Game.load(Backup)
 				},
 				open_backup: function(e) {
 					var file = e.target.files[0];
@@ -307,7 +320,71 @@
 				},
 				launch_backup: function() {
 					Game.toggle_menu("menu-play", "close");
-					load()
+					var Backup = JSON.parse(play.launch_backup.backup.value);
+					Backup = Backup.Backup;
+					Game.load(Backup)
+				},
+				load: function(backup) {
+					show(UI.overlay.load);
+					Game.generate(backup)
+					UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
+					UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
+					UI.overlay.load.style.backgroundColor = "#000";
+					setTimeout(function() {show(UI.menu.load, "flex")}, 600);
+					setTimeout(function() {
+						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
+						UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
+						UI.overlay.load.style.backgroundColor = "transparent"
+					}, 1200);
+					setTimeout(function() {
+						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
+						UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
+						UI.overlay.load.style.backgroundColor = "#000";
+						// Game.generate(backup)
+					}, 4600);
+					setTimeout(function() {
+						hide(UI.menu.load);
+						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
+						UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
+						UI.overlay.load.style.backgroundColor = "transparent";
+						show(Map.container, "flex");
+					}, 5200);
+					setTimeout(function() {hide(UI.overlay.load)}, 5800)
+				},
+				generate: function(backup) {
+					// requesting the JSON map data
+					var path = `maps/${backup.player.level}.json`,
+						map_request = new XMLHttpRequest();
+					map_request.open("GET", path);
+					map_request.responseType = "json";
+					map_request.send();
+					map_request.addEventListener("load", function() {
+						// the request has been accepted, recovering file content and generating the map
+						var r = this.response[backup.player.level],
+							map = r.map,
+							uppermap = r.uppermap,
+							entity = r.entity,
+							next_level = r.next_level,
+							part,
+							texture;
+						// map parts
+						for (i = 0; i < map.length; i++) {
+							part = document.createElement("div");
+							part.className = `part ${map[i].part}`;
+							texture = new Image();
+							texture.src = `assets/textures/map/${map[i].texture}`;
+							if (texture.width === 0) console.log(`${map[i].texture} doesn't exist.`);
+							else console.log(`${map[i].texture} does exist.`)
+							Map.map.append(part)
+						}
+						// uppermap parts
+						/*for (i = 0; i < uppermap.length; i++) {
+							part = document.createElement("div");
+							part.className = `part ${uppermap[i]}`;
+							Map.uppermap.append(part)
+						}*/
+						// entities
+					})
 				},
 				toggle_menu: function(m, s) {
 					// m: menu name (str)
@@ -332,7 +409,7 @@
 						sb.style["animation-name"] = "scrollbox-open";
 						sb.style.height = "50%";
 						scrollable.style.scrollBehavior = "auto";
-						scrollable.scrollTop = 0;
+						scrollable.scrollTop = 0; /* scrolling to top (without animations) */
 						scrollable.style.scrollBehavior = "smooth";
 						setTimeout(function() {
 							content.style.visibility = "visible";
@@ -443,11 +520,18 @@
 				}
 			};
 
+			var Map = {
+				container: null,
+				map: null,
+				uppermap: null,
+				player: null
+			};
+
 			var Character = {
 				mage: {
 					id: "mage",
 					type: "player",
-					texture: "assets/entity/mage_idle.gif",
+					texture: "mage_idle.gif",
 					roundActions: ["attack", "use", "flee"],
 					health: 20,
 					shield: 1,
@@ -475,7 +559,7 @@
 				rogue: {
 					id: "rogue",
 					type: "player",
-					texture: "assets/entity/rogue.png",
+					texture: "rogue.png",
 					roundActions: ["attack", "use", "flee"],
 					health: 22,
 					shield: 2,
@@ -505,7 +589,7 @@
 				paladin: {
 					id: "paladin",
 					type: "player",
-					texture: "assets/entity/paladin.png",
+					texture: "paladin.png",
 					roundActions: ["attack", "use", "flee"],
 					health: 25,
 					shield: 3,
@@ -538,7 +622,7 @@
 					id: "goblin",
 					name: "Gobelin",
 					type: "enemy",
-					texture: "assets/entity/goblin.png",
+					texture: "goblin.png",
 					roundActions: ["attack", "attack", "attack", "attack", "flee", "help"],
 					health: 20,
 					mp: 0,
@@ -569,7 +653,7 @@
 					id: "skeleton1",
 					name: "Guerrier squelette",
 					type: "enemy",
-					texture: "assets/entity/skeleton1.png",
+					texture: "skeleton1.png",
 					roundActions: ["attack", "attack", "attack", "attack", "attack", "help"],
 					health: 20,
 					mp: 0,
@@ -594,7 +678,7 @@
 					id: "skeleton2",
 					name: "Archer squelette",
 					type: "enemy",
-					texture: "assets/entity/skeleton2.png",
+					texture: "skeleton2.png",
 					roundActions: ["attack", "attack", "attack", "attack", "attack", "flee"],
 					health: 20,
 					mp: 0,
@@ -628,24 +712,11 @@
 
 			function hide(e) {return e.style.display = "none"}
 
-			function load() {
-				show(UI.overlay.load);
-				UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
-				UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
-				UI.overlay.load.style.backgroundColor = "#000";
-				setTimeout(function() {UI.menu.load.style.display = "flex"}, 600);
-				setTimeout(function() {
-					UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
-					UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
-					UI.overlay.load.style.backgroundColor = "transparent"
-				}, 1200)
-			}
-
 			function esc(e) {
 				var raw_menus = ["menu-play", "menu-options"];
 				if (e.keyCode == 27) {
 					for (i = 0; i < raw_menus.length; i++) {
-						if (document.querySelector(`.${raw_menus[i]}`).style.display == "flex") Game.toggle_menu(raw_menus[i], "close")
+						if (document.querySelector(`.${raw_menus[i]}`).style.display === "flex") Game.toggle_menu(raw_menus[i], "close")
 					}
 				}
 			}
@@ -653,11 +724,23 @@
 			function select_character(c) {
 				if (character_selected === false) character_selected = true;
 				Game.check_new_game_validity();
-				document.querySelectorAll(".btn[data-character").forEach(function(e) {e.style.backgroundImage = "url(assets/ui/btn/btn-class.png)"});
-				document.querySelector(`.btn[data-character=${c}]`).style.backgroundImage = "url(assets/ui/btn/btn-class-selected.png)";
+				document.querySelectorAll(".btn[data-character").forEach(function(e) {e.style.backgroundImage = "url(assets/textures/btn/btn-class.png)"});
+				document.querySelector(`.btn[data-character=${c}]`).style.backgroundImage = "url(assets/textures/btn/btn-class-selected.png)";
 				play.new_game.health_value.textContent = Character[c].health;
 				play.new_game.shield_value.textContent = Character[c].shield;
 				play.new_game.mana_value.textContent = Character[c].mana
+			}
+
+			function now() {
+				var D = new Date(),
+					year = D.getFullYear(),
+					month = D.getMonth() + 1,
+					day = D.getDate(),
+					hour = D.getHours(),
+					minute = D.getMinutes(),
+					second = D.getSeconds(),
+					date = year + "-" + month + "-" + day + "-" + hour + "-" + minute + "-" + second;
+				return date
 			}
 
 			function convert_date(date) {
@@ -739,13 +822,18 @@
 				options.about.subtitle = $(".option.about .subtitle");
 				options.about.updates = $(".option.about .updates");
 				options.about.credits = $(".option.about .credits");
-				
+				// map elements
+				Map.container = $(".map-container");
+				Map.map = $("#map");
+				Map.uppermap = $("#uppermap");
+				Map.player = $("#player");
+
 				Game.init();
 
 				document.querySelectorAll(".btn[data-function]").forEach(function(e) {
 					e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), this.getAttribute("data-function"))})
 				});
-				document.querySelectorAll(".btn[data-character").forEach(function(e) {
+				document.querySelectorAll(".btn[data-character]").forEach(function(e) {
 					e.addEventListener("click", function() {select_character(this.getAttribute("data-character"))})
 				});
 				document.querySelector("#open_backup").onchange = Game.open_backup;
@@ -753,14 +841,14 @@
 				document.querySelectorAll(".subtitle").forEach(function(e) {
 					e.addEventListener("click", function() {e.parentNode.parentNode.scrollTop = (this.parentNode.offsetTop - 60)})
 				});
+				// music volume
 				document.querySelector(".music .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling)}); // chrome/safari/ff
 				document.querySelector(".music .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling)}); // ie
 				document.querySelector(".music .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling)});
+				// sound volume
 				document.querySelector(".sound .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling)}); // chrome/safari/ff
 				document.querySelector(".sound .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling)}); // ie
-				document.querySelector(".sound .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling)});
-
-				$("body > div").style.right = "unset" // aligning the "Powered by 000webhost" div to the left to avoid layering
+				document.querySelector(".sound .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling)})
 			})
 		</script>
 		<title translate="no">Quiver</title>
@@ -777,14 +865,18 @@
 		</noscript>
 		<main>
 			<!-- game content goes here -->
-			<?php include "assets/ui/menu/menu-main.html"; ?>
+			<?php include "assets/ui/menu-main.html"; ?>
 			<div class="overlay overlay-menu">
-				<?php include "assets/ui/menu/menu-play.html"; ?>
-				<?php include "assets/ui/menu/menu-options.html"; ?>
+				<?php include "assets/ui/menu-play.html"; ?>
+				<?php include "assets/ui/menu-options.html"; ?>
 			</div>
 			<div class="overlay overlay-load"></div>
-			<?php include "assets/ui/menu/menu-load.html"; ?>
-			<?php include "assets/map.html"; ?>
+			<?php include "assets/ui/menu-load.html"; ?>
+			<div class="map-container">
+				<div id="player"></div>
+				<div id="map"></div>
+				<div id="uppermap"></div>
+			</div>
 		</main>
 	</body>
 
