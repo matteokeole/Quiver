@@ -16,13 +16,6 @@
 	background-color: #262626
 }
 
-/* overlay */
-
-.map-container .overlay-shade {
-	/* add some "#000" to make the visible area smaller */
-	background: radial-gradient(circle at 50%, transparent, #000, #000, #000)
-}
-
 /* map and uppermap */
 
 #map, #uppermap {

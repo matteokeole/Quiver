@@ -23,7 +23,7 @@
 
 /* map parts */
 
-/*.part {background-image: url(map/error.png)}*/
+.part {background-image: url(map/error.png)}
 
 /* menus */
 
@@ -31,5 +31,5 @@
 .menu-main-title {background-image: url(menu/main-title.png)}
 .menu-load .clock {background-image: url(menu/clock.png)}
 .menu-load .loading {background-image: url(menu/loading.gif)}
-.scrollbox-top {background-image: url(scrollbox-top.png)}
-.scrollbox-bottom {background-image: url(scrollbox-bottom.png)}
+.scrollbox-top {background-image: url(menu/scrollbox-top.png)}
+.scrollbox-bottom {background-image: url(menu/scrollbox-bottom.png)}

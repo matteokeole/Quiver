@@ -23,6 +23,12 @@
 	z-index: 1
 }
 
+.overlay-map {
+	/* add some "#000" to make the visible area smaller */
+	background: radial-gradient(circle at 50%, transparent, #000, #000, #000);
+	z-index: 1
+}
+
 /* overlay behind menus */
 
 @-webkit-keyframes overlay_menu_fade_in {

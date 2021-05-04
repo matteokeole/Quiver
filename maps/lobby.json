@@ -3,152 +3,152 @@
 		"map": [
 			{
 				"part": "spawn",
-				"texture": "empty.png",
 				"size": [1, 1],
-				"origin": [0, 0]
+				"origin": [0, 0],
+				"texture": "empty.png"
 			}, {
 				"part": "floor",
-				"texture": "brick.png",
 				"size": [19, 17],
-				"origin": [0, 3]
+				"origin": [0, 3],
+				"texture": "brick.png"
 			}, {
 				"part": "hwall1_side",
-				"texture": "darkbrick_side.png",
 				"size": [19, 1],
-				"origin": [0, 11]
+				"origin": [0, 11],
+				"texture": "darkbrick_side.png"
 			}, {
 				"part": "hwall2_side",
-				"texture": "darkbrick_side.png",
 				"size": [9, 1],
-				"origin": [-6, -5]
+				"origin": [-6, -5],
+				"texture": "darkbrick_side.png"
 			}, {
 				"part": "hwall3_side",
-				"texture": "darkbrick_side.png",
 				"size": [9, 1],
-				"origin": [6, -5]
+				"origin": [6, -5],
+				"texture": "darkbrick_side.png"
 			}, {
 				"part": "vwall1",
-				"texture": "darkbrick.png",
 				"size": [1, 15],
-				"origin": [-10, 3.5]
+				"origin": [-10, 3.5],
+				"texture": "darkbrick.png"
 			}, {
 				"part": "vwall2",
-				"texture": "darkbrick.png",
 				"size": [1, 15],
-				"origin": [10, 3.5]
+				"origin": [10, 3.5],
+				"texture": "darkbrick.png"
 			}, {
 				"part": "bar",
-				"texture": "wood.png",
 				"size": [19, 1],
-				"origin": [0, 7.5]
+				"origin": [0, 7.5],
+				"texture": "wood.png"
 			}, {
 				"part": "bar_side",
-				"texture": "table_side.png",
 				"size": [19, 1],
-				"origin": [0, 7]
+				"origin": [0, 7],
+				"texture": "table_side.png"
 			}, {
 				"part": "pnj",
-				"texture": "pnj.png",
 				"size": [1, 1],
-				"origin": [0, 8.5]
+				"origin": [0, 8.5],
+				"texture": "pnj.png"
 			}, {
 				"part": "chest1",
-				"texture": "chest.png",
 				"size": [1, 1],
-				"origin": [-7, 10.5]
+				"origin": [-7, 10.5],
+				"texture": "chest.png"
 			}, {
 				"part": "chest1_side",
-				"texture": "chest_side.png",
 				"size": [1, 1],
-				"origin": [-7, 10]
+				"origin": [-7, 10],
+				"texture": "chest_side.png"
 			}, {
 				"part": "chest2",
-				"texture": "chest.png",
 				"size": [1, 1],
-				"origin": [-1, 10.5]
+				"origin": [-1, 10.5],
+				"texture": "chest.png"
 			}, {
 				"part": "chest2_side",
-				"texture": "pnchest_sidej.png",
 				"size": [1, 1],
-				"origin": [-1, 10]
+				"origin": [-1, 10],
+				"texture": "chest_side.png"
 			}, {
 				"part": "chest3",
-				"texture": "chest.png",
 				"size": [1, 1],
-				"origin": [5, 10.5]
+				"origin": [5, 10.5],
+				"texture": "chest.png"
 			}, {
 				"part": "chest3_side",
-				"texture": "chest_side.png",
 				"size": [1, 1],
-				"origin": [5, 10]
+				"origin": [5, 10],
+				"texture": "chest_side.png"
 			}, {
 				"part": "carpet1",
-				"texture": "carpet.png",
 				"size": [3, 1],
-				"origin": [-6, 6]
+				"origin": [-6, 6],
+				"texture": "carpet.png"
 			}, {
 				"part": "carpet2",
-				"texture": "carpet.png",
 				"size": [5, 2],
-				"origin": [0, 5.5]
+				"origin": [0, 5.5],
+				"texture": "carpet.png"
 			}, {
 				"part": "carpet3",
-				"texture": "carpet.png",
 				"size": [3, 1],
-				"origin": [6, 6]
+				"origin": [6, 6],
+				"texture": "carpet.png"
 			}, {
 				"part": "carpet4",
-				"texture": "carpet.png",
 				"size": [3, 2],
-				"origin": [0, -4.5]
+				"origin": [0, -4.5],
+				"texture": "carpet.png"
 			}, {
 				"part": "table1_side",
-				"texture": "table_side.png",
 				"size": [3, 1],
-				"origin": [-6, 1]
+				"origin": [-6, -1],
+				"texture": "table_side.png"
 			}, {
 				"part": "table2_side",
-				"texture": "table_side.png",
 				"size": [3, 1],
-				"origin": [6, 1]
+				"origin": [6, -1],
+				"texture": "table_side.png"
 			}
 		],
 		"uppermap": [
 			{
 				"part": "weapons",
-				"texture": "wood.png",
 				"size": [3, 1],
-				"origin": [-8, -4]
+				"origin": [-8, -4],
+				"texture": "wood.png"
 			}, {
 				"part": "hwall1",
-				"texture": "darkbrick.png",
 				"size": [21, 1],
-				"origin": [0, 11.5]
+				"origin": [0, 11.5],
+				"texture": "darkbrick.png"
 			}, {
 				"part": "hwall2",
-				"texture": "darkbrick.png",
 				"size": [9, 1],
-				"origin": [-6, -4.5]
+				"origin": [-6, -4.5],
+				"texture": "darkbrick.png"
 			}, {
 				"part": "hwall3",
-				"texture": "darkbrick.png",
 				"size": [9, 1],
-				"origin": [6, -4.5]
+				"origin": [6, -4.5],
+				"texture": "darkbrick.png"
 			}, {
 				"part": "table1",
-				"texture": "wood.png",
 				"size": [3, 4],
-				"origin": [-6, 1]
+				"origin": [-6, 1],
+				"texture": "wood.png"
 			}, {
 				"part": "table2",
-				"texture": "wood.png",
 				"size": [3, 4],
-				"origin": [6, 1]
+				"origin": [6, 1],
+				"texture": "wood.png"
 			}, {
 				"part": "map_border",
-				"texture": "border_bottom.png",
 				"size": [3, 1],
-				"origin": [0, -5]
+				"origin": [0, -5],
+				"texture": "border_bottom.png"
 			}
 		],
 		"entity": [],

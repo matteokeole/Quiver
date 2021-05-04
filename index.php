@@ -18,6 +18,7 @@
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-play.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-options.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-load.css">
+		<link rel="stylesheet" type="text/css" href="assets/textures/texture_list.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/btn.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/icon.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/map.css">
@@ -61,14 +62,14 @@
 				check_input_value: function(input) {
 					if (/^\s+$/.test(input.value) || input.value.length === 0) {
 						// the input value is composed only of whitespaces or is empty
-						(input.getAttribute("id") === "player_name") ? player_name_ok = false : game_name_ok = false;
+						(input.getAttribute("id") === "player_name") ? is_player_name_ok = false : is_game_name_ok = false;
 						play.new_game.play.setAttribute("disabled", "disabled");
 						play.new_game.play.removeEventListener("click", Game.launch_new_game)
-					} else (input.getAttribute("id") === "player_name") ? player_name_ok = true : game_name_ok = true; // no errors
+					} else (input.getAttribute("id") === "player_name") ? is_player_name_ok = true : is_game_name_ok = true; // no errors
 					Game.check_new_game_validity()
 				},
 				check_new_game_validity: function() {
-					if (player_name_ok && game_name_ok && character_selected) {
+					if (is_player_name_ok && is_game_name_ok && is_character_selected) {
 						play.new_game.play.removeAttribute("disabled");
 						play.new_game.play.addEventListener("click", Game.launch_new_game)
 					}
@@ -154,7 +155,7 @@
 						},
 						player: {
 							nickname: play.new_game.player_name.value,
-							class: null,
+							character: character_selected,
 							level: "lobby",
 							health: null,
 							maxhealth: null,
@@ -290,7 +291,10 @@
 				launch_new_game: function() {
 					Game.toggle_menu("menu-play", "close");
 					var Backup = Game.create_backup();
-					Game.load(Backup)
+					Game.load(Backup);
+					var Player = new Mage();
+					Player.hey()
+					// Player.style.backgroundImage = `url(assets/textures/entity/${character_selected}.gif)`;
 				},
 				open_backup: function(e) {
 					var file = e.target.files[0];
@@ -347,7 +351,8 @@
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style.backgroundColor = "transparent";
-						show(Map.container, "flex");
+						show(Map.overlay, "flex");
+						show(Map.container, "flex")
 					}, 5200);
 					setTimeout(function() {hide(UI.overlay.load)}, 5800)
 				},
@@ -366,25 +371,33 @@
 							entity = r.entity,
 							next_level = r.next_level,
 							part,
-							texture;
+							scale_multiplier = 64;
 						// map parts
 						for (i = 0; i < map.length; i++) {
 							part = document.createElement("div");
 							part.className = `part ${map[i].part}`;
-							texture = new Image();
-							texture.src = `assets/textures/map/${map[i].texture}`;
-							if (texture.width === 0) console.log(`${map[i].texture} doesn't exist.`);
-							else console.log(`${map[i].texture} does exist.`)
+							part.style.width = `${scale_multiplier * map[i].size[0]}px`;
+							part.style.height = `${scale_multiplier * map[i].size[1]}px`;
+							part.style.transform = `translateX(${scale_multiplier * map[i].origin[0]}px) translateY(${(scale_multiplier * -map[i].origin[1])}px)`;
+							part.style.backgroundImage = `url(assets/textures/map/${map[i].texture})`;
 							Map.map.append(part)
 						}
 						// uppermap parts
-						/*for (i = 0; i < uppermap.length; i++) {
+						for (i = 0; i < uppermap.length; i++) {
 							part = document.createElement("div");
-							part.className = `part ${uppermap[i]}`;
+							part.className = `part ${uppermap[i].part}`;
+							part.style.width = `${scale_multiplier * uppermap[i].size[0]}px`;
+							part.style.height = `${scale_multiplier * uppermap[i].size[1]}px`;
+							part.style.transform = `translateX(${scale_multiplier * uppermap[i].origin[0]}px) translateY(${(scale_multiplier * -uppermap[i].origin[1])}px)`;
+							part.style.backgroundImage = `url(assets/textures/map/${uppermap[i].texture})`;
 							Map.uppermap.append(part)
-						}*/
-						// entities
+						}
+						// starting the game
+						Game.start()
 					})
+				},
+				start: function() {
+					console.log("Starting")
 				},
 				toggle_menu: function(m, s) {
 					// m: menu name (str)
@@ -396,7 +409,7 @@
 						scrollable = content.querySelector(".scrollable");
 					if (s == "open") {
 						// opening
-						if (play.launch_backup.backup_info.classList.contains("error")) play.launch_backup.backup_info.textContent = ""; // removing JSON error
+						if (play.launch_backup.backup_info.classList.contains("error")) play.launch_backup.backup_info.textContent = ""; // removing JSON error info
 						show(UI.overlay.menu, "flex");
 						UI.overlay.menu.style["-webkit-animation-name"] = "overlay_menu_fade_in";
 						UI.overlay.menu.style["animation-name"] = "overlay_menu_fade_in";
@@ -522,43 +535,101 @@
 
 			var Map = {
 				container: null,
+				overlay: null,
 				map: null,
 				uppermap: null,
 				player: null
 			};
 
-			var Character = {
-				mage: {
-					id: "mage",
-					type: "player",
-					texture: "mage_idle.gif",
-					roundActions: ["attack", "use", "flee"],
-					health: 20,
-					shield: 1,
-					mana: 25,
-					attack1: {
-						id: "fireball",
-						name: "Boule de feu",
-						cost: 3,
-						damage: 4
-					},
-					attack2: {
-						id: "wand",
-						name: "Coup de baguette",
-						cost: 2,
-						damage: 3
-					},
-					ult: {
-						id: "lightning",
-						name: "Eclair",
-						cost: 9,
-						damage: 5,
-						hitAllMobs: true
-					}
-				},
+			function Character(c) {
+				switch (c) {
+					case "mage":
+						this.id = "mage";
+						this.texture = "mage_idle.gif";
+						this.roundActions = ["attack", "use", "flee"];
+						this.health = 20;
+						this.shield = 1;
+						this.mana = 25;
+						this.attack1 = {
+							id: "fireball",
+							name: "Boule de feu",
+							cost: 3,
+							damage: 4
+						};
+						this.attack2 = {
+							id: "wand",
+							name: "Coup de baguette",
+							cost: 2,
+							damage: 3
+						};
+						this.ult = {
+							id: "lightning",
+							name: "Eclair",
+							cost: 9,
+							damage: 5,
+							hitAllMobs: true
+						}
+						break;
+					case "rogue":
+						this.id = "rogue";
+						this.texture = "rogue.png";
+						this.roundActions = ["attack", "use", "flee"];
+						this.health = 20;
+						this.shield = 1;
+						this.mana = 25;
+						this.attack1 = {
+							id: "fireball",
+							name: "Boule de feu",
+							cost: 3,
+							damage: 4
+						};
+						this.attack2 = {
+							id: "wand",
+							name: "Coup de baguette",
+							cost: 2,
+							damage: 3
+						};
+						this.ult = {
+							id: "lightning",
+							name: "Eclair",
+							cost: 9,
+							damage: 5,
+							hitAllMobs: true
+						}
+						break;
+					case "paladin":
+						this.id = "paladin";
+						this.texture = "paladin.png";
+						this.roundActions = ["attack", "use", "flee"];
+						this.health = 20;
+						this.shield = 1;
+						this.mana = 25;
+						this.attack1 = {
+							id: "fireball",
+							name: "Boule de feu",
+							cost: 3,
+							damage: 4
+						};
+						this.attack2 = {
+							id: "wand",
+							name: "Coup de baguette",
+							cost: 2,
+							damage: 3
+						};
+						this.ult = {
+							id: "lightning",
+							name: "Eclair",
+							cost: 9,
+							damage: 5,
+							hitAllMobs: true
+						}
+						break
+				}
+			}
+
+			var	Character = {
 				rogue: {
 					id: "rogue",
-					type: "player",
 					texture: "rogue.png",
 					roundActions: ["attack", "use", "flee"],
 					health: 22,
@@ -588,7 +659,6 @@
 				},
 				paladin: {
 					id: "paladin",
-					type: "player",
 					texture: "paladin.png",
 					roundActions: ["attack", "use", "flee"],
 					health: 25,
@@ -701,9 +771,10 @@
 				}
 			};
 
-			var player_name_ok = false,
-				game_name_ok = false,
-				character_selected = false,
+			var is_player_name_ok = false,
+				is_game_name_ok = false,
+				is_character_selected = false,
+				character_selected = "",
 				json_error = "";
 
 			function $(e) {return document.querySelector(e)}
@@ -722,13 +793,14 @@
 			}
 
 			function select_character(c) {
-				if (character_selected === false) character_selected = true;
-				Game.check_new_game_validity();
+				if (is_character_selected === false) is_character_selected = true;
+				// character_selected = Character[c].id;
 				document.querySelectorAll(".btn[data-character").forEach(function(e) {e.style.backgroundImage = "url(assets/textures/btn/btn-class.png)"});
 				document.querySelector(`.btn[data-character=${c}]`).style.backgroundImage = "url(assets/textures/btn/btn-class-selected.png)";
-				play.new_game.health_value.textContent = Character[c].health;
-				play.new_game.shield_value.textContent = Character[c].shield;
-				play.new_game.mana_value.textContent = Character[c].mana
+				// play.new_game.health_value.textContent = Character[c].health;
+				// play.new_game.shield_value.textContent = Character[c].shield;
+				// play.new_game.mana_value.textContent = Charactesr[c].mana;
+				Game.check_new_game_validity()
 			}
 
 			function now() {
@@ -824,6 +896,7 @@
 				options.about.credits = $(".option.about .credits");
 				// map elements
 				Map.container = $(".map-container");
+				Map.overlay = $(".overlay-map");
 				Map.map = $("#map");
 				Map.uppermap = $("#uppermap");
 				Map.player = $("#player");
@@ -873,6 +946,7 @@
 			<div class="overlay overlay-load"></div>
 			<?php include "assets/ui/menu-load.html"; ?>
 			<div class="map-container">
+				<div class="overlay overlay-map"></div>
 				<div id="player"></div>
 				<div id="map"></div>
 				<div id="uppermap"></div>
