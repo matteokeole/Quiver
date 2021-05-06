@@ -20,7 +20,8 @@
 	width: 144px;
 	height: 36px;
 	line-height: 36px;
-	font-size: 16px
+	color: #000;
+	font-size: 18px
 }
 
 .btn-small[data-function="close"] {width: 36px}

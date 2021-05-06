@@ -3,12 +3,12 @@
 		"lang": "fr",
 		"play.text": "Jouer",
 		"close.text": "Fermer",
-		"back.text": "Annuler",
-		"next.text": "Suivant",
-		"prev.text": "Précédent",
+		"cancel.text": "Annuler",
+		"apply.text": "Appliquer",
 		"create.text": "Créer",
 		"new_game.text": "Nouvelle partie",
 		"launch_backup.text": "Charger une sauvegarde",
+		"keybind_tip.text": "Appuyez sur une touche",
 		"new_game": {
 			"player_name_tip.text": "Comment vous appelez-vous ?\nCe nom sera utilisé pour vous identifier dans cette partie.",
 			"player_name_placeholder.text": "C'est l'histoire de...",
@@ -27,14 +27,9 @@
 			"keybind:left.text": "Tourner à gauche",
 			"keybind:right.text": "Tourner à droite",
 			"keybind:console.text": "Afficher/masquer la console",
-			"display.text": "Affichage",
-			"display:borders.text": "Bordures d'écran",
-			"display:animations.text": "Animations",
 			"audio.text": "Audio",
 			"audio:music.text": "Volume de la musique",
 			"audio:sound.text": "Volume des sons",
-			"saves.text": "Sauvegardes",
-			"saves:advanced.text": "Options avancées des sauvegardes",
 			"lang.text": "Langue",
 			"lang:en_US.text": "Anglais",
 			"lang:es_ES.text": "Espagnol",
@@ -43,15 +38,24 @@
 			"about:updates.text": "Notes de mise à jour",
 			"about:credits.text": "Crédits"
 		},
-		"class": {
+		"character": {
 			"mage": {
-				"name.text": "Mage"
+				"name.text": "Mage",
+				"fireball.text": "Boule de feu",
+				"wand.text": "Coup de baguette",
+				"lightning.text": "Eclair"
 			},
 			"rogue": {
-				"name.text": "Roublard"
+				"name.text": "Roublard",
+				"double_daggers.text": "Doubles dagues",
+				"stealth.text": "Attaque furtive",
+				"discretion.text": "Discrétion"
 			},
 			"paladin": {
-				"name.text": "Paladin"
+				"name.text": "Paladin",
+				"sword_strike.text": "Coup d'épée",
+				"parade.text": "Parade",
+				"regeneration.text": "Regénération"
 			}
 		},
 		"error": {

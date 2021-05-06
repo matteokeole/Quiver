@@ -29,7 +29,8 @@
 	float: right
 }
 
-.icon.letter {
+.icon.key {
+	width: 200px;
 	line-height: 32px;
 	text-align: right;
 	font-size: 18px

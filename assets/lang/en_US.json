@@ -3,12 +3,12 @@
 		"lang": "en",
 		"play.text": "Play",
 		"close.text": "Close",
-		"back.text": "Back",
-		"next.text": "Next",
-		"prev.text": "Previous",
+		"cancel.text": "Cancel",
+		"apply.text": "Apply",
 		"create.text": "Create",
 		"new_game.text": "New Game",
 		"launch_backup.text": "Launch Backup",
+		"keybind_tip.text": "Press a key",
 		"new_game": {
 			"player_name_tip.text": "What's your name?\nIt'll be used to identify you in this new game.",
 			"player_name_placeholder.text": "This is the tale of...",
@@ -27,14 +27,9 @@
 			"keybind:left.text": "Turn Left",
 			"keybind:right.text": "Turn Right",
 			"keybind:console.text": "Toggle Console",
-			"display.text": "Display",
-			"display:borders.text": "Screen Borders",
-			"display:animations.text": "Animations",
 			"audio.text": "Audio",
 			"audio:music.text": "Music Volume",
 			"audio:sound.text": "Sound Volume",
-			"saves.text": "Saves",
-			"saves:advanced.text": "Advanced Saves Options",
 			"lang.text": "Language",
 			"lang:en_US.text": "English",
 			"lang:es_ES.text": "Spanish",
@@ -43,15 +38,24 @@
 			"about:updates.text": "Update Notes",
 			"about:credits.text": "Credits"
 		},
-		"class": {
+		"character": {
 			"mage": {
-				"name.text": "Mage"
+				"name.text": "Mage",
+				"fireball.text": "Fireball",
+				"wand.text": "Wand",
+				"lightning.text": "Lightning"
 			},
 			"rogue": {
-				"name.text": "Rogue"
+				"name.text": "Rogue",
+				"double_daggers.text": "Double Daggers",
+				"stealth.text": "Stealth Attack",
+				"discretion.text": "Discretion"
 			},
 			"paladin": {
-				"name.text": "Paladin"
+				"name.text": "Paladin",
+				"sword_strike.text": "Sword Strike",
+				"parade.text": "Parade",
+				"regeneration.text": "Regeneration"
 			}
 		},
 		"error": {

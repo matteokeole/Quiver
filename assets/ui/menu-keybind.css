@@ -1,0 +1,19 @@
+.menu-keybind {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	color: #fff;
+	text-align: center
+}
+
+.menu-keybind .keybind-title {
+	margin-bottom: 40px;
+	font-size: 34px
+}
+
+.menu-keybind .keybind-tip {
+	margin-bottom: 40px;
+	font-size: 20px
+}
+
+.menu-keybind .actions .btn {margin: 0 20px}

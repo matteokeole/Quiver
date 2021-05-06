@@ -3,12 +3,12 @@
 		"lang": "es",
 		"play.text": "Jugar",
 		"close.text": "Cerrar",
-		"back.text": "Cancelar",
-		"next.text": "Siguiente",
-		"prev.text": "Anterior",
+		"cancel.text": "Anular",
+		"apply.text": "Aplicar",
 		"create.text": "Creer",
 		"new_game.text": "Nuevo juego",
 		"launch_backup.text": "Lanzar una copia de respaldo",
+		"keybind_tip.text": "Presione una tecla",
 		"new_game": {
 			"player_name_tip.text": "¿Cómo te llamas?\nEste nombre será usado para identificarte en este nuevo juego.",
 			"player_name_placeholder.text": "Es la historia de...",
@@ -27,14 +27,9 @@
 			"keybind:left.text": "Girar a la izquierda",
 			"keybind:right.text": "Girar a la derecha",
 			"keybind:console.text": "Mostrar/esconder la consola",
-			"display.text": "Visualización",
-			"display:borders.text": "Fronteras de la pantalla",
-			"display:animations.text": "Animaciones",
 			"audio.text": "Audio",
 			"audio:music.text": "Volumen de la música",
 			"audio:sound.text": "Volumen de los sonidos",
-			"saves.text": "Copias de respaldo",
-			"saves:advanced.text": "Opciones avanzadas de las copias de respaldo",
 			"lang.text": "Idioma",
 			"lang:en_US.text": "Inglés",
 			"lang:es_ES.text": "Español",
@@ -43,15 +38,24 @@
 			"about:updates.text": "Notas de las actualizaciones",
 			"about:credits.text": "Creditos"
 		},
-		"class": {
+		"character": {
 			"mage": {
-				"name.text": "Mago"
+				"name.text": "Mago",
+				"fireball.text": "Bola de fuego",
+				"wand.text": "Varita mágica",
+				"lightning.text": "Rayo"
 			},
 			"rogue": {
-				"name.text": "Pícaro"
+				"name.text": "Pícaro",
+				"double_daggers.text": "Dagas dobles",
+				"stealth.text": "Ataque sigiloso",
+				"discretion.text": "Discreción"
 			},
 			"paladin": {
-				"name.text": "Paladin"
+				"name.text": "Paladín",
+				"sword_strike.text": "Golpe de espada",
+				"parade.text": "Desfile",
+				"regeneration.text": "Regeneración"
 			}
 		},
 		"error": {

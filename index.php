@@ -7,9 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="A rogue-like web video game.">
 		<meta name="version" content="1.1.0">
-		<meta name="author" content="Clarisse Eynard">
-		<meta name="author" content="Léan Houdayer">
-		<meta name="author" content="Mattéo Legagneux">
+		<meta name="author" content="Clarisse Eynard, Léan Houdayer, Mattéo Legagneux">
 		<meta name="copyright" content="© 2021 Quiver. All rights reserved.">
 		<link rel="stylesheet" type="text/css" href="assets/ui/noscript.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/overlay.css">
@@ -17,6 +15,7 @@
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-main.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-play.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-options.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu-keybind.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-load.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/texture_list.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/btn.css">
@@ -49,16 +48,37 @@
 			var Game = {
 				init: function() {
 					$("title").textContent = `Quiver ${Game.version}`; // updating the window title with the last version
-					Game.lang("en_US"); // setting the game language to english (USA) - can be modified in the options
+					Game.lang("en_US"); // setting the game language to english (can be modified in the options)
 					// resetting input values
 					play.new_game.player_name.value = "";
 					play.new_game.game_name.value = "";
 					play.launch_backup.backup.value = "";
 					show($("main")); // opening the game window
 					play.new_game.player_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.player_name)});
-					play.new_game.game_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.game_name)})
+					play.new_game.game_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.game_name)});
+					document.querySelectorAll(".btn[data-function]").forEach(function(e) {
+						e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), this.getAttribute("data-function"))})
+					});
+					document.querySelectorAll(".btn[data-character]").forEach(function(e) {
+						e.addEventListener("click", function() {select_character(this.getAttribute("data-character"))})
+					});
+					document.querySelectorAll(".option-name[data-function='keybind']").forEach(function(e) {
+						e.addEventListener("click", function() {Game.open_keybind(e)})
+					});
+					$("#open_backup").onchange = Game.open_backup;
+					play.launch_backup.launch.addEventListener("click", function() {Game.launch_backup()});
+					document.querySelectorAll(".subtitle").forEach(function(e) {
+						e.addEventListener("click", function() {e.parentNode.parentNode.scrollTop = (this.parentNode.offsetTop - 60)})
+					});
+					// music volume
+					$(".music .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling)}); // chrome/safari/ff
+					$(".music .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling)}); // ie
+					$(".music .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling)});
+					// sound volume
+					$(".sound .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling)}); // chrome/safari/ff
+					$(".sound .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling)}); // ie
+					$(".sound .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling)})
 				},
-				rickroll: function() {location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"},
 				check_input_value: function(input) {
 					if (/^\s+$/.test(input.value) || input.value.length === 0) {
 						// the input value is composed only of whitespaces or is empty
@@ -85,12 +105,10 @@
 					request.addEventListener("load", function() {
 						// the request has been accepted, recovering file content and changing the default language of the page
 						var r = this.response[l];
-						document.querySelector("html").setAttribute("lang", r["lang"]);
+						$("html").setAttribute("lang", r["lang"]);
 						// applying the recovered language data to UI elements
 						// global buttons
-						document.querySelectorAll(".btn-prev").forEach(function(e) {e.textContent = r["prev.text"]});
-						document.querySelectorAll(".btn-next").forEach(function(e) {e.textContent = r["next.text"]});
-						document.querySelectorAll(".btn-class").forEach(function(e) {e.querySelector(".character_title").textContent = r.class[e.classList[2]]["name.text"]});
+						document.querySelectorAll(".btn-class").forEach(function(e) {e.querySelector(".character_title").textContent = r.character[e.classList[2]]["name.text"]});
 						// unique buttons
 						UI.btn.play.textContent = r["play.text"];
 						UI.btn.options.textContent = r["options.text"];
@@ -119,17 +137,14 @@
 						options.keybind.left.firstChild.textContent = r.options["keybind:left.text"];
 						options.keybind.right.firstChild.textContent = r.options["keybind:right.text"];
 						options.keybind.console.firstChild.textContent = r.options["keybind:console.text"];
-						// display settings (not used)
-						/*options.display.subtitle.textContent = r.options["display.text"];
-						options.display.borders.textContent = r.options["display:borders.text"];
-						options.display.animations.textContent = r.options["display:animations.text"];*/
+						// keybind menu
+						keybind.cancel.textContent = r["cancel.text"];
+						keybind.apply.textContent = r["apply.text"];
+						keybind_tip = r["keybind_tip.text"];
 						// audio settings
 						options.audio.subtitle.textContent = r.options["audio.text"];
 						options.audio.music.firstChild.textContent = r.options["audio:music.text"];
 						options.audio.sound.firstChild.textContent = r.options["audio:sound.text"];
-						// save settings (not used)
-						/*options.saves.subtitle.textContent = r.options["saves.text"];
-						options.saves.advanced.textContent = r.options["saves:advanced.text"];*/
 						// language settings
 						options.lang.subtitle.textContent = r.options["lang.text"];
 						options.lang.en_US.firstChild.textContent = r.options["lang:en_US.text"];
@@ -139,12 +154,22 @@
 						options.about.subtitle.textContent = r.options["about.text"];
 						options.about.updates.textContent = r.options["about:updates.text"];
 						options.about.credits.textContent = r.options["about:credits.text"];
+						// ability names
+						ability.fireball = r.character.mage["fireball.text"];
+						ability.wand = r.character.mage["wand.text"];
+						ability.lightning = r.character.mage["lightning.text"];
+						ability.double_daggers = r.character.rogue["double_daggers.text"];
+						ability.stealth = r.character.rogue["stealth.text"];
+						ability.discretion = r.character.rogue["discretion.text"];
+						ability.sword_strike = r.character.paladin["sword_strike.text"];
+						ability.parade = r.character.paladin["parade.text"];
+						ability.regeneration = r.character.paladin["regeneration.text"];
 						// errors
 						json_error = r.error["json_error.text"]
 					});
 					// showing the check mark on the selected language
 					document.querySelectorAll(".option.lang .option-name").forEach(function(e) {e.querySelector(".icon").style.visibility = "hidden"});
-					document.querySelector(`.option.lang .option-name.${l}`).querySelector(".icon").style.visibility = "visible"
+					$(`.option.lang .option-name.${l}`).querySelector(".icon").style.visibility = "visible"
 				},
 				create_backup: function() {
 					var Backup = {
@@ -291,17 +316,14 @@
 				launch_new_game: function() {
 					Game.toggle_menu("menu-play", "close");
 					var Backup = Game.create_backup();
-					Game.load(Backup);
-					var Player = new Mage();
-					Player.hey()
-					// Player.style.backgroundImage = `url(assets/textures/entity/${character_selected}.gif)`;
+					Game.load(Backup)
 				},
 				open_backup: function(e) {
 					var file = e.target.files[0];
 					if (!file) return;
 					var reader = new FileReader();
 					reader.onload = function(e) {
-						show(document.querySelector(".container-backup"), "flex"); // opening
+						show($(".container-backup"), "flex"); // opening
 						try {
 							var temp = JSON.parse(e.target.result); // e.target.result = backup content
 							temp = temp.Backup;
@@ -309,7 +331,7 @@
 							play.launch_backup.backup.value = e.target.result;
 							show(play.launch_backup.backup, "flex");
 							play.launch_backup.backup_info.classList.remove("error");
-							play.launch_backup.backup_info.innerHTML = `"${temp.name}" - ${temp.player.nickname} (level ${temp.player.level}, ${temp.player.class})<br>Creation: ${convert_date(temp.date.creation)}<br>Last connection: ${convert_date(temp.date.lastConnection)}`;
+							play.launch_backup.backup_info.innerHTML = `"${temp.name}" - ${temp.player.nickname} (level ${temp.player.level}, ${temp.player.character})<br>Creation: ${convert_date(temp.date.creation)}<br>Last connection: ${convert_date(temp.date.lastConnection)}`;
 							show(play.launch_backup.launch)
 						} catch (e) {
 							hide(play.launch_backup.launch);
@@ -329,11 +351,18 @@
 					Game.load(Backup)
 				},
 				load: function(backup) {
+					// showing loading screen
 					show(UI.overlay.load);
-					Game.generate(backup)
 					UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style.backgroundColor = "#000";
+					// initializing the player
+					var Player = new Character(backup.player.character);
+					Map.player.style.backgroundImage = `url(assets/textures/entity/${Player.texture.idle})`;
+					TempPlayer = undefined;
+					// generating the map
+					Game.generate(backup, player);
+					// loading overlay/screen animations
 					setTimeout(function() {show(UI.menu.load, "flex")}, 600);
 					setTimeout(function() {
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
@@ -343,9 +372,9 @@
 					setTimeout(function() {
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
-						UI.overlay.load.style.backgroundColor = "#000";
-						// Game.generate(backup)
+						UI.overlay.load.style.backgroundColor = "#000"
 					}, 4600);
+					// hiding loading screen and showing game
 					setTimeout(function() {
 						hide(UI.menu.load);
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
@@ -354,9 +383,12 @@
 						show(Map.overlay, "flex");
 						show(Map.container, "flex")
 					}, 5200);
-					setTimeout(function() {hide(UI.overlay.load)}, 5800)
+					setTimeout(function() {
+						hide(UI.overlay.load);
+						Game.start(player) // starting the game
+					}, 5800)
 				},
-				generate: function(backup) {
+				generate: function(backup, player) {
 					// requesting the JSON map data
 					var path = `maps/${backup.player.level}.json`,
 						map_request = new XMLHttpRequest();
@@ -392,12 +424,10 @@
 							part.style.backgroundImage = `url(assets/textures/map/${uppermap[i].texture})`;
 							Map.uppermap.append(part)
 						}
-						// starting the game
-						Game.start()
 					})
 				},
-				start: function() {
-					console.log("Starting")
+				start: function(player) {
+					console.log("<Game started>")
 				},
 				toggle_menu: function(m, s) {
 					// m: menu name (str)
@@ -407,47 +437,68 @@
 						sb = menu.querySelector(".scrollbox-bottom"),
 						content = menu.querySelector(".content"),
 						scrollable = content.querySelector(".scrollable");
-					if (s == "open") {
-						// opening
-						if (play.launch_backup.backup_info.classList.contains("error")) play.launch_backup.backup_info.textContent = ""; // removing JSON error info
-						show(UI.overlay.menu, "flex");
-						UI.overlay.menu.style["-webkit-animation-name"] = "overlay_menu_fade_in";
-						UI.overlay.menu.style["animation-name"] = "overlay_menu_fade_in";
-						UI.overlay.menu.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-						show(menu, "flex");
-						st.style["-webkit-animation-name"] = "scrollbox-open";
-						st.style["animation-name"] = "scrollbox-open";
-						st.style.height = "50%";
-						sb.style["-webkit-animation-name"] = "scrollbox-open";
-						sb.style["animation-name"] = "scrollbox-open";
-						sb.style.height = "50%";
-						scrollable.style.scrollBehavior = "auto";
-						scrollable.scrollTop = 0; /* scrolling to top (without animations) */
-						scrollable.style.scrollBehavior = "smooth";
-						setTimeout(function() {
-							content.style.visibility = "visible";
-							document.addEventListener("keydown", esc)
-						}, 200)
-					} else if (s == "close") {
-						// closing with button
-						document.removeEventListener("keydown", esc);
-						content.style.visibility = "hidden";
-						st.style["-webkit-animation-name"] = "scrollbox-close";
-						st.style["animation-name"] = "scrollbox-close";
-						st.style.height = 0;
-						sb.style["-webkit-animation-name"] = "scrollbox-close";
-						sb.style["animation-name"] = "scrollbox-close";
-						sb.style.height = 0;
-						UI.overlay.menu.style["-webkit-animation-name"] = "overlay_menu_fade_out";
-						UI.overlay.menu.style["animation-name"] = "overlay_menu_fade_out";
-						UI.overlay.menu.style.backgroundColor = "transparent";
-						setTimeout(function() {
-							hide(menu);
-							hide(UI.overlay.menu)
-						}, 200)
+					switch (s) {
+						case "open": // opening
+							if (play.launch_backup.backup_info.classList.contains("error")) play.launch_backup.backup_info.textContent = ""; // removing JSON error info
+							show(UI.overlay.menu, "flex");
+							UI.overlay.menu.style["-webkit-animation-name"] = "overlay_menu_fade_in";
+							UI.overlay.menu.style["animation-name"] = "overlay_menu_fade_in";
+							UI.overlay.menu.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+							show(menu, "flex");
+							st.style["-webkit-animation-name"] = "scrollbox-open";
+							st.style["animation-name"] = "scrollbox-open";
+							st.style.height = "50%";
+							sb.style["-webkit-animation-name"] = "scrollbox-open";
+							sb.style["animation-name"] = "scrollbox-open";
+							sb.style.height = "50%";
+							scrollable.style.scrollBehavior = "auto";
+							scrollable.scrollTop = 0; /* scrolling to top (without animations) */
+							scrollable.style.scrollBehavior = "smooth";
+							setTimeout(function() {
+								content.style.visibility = "visible";
+								document.addEventListener("keydown", esc)
+							}, 200);
+							break;
+						case "close": // closing with button
+							document.removeEventListener("keydown", esc);
+							content.style.visibility = "hidden";
+							st.style["-webkit-animation-name"] = "scrollbox-close";
+							st.style["animation-name"] = "scrollbox-close";
+							st.style.height = 0;
+							sb.style["-webkit-animation-name"] = "scrollbox-close";
+							sb.style["animation-name"] = "scrollbox-close";
+							sb.style.height = 0;
+							UI.overlay.menu.style["-webkit-animation-name"] = "overlay_menu_fade_out";
+							UI.overlay.menu.style["animation-name"] = "overlay_menu_fade_out";
+							UI.overlay.menu.style.backgroundColor = "transparent";
+							setTimeout(function() {
+								hide(menu);
+								hide(UI.overlay.menu)
+							}, 200);
+							break
 					}
 				},
-				version: "1.1.0"
+				open_keybind: function(key) {
+					keybind.apply.setAttribute("disabled", "disabled");
+					keybind.apply.removeEventListener("click", Game.apply_keybind)
+					keybind.title.textContent = key.firstChild.textContent;
+					keybind.tip.textContent = keybind_tip;
+					show(UI.overlay.keybind, "flex"); // showing the menu
+					document.addEventListener("keydown", esc);
+					document.addEventListener("keydown", function(e) {
+						keybind.tip.textContent = e.code;
+						keybind.apply.removeAttribute("disabled");
+						keybind.apply.addEventListener("click", function() {Game.apply_keybind(key, e)})
+					});
+					keybind.cancel.addEventListener("click", function() {hide(UI.overlay.keybind)})
+				},
+				apply_keybind: function(key, e) {
+					Key[keybind] = e.keyCode;
+					console.log(key)
+					// key.querySelector(".key").textContent = e.code;
+					hide(UI.overlay.keybind)
+				},
+				version: "1.0.0"
 			}
 
 			var UI = {
@@ -464,6 +515,7 @@
 				},
 				overlay: {
 					menu: null,
+					keybind: null,
 					load: null
 				}
 			};
@@ -533,6 +585,13 @@
 				}
 			};
 
+			var keybind = {
+				title: null,
+				tip: null,
+				cancel: null,
+				apply: null
+			};
+
 			var Map = {
 				container: null,
 				overlay: null,
@@ -541,30 +600,43 @@
 				player: null
 			};
 
+			var Key = {
+				forward: 90, // base forward key: W
+				backward: 83, // base backward key: S
+				left: 81, // base left key: A
+				right: 68, // base right key: D
+				console: 112 // base console key: F1
+			};
+
 			function Character(c) {
+				// position/movement infos
+				//
+				// character infos
 				switch (c) {
 					case "mage":
 						this.id = "mage";
-						this.texture = "mage_idle.gif";
-						this.roundActions = ["attack", "use", "flee"];
+						this.texture = {
+							idle: "mage_idle.gif",
+							walking: "mage_walking.gif"
+						};
 						this.health = 20;
 						this.shield = 1;
 						this.mana = 25;
-						this.attack1 = {
+						this.ability1 = {
 							id: "fireball",
-							name: "Boule de feu",
+							name: ability.fireball,
 							cost: 3,
 							damage: 4
-						};
-						this.attack2 = {
+						}
+						this.ability2 = {
 							id: "wand",
-							name: "Coup de baguette",
+							name: ability.wand,
 							cost: 2,
 							damage: 3
-						};
-						this.ult = {
+						}
+						this.ability3 = {
 							id: "lightning",
-							name: "Eclair",
+							name: ability.lightning,
 							cost: 9,
 							damage: 5,
 							hitAllMobs: true
@@ -572,119 +644,78 @@
 						break;
 					case "rogue":
 						this.id = "rogue";
-						this.texture = "rogue.png";
-						this.roundActions = ["attack", "use", "flee"];
-						this.health = 20;
-						this.shield = 1;
-						this.mana = 25;
-						this.attack1 = {
-							id: "fireball",
-							name: "Boule de feu",
-							cost: 3,
-							damage: 4
+						this.texture = {
+							idle: "rogue.png",
+							walking: "rogue.png"
 						};
-						this.attack2 = {
-							id: "wand",
-							name: "Coup de baguette",
+						this.health = 22;
+						this.shield = 2;
+						this.mana = 15;
+						this.ability1 = {
+							id: "double_daggers",
+							name: ability.double_daggers,
 							cost: 2,
-							damage: 3
-						};
-						this.ult = {
-							id: "lightning",
-							name: "Eclair",
-							cost: 9,
-							damage: 5,
-							hitAllMobs: true
+							damage: 4,
+							base_damage: 4,
+							boost_damage: 8
+						}
+						this.ability2 = {
+							id: "stealth",
+							name: ability.stealth,
+							cost: 4,
+							damage: 0,
+							damageMult: false
+						}
+						this.ability3 = {
+							id: "discretion",
+							name: ability.discretion,
+							cost: 7,
+							damage: 0
 						}
 						break;
 					case "paladin":
 						this.id = "paladin";
-						this.texture = "paladin.png";
-						this.roundActions = ["attack", "use", "flee"];
-						this.health = 20;
-						this.shield = 1;
-						this.mana = 25;
-						this.attack1 = {
-							id: "fireball",
-							name: "Boule de feu",
-							cost: 3,
-							damage: 4
+						this.texture = {
+							idle: "paladin.png",
+							walking: "paladin.png"
 						};
-						this.attack2 = {
-							id: "wand",
-							name: "Coup de baguette",
+						this.health = 25;
+						this.shield = 3;
+						this.mana = 20;
+						this.ability1 = {
+							id: "sword_strike",
+							name: ability.sword_strike,
 							cost: 2,
-							damage: 3
-						};
-						this.ult = {
-							id: "lightning",
-							name: "Eclair",
-							cost: 9,
-							damage: 5,
-							hitAllMobs: true
+							damage: 4
+						}
+						this.ability2 = {
+							id: "parade",
+							name: ability.parade,
+							cost: 4,
+							damage: 0,
+							blockAttack: true
+						}
+						this.ability3 = {
+							id: "regeneration",
+							name: ability.regeneration,
+							cost: 7,
+							damage: 0,
+							healthAmount: 5
 						}
 						break
 				}
 			}
 
-			var	Character = {
-				rogue: {
-					id: "rogue",
-					texture: "rogue.png",
-					roundActions: ["attack", "use", "flee"],
-					health: 22,
-					shield: 2,
-					mana: 15,
-					attack1: {
-						id: "doubledaggers",
-						name: "Doubles dagues",
-						cost: 2,
-						damage: 4,
-						base_damage: 4,
-						boost_damage: 8
-					},
-					attack2: {
-						id: "stealth",
-						name: "Attaque furtive",
-						cost: 4,
-						damage: 0,
-						damageMult: false
-					},
-					ult: {
-						id: "discretion",
-						name: "Discretion",
-						cost: 7,
-						damage: 0
-					}
-				},
-				paladin: {
-					id: "paladin",
-					texture: "paladin.png",
-					roundActions: ["attack", "use", "flee"],
-					health: 25,
-					shield: 3,
-					mana: 20,
-					attack1: {
-						id: "sword",
-						name: "Coup d'epee",
-						cost: 2,
-						damage: 4
-					},
-					attack2: {
-						id: "parade",
-						name: "Parade",
-						cost: 4,
-						damage: 0,
-						blockAttack: true
-					},
-					ult: {
-						id: "regeneration",
-						name: "Regeneration (+5)",
-						cost: 7,
-						damage: 0,
-						healthAmount: 5
-					}
-				}
+			var ability = {
+				fireball: "",
+				wand: "",
+				lightning: "",
+				double_daggers: "",
+				stealth: "",
+				discretion: "",
+				sword_strike: "",
+				parade: "",
+				regeneration: ""
 			};
 
 			var Entity = {
@@ -771,10 +802,12 @@
 				}
 			};
 
-			var is_player_name_ok = false,
+			var TempPlayer,
+				is_player_name_ok = false,
 				is_game_name_ok = false,
 				is_character_selected = false,
 				character_selected = "",
+				keybind_tip = "",
 				json_error = "";
 
 			function $(e) {return document.querySelector(e)}
@@ -786,20 +819,26 @@
 			function esc(e) {
 				var raw_menus = ["menu-play", "menu-options"];
 				if (e.keyCode == 27) {
-					for (i = 0; i < raw_menus.length; i++) {
-						if (document.querySelector(`.${raw_menus[i]}`).style.display === "flex") Game.toggle_menu(raw_menus[i], "close")
+					if (UI.overlay.keybind.style.display === "flex") {
+						hide(UI.overlay.keybind)
+					}
+					else {
+						for (i = 0; i < raw_menus.length; i++) {
+							if ($(`.${raw_menus[i]}`).style.display === "flex") Game.toggle_menu(raw_menus[i], "close")
+						}
 					}
 				}
 			}
 
 			function select_character(c) {
 				if (is_character_selected === false) is_character_selected = true;
-				// character_selected = Character[c].id;
+				character_selected = c;
+				TempPlayer = new Character(c);
 				document.querySelectorAll(".btn[data-character").forEach(function(e) {e.style.backgroundImage = "url(assets/textures/btn/btn-class.png)"});
-				document.querySelector(`.btn[data-character=${c}]`).style.backgroundImage = "url(assets/textures/btn/btn-class-selected.png)";
-				// play.new_game.health_value.textContent = Character[c].health;
-				// play.new_game.shield_value.textContent = Character[c].shield;
-				// play.new_game.mana_value.textContent = Charactesr[c].mana;
+				$(`.btn[data-character=${c}]`).style.backgroundImage = "url(assets/textures/btn/btn-class-selected.png)";
+				play.new_game.health_value.textContent = TempPlayer.health;
+				play.new_game.shield_value.textContent = TempPlayer.shield;
+				play.new_game.mana_value.textContent = TempPlayer.mana;
 				Game.check_new_game_validity()
 			}
 
@@ -842,6 +881,7 @@
 				UI.menu.load = $(".menu-load");
 				// overlays
 				UI.overlay.menu = $(".overlay-menu");
+				UI.overlay.keybind = $(".overlay-keybind");
 				UI.overlay.load = $(".overlay-load");
 				// menu titles
 				title.play = $(".content-play .title");
@@ -874,17 +914,15 @@
 				options.keybind.left = $(".option.keybind .left");
 				options.keybind.right = $(".option.keybind .right");
 				options.keybind.console = $(".option.keybind .console");
-				// display settings (not used)
-				/*options.display.subtitle = $(".option.display .subtitle");
-				options.display.borders = $(".option.display .borders");
-				options.display.animations = $(".option.display .animations");*/
+				// keybind menu
+				keybind.title = $(".keybind-title");
+				keybind.tip = $(".keybind-tip");
+				keybind.cancel = $(".menu-keybind .actions .btn[data-keybind='cancel']");
+				keybind.apply = $(".menu-keybind .actions .btn[data-keybind='apply']");
 				// audio settings
 				options.audio.subtitle = $(".option.audio .subtitle");
 				options.audio.music = $(".option.audio .music");
 				options.audio.sound = $(".option.audio .sound");
-				// save settings (not used)
-				/*options.saves.subtitle = $(".option.saves .subtitle");
-				options.saves.advanced = $(".option.saves .advanced");*/
 				// language settings
 				options.lang.subtitle = $(".option.lang .subtitle");
 				options.lang.en_US = $(".option.lang .en_US");
@@ -901,27 +939,7 @@
 				Map.uppermap = $("#uppermap");
 				Map.player = $("#player");
 
-				Game.init();
-
-				document.querySelectorAll(".btn[data-function]").forEach(function(e) {
-					e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), this.getAttribute("data-function"))})
-				});
-				document.querySelectorAll(".btn[data-character]").forEach(function(e) {
-					e.addEventListener("click", function() {select_character(this.getAttribute("data-character"))})
-				});
-				document.querySelector("#open_backup").onchange = Game.open_backup;
-				play.launch_backup.launch.addEventListener("click", function() {Game.launch_backup()});
-				document.querySelectorAll(".subtitle").forEach(function(e) {
-					e.addEventListener("click", function() {e.parentNode.parentNode.scrollTop = (this.parentNode.offsetTop - 60)})
-				});
-				// music volume
-				document.querySelector(".music .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling)}); // chrome/safari/ff
-				document.querySelector(".music .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling)}); // ie
-				document.querySelector(".music .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling)});
-				// sound volume
-				document.querySelector(".sound .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling)}); // chrome/safari/ff
-				document.querySelector(".sound .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling)}); // ie
-				document.querySelector(".sound .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling)})
+				Game.init()
 			})
 		</script>
 		<title translate="no">Quiver</title>
@@ -943,6 +961,7 @@
 				<?php include "assets/ui/menu-play.html"; ?>
 				<?php include "assets/ui/menu-options.html"; ?>
 			</div>
+			<?php include "assets/ui/menu-keybind.html"; ?>
 			<div class="overlay overlay-load"></div>
 			<?php include "assets/ui/menu-load.html"; ?>
 			<div class="map-container">
