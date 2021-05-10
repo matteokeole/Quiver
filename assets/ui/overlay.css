@@ -16,9 +16,14 @@
 	animation: 0.2s linear
 }
 
-.overlay-menu {z-index: 2}
+.overlay-menu {z-index: 3}
 
 .overlay-keybind {
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 3
+}
+
+.overlay-pause {
 	background-color: rgba(0, 0, 0, 0.8);
 	z-index: 2
 }
@@ -77,4 +82,26 @@
 @keyframes overlay_load_fade_out {
 	from {background-color: #000}
 	to {background-color: transparent}
+}
+
+/* pause menu */
+
+@-webkit-keyframes overlay_pause_fade_in {
+	from {opacity: 0}
+	to {opacity: 1}
+}
+
+@keyframes overlay_pause_fade_in {
+	from {opacity: 0}
+	to {opacity: 1}
+}
+
+@-webkit-keyframes overlay_pause_fade_out {
+	from {opacity: 1}
+	to {opacity: 0}
+}
+
+@keyframes overlay_pause_fade_out {
+	from {opacity: 1}
+	to {opacity: 0}
 }

@@ -17,6 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-options.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-keybind.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-load.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu-pause.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/texture_list.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/btn.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/icon.css">
@@ -56,8 +57,11 @@
 					show($("main")); // opening the game window
 					play.new_game.player_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.player_name)});
 					play.new_game.game_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.game_name)});
-					document.querySelectorAll(".btn[data-function]").forEach(function(e) {
-						e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), this.getAttribute("data-function"))})
+					document.querySelectorAll(".btn[data-function='open']").forEach(function(e) {
+						e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), "open")})
+					});
+					document.querySelectorAll(".btn[data-function='close']").forEach(function(e) {
+						e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), "close")})
 					});
 					document.querySelectorAll(".btn[data-character]").forEach(function(e) {
 						e.addEventListener("click", function() {select_character(this.getAttribute("data-character"))})
@@ -70,6 +74,7 @@
 					document.querySelectorAll(".subtitle").forEach(function(e) {
 						e.addEventListener("click", function() {e.parentNode.parentNode.scrollTop = (this.parentNode.offsetTop - 60)})
 					});
+					keybind.cancel.addEventListener("click", Game.close_keybind);
 					// music volume
 					$(".music .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling)}); // chrome/safari/ff
 					$(".music .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling)}); // ie
@@ -85,7 +90,9 @@
 						(input.getAttribute("id") === "player_name") ? is_player_name_ok = false : is_game_name_ok = false;
 						play.new_game.play.setAttribute("disabled", "disabled");
 						play.new_game.play.removeEventListener("click", Game.launch_new_game)
-					} else (input.getAttribute("id") === "player_name") ? is_player_name_ok = true : is_game_name_ok = true; // no errors
+					}
+					else if (input.getAttribute("id") === "player_name") is_player_name_ok = true;
+					else is_game_name_ok = true; // no errors
 					Game.check_new_game_validity()
 				},
 				check_new_game_validity: function() {
@@ -103,18 +110,19 @@
 					request.responseType = "json";
 					request.send();
 					request.addEventListener("load", function() {
-						// the request has been accepted, recovering file content and changing the default language of the page
-						var r = this.response[l];
+						// the request has been accepted, changing page language
+						var r = this.response[l]; // recovering file content
 						$("html").setAttribute("lang", r["lang"]);
-						// applying the recovered language data to UI elements
-						// global buttons
+						// buttons
 						document.querySelectorAll(".btn-class").forEach(function(e) {e.querySelector(".character_title").textContent = r.character[e.classList[2]]["name.text"]});
-						// unique buttons
+						document.querySelectorAll(".btn-options").forEach(function(e) {e.textContent = r["options.text"]});
 						UI.btn.play.textContent = r["play.text"];
-						UI.btn.options.textContent = r["options.text"];
+						UI.btn.resume.textContent = r["resume.text"];
+						UI.btn.exit.textContent = r["exit.text"];
 						// menu titles
 						title.play.textContent = r["play.text"];
 						title.options.textContent = r["options.text"];
+						title.pause.textContent = r["pause.text"];
 						// play menu
 						// new game section
 						play.new_game.subtitle.textContent = r["new_game.text"];
@@ -315,8 +323,8 @@
 				},
 				launch_new_game: function() {
 					Game.toggle_menu("menu-play", "close");
-					var Backup = Game.create_backup();
-					Game.load(Backup)
+					window["Backup"] = Game.create_backup();
+					Game.load(window["Backup"])
 				},
 				open_backup: function(e) {
 					var file = e.target.files[0];
@@ -346,11 +354,12 @@
 				},
 				launch_backup: function() {
 					Game.toggle_menu("menu-play", "close");
-					var Backup = JSON.parse(play.launch_backup.backup.value);
-					Backup = Backup.Backup;
-					Game.load(Backup)
+					window["Backup"] = JSON.parse(play.launch_backup.backup.value);
+					window["Backup"] = window["Backup"].Backup;
+					Game.load(window["Backup"])
 				},
 				load: function(backup) {
+					document.removeEventListener("keydown", esc);
 					// showing loading screen
 					show(UI.overlay.load);
 					UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
@@ -358,10 +367,13 @@
 					UI.overlay.load.style.backgroundColor = "#000";
 					// initializing the player
 					var Player = new Character(backup.player.character);
+					Player.canMove = player.canMove;
+					Player.direction = player.direction;
+					Player.movement = player.movement;
 					Map.player.style.backgroundImage = `url(assets/textures/entity/${Player.texture.idle})`;
 					TempPlayer = undefined;
 					// generating the map
-					Game.generate(backup, player);
+					Game.generate(backup, Player);
 					// loading overlay/screen animations
 					setTimeout(function() {show(UI.menu.load, "flex")}, 600);
 					setTimeout(function() {
@@ -372,7 +384,8 @@
 					setTimeout(function() {
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
-						UI.overlay.load.style.backgroundColor = "#000"
+						UI.overlay.load.style.backgroundColor = "#000";
+						hide(UI.menu.main)
 					}, 4600);
 					// hiding loading screen and showing game
 					setTimeout(function() {
@@ -385,7 +398,7 @@
 					}, 5200);
 					setTimeout(function() {
 						hide(UI.overlay.load);
-						Game.start(player) // starting the game
+						Game.start(backup, Player) // starting the game
 					}, 5800)
 				},
 				generate: function(backup, player) {
@@ -426,8 +439,21 @@
 						}
 					})
 				},
-				start: function(player) {
-					console.log("<Game started>")
+				start: function(backup, player) {
+					document.addEventListener("keydown", pause_menu);
+					UI.btn.resume.addEventListener("click", function() {
+						UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
+						UI.overlay.pause.style["animation-name"] = "overlay_pause_fade_out";
+						Map.container.classList.remove("blur");
+						setTimeout(function() {
+							hide(UI.overlay.pause);
+							player.movement.on()
+						}, 200)
+					});
+					UI.btn.exit.addEventListener("click", function() {location.reload()}); // TODO: a confirmation section musts appear when user want to quit
+					// player movement
+					player.movement.on();
+					window.requestAnimationFrame(player.movement.move)
 				},
 				toggle_menu: function(m, s) {
 					// m: menu name (str)
@@ -478,27 +504,35 @@
 							break
 					}
 				},
-				open_keybind: function(key) {
-					keybind.apply.setAttribute("disabled", "disabled");
-					keybind.apply.removeEventListener("click", Game.apply_keybind)
-					keybind.title.textContent = key.firstChild.textContent;
+				// keybind methods
+				open_keybind: function(k) {
+					current_key = k;
+					keybind.title.textContent = current_key.firstChild.textContent;
 					keybind.tip.textContent = keybind_tip;
 					show(UI.overlay.keybind, "flex"); // showing the menu
 					document.addEventListener("keydown", esc);
-					document.addEventListener("keydown", function(e) {
-						keybind.tip.textContent = e.code;
-						keybind.apply.removeAttribute("disabled");
-						keybind.apply.addEventListener("click", function() {Game.apply_keybind(key, e)})
-					});
-					keybind.cancel.addEventListener("click", function() {hide(UI.overlay.keybind)})
+					document.addEventListener("keydown", Game.input_keybind)
 				},
-				apply_keybind: function(key, e) {
-					Key[keybind] = e.keyCode;
-					console.log(key)
-					// key.querySelector(".key").textContent = e.code;
+				close_keybind: function() {
+					document.removeEventListener("keydown", Game.input_keybind);
+					keybind.apply.removeEventListener("click", Game.apply_keybind);
+					keybind.apply.setAttribute("disabled", "disabled");
 					hide(UI.overlay.keybind)
 				},
-				version: "1.0.0"
+				input_keybind: function(e) {
+					new_keybind = e;
+					keybind.tip.textContent = new_keybind.key;
+					keybind.apply.removeAttribute("disabled");
+					keybind.apply.addEventListener("click", Game.apply_keybind);
+				},
+				apply_keybind: function() {
+					keybind.apply.removeEventListener("click", Game.apply_keybind);
+					keybind.apply.setAttribute("disabled", "disabled");
+					Key[current_key.classList[1]] = new_keybind.keyCode;
+					current_key.querySelector(".key").innerHTML = new_keybind.key;
+					Game.close_keybind()
+				},
+				version: "1.1.0"
 			}
 
 			var UI = {
@@ -506,9 +540,11 @@
 					play: null,
 					options: null,
 					create: null,
-					data_function: {close: null}
+					resume: null,
+					exit: null
 				},
 				menu: {
+					main: null,
 					play: null,
 					options: null,
 					load: null
@@ -516,13 +552,15 @@
 				overlay: {
 					menu: null,
 					keybind: null,
-					load: null
+					load: null,
+					pause: null
 				}
 			};
 
 			var title = {
 				play: null,
-				options: null
+				options: null,
+				pause: null
 			};
 
 			var play = {
@@ -600,18 +638,7 @@
 				player: null
 			};
 
-			var Key = {
-				forward: 90, // base forward key: W
-				backward: 83, // base backward key: S
-				left: 81, // base left key: A
-				right: 68, // base right key: D
-				console: 112 // base console key: F1
-			};
-
 			function Character(c) {
-				// position/movement infos
-				//
-				// character infos
 				switch (c) {
 					case "mage":
 						this.id = "mage";
@@ -705,6 +732,108 @@
 						break
 				}
 			}
+
+			var Key = {
+				forward: 90,
+				backward: 83,
+				left: 81,
+				right: 68,
+				console: 112
+			};
+
+			var player = {
+				canMove: {
+					top: false,
+					bottom: false,
+					left: false,
+					right: false
+				},
+				direction: {
+					top: false,
+					bottom: false,
+					left: false,
+					right: false
+				},
+				movement: {
+					on: function() {
+						// allowing player movement
+						window.addEventListener("keydown", player.movement.keydown);
+						window.addEventListener("keyup", player.movement.keyup);
+						player.canMove.top = true;
+						player.canMove.bottom = true;
+						player.canMove.left = true;
+						player.canMove.right = true
+					},
+					off: function() {
+						// disallowing player movement
+						window.removeEventListener("keydown", player.movement.keydown);
+						window.removeEventListener("keyup", player.movement.keyup);
+						player.canMove.top = false;
+						player.canMove.bottom = false;
+						player.canMove.left = false;
+						player.canMove.right = false
+					},
+					keydown: function(e) {
+						// pressing a key
+						switch (e.keyCode) {
+							case Key["forward"]: // forward key
+								player.canMove.top ? player.direction.top = true : player.direction.top = false;
+								break;
+							case Key["backward"]: // backward key
+								player.canMove.bottom ? player.direction.bottom = true : player.direction.bottom = false;
+								break;
+							case Key["left"]: // left key
+								player.canMove.left ? player.direction.left = true : player.direction.left = false;
+								break;
+							case Key["right"]: // right key
+								player.canMove.right ? player.direction.right = true : player.direction.right = false;
+								break
+						}
+					},
+					keyup: function(e) {
+						// releasing the key
+						switch (e.keyCode) {
+							case Key["forward"]: // forward key
+								player.direction.top = false;
+								break;
+							case Key["backward"]: // backward key
+								player.direction.bottom = false;
+								break;
+							case Key["left"]: // left key
+								player.direction.left = false;
+								break;
+							case Key["right"]: // right key
+								player.direction.right = false;
+								break
+						}
+					},
+					move: function() {
+						if (player.direction.top && player.canMove.top) window["Backup"].player.pos[1] += 0.1;
+						if (player.direction.bottom && player.canMove.bottom) window["Backup"].player.pos[1] -= 0.1;
+						if (player.direction.left && player.canMove.left) {
+							window["Backup"].player.pos[0] -= 0.1;
+							// changing player orientation
+							window["Backup"].player.orientation = "left";
+							Map.player.style.transform = "rotateY(180deg)"
+						}
+						if (player.direction.right && player.canMove.right) {
+							window["Backup"].player.pos[0] += 0.1;
+							// changing player orientation
+							window["Backup"].player.orientation = "right";
+							Map.player.style.transform = "rotateY(0)"
+						}
+						// moving the player
+						// backup.player.pos[0] = player.x.toFixed(1);
+						// backup.player.pos[1] = player.y.toFixed(1);
+						player.movement.tp(window["Backup"].player.pos[0].toFixed(1), window["Backup"].player.pos[1].toFixed(1));
+						window.requestAnimationFrame(player.movement.move)
+					},
+					tp: function(x, y) {
+						Map.map.style.transform = "translateX(" + -x * 64 + "px) translateY(" + y * 64 + "px)";
+						Map.uppermap.style.transform = "translateX(" + -x * 64 + "px) translateY(" + y * 64 + "px)"
+					}
+				}
+			};
 
 			var ability = {
 				fireball: "",
@@ -802,11 +931,14 @@
 				}
 			};
 
-			var TempPlayer,
+			var raw_menus = ["menu-play", "menu-options"],
+				TempPlayer,
 				is_player_name_ok = false,
 				is_game_name_ok = false,
 				is_character_selected = false,
 				character_selected = "",
+				current_key = "",
+				new_keybind = "",
 				keybind_tip = "",
 				json_error = "";
 
@@ -817,15 +949,32 @@
 			function hide(e) {return e.style.display = "none"}
 
 			function esc(e) {
-				var raw_menus = ["menu-play", "menu-options"];
-				if (e.keyCode == 27) {
-					if (UI.overlay.keybind.style.display === "flex") {
-						hide(UI.overlay.keybind)
-					}
+				if (e.keyCode === 27) {
+					if (UI.overlay.keybind.style.display === "flex") Game.close_keybind();
 					else {
 						for (i = 0; i < raw_menus.length; i++) {
 							if ($(`.${raw_menus[i]}`).style.display === "flex") Game.toggle_menu(raw_menus[i], "close")
 						}
+					}
+				}
+			}
+
+			function pause_menu(e) {
+				if (e.keyCode === 27 && UI.overlay.menu.style.display !== "flex") {
+					if (UI.overlay.pause.style.display === "flex") {
+						UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
+						UI.overlay.pause.style["animation-name"] = "overlay_pause_fade_out";
+						Map.container.classList.remove("blur");
+						setTimeout(function() {
+							hide(UI.overlay.pause);
+							player.movement.on()
+						}, 200)
+					} else {
+						player.movement.off();
+						Map.container.classList.add("blur");
+						show(UI.overlay.pause, "flex");
+						UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_in";
+						UI.overlay.pause.style["animation-name"] = "overlay_pause_fade_in"
 					}
 				}
 			}
@@ -874,8 +1023,10 @@
 				UI.btn.play = $(".btn-play");
 				UI.btn.options = $(".btn-options");
 				UI.btn.create = $(".menu-new_game .btn-create");
-				UI.btn.data_function.close = document.querySelectorAll(".btn[data-function='close']");
+				UI.btn.resume = $(".btn-resume");
+				UI.btn.exit = $(".btn-exit");
 				// menus
+				UI.menu.main = $(".menu-main");
 				UI.menu.play = $(".menu-play .scrollable");
 				UI.menu.options = $(".menu-options .scrollable");
 				UI.menu.load = $(".menu-load");
@@ -883,9 +1034,11 @@
 				UI.overlay.menu = $(".overlay-menu");
 				UI.overlay.keybind = $(".overlay-keybind");
 				UI.overlay.load = $(".overlay-load");
+				UI.overlay.pause = $(".overlay-pause");
 				// menu titles
 				title.play = $(".content-play .title");
 				title.options = $(".content-options .title");
+				title.pause = $(".pause-title");
 				// play menu
 				// new game section
 				play.new_game.subtitle = $(".new_game .subtitle");
@@ -964,6 +1117,9 @@
 			<?php include "assets/ui/menu-keybind.html"; ?>
 			<div class="overlay overlay-load"></div>
 			<?php include "assets/ui/menu-load.html"; ?>
+			<div class="overlay overlay-pause">
+				<?php include "assets/ui/menu-pause.html"; ?>
+			</div>
 			<div class="map-container">
 				<div class="overlay overlay-map"></div>
 				<div id="player"></div>

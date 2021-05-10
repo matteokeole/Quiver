@@ -38,6 +38,9 @@
 			"about:updates.text": "Update Notes",
 			"about:credits.text": "Credits"
 		},
+		"pause.text": "Pause",
+		"resume.text": "Resume",
+		"exit.text": "Exit",
 		"character": {
 			"mage": {
 				"name.text": "Mage",

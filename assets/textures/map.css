@@ -13,7 +13,8 @@
 	left: 0;
 	position: fixed;
 	overflow: hidden;
-	background-color: #262626
+	background-color: #262626;
+	transition-duration: 0.2s
 }
 
 /* map and uppermap */
@@ -29,6 +30,8 @@
 	overflow: hidden
 }
 
+#map {z-index: -1}
+
 /* parts */
 
 .part, .upperpart {
@@ -43,6 +46,19 @@
 	width: 64px;
 	height: 64px;
 	background-size: cover;
-	image-rendering: crisp-edges;
-	z-index: 1
+	image-rendering: crisp-edges
+}
+
+/* graphic effects */
+
+.blur {
+	-webkit-filter: blur(4px);
+	-ms-filter: blur(4px);
+	filter: blur(4px)
+}
+
+.grayscale {
+	-webkit-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	filter: grayscale(100%)
 }

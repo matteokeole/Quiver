@@ -38,6 +38,9 @@
 			"about:updates.text": "Notas de las actualizaciones",
 			"about:credits.text": "Creditos"
 		},
+		"pause.text": "Pausa",
+		"resume.text": "Retomar",
+		"exit.text": "Dejar",
 		"character": {
 			"mage": {
 				"name.text": "Mago",
