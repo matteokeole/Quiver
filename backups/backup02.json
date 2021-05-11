@@ -8,7 +8,7 @@
 		"player": {
 			"nickname": "KitsuneDa",
 			"character": "paladin",
-			"level": 1,
+			"level": "dungeon",
 			"health": 25,
 			"maxhealth": 25,
 			"mp": 20,

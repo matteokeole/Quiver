@@ -23,10 +23,7 @@
 	z-index: 3
 }
 
-.overlay-pause {
-	background-color: rgba(0, 0, 0, 0.8);
-	z-index: 2
-}
+.overlay-pause {z-index: 2}
 
 .overlay-load {
 	-webkit-animation-duration: 0.6s;

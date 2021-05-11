@@ -8,7 +8,7 @@
 		"player": {
 			"nickname": "Shixxbowat",
 			"character": "mage",
-			"level": 2,
+			"level": "diamond",
 			"health": 20,
 			"maxhealth": 20,
 			"mp": 25,

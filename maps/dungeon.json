@@ -1,0 +1,364 @@
+{
+	"dungeon": {
+		"map": [
+			{
+				"part": "spawn",
+				"size": [1, 1],
+				"origin": [0, 0],
+				"texture": "empty.png"
+			}, {
+				"part": "hcorridor1",
+				"size": [13, 2],
+				"origin": [5, -0.5],
+				"texture": "brick.png"
+			}, {
+				"part": "hcorridor2",
+				"size": [21, 2],
+				"origin": [20, 2.5],
+				"texture": "brick.png"
+			}, {
+				"part": "hcorridor3",
+				"size": [7, 2],
+				"origin": [27, 8.5],
+				"texture": "brick.png"
+			}, {
+				"part": "hcorridor4",
+				"size": [9, 2],
+				"origin": [14, 8.5],
+				"texture": "brick.png"
+			}, {
+				"part": "hcorridor5",
+				"size": [34, 3],
+				"origin": [20.5, 20],
+				"texture": "brick.png"
+			}, {
+				"part": "vcorridor1",
+				"size": [2, 1],
+				"origin": [10.5, 1],
+				"texture": "brick.png"
+			}, {
+				"part": "vcorridor2",
+				"size": [2, 4],
+				"origin": [15.5, 5.5],
+				"texture": "brick.png"
+			}, {
+				"part": "vcorridor3",
+				"size": [2, 4],
+				"origin": [24.5, 5.5],
+				"texture": "brick.png"
+			}, {
+				"part": "vcorridor4",
+				"size": [2, 9],
+				"origin": [10.5, 14],
+				"texture": "brick.png"
+			}, {
+				"part": "vcorridor5",
+				"size": [2, 9],
+				"origin": [17.5, 14],
+				"texture": "brick.png"
+			}, {
+				"part": "room",
+				"size": [5, 11],
+				"origin": [33, 6],
+				"texture": "brick.png"
+			}, {
+				"part": "hwall1",
+				"size": [11, 1],
+				"origin": [4, 1.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall1_side",
+				"size": [11, 1],
+				"origin": [4, 1],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall2_side",
+				"size": [14, 1],
+				"origin": [5.5, -2],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall3",
+				"size": [5, 1],
+				"origin": [12, 4.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall3_side",
+				"size": [5, 1],
+				"origin": [12, 4],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall4",
+				"size": [7, 1],
+				"origin": [20, 4.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall4_side",
+				"size": [7, 1],
+				"origin": [20, 4],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall5_side",
+				"size": [17, 1],
+				"origin": [21, 1],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall6_side",
+				"size": [7, 1],
+				"origin": [33, 0],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall7",
+				"size": [5, 1],
+				"origin": [28, 4.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall7_side",
+				"size": [5, 1],
+				"origin": [28, 4],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall8_side",
+				"size": [3, 1],
+				"origin": [28, 7],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall9",
+				"size": [5, 1],
+				"origin": [33, 12.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall9_side",
+				"size": [5, 1],
+				"origin": [33, 12],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall10",
+				"size": [7, 1],
+				"origin": [27, 10.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall10_side",
+				"size": [7, 1],
+				"origin": [27, 10],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall11_side",
+				"size": [5, 1],
+				"origin": [11, 7],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall12_side",
+				"size": [2, 1],
+				"origin": [18.5, 7],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall13",
+				"size": [5, 1],
+				"origin": [14, 10.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall13_side",
+				"size": [5, 1],
+				"origin": [14, 10],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall14_side",
+				"size": [3, 1],
+				"origin": [14, 18],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall15_side",
+				"size": [5, 1],
+				"origin": [6, 18],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall16_side",
+				"size": [18, 1],
+				"origin": [28.5, 18],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "hwall17",
+				"size": [34, 1],
+				"origin": [20.5, 22.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall17_side",
+				"size": [34, 1],
+				"origin": [20.5, 22],
+				"texture": "darkbrick_side.png"
+			}, {
+				"part": "vwall1",
+				"size": [1, 3],
+				"origin": [9, 3.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "vwall2",
+				"size": [1, 2],
+				"origin": [12, 0],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "vwall3",
+				"size": [1, 2],
+				"origin": [26, 6],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "vwall4",
+				"size": [1, 2],
+				"origin": [30, 6],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "vwall5",
+				"size": [1, 12],
+				"origin": [36, 7],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "vwall6",
+				"size": [1, 2],
+				"origin": [30, 12],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "vwall7",
+				"size": [1, 6],
+				"origin": [23, 8],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "vwall8",
+				"size": [1, 2],
+				"origin": [14, 6],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "vwall9",
+				"size": [1, 2],
+				"origin": [17, 6],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "vwall10",
+				"size": [1, 11],
+				"origin": [9, 12.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "vwall11",
+				"size": [1, 11],
+				"origin": [19, 12.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "vwall12",
+				"size": [1, 7],
+				"origin": [12, 14.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "vwall13",
+				"size": [1, 7],
+				"origin": [16, 14.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "chest",
+				"size": [1, 1],
+				"origin": [32, 11.5],
+				"texture": "chest.png"
+			}, {
+				"part": "chest_side",
+				"size": [1, 1],
+				"origin": [32, 11],
+				"texture": "chest_side.png"
+			}, {
+				"part": "table_side",
+				"size": [3, 1],
+				"origin": [32, 5],
+				"texture": "table_side.png"
+			}, {
+				"part": "carpet",
+				"size": [34, 1],
+				"origin": [20.5, 20],
+				"texture": "carpet.png"
+			}
+		],
+		"uppermap": [
+			{
+				"part": "hwall2",
+				"size": [14, 1],
+				"origin": [5.5, -1.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall5",
+				"size": [19, 1],
+				"origin": [21, 1.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall6",
+				"size": [7, 1],
+				"origin": [33, 0.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall8",
+				"size": [5, 1],
+				"origin": [28, 7.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall11",
+				"size": [5, 1],
+				"origin": [12, 7.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall12",
+				"size": [2, 1],
+				"origin": [17.5, 7.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall14",
+				"size": [5, 1],
+				"origin": [14, 18.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall15",
+				"size": [6, 1],
+				"origin": [6.5, 18.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "hwall16",
+				"size": [19, 1],
+				"origin": [28, 18.5],
+				"texture": "darkbrick.png"
+			}, {
+				"part": "map_border1",
+				"size": [1, 4.5],
+				"origin": [-1, -0.25],
+				"texture": "border_left.png"
+			}, {
+				"part": "map_border2",
+				"size": [1, 5.5],
+				"origin": [4, 20.25],
+				"texture": "border_left.png"
+			}, {
+				"part": "map_border3",
+				"size": [1, 5.5],
+				"origin": [37, 20.25],
+				"texture": "border_right.png"
+			}, {
+				"part": "table",
+				"size": [3, 2],
+				"origin": [32, 6],
+				"texture": "wood.png"
+			}
+		],
+		"entity": [
+			{
+				"entity": "entity0",
+				"type": "skeleton2",
+				"origin": [13, 2.5],
+				"orientation": "left"
+			}, {
+				"entity": "entity1",
+				"type": "skeleton1",
+				"origin": [22, 2.5],
+				"orientation": "left"
+			}, {
+				"entity": "entity2",
+				"type": "goblin",
+				"origin": [17.5, 15],
+				"orientation": "left"
+			}
+		],
+		"next_level": "diamond"
+	}
+}
