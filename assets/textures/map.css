@@ -19,7 +19,7 @@
 
 /* map and uppermap */
 
-#map, #uppermap {
+#map, #uppermap, #entities {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -30,15 +30,17 @@
 	overflow: hidden
 }
 
-#map {z-index: -1}
+#map, #entities {z-index: -1}
 
 /* parts */
 
-.part, .upperpart {
+.part, .upperpart, .entity {
 	position: absolute;
 	background-repeat: repeat;
 	image-rendering: crisp-edges
 }
+
+.entity {background-size: cover}
 
 /* player */
 

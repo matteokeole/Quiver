@@ -9,6 +9,9 @@
 		"new_game.text": "New Game",
 		"launch_backup.text": "Launch Backup",
 		"keybind_tip.text": "Press a key",
+		"save.text": "Save",
+		"save_tip.text": "To save your game, copy the code below and paste it into a JSON file.",
+		"copy.text": "Copy",
 		"new_game": {
 			"player_name_tip.text": "What's your name?\nIt'll be used to identify you in this new game.",
 			"player_name_placeholder.text": "This is the tale of...",
@@ -41,24 +44,86 @@
 		"pause.text": "Pause",
 		"resume.text": "Resume",
 		"exit.text": "Exit",
+		"ability1_title.text": "First Ability",
+		"ability2_title.text": "Second Ability",
+		"ult_title.text": "Ultimate",
 		"character": {
 			"mage": {
 				"name.text": "Mage",
 				"fireball.text": "Fireball",
+				"fireball_desc.text": "Throw a fireball to your opponent.\nDamage: 4\nCost: 3",
 				"wand.text": "Wand",
-				"lightning.text": "Lightning"
+				"wand_desc.text": "Use a wand to injure your opponent.\nDamage: 3\nCost: 2",
+				"lightning.text": "Lightning",
+				"lightning_desc.text": "The lightning strikes all enemies in the level.\nDamage: 5 for all enemies in the level\nCost: 9"
 			},
 			"rogue": {
 				"name.text": "Rogue",
 				"double_daggers.text": "Double Daggers",
+				"double_daggers_desc.text": "Use two small daggers to injure your opponent.\nDamage: 4 (8 after use of Stealth Attack)\nCost: 2",
 				"stealth.text": "Stealth Attack",
-				"discretion.text": "Discretion"
+				"stealth_desc.text": "Double your damage number for the next round.\nCost: 4",
+				"discretion.text": "Discretion",
+				"discretion_desc.text": "Double your opponent's escape rate.\nCost: 7"
 			},
 			"paladin": {
 				"name.text": "Paladin",
 				"sword_strike.text": "Sword Strike",
+				"sword_strike_desc.text": "Use a sword to injure your opponent.\nDamage: 4\nCost: 2",
 				"parade.text": "Parade",
-				"regeneration.text": "Regeneration"
+				"parade_desc.text": "Block the next attack from your opponent.\nCost: 4",
+				"regeneration.text": "Regeneration",
+				"regeneration_desc.text": "Regenerate instantly 5 health points.\nCost: 7"
+			}
+		},
+		"subtitle": {
+			"lobby.text": "Part 1:\nThe Lobby",
+			"dungeon.text": "Part 2:\nInto the Dungeon",
+			"diamond.text": "Part 3:\nThe Lost Diamond"
+		},
+		"teller": {
+			"narrator.text": "Narrator",
+			"innkeeper.text": "Innkeeper",
+			"goblin.text": "Goblin"
+		},
+		"dialog": {
+			"lobby": [
+				{"text": "As you wake up in a tavern, the innkeeper speaks to you."},
+				{"text": "Hello %s, how are you? Do you know the legend of the lost diamond?"},
+				{
+					"text": "Do you want to hear it?",
+					"options": ["Yes, why not", "I'm too lazy to listen"]
+				},
+				{"text": "A legend says that there is a diamond of great value hidden in an ancient dungeon. If you find it, it will be yours!"},
+				{"text": "If you want to go looking for him, you can leave the hostel. I'll guide you to the dungeon. Good luck!"},
+				{"text": "At your own sweet will :("}
+			],
+			"dungeon": [
+				{"text": "You're finally in front of the dungeon. Watch out for the monsters lying around."},
+				{"text": "The door closed behind you. Can't go back."},
+				{"text": "You hear noise coming from the room. Maybe it contains a treasure..."},
+				{"text": "You try to open the chest, but it's rusty and won't give in."},
+				{"text": "You feel a hostile presence in this hallway. Is it really worth going there?"},
+				{"text": "You hit your head. It's a wall, here."}
+			],
+			"diamond": [
+				{"text": "You continue down the hallway, going deeper into the dungeon."},
+				{"text": "-bleh bleh bleh-"},
+				{"text": "You open the chest and find that it is empty. And dusty."},
+				{"text": "This hallway is very dark. It would take a torch to see more clearly."},
+				{"text": "You grab the diamond and run away with it as fast as you can."}
+			],
+			"misc": {
+				"kill": [
+					{"text": "You killed a goblin. *gurgling noise* You regain some health and mana."},
+					{"text": "You killed a skeleton guard. *cracking bone noises* You regain some health and mana."},
+					{"text": "You killed a skeleton archer. *cracking bone noises* You regain some health and mana."}
+				],
+				"flight": [
+					{"text": "The goblin fled. *distant footstep noises* You regain some health and mana."},
+					{"text": "The skeleton guard fled. *footstep and bone noises* You regain some health and mana."},
+					{"text": "The skeleton archer fled. *footstep and bone noises* You regain some health and mana."}
+				]
 			}
 		},
 		"error": {

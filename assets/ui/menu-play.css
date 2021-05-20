@@ -42,21 +42,33 @@
 .character_title {margin-top: 10px}
 
 .character_info {
+	display: none;
 	width: 608px;
 	margin-bottom: 40px;
 	padding: 8px;
 	top: -4px;
 	position: relative;
 	box-shadow: inset 0 0 0 4px #000;
-	background-color: #ab9d86
+	background-color: #ab9d86;
+	font-size: 18px
 }
 
 .health_value,
 .shield_value,
 .mana_value {
 	display: inline-block;
-	margin: 4px 0;
-	font-size: 18px
+	margin: 4px 0
+}
+
+.ability_title {
+	margin-top: 12px;
+	font-weight: bold;
+	text-decoration: underline
+}
+
+.ability_desc {
+	font-style: italic;
+	white-space: pre
 }
 
 /* launch backup section */
@@ -75,7 +87,7 @@
 	font-size: 18px
 }
 
-#backup {
+textarea {
 	width: 700px;
 	height: 184px;
 	margin-bottom: 20px;

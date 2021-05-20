@@ -9,6 +9,9 @@
 		"new_game.text": "Nouvelle partie",
 		"launch_backup.text": "Charger une sauvegarde",
 		"keybind_tip.text": "Appuyez sur une touche",
+		"save.text": "Sauvegarder",
+		"save_tip.text": "Pour sauvegarder votre partie, copiez le code ci-dessous et collez-le dans un fichier JSON.",
+		"copy.text": "Copier",
 		"new_game": {
 			"player_name_tip.text": "Comment vous appelez-vous ?\nCe nom sera utilisé pour vous identifier dans cette partie.",
 			"player_name_placeholder.text": "C'est l'histoire de...",
@@ -41,24 +44,86 @@
 		"pause.text": "Pause",
 		"resume.text": "Reprendre",
 		"exit.text": "Quitter",
+		"ability1_title.text": "Première capacité",
+		"ability2_title.text": "Seconde capacité",
+		"ult_title.text": "Ultime",
 		"character": {
 			"mage": {
 				"name.text": "Mage",
 				"fireball.text": "Boule de feu",
+				"fireball_desc.text": "Lancez une boule de feu sur votre adversaire.\nDégâts : 4\nCoût : 3",
 				"wand.text": "Coup de baguette",
-				"lightning.text": "Eclair"
+				"wand_desc.text": "Utilisez une baguette magique pour blesser votre adversaire.\nDégâts : 3\nCoût : 2",
+				"lightning.text": "Eclair",
+				"lightning_desc.text": "La foudre s'abat sur tous les ennemis du niveau.\nDégâts : 5 pour tous les ennemis du niveau\nCoût : 9"
 			},
 			"rogue": {
 				"name.text": "Roublard",
 				"double_daggers.text": "Doubles dagues",
+				"double_daggers_desc.text": "Utilisez deux petites dagues pour blesser votre adversaire.\nDégâts : 4 (8 après avoir utilisé Attaque furtive)\nCoût : 2",
 				"stealth.text": "Attaque furtive",
-				"discretion.text": "Discrétion"
+				"stealth_desc.text": "Doublez votre nombre de dégâts pour le prochain tour.\nCoût : 4",
+				"discretion.text": "Discrétion",
+				"discretion_desc.text": "Doublez le taux de fuite de votre adversaire.\nCoût : 7"
 			},
 			"paladin": {
 				"name.text": "Paladin",
 				"sword_strike.text": "Coup d'épée",
+				"sword_strike_desc.text": "Utilisez une épée pour blesser votre adversaire.\nDégâts : 4\nCoût : 2",
 				"parade.text": "Parade",
-				"regeneration.text": "Regénération"
+				"parade_desc.text": "Parez la prochaine attaque de votre adversaire.\nCoût : 4",
+				"regeneration.text": "Regénération",
+				"regeneration_desc.text": "Regénérez instantanément 5 points de santé.\nCoût : 7"
+			}
+		},
+		"subtitle": {
+			"lobby.text": "Partie 1 :\nLa taverne",
+			"dungeon.text": "Partie 2 :\nDans le donjon",
+			"diamond.text": "Partie 3 :\nLe diamant perdu"
+		},
+		"teller": {
+			"narrator.text": "Narrateur ",
+			"innkeeper.text": "Aubergiste ",
+			"goblin.text": "Gobelin "
+		},
+		"dialog": {
+			"lobby": [
+				{"text": "Alors que vous vous réveillez dans une taverne, l'aubergiste s'adresse à vous."},
+				{"text": "Bonjour %s, comment allez-vous ? Connaissez-vous la légende du diamant perdu ?"},
+				{
+					"text": "Voulez-vous que je vous la raconte ?",
+					"options": ["Oui, pourquoi pas", "J'ai la flemme d'écouter"]
+				},
+				{"text": "Une légende dit qu'il y a un diamant d'une grande valeur caché dans un ancien donjon. Si vous le trouvez, il sera à vous !"},
+				{"text": "Si vous voulez partir à sa recherche, vous pouvez sortir de l'auberge. Je vous guiderai jusqu'au donjon. Bonne chance !"},
+				{"text": "Comme vous voulez :("}
+			],
+			"dungeon": [
+				{"text": "Vous êtes enfin arrivé(e) au donjon. Faites attention aux monstres qui y traînent."},
+				{"text": "La porte s'est fermée derrière vous. Impossible de revenir en arrière."},
+				{"text": "Vous entendez du bruit venir de la pièce. Peut-être qu'elle renferme un trésor..."},
+				{"text": "Vous tentez d'ouvrir le coffre, mais il est rouillé et ne veut pas céder."},
+				{"text": "Vous sentez une présence hostile dans ce couloir. Vaut-il vraiment la peine d'y aller ?"},
+				{"text": "Vous vous cognez la tete. C'est un mur, ici."}
+			],
+			"diamond": [
+				{"text": "Vous continuez dans le couloir en vous enfoncant encore plus loin dans le donjon."},
+				{"text": "-bleh bleh bleh-"},
+				{"text": "Vous ouvrez le coffre et constatez qu'il est vide. Et poussiereux."},
+				{"text": "Ce couloir est très sombre. Il faudrait une torche pour y voir plus clair."},
+				{"text": "Vous vous emparez du diamant et vous vous enfuyez avec aussi vite que possible."}
+			],
+			"misc": {
+				"kill": [
+					{"text": "Vous avez tué un gobelin. *bruit de gargouillement* Vous récupérez un peu de santé et de mana."},
+					{"text": "Vous avez tué un guerrier squelette. *bruits d'os qui craquent* Vous récupérez un peu de santé et de mana."},
+					{"text": "Vous avez tué un archer squelette. *bruits d'os qui craquent* Vous récupérez un peu de santé et de mana."}
+				],
+				"flight": [
+					{"text": "Le gobelin a fui. *bruits de pas lointains* Vous récupérez un peu de santé et de mana."},
+					{"text": "Le guerrier squelette a fui. *bruits de pas et d'os* Vous récupérez un peu de santé et de mana."},
+					{"text": "L'archer squelette a fui. *bruits de pas et d'os* Vous récupérez un peu de santé et de mana."}
+				]
 			}
 		},
 		"error": {

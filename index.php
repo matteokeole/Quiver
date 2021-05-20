@@ -9,19 +9,22 @@
 		<meta name="version" content="1.1.0">
 		<meta name="author" content="Clarisse Eynard, Léan Houdayer, Mattéo Legagneux">
 		<meta name="copyright" content="© 2021 Quiver. All rights reserved.">
-		<link rel="stylesheet" type="text/css" href="assets/ui/noscript.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/overlay.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/dialog.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/menu-main.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/menu-play.css">
-		<link rel="stylesheet" type="text/css" href="assets/ui/menu-options.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-keybind.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-load.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu-main.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu-options.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-pause.css">
-		<link rel="stylesheet" type="text/css" href="assets/textures/texture_list.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu-play.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu-save.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/noscript.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/overlay.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/subtitle.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/btn.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/icon.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/map.css">
+		<link rel="stylesheet" type="text/css" href="assets/textures/texture_list.css">
 		<style type="text/css">
 			@font-face {
 				font-family: Quiver;
@@ -54,6 +57,7 @@
 					play.new_game.player_name.value = "";
 					play.new_game.game_name.value = "";
 					play.launch_backup.backup.value = "";
+					save.backup.value = "";
 					show($("main")); // opening the game window
 					play.new_game.player_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.player_name)});
 					play.new_game.game_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.game_name)});
@@ -118,10 +122,13 @@
 						document.querySelectorAll(".btn-options").forEach(function(e) {e.textContent = r["options.text"]});
 						UI.btn.play.textContent = r["play.text"];
 						UI.btn.resume.textContent = r["resume.text"];
+						UI.btn.save.textContent = r["save.text"];
+						UI.btn.copy.textContent = r["copy.text"];
 						UI.btn.exit.textContent = r["exit.text"];
 						// menu titles
 						title.play.textContent = r["play.text"];
 						title.options.textContent = r["options.text"];
+						title.save.textContent = r["save.text"];
 						title.pause.textContent = r["pause.text"];
 						// play menu
 						// new game section
@@ -162,18 +169,53 @@
 						options.about.subtitle.textContent = r.options["about.text"];
 						options.about.updates.textContent = r.options["about:updates.text"];
 						options.about.credits.textContent = r.options["about:credits.text"];
+						// save menu
+						save.tip.textContent = r["save_tip.text"];
 						// ability names
-						ability.fireball = r.character.mage["fireball.text"];
-						ability.wand = r.character.mage["wand.text"];
-						ability.lightning = r.character.mage["lightning.text"];
-						ability.double_daggers = r.character.rogue["double_daggers.text"];
-						ability.stealth = r.character.rogue["stealth.text"];
-						ability.discretion = r.character.rogue["discretion.text"];
-						ability.sword_strike = r.character.paladin["sword_strike.text"];
-						ability.parade = r.character.paladin["parade.text"];
-						ability.regeneration = r.character.paladin["regeneration.text"];
+						ability_id.fireball = r.character.mage["fireball.text"];
+						ability_id.wand = r.character.mage["wand.text"];
+						ability_id.lightning = r.character.mage["lightning.text"];
+						ability_id.double_daggers = r.character.rogue["double_daggers.text"];
+						ability_id.stealth = r.character.rogue["stealth.text"];
+						ability_id.discretion = r.character.rogue["discretion.text"];
+						ability_id.sword_strike = r.character.paladin["sword_strike.text"];
+						ability_id.parade = r.character.paladin["parade.text"];
+						ability_id.regeneration = r.character.paladin["regeneration.text"];
+						// ability descriptions
+						ability_desc.fireball = r.character.mage["fireball_desc.text"];
+						ability_desc.wand = r.character.mage["wand_desc.text"];
+						ability_desc.lightning = r.character.mage["lightning_desc.text"];
+						ability_desc.double_daggers = r.character.rogue["double_daggers_desc.text"];
+						ability_desc.stealth = r.character.rogue["stealth_desc.text"];
+						ability_desc.discretion = r.character.rogue["discretion_desc.text"];
+						ability_desc.sword_strike = r.character.paladin["sword_strike_desc.text"];
+						ability_desc.parade = r.character.paladin["parade_desc.text"];
+						ability_desc.regeneration = r.character.paladin["regeneration_desc.text"];
+						// ability titles
+						ability1_title = r["ability1_title.text"];
+						ability2_title = r["ability2_title.text"];
+						ult_title = r["ult_title.text"];
 						// errors
-						json_error = r.error["json_error.text"]
+						json_error = r.error["json_error.text"];
+						// level subtitles
+						Subtitle.lobby.text = r.subtitle["lobby.text"];
+						Subtitle.dungeon.text = r.subtitle["dungeon.text"];
+						Subtitle.diamond.text = r.subtitle["diamond.text"];
+						// teller names
+						Teller.narrator = r.teller["narrator.text"];
+						Teller.innkeeper = r.teller["innkeeper.text"];
+						Teller.goblin = r.teller["goblin.text"];
+						// dialogs
+						// lobby dialogs
+						for (i = 0; i < Dialog.lobby.length; i++) {Dialog.lobby[i].text = r.dialog.lobby[i].text}
+						Dialog.lobby[2].options[0] = r.dialog.lobby[2].options[0];
+						Dialog.lobby[2].options[1] = r.dialog.lobby[2].options[1];
+						for (i = 0; i < Dialog.dungeon.length; i++) {Dialog.dungeon[i].text = r.dialog.dungeon[i].text} // dungeon dialogs
+						for (i = 0; i < Dialog.diamond.length; i++) {Dialog.diamond[i].text = r.dialog.diamond[i].text} // diamond dialogs
+						for (i = 0; i < Dialog.misc.kill.length; i++) {Dialog.misc.kill[i].text = r.dialog.misc.kill[i].text} // kill dialogs
+						for (i = 0; i < Dialog.misc.flight.length; i++) {Dialog.misc.flight[i].text = r.dialog.misc.flight[i].text} // flight dialogs
+						// character info
+						if (character_selected !== "") select_character(character_selected)
 					});
 					// showing the check mark on the selected language
 					document.querySelectorAll(".option.lang .option-name").forEach(function(e) {e.querySelector(".icon").style.visibility = "hidden"});
@@ -356,6 +398,8 @@
 					Game.toggle_menu("menu-play", "close");
 					window["Backup"] = JSON.parse(play.launch_backup.backup.value);
 					window["Backup"] = window["Backup"].Backup;
+					window["Backup"].date.lastConnection = now();
+					save.backup.value = play.launch_backup.backup.value;
 					Game.load(window["Backup"])
 				},
 				load: function(backup) {
@@ -385,6 +429,7 @@
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
 						UI.overlay.load.style.backgroundColor = "#000";
+						Game.start(backup, Player); // starting the game
 						hide(UI.menu.main)
 					}, 4600);
 					// hiding loading screen and showing game
@@ -396,10 +441,7 @@
 						show(Map.overlay, "flex");
 						show(Map.container, "flex")
 					}, 5200);
-					setTimeout(function() {
-						hide(UI.overlay.load);
-						Game.start(backup, Player) // starting the game
-					}, 5800)
+					setTimeout(function() {hide(UI.overlay.load)}, 5800)
 				},
 				generate: function(backup, player) {
 					// requesting the JSON map data
@@ -413,7 +455,7 @@
 						var r = this.response[backup.player.level],
 							map = r.map,
 							uppermap = r.uppermap,
-							entity = r.entity,
+							entities = r.entity,
 							next_level = r.next_level,
 							part,
 							scale_multiplier = 64;
@@ -437,6 +479,16 @@
 							part.style.backgroundImage = `url(assets/textures/map/${uppermap[i].texture})`;
 							Map.uppermap.append(part)
 						}
+						// entities
+						for (i = 0; i < entities.length; i++) {
+							part = document.createElement("div");
+							part.className = `entity ${entities[i].entity}`;
+							part.style.width = `${scale_multiplier}px`;
+							part.style.height = `${scale_multiplier}px`;
+							part.style.transform = `translateX(${scale_multiplier * entities[i].origin[0]}px) translateY(${(scale_multiplier * -entities[i].origin[1])}px) rotateY(${entities[i].orientation === "right" ? 0 : 180}deg)`;
+							part.style.backgroundImage = `url(assets/textures/entity/${entities[i].type}.png)`;
+							Map.entities.append(part)
+						}
 					})
 				},
 				start: function(backup, player) {
@@ -450,10 +502,61 @@
 							player.movement.on()
 						}, 200)
 					});
-					UI.btn.exit.addEventListener("click", function() {location.reload()}); // TODO: a confirmation section musts appear when user want to quit
+					UI.btn.exit.addEventListener("click", function() {location.reload()}); // TODO: exit confirmation
 					// player movement
 					player.movement.on();
-					window.requestAnimationFrame(player.movement.move)
+					window.requestAnimationFrame(player.movement.move);
+					Game.story(backup.player.level) // level subtitle & dialogs
+				},
+				story: function(map) {
+					update_subtitle(map);
+					switch (map) {
+						case "lobby": // showing lobby dialogs
+							Map.dialog_content.innerHTML = `${Teller.narrator}: <i>${Dialog.lobby[0].text}</i>`;
+							show(Map.dialog);
+							setTimeout(function() {
+								Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[1].text.split("%s").join(window["Backup"].player.nickname)}</i>`;
+								setTimeout(function() {
+									Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[2].text}</i>`;
+									Map.dialog_option1.textContent = `-> ${Dialog.lobby[2].options[0]}`;
+									Map.dialog_option2.textContent = `-> ${Dialog.lobby[2].options[1]}`;
+									show(Map.dialog_option1);
+									show(Map.dialog_option2);
+									Map.dialog_option1.addEventListener("click", function() {
+										// continuing the game
+										hide(Map.dialog_option1);
+										hide(Map.dialog_option2);
+										Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[3].text}</i>`;
+										setTimeout(function() {
+											next_level_available = true;
+											Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[4].text}</i>`;
+											setTimeout(function() {hide(Map.dialog)}, Dialog.lobby[4].text)
+										}, Dialog.lobby[3].duration)
+									});
+									Map.dialog_option2.addEventListener("click", function() {
+										// alternative ending
+										hide(Map.dialog_option1);
+										hide(Map.dialog_option2);
+										Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[5].text}</i>`;
+										setTimeout(function() {
+											hide(Map.dialog);
+											player.movement.off()
+										}, Dialog.lobby[5].duration)
+									})
+								}, Dialog.lobby[1].duration)
+							}, Dialog.lobby[0].duration);
+							break;
+						case "dungeon":
+							Map.dialog_content.innerHTML = `${Teller.narrator}: <i>${Dialog.dungeon[0].text}</i>`;
+							show(Map.dialog);
+							setTimeout(function() {hide(Map.dialog)}, Dialog.dungeon[0].duration);
+							break;
+						case "diamond":
+							Map.dialog_content.innerHTML = `${Teller.narrator}: <i>${Dialog.diamond[0].text}</i>`;
+							show(Map.dialog);
+							setTimeout(function() {hide(Map.dialog)}, Dialog.diamond[0].duration);
+							break
+					}
 				},
 				toggle_menu: function(m, s) {
 					// m: menu name (str)
@@ -540,7 +643,9 @@
 					play: null,
 					options: null,
 					create: null,
+					save: null,
 					resume: null,
+					copy: null,
 					exit: null
 				},
 				menu: {
@@ -560,6 +665,7 @@
 			var title = {
 				play: null,
 				options: null,
+				save: null,
 				pause: null
 			};
 
@@ -575,6 +681,12 @@
 					health_value: null,
 					shield_value: null,
 					mana_value: null,
+					ability1_title: null,
+					ability1_desc: null,
+					ability2_title: null,
+					ability2_desc: null,
+					ult_title: null,
+					ult_desc: null,
 					play: null
 				},
 				launch_backup: {
@@ -630,12 +742,23 @@
 				apply: null
 			};
 
+			var save = {
+				tip: null,
+				backup: null
+			};
+
 			var Map = {
 				container: null,
 				overlay: null,
 				map: null,
 				uppermap: null,
-				player: null
+				player: null,
+				entities: null,
+				subtitle: null,
+				dialog: null,
+				dialog_content: null,
+				dialog_option1: null,
+				dialog_option2: null
 			};
 
 			function Character(c) {
@@ -651,23 +774,20 @@
 						this.mana = 25;
 						this.ability1 = {
 							id: "fireball",
-							name: ability.fireball,
 							cost: 3,
 							damage: 4
-						}
+						};
 						this.ability2 = {
 							id: "wand",
-							name: ability.wand,
 							cost: 2,
 							damage: 3
-						}
-						this.ability3 = {
+						};
+						this.ult = {
 							id: "lightning",
-							name: ability.lightning,
 							cost: 9,
 							damage: 5,
 							hitAllMobs: true
-						}
+						};
 						break;
 					case "rogue":
 						this.id = "rogue";
@@ -680,25 +800,22 @@
 						this.mana = 15;
 						this.ability1 = {
 							id: "double_daggers",
-							name: ability.double_daggers,
 							cost: 2,
 							damage: 4,
 							base_damage: 4,
 							boost_damage: 8
-						}
+						};
 						this.ability2 = {
 							id: "stealth",
-							name: ability.stealth,
 							cost: 4,
 							damage: 0,
 							damageMult: false
-						}
-						this.ability3 = {
+						};
+						this.ult = {
 							id: "discretion",
-							name: ability.discretion,
 							cost: 7,
 							damage: 0
-						}
+						};
 						break;
 					case "paladin":
 						this.id = "paladin";
@@ -711,24 +828,21 @@
 						this.mana = 20;
 						this.ability1 = {
 							id: "sword_strike",
-							name: ability.sword_strike,
 							cost: 2,
 							damage: 4
-						}
+						};
 						this.ability2 = {
 							id: "parade",
-							name: ability.parade,
 							cost: 4,
 							damage: 0,
 							blockAttack: true
-						}
-						this.ability3 = {
+						};
+						this.ult = {
 							id: "regeneration",
-							name: ability.regeneration,
 							cost: 7,
 							damage: 0,
 							healthAmount: 5
-						}
+						};
 						break
 				}
 			}
@@ -830,8 +944,10 @@
 						window.requestAnimationFrame(player.movement.move)
 					},
 					tp: function(x, y) {
-						Map.map.style.transform = "translateX(" + -x * 64 + "px) translateY(" + y * 64 + "px)";
-						Map.uppermap.style.transform = "translateX(" + -x * 64 + "px) translateY(" + y * 64 + "px)"
+						var t = "translateX(" + -x * 64 + "px) translateY(" + y * 64 + "px)";
+						Map.map.style.transform = t;
+						Map.uppermap.style.transform = t;
+						Map.entities.style.transform = t
 					}
 				},
 				test_collision: function(x, y) {
@@ -968,7 +1084,19 @@
 				}
 			};
 
-			var ability = {
+			var ability_id = {
+				fireball: "",
+				wand: "",
+				lightning: "",
+				double_daggers: "",
+				stealth: "",
+				discretion: "",
+				sword_strike: "",
+				parade: "",
+				regeneration: ""
+			};
+
+			var ability_desc = {
 				fireball: "",
 				wand: "",
 				lightning: "",
@@ -1064,7 +1192,119 @@
 				}
 			};
 
-			var raw_menus = ["menu-play", "menu-options"],
+			var Subtitle = {
+				lobby: {
+					text: null,
+					duration: 4000
+				},
+				dungeon: {
+					text: null,
+					duration: 4000
+				},
+				diamond: {
+					text: null,
+					duration: 4000
+				}
+			};
+
+			var Teller = {
+				narrator: null,
+				innkeeper: null,
+				goblin: null
+			}
+
+			var Dialog = {
+				lobby: [
+					{
+						text: null,
+						duration: 10000
+					}, {
+						text: null,
+						duration: 5000
+					}, {
+						text: null,
+						duration: 0,
+						options: [null, null]
+					}, {
+						text: null,
+						duration: 10000
+					}, {
+						text: null,
+						duration: 10000
+					}, {
+						text: null,
+						duration: 4000
+					}
+				],
+				dungeon: [
+					{
+						text: null,
+						duration: 5000
+					}, {
+						text: null,
+						duration: 3000
+					}, {
+						text: null,
+						duration: 4000
+					}, {
+						text: null,
+						duration: 4000
+					}, {
+						text: null,
+						duration: 4000
+					}, {
+						text: null,
+						duration: 4000
+					}
+				],
+				diamond: [
+					{
+						text: null,
+						duration: 5000
+					}, {
+						text: null,
+						duration: 3000
+					}, {
+						text: null,
+						duration: 4000
+					}, {
+						text: null,
+						duration: 3000
+					}, {
+						text: null,
+						duration: 4000
+					}
+				],
+				misc: {
+					kill: [
+						{
+							text: null,
+							duration: 5000
+						}, {
+							text: null,
+							duration: 5000
+						}, {
+							text: null,
+							duration: 5000
+						}
+					],
+					flight: [
+						{
+							text: null,
+							duration: 5000
+						}, {
+							text: null,
+							duration: 5000
+						}, {
+							text: null,
+							duration: 5000
+						}
+					]
+				}
+			};
+
+			// other variables
+			var raw_menus = ["menu-play", "menu-options", "menu-save"],
 				TempPlayer,
 				is_player_name_ok = false,
 				is_game_name_ok = false,
@@ -1073,7 +1313,11 @@
 				current_key = "",
 				new_keybind = "",
 				keybind_tip = "",
-				json_error = "";
+				ability1_title = "",
+				ability2_title = "",
+				ult_title = "",
+				json_error = "",
+				next_level_available = false;
 
 			function $(e) {return document.querySelector(e)}
 
@@ -1113,15 +1357,28 @@
 			}
 
 			function select_character(c) {
-				if (is_character_selected === false) is_character_selected = true;
+				is_character_selected = true;
 				character_selected = c;
+				Game.check_new_game_validity();
 				TempPlayer = new Character(c);
+				show(play.new_game.character_info);
 				document.querySelectorAll(".btn[data-character").forEach(function(e) {e.style.backgroundImage = "url(assets/textures/btn/btn-class.png)"});
 				$(`.btn[data-character=${c}]`).style.backgroundImage = "url(assets/textures/btn/btn-class-selected.png)";
 				play.new_game.health_value.textContent = TempPlayer.health;
 				play.new_game.shield_value.textContent = TempPlayer.shield;
 				play.new_game.mana_value.textContent = TempPlayer.mana;
-				Game.check_new_game_validity()
+				play.new_game.ability1_title.textContent = `${ability1_title}: ${ability_id[TempPlayer.ability1.id]}`;
+				play.new_game.ability1_desc.textContent = ability_desc[TempPlayer.ability1.id];
+				play.new_game.ability2_title.textContent = `${ability2_title}: ${ability_id[TempPlayer.ability2.id]}`;
+				play.new_game.ability2_desc.textContent = ability_desc[TempPlayer.ability2.id];
+				play.new_game.ult_title.textContent = `${ult_title}: ${ability_id[TempPlayer.ult.id]}`;
+				play.new_game.ult_desc.textContent = ability_desc[TempPlayer.ult.id]
+			}
+
+			function update_subtitle(map) {
+				Map.subtitle.textContent = Subtitle[map].text;
+				show(Map.subtitle);
+				setTimeout(function(e) {hide(Map.subtitle)}, Subtitle[map].duration)
 			}
 
 			function now() {
@@ -1155,8 +1412,10 @@
 				// buttons
 				UI.btn.play = $(".btn-play");
 				UI.btn.options = $(".btn-options");
+				UI.btn.save = $(".btn-save");
 				UI.btn.create = $(".menu-new_game .btn-create");
 				UI.btn.resume = $(".btn-resume");
+				UI.btn.copy = $(".btn-copy");
 				UI.btn.exit = $(".btn-exit");
 				// menus
 				UI.menu.main = $(".menu-main");
@@ -1171,6 +1430,7 @@
 				// menu titles
 				title.play = $(".content-play .title");
 				title.options = $(".content-options .title");
+				title.save = $(".content-save .title");
 				title.pause = $(".pause-title");
 				// play menu
 				// new game section
@@ -1184,6 +1444,12 @@
 				play.new_game.health_value = $(".health_value");
 				play.new_game.shield_value = $(".shield_value");
 				play.new_game.mana_value = $(".mana_value");
+				play.new_game.ability1_title = $(".ability1_info .ability_title");
+				play.new_game.ability1_desc = $(".ability1_info .ability_desc");
+				play.new_game.ability2_title = $(".ability2_info .ability_title");
+				play.new_game.ability2_desc = $(".ability2_info .ability_desc");
+				play.new_game.ult_title = $(".ult_info .ability_title");
+				play.new_game.ult_desc = $(".ult_info .ability_desc");
 				play.new_game.play = $(".new_game .btn-new_game");
 				// launch backup section
 				play.launch_backup.subtitle = $(".launch_backup .subtitle");
@@ -1218,12 +1484,21 @@
 				options.about.subtitle = $(".option.about .subtitle");
 				options.about.updates = $(".option.about .updates");
 				options.about.credits = $(".option.about .credits");
+				// save menu
+				save.tip = $(".save_tip");
+				save.backup = $("#current_backup");
 				// map elements
 				Map.container = $(".map-container");
 				Map.overlay = $(".overlay-map");
 				Map.map = $("#map");
 				Map.uppermap = $("#uppermap");
 				Map.player = $("#player");
+				Map.entities = $("#entities");
+				Map.subtitle = $(".level-subtitle");
+				Map.dialog = $(".dialog");
+				Map.dialog_content = $(".dialog-content");
+				Map.dialog_option1 = $(".dialog-option-1");
+				Map.dialog_option2 = $(".dialog-option-2");
 
 				Game.init()
 			})
@@ -1246,6 +1521,7 @@
 			<div class="overlay overlay-menu">
 				<?php include "assets/ui/menu-play.html"; ?>
 				<?php include "assets/ui/menu-options.html"; ?>
+				<?php include "assets/ui/menu-save.html"; ?>
 			</div>
 			<?php include "assets/ui/menu-keybind.html"; ?>
 			<div class="overlay overlay-load"></div>
@@ -1258,6 +1534,13 @@
 				<div id="player"></div>
 				<div id="map"></div>
 				<div id="uppermap"></div>
+				<div id="entities"></div>
+				<div class="level-subtitle"></div>
+				<div class="dialog">
+					<div class="dialog-content"></div>
+					<span class="dialog-option dialog-option-1"></span>
+					<span class="dialog-option dialog-option-2"></span>
+				</div>
 			</div>
 		</main>
 	</body>

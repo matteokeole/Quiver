@@ -9,6 +9,9 @@
 		"new_game.text": "Nuevo juego",
 		"launch_backup.text": "Lanzar una copia de respaldo",
 		"keybind_tip.text": "Presione una tecla",
+		"save.text": "Guardar",
+		"save_tip.text": "Para guardar tu juego, copia el código a continuación y péguelo en un archivo JSON.",
+		"copy.text": "Copiar",
 		"new_game": {
 			"player_name_tip.text": "¿Cómo te llamas?\nEste nombre será usado para identificarte en este nuevo juego.",
 			"player_name_placeholder.text": "Es la historia de...",
@@ -41,24 +44,86 @@
 		"pause.text": "Pausa",
 		"resume.text": "Retomar",
 		"exit.text": "Dejar",
+		"ability1_title.text": "Primera habilidad",
+		"ability2_title.text": "Segunda habilidad",
+		"ult_title.text": "Último",
 		"character": {
 			"mage": {
 				"name.text": "Mago",
 				"fireball.text": "Bola de fuego",
+				"fireball_desc.text": "Lanza una bola de fuego a tu oponente.\nDaño: 4\nCosto: 3",
 				"wand.text": "Varita mágica",
-				"lightning.text": "Rayo"
+				"wand_desc.text": "Utilizas una varita mágica para lastimar a tu oponente.\nDaño: 3\nCosto: 2",
+				"lightning.text": "Rayo",
+				"lightning_desc.text": "Un rayo golpea a todos los enemigos en el nivel.\nDaño: 5 para todos los enemigos en el nivel\nCosto: 9"
 			},
 			"rogue": {
 				"name.text": "Pícaro",
 				"double_daggers.text": "Dagas dobles",
+				"double_daggers_desc.text": "Utilizas dos pequeñas dagas para lastimar a tu oponente.\nDaño: 4 (8 después de usar Ataque sigiloso)\nCosto: 2",
 				"stealth.text": "Ataque sigiloso",
-				"discretion.text": "Discreción"
+				"stealth_desc.text": "Doblas tus daños para la próxima ronda.\nCosto: 4",
+				"discretion.text": "Discreción",
+				"discretion_desc.text": "Duplica la tasa de escape de tu oponente.\nCosto: 7"
 			},
 			"paladin": {
 				"name.text": "Paladín",
 				"sword_strike.text": "Golpe de espada",
+				"sword_strike_desc.text": "Utilizas una espada para lastimar a tu oponente.\nDaño: 4\nCosto: 2",
 				"parade.text": "Desfile",
-				"regeneration.text": "Regeneración"
+				"parade_desc.text": "Bloqueas el próximo ataque de tu oponente.\nCosto: 4",
+				"regeneration.text": "Regeneración",
+				"regeneration_desc.text": "Regenera instantáneamente 5 puntos de vida.\nCosto: 7"
+			}
+		},
+		"subtitle": {
+			"lobby.text": "Parte 1:\nLa Taberna",
+			"dungeon.text": "Parte 2:\nEn el Calabozo",
+			"diamond.text": "Parte 3:\nEl Diamante Perdido"
+		},
+		"teller": {
+			"narrator.text": "Narrador",
+			"innkeeper.text": "Posadero",
+			"goblin.text": "Duende"
+		},
+		"dialog": {
+			"lobby": [
+				{"text": "Cuando te despiertas en una taberna, el posadero te habla."},
+				{"text": "Buenos dias %s, ¿qué tal? ¿Conoces la leyenda del diamante perdido?"},
+				{
+					"text": "¿Quieres que te lo diga?",
+					"options": ["Sí, por qué no", "Soy demasiado vago para escuchar"]
+				},
+				{"text": "Una leyenda dice que hay un diamante de gran valor escondido en una antigua mazmorra. ¡Si lo encuentras, será tuyo!"},
+				{"text": "Si quieres ir a buscarlo, puedes salir del albergue. Te guiare al calabozo. ¡Buena suerte!"},
+				{"text": "Como queráis :("}
+			],
+			"dungeon": [
+				{"text": "Finalmente has llegado a la mazmorra. Cuidado con los monstruos que están por ahí."},
+				{"text": "La puerta se cerró detrás de ti. No puedo volver."},
+				{"text": "Escuchas ruido proveniente de la habitación. Quizás contenga un tesoro..."},
+				{"text": "Intentas abrir la caja fuerte, pero está oxidada y no se rinde."},
+				{"text": "Sientes una presencia hostil en este pasillo. ¿Realmente vale la pena ir?"},
+				{"text": "Te golpeaste la cabeza. Es un muro, aquí."}
+			],
+			"diamond": [
+				{"text": "Continúas por el pasillo, adentrándote más en la mazmorra."},
+				{"text": "-bleh bleh bleh-"},
+				{"text": "Abres la caja fuerte y descubres que está vacía. Y polvoriento."},
+				{"text": "Este pasillo está muy oscuro. Se necesitaría una antorcha para ver más claramente."},
+				{"text": "Agarras el diamante y huyes con él tan rápido como puedas."}
+			],
+			"misc": {
+				"kill": [
+					{"text": "Mataste a un duende. *ruido de gorgoteo* Recupera algo de salud y maná."},
+					{"text": "Mataste a un guerrero esqueleto. *ruido de crujidos de huesos* Recupera algo de salud y maná."},
+					{"text": "Mataste a un arquero esqueleto. *ruido de crujidos de huesos* Recupera algo de salud y maná."}
+				],
+				"flight": [
+					{"text": "El duende se escapó. *ruido de pasos distantes* Recupera algo de salud y maná."},
+					{"text": "El guerrero esqueleto se escapó. *ruido de pasos y huesos* Recupera algo de salud y maná."},
+					{"text": "El arquero esqueleto se escapó. *ruido de pasos y huesos* Recupera algo de salud y maná."}
+				]
 			}
 		},
 		"error": {
