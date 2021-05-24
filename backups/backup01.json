@@ -10,9 +10,9 @@
 			"character": "paladin",
 			"level": "lobby",
 			"health": 25,
-			"maxhealth": 25,
-			"mp": 20,
-			"maxmp": 20,
+			"health_max": 25,
+			"mana": 20,
+			"mana_max": 20,
 			"resistance": 3,
 			"base_resistance": 3,
 			"pos": [-8, -2.5],
@@ -30,30 +30,37 @@
 		},
 		"entity": {
 			"Entity0": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			},
 			"Entity1": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			},
 			"Entity2": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			},
 			"Entity3": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			},
 			"Entity4": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			},
 			"Entity5": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			},
 			"Entity6": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			}

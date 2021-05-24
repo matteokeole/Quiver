@@ -10,9 +10,9 @@
 			"character": "mage",
 			"level": "diamond",
 			"health": 20,
-			"maxhealth": 20,
-			"mp": 25,
-			"maxmp": 25,
+			"health_max": 20,
+			"mana": 25,
+			"mana_max": 25,
 			"resistance": 1,
 			"base_resistance": 1,
 			"pos": [0, 0],
@@ -30,30 +30,37 @@
 		},
 		"entity": {
 			"Entity0": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			},
 			"Entity1": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			},
 			"Entity2": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			},
 			"Entity3": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			},
 			"Entity4": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			},
 			"Entity5": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			},
 			"Entity6": {
+				"health": 20,
 				"isDead": false,
 				"hasFled": false
 			}

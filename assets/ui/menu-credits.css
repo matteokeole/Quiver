@@ -1,0 +1,73 @@
+.menu-credits {
+	display: none;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	overflow: hidden;
+	background-color: #000
+}
+
+.menu-credits .icon-credits {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	background: url(../../favicon.ico) center no-repeat;
+	background-size: 50%;
+	image-rendering: crisp-edges
+}
+
+.menu-credits .credits {
+	width: 50%;
+	top: -9999px;
+	right: 0;
+	position: absolute;
+	text-align: center;
+	font-size: 24px;
+	color: #fff;
+	animation: credits 30s linear;
+	-webkit-animation: credits 30s linear
+}
+
+@keyframes credits {
+	0%, 2% {top: 0}
+	100% {top: -200%} /* credit menu height */
+}
+
+@-webkit-keyframes credits {
+	0%, 2% {top: 0}
+	100% {top: -200%} /* credit menu height */
+}
+
+.credits span {display: block}
+
+.credits .credit-title {
+	padding: 200px 0 300px 0;
+	font-size: 48px
+}
+
+.credits #copyright {padding-bottom: 300px}
+
+.credits .job {
+	padding-bottom: 20px;
+	font-size: 32px
+}
+
+.credits .name {padding-bottom: 150px}
+
+.credits .name:last-child {padding-bottom: 200px}
+
+.menu-credits .actions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	bottom: 0;
+	position: absolute;
+	width: 100%;
+	height: 104px
+}

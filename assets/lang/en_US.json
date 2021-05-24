@@ -12,6 +12,7 @@
 		"save.text": "Save",
 		"save_tip.text": "To save your game, copy the code below and paste it into a JSON file.",
 		"copy.text": "Copy",
+		"copy_success.text": "Successfully copied!",
 		"new_game": {
 			"player_name_tip.text": "What's your name?\nIt'll be used to identify you in this new game.",
 			"player_name_placeholder.text": "This is the tale of...",
@@ -44,6 +45,15 @@
 		"pause.text": "Pause",
 		"resume.text": "Resume",
 		"exit.text": "Exit",
+		"main_menu.text": "Main Menu",
+		"credits.text": "Credits",
+		"credits": {
+			"copyright.text": "Copyright (C) 2021. Do not distribute!",
+			"copyright_fool.text": "Copyright (C) 2021. Donut distribute!",
+			"clarisse_job.text": "Artistic Director & Screenwriter",
+			"lean_job.text": "Game Designer",
+			"matteo_job.text": "UI & Level Designer"
+		},
 		"ability1_title.text": "First Ability",
 		"ability2_title.text": "Second Ability",
 		"ult_title.text": "Ultimate",
@@ -94,7 +104,7 @@
 					"text": "Do you want to hear it?",
 					"options": ["Yes, why not", "I'm too lazy to listen"]
 				},
-				{"text": "A legend says that there is a diamond of great value hidden in an ancient dungeon. If you find it, it will be yours!"},
+				{"text": "A legend says that there is a diamond of great value hidden in an old dungeon. If you find it, it will be yours!"},
 				{"text": "If you want to go looking for him, you can leave the hostel. I'll guide you to the dungeon. Good luck!"},
 				{"text": "At your own sweet will :("}
 			],

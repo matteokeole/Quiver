@@ -11,6 +11,7 @@
 		<meta name="copyright" content="© 2021 Quiver. All rights reserved.">
 		<link rel="stylesheet" type="text/css" href="assets/ui/dialog.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/menu-credits.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-keybind.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-load.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-main.css">
@@ -41,7 +42,7 @@
 
 			main {display: none}
 
-			div, input {font-family: Quiver}
+			div, input, button {font-family: Quiver}
 
 			textarea {
 				font-family: monospace;
@@ -72,6 +73,19 @@
 					});
 					document.querySelectorAll(".option-name[data-function='keybind']").forEach(function(e) {
 						e.addEventListener("click", function() {Game.open_keybind(e)})
+					});
+					document.querySelectorAll(".btn[data-function='refresh']").forEach(function(e) {
+						e.addEventListener("click", function() {location.reload()})
+					});
+					$(".option-name.credits").addEventListener("click", Game.open_credits);
+					UI.btn.save.addEventListener("click", function() {Game.update_save_backup(window["Backup"])});
+					UI.btn.close_credits.addEventListener("click", Game.close_credits);
+					UI.btn.copy.addEventListener("click", function() {
+						// copying backup content
+						save.backup.select();
+						save.backup.setSelectionRange(0, save.backup.value.length);
+						document.execCommand("copy");
+						this.textContent = copy_success
 					});
 					$("#open_backup").onchange = Game.open_backup;
 					play.launch_backup.launch.addEventListener("click", function() {Game.launch_backup()});
@@ -124,7 +138,10 @@
 						UI.btn.resume.textContent = r["resume.text"];
 						UI.btn.save.textContent = r["save.text"];
 						UI.btn.copy.textContent = r["copy.text"];
+						copy_success = r["copy_success.text"];
 						UI.btn.exit.textContent = r["exit.text"];
+						UI.btn.close_credits.textContent = r["close.text"];
+						UI.btn.main_menu.textContent = r["main_menu.text"];
 						// menu titles
 						title.play.textContent = r["play.text"];
 						title.options.textContent = r["options.text"];
@@ -169,6 +186,13 @@
 						options.about.subtitle.textContent = r.options["about.text"];
 						options.about.updates.textContent = r.options["about:updates.text"];
 						options.about.credits.textContent = r.options["about:credits.text"];
+						// credit menu
+						credits.title.textContent = r["credits.text"];
+						copyright = r.credits["copyright.text"];
+						copyright_fool = r.credits["copyright_fool.text"];
+						credits.clarisse_job.textContent = r.credits["clarisse_job.text"];
+						credits.lean_job.textContent = r.credits["lean_job.text"];
+						credits.matteo_job.textContent = r.credits["matteo_job.text"];
 						// save menu
 						save.tip.textContent = r["save_tip.text"];
 						// ability names
@@ -195,8 +219,9 @@
 						ability1_title = r["ability1_title.text"];
 						ability2_title = r["ability2_title.text"];
 						ult_title = r["ult_title.text"];
-						// errors
+						// errors/infos
 						json_error = r.error["json_error.text"];
+						copy_success = r["copy_success.text"];
 						// level subtitles
 						Subtitle.lobby.text = r.subtitle["lobby.text"];
 						Subtitle.dungeon.text = r.subtitle["dungeon.text"];
@@ -221,7 +246,7 @@
 					document.querySelectorAll(".option.lang .option-name").forEach(function(e) {e.querySelector(".icon").style.visibility = "hidden"});
 					$(`.option.lang .option-name.${l}`).querySelector(".icon").style.visibility = "visible"
 				},
-				create_backup: function() {
+				create_backup: function(player) {
 					var Backup = {
 						name: play.new_game.game_name.value,
 						date: {
@@ -232,15 +257,14 @@
 							nickname: play.new_game.player_name.value,
 							character: character_selected,
 							level: "lobby",
-							health: null,
-							maxhealth: null,
-							mp: null,
-							maxmp: null,
-							resistance: null,
-							base_resistance: null,
+							health: player.health,
+							health_max: player.health,
+							mana: player.mana,
+							mana_max: player.mana,
+							resistance: player.shield,
+							base_resistance: player.shield,
 							pos: [0, 0],
-							orientation: "right",
-							hasBlocked: false
+							orientation: "right"
 						},
 						stats: {
 							kill_total: 0,
@@ -253,111 +277,40 @@
 							flight_skeleton2: 0
 						},
 						entity: {
-							// entity data
 							Entity0: {
-								// archer skeleton
-								id: Entity.Skeleton2.id,
-								index: 0,
-								name: Entity.Skeleton2.name,
-								texture: Entity.Skeleton2.texture,
 								health: Entity.Skeleton2.health,
-								max_health: Entity.Skeleton2.health,
-								resistance: Entity.Skeleton2.resistance,
-								heal: Entity.Skeleton2.heal,
-								isScared: false,
-								hasBlocked: false,
-								hasFled: false,
-								isDead: false
+								isDead: false,
+								hasFled: false
 							},
 							Entity1: {
-								// warrior skeleton
-								id: Entity.Skeleton1.id,
-								index: 1,
-								name: Entity.Skeleton1.name,
-								texture: Entity.Skeleton1.texture,
 								health: Entity.Skeleton1.health,
-								max_health: Entity.Skeleton1.health,
-								resistance: Entity.Skeleton1.resistance,
-								heal: Entity.Skeleton1.heal,
-								isScared: false,
-								hasBlocked: false,
-								hasFled: false,
-								isDead: false
+								isDead: false,
+								hasFled: false
 							},
 							Entity2: {
-								// goblin
-								id: Entity.Goblin.id,
-								index: 2,
-								name: Entity.Goblin.name,
-								texture: Entity.Goblin.texture,
 								health: Entity.Goblin.health,
-								max_health: Entity.Goblin.health,
-								resistance: Entity.Goblin.resistance,
-								heal: Entity.Goblin.heal,
-								isScared: false,
-								hasBlocked: false,
-								hasFled: false,
-								isDead: false
+								isDead: false,
+								hasFled: false
 							},
 							Entity3: {
-								// warrior skeleton
-								id: Entity.Skeleton1.id,
-								index: 3,
-								name: Entity.Skeleton1.name,
-								texture: Entity.Skeleton1.texture,
 								health: Entity.Skeleton1.health,
-								max_health: Entity.Skeleton1.health,
-								resistance: Entity.Skeleton1.resistance,
-								heal: Entity.Skeleton1.heal,
-								isScared: false,
-								hasBlocked: false,
-								hasFled: false,
-								isDead: false
+								isDead: false,
+								hasFled: false
 							},
 							Entity4: {
-								// goblin
-								id: Entity.Goblin.id,
-								index: 4,
-								name: Entity.Goblin.name,
-								texture: Entity.Goblin.texture,
 								health: Entity.Goblin.health,
-								max_health: Entity.Goblin.health,
-								resistance: Entity.Goblin.resistance,
-								heal: Entity.Goblin.heal,
-								isScared: false,
-								hasBlocked: false,
-								hasFled: false,
-								isDead: false
+								isDead: false,
+								hasFled: false
 							},
 							Entity5: {
-								// archer skeleton (top map)
-								id: Entity.Skeleton2.id,
-								index: 5,
-								name: Entity.Skeleton2.name,
-								texture: Entity.Skeleton2.texture,
 								health: Entity.Skeleton2.health,
-								max_health: Entity.Skeleton2.health,
-								resistance: Entity.Skeleton2.resistance,
-								heal: Entity.Skeleton2.heal,
-								isScared: false,
-								hasBlocked: false,
-								hasFled: false,
-								isDead: false
+								isDead: false,
+								hasFled: false
 							},
 							Entity6: {
-								// archer skeleton (bottom map)
-								id: Entity.Skeleton2.id,
-								index: 6,
-								name: Entity.Skeleton2.name,
-								texture: Entity.Skeleton2.texture,
 								health: Entity.Skeleton2.health,
-								max_health: Entity.Skeleton2.health,
-								resistance: Entity.Skeleton2.resistance,
-								heal: Entity.Skeleton2.heal,
-								isScared: false,
-								hasBlocked: false,
-								hasFled: false,
-								isDead: false
+								isDead: false,
+								hasFled: false
 							}
 						}
 					}
@@ -365,8 +318,14 @@
 				},
 				launch_new_game: function() {
 					Game.toggle_menu("menu-play", "close");
-					window["Backup"] = Game.create_backup();
-					Game.load(window["Backup"])
+					// initializing the player
+					var Player = new Character(character_selected);
+					Player.canMove = player.canMove;
+					Player.direction = player.direction;
+					Player.movement = player.movement;
+					TempPlayer = undefined;
+					window["Backup"] = Game.create_backup(Player);
+					Game.load(window["Backup"], Player)
 				},
 				open_backup: function(e) {
 					var file = e.target.files[0];
@@ -376,7 +335,6 @@
 						show($(".container-backup"), "flex"); // opening
 						try {
 							var temp = JSON.parse(e.target.result); // e.target.result = backup content
-							temp = temp.Backup;
 							// showing backup content
 							play.launch_backup.backup.value = e.target.result;
 							show(play.launch_backup.backup, "flex");
@@ -397,27 +355,24 @@
 				launch_backup: function() {
 					Game.toggle_menu("menu-play", "close");
 					window["Backup"] = JSON.parse(play.launch_backup.backup.value);
-					window["Backup"] = window["Backup"].Backup;
 					window["Backup"].date.lastConnection = now();
-					save.backup.value = play.launch_backup.backup.value;
-					Game.load(window["Backup"])
+					// initializing the player
+					var Player = new Character(window["Backup"].player.character);
+					Player.canMove = player.canMove;
+					Player.direction = player.direction;
+					Player.movement = player.movement;
+					Game.load(window["Backup"], Player)
 				},
-				load: function(backup) {
+				update_save_backup: function(backup) {save.backup.value = JSON.stringify(backup, null, "\t")},
+				load: function(backup, player) {
 					document.removeEventListener("keydown", esc);
 					// showing loading screen
 					show(UI.overlay.load);
 					UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style.backgroundColor = "#000";
-					// initializing the player
-					var Player = new Character(backup.player.character);
-					Player.canMove = player.canMove;
-					Player.direction = player.direction;
-					Player.movement = player.movement;
-					Map.player.style.backgroundImage = `url(assets/textures/entity/${Player.texture.idle})`;
-					TempPlayer = undefined;
-					// generating the map
-					Game.generate(backup, Player);
+					Game.generate(backup); // generating the map
+					Map.player.style.backgroundImage = `url(assets/textures/entity/${player.texture.idle})`;
 					// loading overlay/screen animations
 					setTimeout(function() {show(UI.menu.load, "flex")}, 600);
 					setTimeout(function() {
@@ -429,7 +384,7 @@
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
 						UI.overlay.load.style.backgroundColor = "#000";
-						Game.start(backup, Player); // starting the game
+						Game.start(backup, player); // starting the game
 						hide(UI.menu.main)
 					}, 4600);
 					// hiding loading screen and showing game
@@ -443,7 +398,7 @@
 					}, 5200);
 					setTimeout(function() {hide(UI.overlay.load)}, 5800)
 				},
-				generate: function(backup, player) {
+				generate: function(backup) {
 					// requesting the JSON map data
 					var path = `maps/${backup.player.level}.json`,
 						map_request = new XMLHttpRequest();
@@ -502,11 +457,15 @@
 							player.movement.on()
 						}, 200)
 					});
-					UI.btn.exit.addEventListener("click", function() {location.reload()}); // TODO: exit confirmation
 					// player movement
 					player.movement.on();
 					window.requestAnimationFrame(player.movement.move);
 					Game.story(backup.player.level) // level subtitle & dialogs
+				},
+				end: function() {
+					player.speed = 0; // setting speed to 0 so the player can't move
+					player.movement.off(); // disabling player movement
+					Game.open_credits() // opening credit menu
 				},
 				story: function(map) {
 					update_subtitle(map);
@@ -514,49 +473,80 @@
 						case "lobby": // showing lobby dialogs
 							Map.dialog_content.innerHTML = `${Teller.narrator}: <i>${Dialog.lobby[0].text}</i>`;
 							show(Map.dialog);
+							setTimeout(function() {hide(Map.dialog)}, Dialog.lobby[0].duration);
 							setTimeout(function() {
 								Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[1].text.split("%s").join(window["Backup"].player.nickname)}</i>`;
+								show(Map.dialog);
+								setTimeout(function() {hide(Map.dialog)}, Dialog.lobby[1].duration);
 								setTimeout(function() {
 									Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[2].text}</i>`;
 									Map.dialog_option1.textContent = `-> ${Dialog.lobby[2].options[0]}`;
 									Map.dialog_option2.textContent = `-> ${Dialog.lobby[2].options[1]}`;
 									show(Map.dialog_option1);
 									show(Map.dialog_option2);
+									show(Map.dialog);
 									Map.dialog_option1.addEventListener("click", function() {
 										// continuing the game
 										hide(Map.dialog_option1);
 										hide(Map.dialog_option2);
-										Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[3].text}</i>`;
+										hide(Map.dialog);
 										setTimeout(function() {
-											next_level_available = true;
-											Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[4].text}</i>`;
-											setTimeout(function() {hide(Map.dialog)}, Dialog.lobby[4].text)
-										}, Dialog.lobby[3].duration)
+											Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[3].text}</i>`;
+											show(Map.dialog);
+											setTimeout(function() {hide(Map.dialog)}, Dialog.lobby[3].duration);
+											setTimeout(function() {
+												can_enter_dungeon = true;
+												Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[4].text}</i>`;
+												show(Map.dialog);
+												setTimeout(function() {hide(Map.dialog)}, Dialog.lobby[4].duration)
+											}, Dialog.lobby[3].duration + 1000)
+										}, 1000);
 									});
 									Map.dialog_option2.addEventListener("click", function() {
 										// alternative ending
 										hide(Map.dialog_option1);
 										hide(Map.dialog_option2);
-										Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[5].text}</i>`;
+										hide(Map.dialog);
+										setTimeout(function() {
+											Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[5].text}</i>`;
+											show(Map.dialog);
+										}, 1000)
 										setTimeout(function() {
 											hide(Map.dialog);
-											player.movement.off()
-										}, Dialog.lobby[5].duration)
+											game_ended = true;
+											// closing pause menu if opened
+											UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
+											UI.overlay.pause.style["animation-name"] = "overlay_pause_fade_out";
+											Map.container.classList.remove("blur");
+											setTimeout(function() {
+												hide(UI.overlay.pause);
+												player.movement.on()
+											}, 200);
+											document.removeEventListener("keydown", pause_menu);
+											Game.end()
+										}, Dialog.lobby[5].duration + 1000)
 									})
-								}, Dialog.lobby[1].duration)
-							}, Dialog.lobby[0].duration);
+								}, Dialog.lobby[1].duration + 1000)
+							}, Dialog.lobby[0].duration + 1000);
 							break;
 						case "dungeon":
-							Map.dialog_content.innerHTML = `${Teller.narrator}: <i>${Dialog.dungeon[0].text}</i>`;
-							show(Map.dialog);
-							setTimeout(function() {hide(Map.dialog)}, Dialog.dungeon[0].duration);
+							dialog(Dialog.dungeon[0]);
 							break;
 						case "diamond":
-							Map.dialog_content.innerHTML = `${Teller.narrator}: <i>${Dialog.diamond[0].text}</i>`;
-							show(Map.dialog);
-							setTimeout(function() {hide(Map.dialog)}, Dialog.diamond[0].duration);
+							dialog(Dialog.diamond[0]);
 							break
 					}
+				},
+				update_map: function(backup, map) {
+					while (Map.map.firstChild) {Map.map.removeChild(Map.map.lastChild)}
+					while (Map.uppermap.firstChild) {Map.uppermap.removeChild(Map.uppermap.lastChild)}
+					while (Map.entities.firstChild) {Map.entities.removeChild(Map.entities.lastChild)}
+					backup.player.level = map; // disabling lobby collisions and enabling dungeon collisions
+					// setting player coords to (0, 0)
+					backup.player.pos[0] = 0;
+					backup.player.pos[1] = 0;
+					Game.generate(backup, map); // generating the next map
+					Game.story(map) // next map story (subtitle/dialogs)
 				},
 				toggle_menu: function(m, s) {
 					// m: menu name (str)
@@ -635,6 +625,46 @@
 					current_key.querySelector(".key").innerHTML = new_keybind.key;
 					Game.close_keybind()
 				},
+				open_credits: function() {
+					Game.toggle_menu("menu-options", "close");
+					show(UI.overlay.load);
+					UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
+					UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
+					UI.overlay.load.style.backgroundColor = "#000";
+					setTimeout(function() {
+						var donut = Math.floor(6 * Math.random() + 1);
+						credits.copyright.textContent = (donut === 1) ? copyright_fool : copyright;
+						if (game_ended) {
+							hide(UI.btn.close_credits);
+							show(UI.btn.main_menu)
+						} else {
+							hide(UI.btn.main_menu);
+							show(UI.btn.close_credits)
+						}
+						show(UI.menu.credits, "flex")
+					}, 600);
+					setTimeout(function() {
+						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
+						UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
+						UI.overlay.load.style.backgroundColor = "transparent";
+						if (!game_ended)	document.addEventListener("keydown", esc);
+						setTimeout(function() {hide(UI.overlay.load)}, 600)
+					}, 1200)
+				},
+				close_credits: function() {
+					document.removeEventListener("keydown", esc);
+					show(UI.overlay.load);
+					UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
+					UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
+					UI.overlay.load.style.backgroundColor = "#000";
+					setTimeout(function() {hide(UI.menu.credits)}, 600);
+					setTimeout(function() {
+						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
+						UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
+						UI.overlay.load.style.backgroundColor = "transparent";
+						setTimeout(function() {hide(UI.overlay.load)}, 600)
+					}, 1200)
+				},
 				version: "1.1.0"
 			}
 
@@ -646,13 +676,16 @@
 					save: null,
 					resume: null,
 					copy: null,
-					exit: null
+					exit: null,
+					close_credits: null,
+					main_menu: null
 				},
 				menu: {
 					main: null,
 					play: null,
 					options: null,
-					load: null
+					load: null,
+					credits: null
 				},
 				overlay: {
 					menu: null,
@@ -740,6 +773,14 @@
 				tip: null,
 				cancel: null,
 				apply: null
+			};
+
+			var credits = {
+				title: null,
+				copyright: null,
+				clarisse_job: null,
+				lean_job: null,
+				matteo_job: null
 			};
 
 			var save = {
@@ -868,6 +909,7 @@
 					left: false,
 					right: false
 				},
+				speed: 0.1,
 				movement: {
 					on: function() {
 						// allowing player movement
@@ -923,16 +965,16 @@
 					},
 					move: function() {
 						player.test_collision(window["Backup"].player.pos[0].toFixed(1), window["Backup"].player.pos[1].toFixed(1));
-						if (player.direction.top && player.canMove.top) window["Backup"].player.pos[1] += 0.1;
-						if (player.direction.bottom && player.canMove.bottom) window["Backup"].player.pos[1] -= 0.1;
+						if (player.direction.top && player.canMove.top) window["Backup"].player.pos[1] += player.speed;
+						if (player.direction.bottom && player.canMove.bottom) window["Backup"].player.pos[1] -= player.speed;
 						if (player.direction.left && player.canMove.left) {
-							window["Backup"].player.pos[0] -= 0.1;
+							window["Backup"].player.pos[0] -= player.speed;
 							// changing player orientation
 							window["Backup"].player.orientation = "left";
 							Map.player.style.transform = "rotateY(180deg)"
 						}
 						if (player.direction.right && player.canMove.right) {
-							window["Backup"].player.pos[0] += 0.1;
+							window["Backup"].player.pos[0] += player.speed;
 							// changing player orientation
 							window["Backup"].player.orientation = "right";
 							Map.player.style.transform = "rotateY(0)"
@@ -979,6 +1021,15 @@
 							else if (x >= -8 && x <= -7 && y > -1.5 && y < 3) player.canMove.right = false; // table1
 							else if (x >= 4 && x <= 5 && y > -1.5 && y < 3) player.canMove.right = false; // table2
 							else player.canMove.right = true;
+							// custom cases
+							if (x >= -1 && x <= 1 && y >= -6 && y <= -5) {
+								// exit
+								if (!custom_case_near && can_enter_dungeon) {
+									custom_case_near = true; // a custom case is near
+									Game.update_map(window["Backup"], "dungeon") // entering the dungeon
+								}
+							}
+							else custom_case_near = false; // no custom cases near
 							break;
 						case "dungeon":
 							// top
@@ -1029,6 +1080,52 @@
 							else if (x >= 11 && x <= 12 && y > 9.5 && y < 19) player.canMove.right = false; // vwall12
 							else if (x >= 37 && x <= 38 && y >= 19 && y <= 21.5) player.canMove.right = false; // map_border3
 							else player.canMove.right = true;
+							// custom cases
+							if (x >= -2 && x <= -1 && y >= -1 && y <= 0.5) {
+								// map border
+								if (!custom_case_near) {
+									custom_case_near = true; // a custom case is near
+									dialog(Dialog.dungeon[1]) // border dialog
+								}
+							}
+							else if ((x > 26 && x < 28 && y >= 2 && y <= 3.5) || (x > 26 && x < 28 && y >= 8 && y <= 9.5)) {
+								// chest room
+								if (!custom_case_near && !chest_room_visited) {
+									custom_case_near = true; // a custom case is near
+									chest_room_visited = true;
+									dialog(Dialog.dungeon[2]) // chest room dialog
+								}
+							}
+							else if (x >= 31.1 && x <= 32.9 && y >= 10.6 && y <= 11.6) {
+								// chest
+								if (!custom_case_near) {
+									custom_case_near = true; // a custom case is near
+									dialog(Dialog.dungeon[3]) // chest dialog
+								}
+							}
+							else if (x >= 10 && x <= 11 && y > 9.5 && y < 11.5) {
+								// corridor monster
+								if (!custom_case_near && !corridor_visited) {
+									custom_case_near = true; // a custom case is near
+									corridor_visited = true;
+									dialog(Dialog.dungeon[4]) // corridor monster dialog
+								}
+							}
+							else if (x >= 3 && x <= 4 && y >= 19 && y <= 21.5) {
+								// false exit
+								if (!custom_case_near) {
+									custom_case_near = true; // a custom case is near
+									dialog(Dialog.dungeon[5]) // false exit dialog
+								}
+							}
+							else if (x >= 37 && x <= 38 && y >= 19 && y <= 21.5) {
+								// exit
+								if (!custom_case_near) {
+									custom_case_near = true; // a custom case is near
+									Game.update_map(window["Backup"], "diamond") // entering "diamond" level
+								}
+							}
+							else custom_case_near = false; // no custom cases near
 							break;
 						case "diamond":
 							// top
@@ -1079,6 +1176,51 @@
 							else if (x >= 19 && x <= 20 && y >= -19 && y <= -17.5) player.canMove.right = false; // vwall9
 							else if (x >= 12 && x <= 13 && y >= -24 && y < -19) player.canMove.right = false; // vwall11
 							else player.canMove.right = true;
+							// custom cases
+							if (x > 1 && x < 3 && y >= -14 && y <= -11.5) {
+								// goblin noise
+								if (!custom_case_near && !goblin_noise_done) {
+									custom_case_near = true; // a custom case is near
+									goblin_noise_done = true;
+									dialog(Dialog.diamond[1]) // goblin noise dialog
+								}
+							}
+							else if (x >= 13.1 && x <= 14.9 && y >= -5.4 && y <= -4.4) {
+								// chest
+								if (!custom_case_near) {
+									custom_case_near = true; // a custom case is near
+									dialog(Dialog.diamond[2]) // chest dialog
+								}
+							}
+							else if (x >= -1 && x <= 1 && y >= 1 && y <= 2) {
+								// map border 1
+								if (!custom_case_near) {
+									custom_case_near = true; // a custom case is near
+									dialog(Dialog.dungeon[1]) // border 1 dialog
+								}
+							}
+							else if (x >= 6 && x <= 7 && y >= -24 && y <= -22.5) {
+								// map border 2
+								if (!custom_case_near) {
+									custom_case_near = true; // a custom case is near
+									dialog(Dialog.diamond[3]) // border 2 dialog
+								}
+							}
+							else if ((x > 26 && x <= 27 && y >= -13.5 && y <= -12.5) || (x > 26 && x <= 27 && y >= -13 && y <= -12) || (x >= 26 && x <= 27 && y > -13.5 && y < -12)) {
+								// diamond
+								if (!custom_case_near && !diamond_taken) {
+									custom_case_near = true; // a custom case is near
+									diamond_taken = true;
+									game_ended = true;
+									document.removeEventListener("keydown", pause_menu);
+									Map.uppermap.removeChild(Map.uppermap.querySelector(".diamond")); // removing the diamond
+									player.movement.off();
+									dialog(Dialog.diamond[4]);
+									setTimeout(Game.end, Dialog.diamond[4].duration)
+									// main ending
+								}
+							}
+							else custom_case_near = false;
 							break
 					}
 				}
@@ -1216,61 +1358,78 @@
 			var Dialog = {
 				lobby: [
 					{
+						teller: "narrator",
 						text: null,
 						duration: 10000
 					}, {
+						teller: "innkeeper",
 						text: null,
 						duration: 5000
 					}, {
+						teller: "innkeeper",
 						text: null,
 						duration: 0,
 						options: [null, null]
 					}, {
+						teller: "innkeeper",
 						text: null,
 						duration: 10000
 					}, {
+						teller: "innkeeper",
 						text: null,
 						duration: 10000
 					}, {
+						teller: "innkeeper",
 						text: null,
 						duration: 4000
 					}
 				],
 				dungeon: [
 					{
+						teller: "narrator",
 						text: null,
 						duration: 5000
 					}, {
+						teller: "narrator",
 						text: null,
 						duration: 3000
 					}, {
+						teller: "narrator",
 						text: null,
 						duration: 4000
 					}, {
+						teller: "narrator",
 						text: null,
 						duration: 4000
 					}, {
+						teller: "narrator",
 						text: null,
 						duration: 4000
 					}, {
+						teller: "narrator",
 						text: null,
 						duration: 4000
 					}
 				],
 				diamond: [
 					{
+						teller: "narrator",
 						text: null,
 						duration: 5000
 					}, {
+						teller: "goblin",
 						text: null,
 						duration: 3000
 					}, {
+						teller: "narrator",
 						text: null,
 						duration: 4000
 					}, {
+						teller: "narrator",
 						text: null,
 						duration: 3000
 					}, {
+						teller: "narrator",
 						text: null,
 						duration: 4000
 					}
@@ -1317,7 +1476,16 @@
 				ability2_title = "",
 				ult_title = "",
 				json_error = "",
-				next_level_available = false;
+				copy_success = "",
+				custom_case_near = false,
+				can_enter_dungeon = false,
+				chest_room_visited = false,
+				corridor_visited = false,
+				goblin_noise_done = false,
+				diamond_taken = false,
+				game_ended = false,
+				copyright = "",
+				copyright_fool = "";
 
 			function $(e) {return document.querySelector(e)}
 
@@ -1328,6 +1496,7 @@
 			function esc(e) {
 				if (e.keyCode === 27) {
 					if (UI.overlay.keybind.style.display === "flex") Game.close_keybind();
+					else if (UI.menu.credits.style.display === "flex") Game.close_credits();
 					else {
 						for (i = 0; i < raw_menus.length; i++) {
 							if ($(`.${raw_menus[i]}`).style.display === "flex") Game.toggle_menu(raw_menus[i], "close")
@@ -1378,7 +1547,13 @@
 			function update_subtitle(map) {
 				Map.subtitle.textContent = Subtitle[map].text;
 				show(Map.subtitle);
-				setTimeout(function(e) {hide(Map.subtitle)}, Subtitle[map].duration)
+				setTimeout(function() {hide(Map.subtitle)}, Subtitle[map].duration)
+			}
+
+			function dialog(dialog) {
+				Map.dialog_content.innerHTML = `${Teller[dialog.teller]}: <i>${dialog.text}</i>`;
+				show(Map.dialog);
+				setTimeout(function() {hide(Map.dialog)}, dialog.duration)
 			}
 
 			function now() {
@@ -1417,11 +1592,14 @@
 				UI.btn.resume = $(".btn-resume");
 				UI.btn.copy = $(".btn-copy");
 				UI.btn.exit = $(".btn-exit");
+				UI.btn.close_credits = $(".btn-close-credits");
+				UI.btn.main_menu = $(".btn-main-menu");
 				// menus
 				UI.menu.main = $(".menu-main");
 				UI.menu.play = $(".menu-play .scrollable");
 				UI.menu.options = $(".menu-options .scrollable");
 				UI.menu.load = $(".menu-load");
+				UI.menu.credits = $(".menu-credits");
 				// overlays
 				UI.overlay.menu = $(".overlay-menu");
 				UI.overlay.keybind = $(".overlay-keybind");
@@ -1484,6 +1662,12 @@
 				options.about.subtitle = $(".option.about .subtitle");
 				options.about.updates = $(".option.about .updates");
 				options.about.credits = $(".option.about .credits");
+				// credit menu
+				credits.title = $(".credit-title");
+				credits.copyright = $("#copyright");
+				credits.clarisse_job = $(".job.clarisse");
+				credits.lean_job = $(".job.lean");
+				credits.matteo_job = $(".job.matteo");
 				// save menu
 				save.tip = $(".save_tip");
 				save.backup = $("#current_backup");
@@ -1538,10 +1722,11 @@
 				<div class="level-subtitle"></div>
 				<div class="dialog">
 					<div class="dialog-content"></div>
-					<span class="dialog-option dialog-option-1"></span>
-					<span class="dialog-option dialog-option-2"></span>
+					<button class="dialog-option dialog-option-1"></button>
+					<button class="dialog-option dialog-option-2"></button>
 				</div>
 			</div>
+			<?php include "assets/ui/menu-credits.html"; ?>
 		</main>
 	</body>
 

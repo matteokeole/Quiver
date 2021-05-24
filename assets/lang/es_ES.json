@@ -12,6 +12,7 @@
 		"save.text": "Guardar",
 		"save_tip.text": "Para guardar tu juego, copia el código a continuación y péguelo en un archivo JSON.",
 		"copy.text": "Copiar",
+		"copy_success.text": "¡Copiado con éxito!!",
 		"new_game": {
 			"player_name_tip.text": "¿Cómo te llamas?\nEste nombre será usado para identificarte en este nuevo juego.",
 			"player_name_placeholder.text": "Es la historia de...",
@@ -44,6 +45,15 @@
 		"pause.text": "Pausa",
 		"resume.text": "Retomar",
 		"exit.text": "Dejar",
+		"main_menu.text": "Menú principal",
+		"credits.text": "Creditos",
+		"credits": {
+			"copyright.text": "Copyright (C) 2021. Do not distribute!",
+			"copyright_fool.text": "Copyright (C) 2021. Donut distribute!",
+			"clarisse_job.text": "Director artístico y Guionista",
+			"lean_job.text": "Game Designer",
+			"matteo_job.text": "UI & Level Designer"
+		},
 		"ability1_title.text": "Primera habilidad",
 		"ability2_title.text": "Segunda habilidad",
 		"ult_title.text": "Último",
