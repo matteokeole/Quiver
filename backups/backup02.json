@@ -1,70 +1,52 @@
 {
-	"name": "hé oui",
+	"name": "s",
 	"date": {
-		"creation": "2021-5-23-13-34-47",
-		"lastConnection": "2021-5-23-13-34-47"
+		"creation": "2021-5-27-23-4-23",
+		"lastConnection": "2021-5-28-11-10-47"
 	},
 	"player": {
-		"nickname": "Mais c'est le lol",
-		"character": "mage",
+		"nickname": "s",
+		"character": "paladin",
 		"level": "dungeon",
 		"health": 20,
 		"health_max": 20,
 		"mana": 25,
 		"mana_max": 25,
-		"resistance": 1,
-		"base_resistance": 1,
+		"shield": 1,
 		"pos": [
-			0,
-			-0.9999999999999999
+			10.599999999999978,
+			2.700000000000001
 		],
-		"orientation": "right"
+		"orientation": "left"
 	},
-	"stats": {
-		"kill_total": 0,
-		"kill_goblin": 0,
-		"kill_skeleton1": 0,
-		"kill_skeleton2": 0,
-		"flight_total": 0,
-		"flight_goblin": 0,
-		"flight_skeleton1": 0,
-		"flight_skeleton2": 0
-	},
-	"entity": {
-		"Entity0": {
-			"health": 20,
-			"isDead": false,
-			"hasFled": false
+	"entity": [
+		{
+			"health": 0,
+			"scare": 2
 		},
-		"Entity1": {
+		{
 			"health": 20,
-			"isDead": false,
-			"hasFled": false
+			"scare": 1
 		},
-		"Entity2": {
+		{
 			"health": 20,
-			"isDead": false,
-			"hasFled": false
+			"scare": 3
 		},
-		"Entity3": {
+		{
 			"health": 20,
-			"isDead": false,
-			"hasFled": false
+			"scare": 1
 		},
-		"Entity4": {
+		{
 			"health": 20,
-			"isDead": false,
-			"hasFled": false
+			"scare": 3
 		},
-		"Entity5": {
+		{
 			"health": 20,
-			"isDead": false,
-			"hasFled": false
+			"scare": 2
 		},
-		"Entity6": {
+		{
 			"health": 20,
-			"isDead": false,
-			"hasFled": false
+			"scare": 2
 		}
-	}
+	]
 }

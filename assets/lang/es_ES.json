@@ -46,14 +46,18 @@
 		"resume.text": "Retomar",
 		"exit.text": "Dejar",
 		"main_menu.text": "Menú principal",
+		"death_title.text": "¡Estás muerto!",
+		"death_subtitle.text": "Es muy triste...",
 		"credits.text": "Creditos",
 		"credits": {
-			"copyright.text": "Copyright (C) 2021. Do not distribute!",
-			"copyright_fool.text": "Copyright (C) 2021. Donut distribute!",
+			"copyright.text": "Copyright © 2021. Do not distribute!",
+			"copyright_fool.text": "Copyright © 2021. Donut distribute!",
 			"clarisse_job.text": "Director artístico y Guionista",
 			"lean_job.text": "Game Designer",
 			"matteo_job.text": "UI & Level Designer"
 		},
+		"health.text": "Salud",
+		"mana.text": "Mana",
 		"ability1_title.text": "Primera habilidad",
 		"ability2_title.text": "Segunda habilidad",
 		"ult_title.text": "Último",
@@ -74,7 +78,7 @@
 				"stealth.text": "Ataque sigiloso",
 				"stealth_desc.text": "Doblas tus daños para la próxima ronda.\nCosto: 4",
 				"discretion.text": "Discreción",
-				"discretion_desc.text": "Duplica la tasa de escape de tu oponente.\nCosto: 7"
+				"discretion_desc.text": "Triplicas la tasa de escape de tu oponente.\nCosto: 7"
 			},
 			"paladin": {
 				"name.text": "Paladín",
@@ -86,6 +90,15 @@
 				"regeneration_desc.text": "Regenera instantáneamente 5 puntos de vida.\nCosto: 7"
 			}
 		},
+		"enemy_ability": {
+			"kick.text": "Patada",
+			"hammer.text": "Martillazo",
+			"dagger.text": "Golpe de daga",
+			"arrow.text": "Tiro de flecha",
+			"heal.text": "Regeneración"
+		},
+		"player_block.text": "¡Tu bloqueas!",
+		"enemy_block.text": "¡Tu oponente bloquea!",
 		"subtitle": {
 			"lobby.text": "Parte 1:\nLa Taberna",
 			"dungeon.text": "Parte 2:\nEn el Calabozo",
@@ -136,6 +149,8 @@
 				]
 			}
 		},
+		"fight.text": "¡Fight!",
+		"flee.text": "Huir",
 		"error": {
 			"json_error.text": "%e no es un archivo JSON válido."
 		}

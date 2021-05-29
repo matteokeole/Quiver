@@ -1,0 +1,161 @@
+.menu-fight {
+	display: none;
+	width: auto;
+	height: auto;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: fixed;
+	background-color: #000;
+	color: #fff;
+	cursor: default;
+	text-align: center;
+	z-index: 4
+}
+
+.menu-fight .fight {
+	height: 150px;
+	line-height: 134px;
+	top: 0;
+	left: 0;
+	right: 0;
+	position: relative;
+	color: #fff;
+	cursor: default;
+	text-align: center;
+	font-size: 48px;
+	z-index: 1
+}
+
+.menu-fight .player_attack, .menu-fight .enemy_attack {
+	display: none;
+	width: 50%;
+	height: 52px;
+	margin: auto;
+	padding: 8px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	border: 4px solid #000;
+	background-color: #ab9d86;
+	color: #000;
+	cursor: default;
+	font-size: 40px;
+	-webkit-animation: attack_name 3s infinite linear;
+	animation: attack_name 3s infinite linear;
+	z-index: 1
+}
+
+@-webkit-keyframes attack_name {
+	from {opacity: 1}
+	to {opacity: 0}
+}
+
+@keyframes attack_name {
+	from {opacity: 1}
+	to {opacity: 0}
+}
+
+.menu-fight .player_attack {background-color: #ab9d86}
+
+.menu-fight .enemy_attack {background-color: #ca302d}
+
+.menu-fight .player_avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	background: radial-gradient(circle at 50%, #222, #000, #000)
+}
+
+.menu-fight .vs {
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	font-size: 60px;
+	-webkit-transform: rotateZ(-15deg);
+	-ms-transform: rotateZ(-15deg);
+	transform: rotateZ(-15deg);
+	z-index: 1
+}
+
+.menu-fight .enemy_avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	background: radial-gradient(circle at 50%, #222, #000, #000)
+}
+
+.menu-fight .avatar {
+	width: 128px;
+	height: 128px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+	image-rendering: crisp-edges
+}
+
+.menu-fight .enemy_avatar .avatar {
+	-webkit-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+	transform: rotateY(180deg)
+}
+
+.menu-fight .actions {
+	width: 448px;
+	margin: 0 auto;
+	bottom: 32px;
+	left: 0;
+	right: 0;
+	position: absolute;
+	text-align: center
+}
+
+.menu-fight .actions .btn {
+	margin-top: 8px;
+	color: #000
+}
+
+.menu-fight .actions .ability_name {
+	margin-left: 16px;
+	float: left
+}
+
+.menu-fight .actions .ability_cost {
+	margin-right: 16px;
+	float: right
+}
+
+.ability_cost .cost {
+	margin-right: 8px;
+	float: left;
+	color: #0f056b
+}
+
+.ability_cost .icon.mana {
+	width: 24px;
+	height: 52px;
+	float: right;
+	background-size: 24px
+}

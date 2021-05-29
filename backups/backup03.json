@@ -1,69 +1,52 @@
 {
-	"Backup": {
-		"name": "Partie de Shixxbowat",
-		"date": {
-			"creation": "2021-01-20-21-49-10",
-			"lastConnection": "2021-01-20-21-49-10"
-		},
-		"player": {
-			"nickname": "Shixxbowat",
-			"character": "mage",
-			"level": "diamond",
+	"name": "s",
+	"date": {
+		"creation": "2021-5-27-23-4-23",
+		"lastConnection": "2021-5-28-12-19-58"
+	},
+	"player": {
+		"nickname": "s",
+		"character": "rogue",
+		"level": "diamond",
+		"health": 12,
+		"health_max": 20,
+		"mana": 25,
+		"mana_max": 25,
+		"shield": 1,
+		"pos": [
+			0.10000000000000003,
+			-6.099999999999991
+		],
+		"orientation": "left"
+	},
+	"entity": [
+		{
 			"health": 20,
-			"health_max": 20,
-			"mana": 25,
-			"mana_max": 25,
-			"resistance": 1,
-			"base_resistance": 1,
-			"pos": [0, 0],
-			"orientation": "right"
+			"scare": 2
 		},
-		"stats": {
-			"kill_total": 0,
-			"kill_goblin": 0,
-			"kill_skeleton1": 0,
-			"kill_skeleton2": 0,
-			"flight_total": 0,
-			"flight_goblin": 0,
-			"flight_skeleton1": 0,
-			"flight_skeleton2": 0
+		{
+			"health": 20,
+			"scare": 1
 		},
-		"entity": {
-			"Entity0": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			},
-			"Entity1": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			},
-			"Entity2": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			},
-			"Entity3": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			},
-			"Entity4": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			},
-			"Entity5": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			},
-			"Entity6": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			}
+		{
+			"health": 20,
+			"scare": 3
+		},
+		{
+			"health": 20,
+			"scare": 1
+		},
+		{
+			"health": 20,
+			"scare": 3
+		},
+		{
+			"health": 20,
+			"scare": 2
+		},
+		{
+			"health": 20,
+			"scare": 2
 		}
-	}
+	]
 }

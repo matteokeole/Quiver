@@ -46,14 +46,18 @@
 		"resume.text": "Reprendre",
 		"exit.text": "Quitter",
 		"main_menu.text": "Menu principal",
+		"death_title.text": "Vous êtes mort(e) !",
+		"death_subtitle.text": "C'est vraiment dommage...",
 		"credits.text": "Crédits",
 		"credits": {
-			"copyright.text": "Copyright (C) 2021. Do not distribute!",
-			"copyright_fool.text": "Copyright (C) 2021. Donut distribute!",
+			"copyright.text": "Copyright © 2021. Do not distribute!",
+			"copyright_fool.text": "Copyright © 2021. Donut distribute!",
 			"clarisse_job.text": "Directrice artistique & Scénariste",
 			"lean_job.text": "Game Designer",
 			"matteo_job.text": "UI & Level Designer"
 		},
+		"health.text": "Santé",
+		"mana.text": "Mana",
 		"ability1_title.text": "Première capacité",
 		"ability2_title.text": "Seconde capacité",
 		"ult_title.text": "Ultime",
@@ -74,7 +78,7 @@
 				"stealth.text": "Attaque furtive",
 				"stealth_desc.text": "Doublez votre nombre de dégâts pour le prochain tour.\nCoût : 4",
 				"discretion.text": "Discrétion",
-				"discretion_desc.text": "Doublez le taux de fuite de votre adversaire.\nCoût : 7"
+				"discretion_desc.text": "Triplez le taux de fuite de votre adversaire.\nCoût : 7"
 			},
 			"paladin": {
 				"name.text": "Paladin",
@@ -86,6 +90,15 @@
 				"regeneration_desc.text": "Regénérez instantanément 5 points de santé.\nCoût : 7"
 			}
 		},
+		"enemy_ability": {
+			"kick.text": "Coup de pied",
+			"hammer.text": "Coup de massue",
+			"dagger.text": "Coup de dague",
+			"arrow.text": "Tir de flèche",
+			"heal.text": "Regénération"
+		},
+		"player_block.text": "Vous parez !",
+		"enemy_block.text": "Votre adversaire pare !",
 		"subtitle": {
 			"lobby.text": "Partie 1 :\nLa taverne",
 			"dungeon.text": "Partie 2 :\nDans le donjon",
@@ -136,6 +149,8 @@
 				]
 			}
 		},
+		"fight.text": "Fight !",
+		"flee.text": "Fuir",
 		"error": {
 			"json_error.text": "%e n'est pas un fichier JSON valide."
 		}

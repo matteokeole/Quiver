@@ -46,14 +46,18 @@
 		"resume.text": "Resume",
 		"exit.text": "Exit",
 		"main_menu.text": "Main Menu",
+		"death_title.text": "You're dead!",
+		"death_subtitle.text": "It's really sad...",
 		"credits.text": "Credits",
 		"credits": {
-			"copyright.text": "Copyright (C) 2021. Do not distribute!",
-			"copyright_fool.text": "Copyright (C) 2021. Donut distribute!",
+			"copyright.text": "Copyright © 2021. Do not distribute!",
+			"copyright_fool.text": "Copyright © 2021. Donut distribute!",
 			"clarisse_job.text": "Artistic Director & Screenwriter",
 			"lean_job.text": "Game Designer",
 			"matteo_job.text": "UI & Level Designer"
 		},
+		"health.text": "Health",
+		"mana.text": "Mana",
 		"ability1_title.text": "First Ability",
 		"ability2_title.text": "Second Ability",
 		"ult_title.text": "Ultimate",
@@ -74,7 +78,7 @@
 				"stealth.text": "Stealth Attack",
 				"stealth_desc.text": "Double your damage number for the next round.\nCost: 4",
 				"discretion.text": "Discretion",
-				"discretion_desc.text": "Double your opponent's escape rate.\nCost: 7"
+				"discretion_desc.text": "Triple your opponent's escape rate.\nCost: 7"
 			},
 			"paladin": {
 				"name.text": "Paladin",
@@ -86,6 +90,15 @@
 				"regeneration_desc.text": "Regenerate instantly 5 health points.\nCost: 7"
 			}
 		},
+		"enemy_ability": {
+			"kick.text": "Kick",
+			"hammer.text": "Hammer",
+			"dagger.text": "Dagger",
+			"arrow.text": "Arrow Shot",
+			"heal.text": "Regeneration"
+		},
+		"player_block.text": "You block!",
+		"enemy_block.text": "Your opponent blocks!",
 		"subtitle": {
 			"lobby.text": "Part 1:\nThe Lobby",
 			"dungeon.text": "Part 2:\nInto the Dungeon",
@@ -136,6 +149,8 @@
 				]
 			}
 		},
+		"fight.text": "Fight!",
+		"flee.text": "Run Away",
 		"error": {
 			"json_error.text": "%e is not a valid JSON file."
 		}

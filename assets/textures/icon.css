@@ -1,7 +1,8 @@
 .icon {
 	display: inline-block;
-	background-size: cover;
 	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
 	image-rendering: crisp-edges
 }
 

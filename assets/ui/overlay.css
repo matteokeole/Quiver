@@ -25,6 +25,13 @@
 
 .overlay-pause {z-index: 2}
 
+.overlay-death {
+	background-color: rgba(0, 0, 0, 0.2);
+	-webkit-animation: 2s linear;
+	animation: 2s linear;
+	z-index: 2
+}
+
 .overlay-load {
 	-webkit-animation-duration: 0.6s;
 	animation-duration: 0.6s;

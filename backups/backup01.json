@@ -1,69 +1,52 @@
 {
-	"Backup": {
-		"name": "Partie de jett rebibe me",
-		"date": {
-			"creation": "2021-01-11-19-46-55",
-			"lastConnection": "2021-01-12-15-16-33"
+	"name": "s",
+	"date": {
+		"creation": "2021-5-26-11-38-33",
+		"lastConnection": "2021-5-26-11-38-33"
+	},
+	"player": {
+		"nickname": "s",
+		"character": "paladin",
+		"level": "lobby",
+		"health": 25,
+		"health_max": 25,
+		"mana": 20,
+		"mana_max": 20,
+		"shield": 3,
+		"pos": [
+			-7.999999999999989,
+			-2.700000000000001
+		],
+		"orientation": "left"
+	},
+	"entity": [
+		{
+			"health": 20,
+			"scare": 2
 		},
-		"player": {
-			"nickname": "jett rebibe me",
-			"character": "paladin",
-			"level": "lobby",
-			"health": 25,
-			"health_max": 25,
-			"mana": 20,
-			"mana_max": 20,
-			"resistance": 3,
-			"base_resistance": 3,
-			"pos": [-8, -2.5],
-			"orientation": "left"
+		{
+			"health": 20,
+			"scare": 1
 		},
-		"stats": {
-			"kill_total": 0,
-			"kill_goblin": 0,
-			"kill_skeleton1": 0,
-			"kill_skeleton2": 0,
-			"flight_total": 0,
-			"flight_goblin": 0,
-			"flight_skeleton1": 0,
-			"flight_skeleton2": 0
+		{
+			"health": 20,
+			"scare": 3
 		},
-		"entity": {
-			"Entity0": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			},
-			"Entity1": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			},
-			"Entity2": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			},
-			"Entity3": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			},
-			"Entity4": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			},
-			"Entity5": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			},
-			"Entity6": {
-				"health": 20,
-				"isDead": false,
-				"hasFled": false
-			}
+		{
+			"health": 20,
+			"scare": 1
+		},
+		{
+			"health": 20,
+			"scare": 3
+		},
+		{
+			"health": 20,
+			"scare": 2
+		},
+		{
+			"health": 20,
+			"scare": 2
 		}
-	}
+	]
 }

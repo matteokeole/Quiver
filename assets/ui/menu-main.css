@@ -4,7 +4,7 @@
 	position: absolute;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: 100%;
+	background-size: cover;
 	image-rendering: crisp-edges
 }
 
