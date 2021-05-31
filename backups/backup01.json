@@ -1,21 +1,21 @@
 {
 	"name": "s",
 	"date": {
-		"creation": "2021-5-26-11-38-33",
-		"lastConnection": "2021-5-26-11-38-33"
+		"creation": "2021-5-27-23-4-23",
+		"lastConnection": "2021-5-28-11-10-47"
 	},
 	"player": {
 		"nickname": "s",
 		"character": "paladin",
-		"level": "lobby",
-		"health": 25,
-		"health_max": 25,
-		"mana": 20,
-		"mana_max": 20,
-		"shield": 3,
+		"level": "dungeon",
+		"health": 20,
+		"health_max": 20,
+		"mana": 25,
+		"mana_max": 25,
+		"shield": 1,
 		"pos": [
-			-7.999999999999989,
-			-2.700000000000001
+			10.599999999999978,
+			2.700000000000001
 		],
 		"orientation": "left"
 	},

@@ -82,6 +82,7 @@
 					play.launch_backup.backup.value = "";
 					save.backup.value = "";
 					show($("main")); // opening the game window
+					document.querySelectorAll(".btn:not([disabled]), .option-name").forEach(function(e) {e.addEventListener("click", function() {play_sound("click")})}); // click sound
 					play.new_game.player_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.player_name)});
 					play.new_game.game_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.game_name)});
 					document.querySelectorAll(".btn[data-function='open']").forEach(function(e) {
@@ -116,13 +117,13 @@
 					});
 					keybind.cancel.addEventListener("click", Game.close_keybind);
 					// music volume
-					$(".music .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling)}); // chrome/safari/ff
-					$(".music .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling)}); // ie
-					$(".music .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling)});
+					$(".music .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling, "music")}); // chrome/safari/ff
+					$(".music .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling, "music")}); // ie
+					$(".music .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling, "music")});
 					// sound volume
-					$(".sound .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling)}); // chrome/safari/ff
-					$(".sound .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling)}); // ie
-					$(".sound .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling)})
+					$(".sound .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling, "sound")}); // chrome/safari/ff
+					$(".sound .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling, "sound")}); // ie
+					$(".sound .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling, "sound")})
 				},
 				check_input_value: function(input) {
 					if (/^\s+$/.test(input.value) || input.value.length === 0) {
@@ -573,6 +574,7 @@
 					in_fight = true;
 					current_enemy_id = enemy_id;
 					current_enemy = enemy;
+					rogue_damage_mult = 1; // resetting rogue's damage multiplier (stealth ability)
 					TempPlayer = new Character(backup.player.character);
 					fight.player_avatar.style.backgroundImage = `url(assets/textures/entity/${TempPlayer.texture.idle})`;
 					fight.enemy_avatar.style.backgroundImage = `url(assets/textures/entity/${enemy}.png)`;
@@ -593,6 +595,7 @@
 				},
 				death: function() {
 					game_ended = true;
+					play_sound("pop");
 					// closing pause menu if opened
 					document.removeEventListener("keydown", pause_menu);
 					UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
@@ -1349,6 +1352,7 @@
 									game_ended = true;
 									Map.uppermap.removeChild(Map.uppermap.querySelector(".diamond")); // removing the diamond
 									player.movement.off();
+									play_sound("diamond");
 									dialog(Dialog.diamond[4]);
 									setTimeout(Game.end, Dialog.diamond[4].duration) // main ending
 								}
@@ -1628,6 +1632,34 @@
 				btn_flee: null
 			};
 
+			// musics
+			var Music = {};
+
+			// sounds
+			var Sound = {
+				click: new Audio("assets/sounds/click.mp3"),
+				fireball: new Audio("assets/sounds/fireball.mp3"),
+				wand: new Audio("assets/sounds/wand.mp3"),
+				lightning: new Audio("assets/sounds/lightning.mp3"),
+				dagger: new Audio("assets/sounds/dagger.mp3"),
+				stealth: new Audio("assets/sounds/stealth.mp3"),
+				discretion: new Audio("assets/sounds/discretion.mp3"),
+				parade: new Audio("assets/sounds/parade.mp3"),
+				heal: new Audio("assets/sounds/heal.mp3"),
+				kick: new Audio("assets/sounds/kick.mp3"),
+				hammer: new Audio("assets/sounds/hammer.mp3"),
+				arrow: new Audio("assets/sounds/arrow.mp3"),
+				cash: new Audio("assets/sounds/cash.mp3"),
+				pop: new Audio("assets/sounds/pop.mp3"),
+				diamond: new Audio("assets/sounds/diamond.mp3")
+			};
+
+			// volume
+			var Volume = {
+				music: 1,
+				sound: 1
+			}
+
 			// other variables
 			var raw_menus = ["menu-play", "menu-options", "menu-save"],
 				TempPlayer,
@@ -1810,7 +1842,21 @@
 					else {
 						// the enemy is alive and didn't fled
 						window["Backup"].entity[current_enemy_id].health -= TempPlayer.ability1.damage * rogue_damage_mult;
-						rogue_damage_mult = 1; // resetting rogue's damage multiplier (stealth ability)
+						switch (window["Backup"].player.character) {
+							case "mage":
+								// fireball
+								play_sound("fireball");
+								break;
+							case "rogue":
+								// double daggers
+								rogue_damage_mult = 1; // resetting rogue's damage multiplier (stealth ability)
+								play_sound("dagger");
+								break;
+							case "paladin":
+								// sword strike
+								play_sound("dagger");
+								break
+						}
 						// updating huds
 						update_mini_hud(window["Backup"], current_enemy_id, current_enemy);
 						update_ability_use(window["Backup"]);
@@ -1831,22 +1877,23 @@
 							case "mage":
 								// wand
 								window["Backup"].entity[current_enemy_id].health -= TempPlayer.ability2.damage;
-								show_player_attack(ability_id[TempPlayer.ability2.id]);
+								play_sound("wand");
 								break;
 							case "rogue":
 								// stealth
 								rogue_damage_mult = 2;
-								show_player_attack(ability_id[TempPlayer.ability2.id]);
+								play_sound("stealth");
 								break;
 							case "paladin":
 								// parade
 								window["Backup"].player.shield = 20; // parade sets the shield to its max value for 1 round, so 1 attack is blocked
-								show_player_attack(ability_id[TempPlayer.ability2.id]);
+								play_sound("parade");
 								break
 						}
 						// updating huds
 						update_mini_hud(window["Backup"], current_enemy_id, current_enemy);
-						update_ability_use(window["Backup"])
+						update_ability_use(window["Backup"]);
+						show_player_attack(ability_id[TempPlayer.ability2.id])
 					}
 				}
 			}
@@ -1875,23 +1922,24 @@
 										window["Backup"].entity[6].health -= TempPlayer.ult.damage;
 										break
 								}
-								show_player_attack(ability_id[TempPlayer.ult.id]);
+								play_sound("lightning");
 								break;
 							case "rogue":
 								// discretion
 								rogue_discretion = true;
 								window["Backup"].entity[current_enemy_id].scare *= 3;
-								show_player_attack(ability_id[TempPlayer.ult.id]);
+								play_sound("discretion");
 								break;
 							case "paladin":
 								// regeneration
 								(window["Backup"].player.health > 20) ? window["Backup"].player.health = 25 : window["Backup"].player.health += 5;
-								show_player_attack(ability_id[TempPlayer.ult.id]);
+								play_sound("heal");
 								break
 						}
 						// updating huds
 						update_mini_hud(window["Backup"], current_enemy_id, current_enemy);
-						update_ability_use(window["Backup"])
+						update_ability_use(window["Backup"]);
+						show_player_attack(ability_id[TempPlayer.ult.id])
 					}
 				}
 			}
@@ -1946,6 +1994,7 @@
 					Map.entities.removeChild($(`.entity${enemy_id}`));
 					hide(UI.menu.fight);
 					player.movement.on();
+					play_sound("cash");
 					switch (enemy) {
 						case "goblin":
 							dialog(Dialog.misc.flight[0]);
@@ -1964,7 +2013,10 @@
 						rogue_discretion = false;
 						backup.entity[enemy_id].scare /= 3
 					}
-					if (player_block_test(backup)) show_enemy_attack(player_block_text);
+					if (player_block_test(backup)) {
+						play_sound("parade");
+						show_enemy_attack(player_block_text)
+					}
 					else {
 						var enemy_attack_choice = Math.floor(6 * Math.random() + 1);
 						switch (enemy) {
@@ -1972,18 +2024,21 @@
 								if (enemy_attack_choice <= 3) {
 									// kick
 									(backup.player.health - Entity[enemy].ability1.damage <= 0) ? Game.death() : backup.player.health -= Entity[enemy].ability1.damage;
+									play_sound("kick");
 									update_mini_hud(backup, enemy_id, enemy);
 									show_enemy_attack(enemy_ability_id.kick)
 								}
 								else if (enemy_attack_choice > 3 && enemy_attack_choice <= 5) {
 									// hammer
 									(backup.player.health - Entity[enemy].ability2.damage <= 0) ? Game.death() : backup.player.health -= Entity[enemy].ability2.damage;
+									play_sound("hammer");
 									update_mini_hud(backup, enemy_id, enemy);
 									show_enemy_attack(enemy_ability_id.hammer)
 								}
 								else {
 									// heal
 									(backup.entity[enemy_id].health > 17) ? backup.entity[enemy_id].health = 20 : backup.entity[enemy_id].health += 3;
+									play_sound("heal");
 									update_mini_hud(backup, enemy_id, enemy);
 									show_enemy_attack(enemy_ability_id.heal)
 								}
@@ -1992,12 +2047,14 @@
 								if (enemy_attack_choice <= 4) {
 									// dagger
 									(backup.player.health - Entity[enemy].ability1.damage <= 0) ? Game.death() : backup.player.health -= Entity[enemy].ability1.damage;
+									play_sound("dagger");
 									update_mini_hud(backup, enemy_id, enemy);
 									show_enemy_attack(enemy_ability_id.dagger)
 								}
 								else {
 									// heal
 									(backup.entity[enemy_id].health > 18) ? backup.entity[enemy_id].health = 20 : backup.entity[enemy_id].health += 2;
+									play_sound("heal");
 									update_mini_hud(backup, enemy_id, enemy);
 									show_enemy_attack(enemy_ability_id.heal)
 								}
@@ -2005,6 +2062,7 @@
 							case "skeleton2":
 								// the archer has only 1 attack
 								(backup.player.health - Entity[enemy].ability1.damage <= 0) ? Game.death() : backup.player.health -= Entity[enemy].ability1.damage;
+								play_sound("arrow");
 								update_mini_hud(backup, enemy_id, enemy);
 								show_enemy_attack(enemy_ability_id.arrow);
 								break
@@ -2023,6 +2081,7 @@
 				Map.entities.removeChild($(`.entity${enemy_id}`));
 				hide(UI.menu.fight);
 				player.movement.on();
+				play_sound("cash");
 				switch (enemy) {
 					case "goblin":
 						dialog(Dialog.misc.kill[0]);
@@ -2044,6 +2103,7 @@
 			}
 
 			function enemy_block(backup, enemy_id, enemy) {
+				play_sound("parade");
 				update_mini_hud(backup, enemy_id, enemy);
 				show_player_attack(enemy_block_text)
 			}
@@ -2066,14 +2126,60 @@
 				return `${date[0]}/${date[1]}/${date[2]} ${date[3]}:${date[4]}:${date[5]}`
 			}
 
-			function set_volume_range(input, target) {
+			function set_volume_range(input, target, source) {
 				if (input.value.length !== 0 && /^\d*\.?\d*$/.test(input.value)) {
 					// a number has been entered
-					if (input.value >= 0 && input.value <= 100) return target.value = input.value
+					if (input.value >= 0 && input.value <= 100) {
+						if (source === "sound") {
+							Volume.sound = input.value / 100;
+							Sound.click.volume = Volume.sound;
+							Sound.fireball.volume = Volume.sound;
+							Sound.wand.volume = Volume.sound;
+							Sound.lightning.volume = Volume.sound;
+							Sound.dagger.volume = Volume.sound;
+							Sound.stealth.volume = Volume.sound;
+							Sound.discretion.volume = Volume.sound;
+							Sound.parade.volume = Volume.sound;
+							Sound.heal.volume = Volume.sound;
+							Sound.kick.volume = Volume.sound;
+							Sound.hammer.volume = Volume.sound;
+							Sound.arrow.volume = Volume.sound;
+							Sound.cash.volume = Volume.sound;
+							Sound.pop.volume = Volume.sound;
+							Sound.diamond.volume = Volume.sound
+						} else Volume.music = input.value / 100;
+						return target.value = input.value
+					}
 				}
 			}
 
-			function set_volume_nb(input, target) {return target.value = input.value}
+			function set_volume_nb(input, target, source) {
+				if (source === "sound") {
+					Volume.sound = input.value / 100;
+					Sound.click.volume = Volume.sound;
+					Sound.fireball.volume = Volume.sound;
+					Sound.wand.volume = Volume.sound;
+					Sound.lightning.volume = Volume.sound;
+					Sound.dagger.volume = Volume.sound;
+					Sound.stealth.volume = Volume.sound;
+					Sound.discretion.volume = Volume.sound;
+					Sound.parade.volume = Volume.sound;
+					Sound.heal.volume = Volume.sound;
+					Sound.kick.volume = Volume.sound;
+					Sound.hammer.volume = Volume.sound;
+					Sound.arrow.volume = Volume.sound;
+					Sound.cash.volume = Volume.sound;
+					Sound.pop.volume = Volume.sound;
+					Sound.diamond.volume = Volume.sound
+				} else Volume.music = input.value / 100;
+				return target.value = input.value
+			}
+
+			function play_sound(sound, loop) {
+				Sound[sound].currentTime = 0;
+				Sound[sound].loop = loop;
+				Sound[sound].play()
+			}
 
 			window.addEventListener("load", function() {
 				// buttons
