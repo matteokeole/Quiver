@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="A rogue-like web video game.">
-		<meta name="version" content="1.1.0">
+		<meta name="version" content="1.1.1">
 		<meta name="author" content="Clarisse Eynard, Léan Houdayer, Mattéo Legagneux">
 		<meta name="copyright" content="© 2021 Quiver. All rights reserved.">
 		<link rel="stylesheet" type="text/css" href="assets/ui/dialog.css">
@@ -99,6 +99,12 @@
 					});
 					document.querySelectorAll(".btn[data-function='refresh']").forEach(function(e) {
 						e.addEventListener("click", function() {location.reload()})
+					});
+					$(".option-name.tutorial").addEventListener("click", function() {
+						alert("Quiver - How To Play\n\n\n\nWanna start your first Quiver game? Here are the basic infos that you need to know before playing.\n\nBefore launching\nYou can change your keybinds, your language and the music/sound volume in the Options menu, before launching a game. No worries, you'll have access to this menu when playing, but in order to follow well the dialogs, we advice you to do your changes before creating a new game.\nWhen initializing your first Quiver game, you'll need to name your game, give yourself a nickname and select a character between the Mage, the Rogue and the Paladin. Be aware that these characters have their own stats, and are played differently. All the character infos are visible in the New Game menu.\n\nAfter launching\nYou'll arrive in a place where you can move with your preset settings, and where the history will begin. Also, don't forget to look at the dialogs, that's important.\n\nExploration\nAfter reading the story, the (real) game will start. Just keep exploring the dungeons and you'll finish the game. Yeah, it's that simple.\n\nMonster Fighting\nActually, it's not that simple. There are monsters in the dungeon and they will do everything to kill you. But you're brave, and you will fight them. The fighting system is pretty simple: it's a round-by-round system, in which you'll use your character's abilities against the monster's abilities. Warning: there are several types of monsters, and they do not have the same abilities. Mostly of their abilities will hurt you, and all your abilities require mana points to be used. If you don't have mana, you can only flee, and lose 8 health points. So, keep a look on your HUD!\nWhen you defeat an enemy, you'll gain recovery health and mana.\n\nGood luck, young explorer!")
+					});
+					$(".option-name.updates").addEventListener("click", function() {
+						alert("Quiver Updates\n\n\n\nAlpha Updates\n\n\n\n210108 - 01/08/21\n\nThis is the first ever-created version of Quiver. There was only a few UI designs and some useless buttons. The game initial name was Dungeon Quest!\n\n210118 - 01/18/21\n\nQuiver just gets its first level, which was the dungeon entrance! There was not textures, but the main menu could launch a game. There was some textures like the relief texture on the buttons, the darkbrick menu texture and the scroll appearance for the secondary menus. By the way, we were experiencing the very first motion and collision tests on the game.\n\n210120 - 01/20/21\n\nAdded some infos at the top of the backup content (game name, nickname, current level, etc.).\n\n210122 - 01/22/21\n\nRewrite of the generator and motion engines and some bug fixes.\n\n210124 - 01/24/21\n\nThe user now needs to inform all the text fields on the New Game menu, like the game name, the class, etc.\n\n210125 - 01/25/21\n\nAddition of the first level design textures like brick, wood, etc. Even if the collisions with all the objects are disabled, there are collision barriers around the level so the player can't quit the map.\n\n210129 - 01/29/21\n\nThe loading menu with that (beautiful) counter clock has just been added! Thanks Paint 3D. Really. No. I hate Paint 3D.\n\n210207 - 02/07/21\n\nWelcome to this incredibly beautiful main menu background. Thanks Léan :). Also, the update brings the first 2.5D textures to the game. The dungeon entrance is fully designed! Just, the collisions are missing but no worry! These will come soon :D\n\n210220 - 02/20/21\n\nJust some texture updates, like chests. I like chests. Oh, and the counter clock from the loading menu is now finished. Oh, and also the character stats are into the game and ready to be used!\n\n210301 - 03/01/21\n\nThe biggest alpha update, by far. The site is now on Hostinger, at https://quivergame.000webhostapp.com. The player HUD has been added, as well as the dialogs and the mobs. The collisions are finished and work well. The player can pass levels, fight monsters and grab the... wait, I don't want to spoil you! Play the game before.\n\n\n\nRelease Updates (yeah, beta hasn't existed)\n\n\n\n1.0.0 - 03/07/21\n\nThis is the first released version of Quiver. The game is hosted and playable at https://quivergame.000webhostapp.com. This address is not intended to change.\n\nQuiver 1.0.0 is quite different from its earlier versions. The website had a scaling system which had to set the window scale to 16/9, which was the only supported ratio. The UI was a little different too: the New Game menu and the Launch Backup menu were separated, and the graphic interface was a bit less conscientious. Also, Quiver had not sounds. They'll be implemented with the next update.\n\n1.1.0 - 05/30/21\n\nThis update had brought a lot of changes: the source code had been fully re-written, and we added some animations, languages (English, Spanish and French - maybe other languages will be added with the next updates :D) and options. You can now choose your keybinds, regulate the volume of the in-game and music sounds and change your language. The history, the dialogues, the maps and the enemies are the same than that of the previous version. With this update, Quiver is twice as light as before!\n\n1.1.1 - 08/17/21\n\nA small update in which we added a little guide to learn the basics, as well as the update changelog you're reading right now :)")
 					});
 					$(".option-name.credits").addEventListener("click", Game.open_credits);
 					UI.btn.save.addEventListener("click", function() {Game.update_save_backup(window["Backup"])});
@@ -207,6 +213,7 @@
 						options.lang.fr_FR.firstChild.textContent = r.options["lang:fr_FR.text"];
 						// about settings
 						options.about.subtitle.textContent = r.options["about.text"];
+						options.about.tutorial.textContent = r.options["about:tutorial.text"];
 						options.about.updates.textContent = r.options["about:updates.text"];
 						options.about.credits.textContent = r.options["about:credits.text"];
 						// credit menu
@@ -747,7 +754,7 @@
 						setTimeout(function() {hide(UI.overlay.load)}, 600)
 					}, 1200)
 				},
-				version: "1.1.0"
+				version: "1.1.1"
 			}
 
 			var UI = {
@@ -846,6 +853,7 @@
 				},
 				about: {
 					subtitle: null,
+					tutorial: null,
 					updates: null,
 					credits: null
 				}
@@ -2259,6 +2267,7 @@
 				options.lang.fr_FR = $(".option.lang .fr_FR");
 				// about settings
 				options.about.subtitle = $(".option.about .subtitle");
+				options.about.tutorial = $(".option.about .tutorial");
 				options.about.updates = $(".option.about .updates");
 				options.about.credits = $(".option.about .credits");
 				// credit menu
@@ -2321,7 +2330,7 @@
 				Enable JavaScript in your browser, then retry.<br><br>
 				<a href="">Reload</a>
 			</p>
-			<div class="version">1.1.0</div>
+			<div class="version">1.1.1</div>
 		</noscript>
 		<main>
 			<!-- game content goes here -->
