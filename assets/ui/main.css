@@ -1,0 +1,48 @@
+/** Main styles & console **/
+
+/* Import game font */
+@font-face {
+	font-family: Quiver;
+	src: url(../font/Quiver.ttf) format("truetype")
+}
+
+/* Text selection color */
+
+::selection {background-color: rgba(0, 0, 0, 0.2)}
+::-moz-selection {background-color: rgba(0, 0, 0, 0.2)}
+
+body {
+	margin: 0;
+	background-color: #000;
+	cursor: default
+}
+
+/* Mask 000webhost banner */
+div a[href="https://www.000webhost.com/?utm_source=000webhostapp&utm_campaign=000_logo&utm_medium=website&utm_content=footer_img"] {
+	display: none !important
+}
+
+main {display: none}
+
+div, input, button {font-family: Quiver}
+
+#console {
+	display: none;
+	width: 250px;
+	height: 400px;
+	margin: auto;
+	padding: 8px;
+	top: 8px;
+	right: 8px;
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	cursor: default;
+	font-size: 20px;
+	z-index: 999
+}
+
+.console-title {
+	margin-bottom: 20px;
+	text-align: center
+}

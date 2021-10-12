@@ -1,3 +1,5 @@
+/** Fight menu **/
+
 .menu-fight {
 	display: none;
 	width: auto;
@@ -54,7 +56,6 @@
 	from {opacity: 1}
 	to {opacity: 0}
 }
-
 @keyframes attack_name {
 	from {opacity: 1}
 	to {opacity: 0}

@@ -1,8 +1,10 @@
+/** Death menu **/
+
 .overlay-death {
 	display: flex;
-	align-items: center;
+	flex-direction: column;
 	justify-content: center;
-	flex-direction: column
+	align-items: center
 }
 
 .death_title {

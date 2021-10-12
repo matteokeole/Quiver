@@ -1,16 +1,18 @@
-/* buttons */
+/** Play menu **/
+
+/* Buttons */
 
 .btn-new_game, .btn-open_backup {margin: 20px 0}
 
 .btn-open_backup {font-weight: normal}
 
-/* new game section */
+/* New game section */
 
 .new_game, .launch_backup {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center
+	justify-content: center;
+	align-items: center
 }
 
 .new_game {padding-bottom: 40px}
@@ -28,6 +30,7 @@
 	width: 300px;
 	margin: 10px 0 40px 0;
 	padding: 8px;
+	outline: none;
 	border: 4px solid #000;
 	border-radius: none;
 	background-color: rgba(0, 0, 0, 0.3);

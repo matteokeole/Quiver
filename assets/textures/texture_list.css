@@ -1,4 +1,6 @@
-/* buttons */
+/** Texture list **/
+
+/* Buttons */
 
 .btn {background-image: url(btn/btn.png)}
 .btn:active {background-image: url(btn/btn-pressed.png)}
@@ -13,7 +15,7 @@
 .btn-class {background-image: url(btn/btn-class.png)}
 .btn-class:active {background-image: url(btn/btn-class-selected.png)}
 
-/* icons */
+/* Icons */
 
 .icon.health {background-image: url(icon/health.png)}
 .icon.shield {background-image: url(icon/shield.png)}
@@ -23,11 +25,11 @@
 .icon.paladin {background-image: url(icon/paladin.png)}
 .icon.check {background-image: url(icon/check.png)}
 
-/* map parts */
+/* Map parts */
 
 .part {background-image: url(map/error.png)}
 
-/* menus */
+/* Menus */
 
 .menu-main {background-image: url(menu/background.jpg)}
 .menu-main-title {background-image: url(menu/main-title.png)}

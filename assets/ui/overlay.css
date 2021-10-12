@@ -1,3 +1,5 @@
+/** Overlays **/
+
 .overlay {
 	display: none;
 	align-items: center;
@@ -39,18 +41,17 @@
 }
 
 .overlay-map {
-	/* add some "#000" to make the visible area smaller */
+	/* Add some "#000" to make the visible area smaller */
 	background: radial-gradient(circle at 50%, transparent, #000, #000, #000);
 	z-index: 1
 }
 
-/* overlay behind menus */
+/* Overlay behind menus */
 
 @-webkit-keyframes overlay_menu_fade_in {
 	from {background-color: transparent}
 	to {background-color: rgba(0, 0, 0, 0.8)}
 }
-
 @keyframes overlay_menu_fade_in {
 	from {background-color: transparent}
 	to {background-color: rgba(0, 0, 0, 0.8)}
@@ -60,19 +61,17 @@
 	from {background-color: rgba(0, 0, 0, 0.8)}
 	to {background-color: transparent}
 }
-
 @keyframes overlay_menu_fade_out {
 	from {background-color: rgba(0, 0, 0, 0.8)}
 	to {background-color: transparent}
 }
 
-/* loading overlay */
+/* Loading overlay */
 
 @-webkit-keyframes overlay_load_fade_in {
 	from {background-color: transparent}
 	to {background-color: #000}
 }
-
 @keyframes overlay_load_fade_in {
 	from {background-color: transparent}
 	to {background-color: #000}
@@ -82,19 +81,17 @@
 	from {background-color: #000}
 	to {background-color: transparent}
 }
-
 @keyframes overlay_load_fade_out {
 	from {background-color: #000}
 	to {background-color: transparent}
 }
 
-/* pause menu */
+/* Pause menu */
 
 @-webkit-keyframes overlay_pause_fade_in {
 	from {opacity: 0}
 	to {opacity: 1}
 }
-
 @keyframes overlay_pause_fade_in {
 	from {opacity: 0}
 	to {opacity: 1}
@@ -104,7 +101,6 @@
 	from {opacity: 1}
 	to {opacity: 0}
 }
-
 @keyframes overlay_pause_fade_out {
 	from {opacity: 1}
 	to {opacity: 0}

@@ -1,6 +1,9 @@
-/* menu content
-light #f5e0bf
-dark #c4b399 */
+/** Scrollbox content **/
+
+/*
+Light: #f5e0bf
+Dark: #c4b399
+*/
 
 .menu {
 	display: none;
@@ -11,7 +14,7 @@ dark #c4b399 */
 	position: relative
 }
 
-/* opening/closing animations */
+/* Open/close animations */
 
 .scrollbox-top {
 	position: relative;
@@ -38,7 +41,6 @@ dark #c4b399 */
 	from {height: 0}
 	to {height: 50%}
 }
-
 @keyframes scrollbox-open {
 	from {height: 0}
 	to {height: 50%}
@@ -48,13 +50,12 @@ dark #c4b399 */
 	from {height: 50%}
 	to {height: 0}
 }
-
 @keyframes scrollbox-close {
 	from {height: 50%}
 	to {height: 0}
 }
 
-/* content */
+/* Content */
 
 .menu-title {
 	display: block;
@@ -102,6 +103,8 @@ dark #c4b399 */
 	height: 30px;
 	margin-top: 10px
 }
+
+/* Media queries */
 
 @media screen and (max-width: 1200px) and (max-aspect-ratio: 1.78) {
 	.menu {

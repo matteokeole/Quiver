@@ -1,4 +1,4 @@
-/* map container */
+/** Map container **/
 
 .map-container {
 	display: none;
@@ -17,7 +17,7 @@
 	transition-duration: 0.2s
 }
 
-/* map and uppermap */
+/* Map and uppermap */
 
 #map, #uppermap, #entities {
 	display: flex;
@@ -32,7 +32,7 @@
 
 #map, #entities {z-index: -1}
 
-/* parts */
+/* Parts */
 
 .part, .upperpart, .entity {
 	position: absolute;
@@ -42,7 +42,7 @@
 
 .entity {background-size: cover}
 
-/* player */
+/* Player */
 
 #player {
 	width: 64px;
@@ -51,7 +51,7 @@
 	image-rendering: crisp-edges
 }
 
-/* graphic effects */
+/* Graphic effects */
 
 .blur {
 	-webkit-filter: blur(4px);

@@ -1,14 +1,30 @@
+<!--
+	Quiver, a rogue-like web video game!
+	Made by Clarisse Eynard, Léan Houdayer and Mattéo Legagneux.
+	Copyright (C) 2021. All rights reserved.
+-->
+
 <!DOCTYPE html>
 
-<html lang="en">
+<html prefix="og: http://ogp.me/ns#" lang="en">
 
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="A rogue-like web video game.">
-		<meta name="version" content="1.1.1">
+		<meta name="description" content="A rogue-like web video game!">
+		<meta name="keywords" content="jeu, vidéo, web, 2d, rogue-like, dungeon, donjon, clarisse, eynard, léan, houdayer, mattéo, legagneux">
 		<meta name="author" content="Clarisse Eynard, Léan Houdayer, Mattéo Legagneux">
-		<meta name="copyright" content="© 2021 Quiver. All rights reserved.">
+		<meta name="version" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://quivergame.000webhostapp.com">
+		<meta property="og:site_name" content="matteoo34's GitHub">
+		<meta property="og:title" content="Quiver">
+		<meta property="og:description" content="A rogue-like web video game!">
+		<meta property="og:image" content="https://quivergame.000webhostapp.com/assets/textures/menu/background.jpg">
+		<meta name="twitter:card" content="summary_large_image">
+		<link rel="icon" type="image/x-icon" href="favicon.ico">
+		<link rel="apple-touch-icon" type="image/x-icon" href="favicon.ico">
 		<link rel="stylesheet" type="text/css" href="assets/ui/dialog.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/hud.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu.css">
@@ -29,60 +45,26 @@
 		<link rel="stylesheet" type="text/css" href="assets/textures/icon.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/map.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/texture_list.css">
-		<style type="text/css">
-			@font-face {
-				font-family: Quiver;
-				src: url(assets/font/Quiver.ttf) format("truetype")
-			}
-
-			::selection {background-color: rgba(0, 0, 0, 0.2)} /* text selection color */
-
-			body {
-				margin: 0;
-				background-color: #000;
-				cursor: default
-			}
-
-			main {display: none}
-
-			div, input, button {font-family: Quiver}
-
-			#console {
-				display: none;
-				width: 250px;
-				height: 400px;
-				margin: auto;
-				padding: 8px;
-				top: 8px;
-				right: 8px;
-				position: fixed;
-				background-color: rgba(0, 0, 0, 0.5);
-				color: #fff;
-				cursor: default;
-				font-size: 20px;
-				z-index: 999
-			}
-
-			.console-title {
-				margin-bottom: 20px;
-				text-align: center
-			}
-		</style>
-		<script type="text/javascript">
-			var Game = {
+		<link rel="stylesheet" type="text/css" href="assets/ui/main.css">
+		<script>
+			const Game = {
 				init: function() {
-					$("title").textContent = `Quiver ${Game.version}`; // updating the window title with the last version
-					Game.lang("en_US"); // setting the game language to english (can be modified in the options)
-					// resetting input values
+					$("meta[name='version']").setAttribute("version", this.version); // Set the current version as metadata
+					$("title").textContent = `Quiver ${this.version}`; // Print the window title on the last version
+					Game.lang("en_US"); // Default language is english (this setting can be modified in options)
+					// Reset inputs
 					document.addEventListener("keydown", function(e) {
 						if (e.keyCode === Key.console) ($("#console").style.display !== "block") ? show($("#console")) : hide($("#console"))
-					})
-					play.new_game.player_name.value = "";
-					play.new_game.game_name.value = "";
-					play.launch_backup.backup.value = "";
-					save.backup.value = "";
-					show($("main")); // opening the game window
-					document.querySelectorAll(".btn:not([disabled]), .option-name").forEach(function(e) {e.addEventListener("click", function() {play_sound("click")})}); // click sound
+					});
+					let empty = "";
+					play.new_game.player_name.value = empty;
+					play.new_game.game_name.value = empty;
+					play.launch_backup.backup.value = empty;
+					save.backup.value = empty;
+					show($("main")); // Open game window
+					document.querySelectorAll(".btn:not([disabled]), .option-name").forEach(function(e) {
+						e.addEventListener("click", function() {play_sound("click")})
+					}); // Click sound
 					play.new_game.player_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.player_name)});
 					play.new_game.game_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.game_name)});
 					document.querySelectorAll(".btn[data-function='open']").forEach(function(e) {
@@ -104,13 +86,13 @@
 						alert("Quiver - How To Play\n\n\n\nWanna start your first Quiver game? Here are the basic infos that you need to know before playing.\n\nBefore launching\nYou can change your keybinds, your language and the music/sound volume in the Options menu, before launching a game. No worries, you'll have access to this menu when playing, but in order to follow well the dialogs, we advice you to do your changes before creating a new game.\nWhen initializing your first Quiver game, you'll need to name your game, give yourself a nickname and select a character between the Mage, the Rogue and the Paladin. Be aware that these characters have their own stats, and are played differently. All the character infos are visible in the New Game menu.\n\nAfter launching\nYou'll arrive in a place where you can move with your preset settings, and where the history will begin. Also, don't forget to look at the dialogs, that's important.\n\nExploration\nAfter reading the story, the (real) game will start. Just keep exploring the dungeons and you'll finish the game. Yeah, it's that simple.\n\nMonster Fighting\nActually, it's not that simple. There are monsters in the dungeon and they will do everything to kill you. But you're brave, and you will fight them. The fighting system is pretty simple: it's a round-by-round system, in which you'll use your character's abilities against the monster's abilities. Warning: there are several types of monsters, and they do not have the same abilities. Mostly of their abilities will hurt you, and all your abilities require mana points to be used. If you don't have mana, you can only flee, and lose 8 health points. So, keep a look on your HUD!\nWhen you defeat an enemy, you'll gain recovery health and mana.\n\nGood luck, young explorer!")
 					});
 					$(".option-name.updates").addEventListener("click", function() {
-						alert("Quiver Updates\n\n\n\nAlpha Updates\n\n\n\n210108 - 01/08/21\n\nThis is the first ever-created version of Quiver. There was only a few UI designs and some useless buttons. The game initial name was Dungeon Quest!\n\n210118 - 01/18/21\n\nQuiver just gets its first level, which was the dungeon entrance! There was not textures, but the main menu could launch a game. There was some textures like the relief texture on the buttons, the darkbrick menu texture and the scroll appearance for the secondary menus. By the way, we were experiencing the very first motion and collision tests on the game.\n\n210120 - 01/20/21\n\nAdded some infos at the top of the backup content (game name, nickname, current level, etc.).\n\n210122 - 01/22/21\n\nRewrite of the generator and motion engines and some bug fixes.\n\n210124 - 01/24/21\n\nThe user now needs to inform all the text fields on the New Game menu, like the game name, the class, etc.\n\n210125 - 01/25/21\n\nAddition of the first level design textures like brick, wood, etc. Even if the collisions with all the objects are disabled, there are collision barriers around the level so the player can't quit the map.\n\n210129 - 01/29/21\n\nThe loading menu with that (beautiful) counter clock has just been added! Thanks Paint 3D. Really. No. I hate Paint 3D.\n\n210207 - 02/07/21\n\nWelcome to this incredibly beautiful main menu background. Thanks Léan :). Also, the update brings the first 2.5D textures to the game. The dungeon entrance is fully designed! Just, the collisions are missing but no worry! These will come soon :D\n\n210220 - 02/20/21\n\nJust some texture updates, like chests. I like chests. Oh, and the counter clock from the loading menu is now finished. Oh, and also the character stats are into the game and ready to be used!\n\n210301 - 03/01/21\n\nThe biggest alpha update, by far. The site is now on Hostinger, at https://quivergame.000webhostapp.com. The player HUD has been added, as well as the dialogs and the mobs. The collisions are finished and work well. The player can pass levels, fight monsters and grab the... wait, I don't want to spoil you! Play the game before.\n\n\n\nRelease Updates (yeah, beta hasn't existed)\n\n\n\n1.0.0 - 03/07/21\n\nThis is the first released version of Quiver. The game is hosted and playable at https://quivergame.000webhostapp.com. This address is not intended to change.\n\nQuiver 1.0.0 is quite different from its earlier versions. The website had a scaling system which had to set the window scale to 16/9, which was the only supported ratio. The UI was a little different too: the New Game menu and the Launch Backup menu were separated, and the graphic interface was a bit less conscientious. Also, Quiver had not sounds. They'll be implemented with the next update.\n\n1.1.0 - 05/30/21\n\nThis update had brought a lot of changes: the source code had been fully re-written, and we added some animations, languages (English, Spanish and French - maybe other languages will be added with the next updates :D) and options. You can now choose your keybinds, regulate the volume of the in-game and music sounds and change your language. The history, the dialogues, the maps and the enemies are the same than that of the previous version. With this update, Quiver is twice as light as before!\n\n1.1.1 - 08/17/21\n\nA small update in which we added a little guide to learn the basics, as well as the update changelog you're reading right now :)")
+						alert("Quiver Updates\n\n\n\nAlpha Updates\n\n\n\n210108 - 01/08/21\n\nThis is the first ever-created version of Quiver. There was only a few UI designs and some useless buttons. The game initial name was Dungeon Quest!\n\n210118 - 01/18/21\n\nQuiver just gets its first level, which was the dungeon entrance! There was not textures, but the main menu could launch a game. There was some textures like the relief texture on the buttons, the darkbrick menu texture and the scroll appearance for the secondary menus. By the way, we were experiencing the very first motion and collision tests on the game.\n\n210120 - 01/20/21\n\nAdded some infos at the top of the backup content (game name, nickname, current level, etc.).\n\n210122 - 01/22/21\n\nRewrite of the generator and motion engines and some bug fixes.\n\n210124 - 01/24/21\n\nThe user now needs to inform all the text fields on the New Game menu, like the game name, the class, etc.\n\n210125 - 01/25/21\n\nAddition of the first level design textures like brick, wood, etc. Even if the collisions with all the objects are disabled, there are collision barriers around the level so the player can't quit the map.\n\n210129 - 01/29/21\n\nThe loading menu with that (beautiful) counter clock has just been added! Thanks Paint 3D. Really. No. I hate Paint 3D.\n\n210207 - 02/07/21\n\nWelcome to this incredibly beautiful main menu background. Thanks Léan :). Also, the update brings the first 2.5D textures to the game. The dungeon entrance is fully designed! Just, the collisions are missing but no worry! These will come soon :D\n\n210220 - 02/20/21\n\nJust some texture updates, like chests. I like chests. Oh, and the counter clock from the loading menu is now finished. Oh, and also the character stats are into the game and ready to be used!\n\n210301 - 03/01/21\n\nThe biggest alpha update, by far. The site is now on Hostinger, at https://quivergame.000webhostapp.com. The player HUD has been added, as well as the dialogs and the mobs. The collisions are finished and work well. The player can pass levels, fight monsters and grab the... wait, I don't want to spoil you! Play the game before.\n\n\n\nRelease Updates\n\n\n\n1.0.0 - 03/07/21\n\nThis is the first released version of Quiver. The game is hosted and playable at https://quivergame.000webhostapp.com. This address is not intended to change.\n\nQuiver 1.0.0 is quite different from its earlier versions. The website had a scaling system which had to set the window scale to 16/9, which was the only supported ratio. The UI was a little different too: the New Game menu and the Launch Backup menu were separated, and the graphic interface was a bit less conscientious. Also, Quiver had not sounds. They'll be implemented with the next update.\n\n1.1.0 - 05/30/21\n\nThis update brings a lot of changes: the source code had been fully re-written, and we added some animations, languages (English, Spanish and French - maybe other languages will be added with the next updates :D) and options. You can now choose your keybinds, regulate the volume of the in-game and music sounds and change your language. The history, the dialogues, the maps and the enemies are the same than that of the previous version. With this update, Quiver is twice as light as before!\n\n1.1.1 - 08/17/21\n\nA small update in which we added a little guide to learn the basics, as well as the update changelog you're reading right now :)\n\n1.1.2 - 12/10/21\n\nSomes changes about the code lisibility. You'll no longer see these green weird progress bars on other browsers than Firefox!")
 					});
 					$(".option-name.credits").addEventListener("click", Game.open_credits);
 					UI.btn.save.addEventListener("click", function() {Game.update_save_backup(window["Backup"])});
 					UI.btn.close_credits.addEventListener("click", Game.close_credits);
 					UI.btn.copy.addEventListener("click", function() {
-						// copying backup content
+						// Copy backup content
 						save.backup.select();
 						save.backup.setSelectionRange(0, save.backup.value.length);
 						document.execCommand("copy");
@@ -122,24 +104,30 @@
 						e.addEventListener("click", function() {e.parentNode.parentNode.scrollTop = (this.parentNode.offsetTop - 60)})
 					});
 					keybind.cancel.addEventListener("click", Game.close_keybind);
-					// music volume
-					$(".music .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling, "music")}); // chrome/safari/ff
-					$(".music .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling, "music")}); // ie
+					// Music volume
+					// Chrome/Safari/Firefox
+					$(".music .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling, "music")});
+					// IE
+					$(".music .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling, "music")});
+					// Volume number
 					$(".music .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling, "music")});
-					// sound volume
-					$(".sound .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling, "sound")}); // chrome/safari/ff
-					$(".sound .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling, "sound")}); // ie
+					// Sound volume
+					// Chrome/Safari/Firefox
+					$(".sound .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling, "sound")});
+					// IE
+					$(".sound .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling, "sound")});
+					// Volume number
 					$(".sound .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling, "sound")})
 				},
 				check_input_value: function(input) {
 					if (/^\s+$/.test(input.value) || input.value.length === 0) {
-						// the input value is composed only of whitespaces or is empty
+						// The input value is composed only of whitespaces or is empty
 						(input.getAttribute("id") === "player_name") ? is_player_name_ok = false : is_game_name_ok = false;
 						play.new_game.play.setAttribute("disabled", "disabled");
 						play.new_game.play.removeEventListener("click", Game.launch_new_game)
 					}
 					else if (input.getAttribute("id") === "player_name") is_player_name_ok = true;
-					else is_game_name_ok = true; // no errors
+					else is_game_name_ok = true; // No errors
 					Game.check_new_game_validity()
 				},
 				check_new_game_validity: function() {
@@ -149,18 +137,20 @@
 					}
 				},
 				lang: function(l) {
-					// l: language name (str)
-					// requesting the JSON file
-					var path = `assets/lang/${l}.json`,
+					// Change the UI language
+					// l -> language [str]
+					// JSON lang file request
+					let path = `assets/lang/${l}.json`,
 						request = new XMLHttpRequest();
 					request.open("GET", path);
 					request.responseType = "json";
 					request.send();
 					request.addEventListener("load", function() {
-						// the request has been accepted, changing page language
-						var r = this.response[l]; // recovering file content
+						// Request accepted
+						let r = this.response[l]; // Get file content
 						$("html").setAttribute("lang", r["lang"]);
-						// buttons
+						// Apply new language to the interface
+						// Buttons
 						document.querySelectorAll(".btn-class").forEach(function(e) {e.querySelector(".character_title").textContent = r.character[e.classList[2]]["name.text"]});
 						document.querySelectorAll(".btn-options").forEach(function(e) {e.textContent = r["options.text"]});
 						document.querySelectorAll(".btn-main-menu").forEach(function(e) {e.textContent = r["main_menu.text"]});
@@ -171,13 +161,13 @@
 						copy_success = r["copy_success.text"];
 						UI.btn.exit.textContent = r["exit.text"];
 						UI.btn.close_credits.textContent = r["close.text"];
-						// menu titles
+						// Menu titles
 						title.play.textContent = r["play.text"];
 						title.options.textContent = r["options.text"];
 						title.save.textContent = r["save.text"];
 						title.pause.textContent = r["pause.text"];
-						// play menu
-						// new game section
+						// Play menu
+						// New Game section
 						play.new_game.subtitle.textContent = r["new_game.text"];
 						play.new_game.player_name_tip.textContent = r.new_game["player_name_tip.text"];
 						play.new_game.player_name.setAttribute("placeholder", r.new_game["player_name_placeholder.text"]);
@@ -185,47 +175,47 @@
 						play.new_game.game_name.setAttribute("placeholder", r.new_game["game_name_placeholder.text"]);
 						play.new_game.character_selection_tip.textContent = r.new_game["character_selection_tip.text"];
 						play.new_game.play.textContent = r["new_game.text"];
-						// launch backup section
+						// Launch Backup section
 						play.launch_backup.subtitle.textContent = r["launch_backup.text"];
 						play.launch_backup.open.textContent = r["open_backup.text"];
 						play.launch_backup.backup_tip.textContent = r["backup_tip.text"];
 						play.launch_backup.launch.textContent = r["launch_this_backup.text"];
-						// option menu
-						// keybind settings
+						// Options menu
+						// Keybinds settings
 						options.keybind.subtitle.textContent = r.options["keybind.text"];
 						options.keybind.forward.firstChild.textContent = r.options["keybind:forward.text"];
 						options.keybind.backward.firstChild.textContent = r.options["keybind:backward.text"];
 						options.keybind.left.firstChild.textContent = r.options["keybind:left.text"];
 						options.keybind.right.firstChild.textContent = r.options["keybind:right.text"];
 						options.keybind.console.firstChild.textContent = r.options["keybind:console.text"];
-						// keybind menu
+						// Keybinds menu
 						keybind.cancel.textContent = r["cancel.text"];
 						keybind.apply.textContent = r["apply.text"];
 						keybind_tip = r["keybind_tip.text"];
-						// audio settings
+						// Audio settings
 						options.audio.subtitle.textContent = r.options["audio.text"];
 						options.audio.music.firstChild.textContent = r.options["audio:music.text"];
 						options.audio.sound.firstChild.textContent = r.options["audio:sound.text"];
-						// language settings
+						// Language settings
 						options.lang.subtitle.textContent = r.options["lang.text"];
 						options.lang.en_US.firstChild.textContent = r.options["lang:en_US.text"];
 						options.lang.es_ES.firstChild.textContent = r.options["lang:es_ES.text"];
 						options.lang.fr_FR.firstChild.textContent = r.options["lang:fr_FR.text"];
-						// about settings
+						// About settings
 						options.about.subtitle.textContent = r.options["about.text"];
 						options.about.tutorial.textContent = r.options["about:tutorial.text"];
 						options.about.updates.textContent = r.options["about:updates.text"];
 						options.about.credits.textContent = r.options["about:credits.text"];
-						// credit menu
+						// Credits menu
 						credits.title.textContent = r["credits.text"];
 						copyright = r.credits["copyright.text"];
 						copyright_fool = r.credits["copyright_fool.text"];
 						credits.clarisse_job.textContent = r.credits["clarisse_job.text"];
 						credits.lean_job.textContent = r.credits["lean_job.text"];
 						credits.matteo_job.textContent = r.credits["matteo_job.text"];
-						// save menu
+						// Save menu
 						save.tip.textContent = r["save_tip.text"];
-						// ability names
+						// Abilities names
 						ability_id.fireball = r.character.mage["fireball.text"];
 						ability_id.wand = r.character.mage["wand.text"];
 						ability_id.lightning = r.character.mage["lightning.text"];
@@ -235,7 +225,7 @@
 						ability_id.sword_strike = r.character.paladin["sword_strike.text"];
 						ability_id.parade = r.character.paladin["parade.text"];
 						ability_id.regeneration = r.character.paladin["regeneration.text"];
-						// ability descriptions
+						// Abilities descriptions
 						ability_desc.fireball = r.character.mage["fireball_desc.text"];
 						ability_desc.wand = r.character.mage["wand_desc.text"];
 						ability_desc.lightning = r.character.mage["lightning_desc.text"];
@@ -245,37 +235,37 @@
 						ability_desc.sword_strike = r.character.paladin["sword_strike_desc.text"];
 						ability_desc.parade = r.character.paladin["parade_desc.text"];
 						ability_desc.regeneration = r.character.paladin["regeneration_desc.text"];
-						// stat names & ability titles
+						// Stats & abilities titles
 						health = r["health.text"];
 						mana = r["mana.text"];
 						ability1_title = r["ability1_title.text"];
 						ability2_title = r["ability2_title.text"];
 						ult_title = r["ult_title.text"];
-						// enemy ability names
+						// Enemy abilities names
 						enemy_ability_id.kick = r.enemy_ability["kick.text"];
 						enemy_ability_id.hammer = r.enemy_ability["hammer.text"];
 						enemy_ability_id.dagger = r.enemy_ability["dagger.text"];
 						enemy_ability_id.arrow = r.enemy_ability["arrow.text"];
 						enemy_ability_id.heal = r.enemy_ability["heal.text"];
-						// parades
+						// Parades
 						player_block_text = r["player_block.text"];
 						enemy_block_text = r["enemy_block.text"];
-						// death menu
+						// Death menu
 						UI.overlay.death.querySelector(".death_title").textContent = r["death_title.text"];
 						UI.overlay.death.querySelector(".death_subtitle").textContent = r["death_subtitle.text"];
-						// errors/infos
+						// Alerts
 						json_error = r.error["json_error.text"];
 						copy_success = r["copy_success.text"];
-						// level subtitles
+						// Level subtitles
 						Subtitle.lobby.text = r.subtitle["lobby.text"];
 						Subtitle.dungeon.text = r.subtitle["dungeon.text"];
 						Subtitle.diamond.text = r.subtitle["diamond.text"];
-						// teller names
+						// Teller names
 						Teller.narrator = r.teller["narrator.text"];
 						Teller.innkeeper = r.teller["innkeeper.text"];
 						Teller.goblin = r.teller["goblin.text"];
-						// dialogs
-						// lobby dialogs
+						// Dialogs
+						// Lobby dialogs
 						for (i = 0; i < Dialog.lobby.length; i++) {Dialog.lobby[i].text = r.dialog.lobby[i].text}
 						Dialog.lobby[2].options[0] = r.dialog.lobby[2].options[0];
 						Dialog.lobby[2].options[1] = r.dialog.lobby[2].options[1];
@@ -283,28 +273,28 @@
 						for (i = 0; i < Dialog.diamond.length; i++) {Dialog.diamond[i].text = r.dialog.diamond[i].text} // diamond dialogs
 						for (i = 0; i < Dialog.misc.kill.length; i++) {Dialog.misc.kill[i].text = r.dialog.misc.kill[i].text} // kill dialogs
 						for (i = 0; i < Dialog.misc.flight.length; i++) {Dialog.misc.flight[i].text = r.dialog.misc.flight[i].text} // flight dialogs
-						// character info & fight menu
+						// Character info & fight menu
 						fight.title.textContent = r["fight.text"];
 						if (character_selected !== "") {
 							select_character(character_selected)
-							var TempPlayer = new Character(character_selected);
+							let TempPlayer = new Character(character_selected);
 							fight.btn_ability1.querySelector(".ability_name").textContent = ability_id[TempPlayer.ability1.id];
 							fight.btn_ability2.querySelector(".ability_name").textContent = ability_id[TempPlayer.ability2.id];
 							fight.btn_ult.querySelector(".ability_name").textContent = ability_id[TempPlayer.ult.id]
 						}
 						fight.btn_flee.textContent = r["flee.text"];
-						// hud updates
+						// HUD updates
 						if (window["Backup"] !== undefined) {
 							update_hud(window["Backup"]);
 							if (current_enemy !== undefined) update_mini_hud(window["Backup"], current_enemy_id, current_enemy)
 						}
 					});
-					// showing the check mark on the selected language
+					// Show a check icon on the selected language
 					document.querySelectorAll(".option.lang .option-name").forEach(function(e) {e.querySelector(".icon").style.visibility = "hidden"});
 					$(`.option.lang .option-name.${l}`).querySelector(".icon").style.visibility = "visible"
 				},
 				create_backup: function(player) {
-					var Backup = {
+					let Backup = {
 						name: play.new_game.game_name.value,
 						date: {
 							creation: now(),
@@ -351,8 +341,8 @@
 				},
 				launch_new_game: function() {
 					Game.toggle_menu("menu-play", "close");
-					// initializing the player
-					var Player = new Character(character_selected);
+					// Init player
+					let Player = new Character(character_selected);
 					Player.canMove = player.canMove;
 					Player.direction = player.direction;
 					Player.movement = player.movement;
@@ -361,14 +351,14 @@
 					Game.load(window["Backup"], Player)
 				},
 				open_backup: function(e) {
-					var file = e.target.files[0];
+					let file = e.target.files[0];
 					if (!file) return;
-					var reader = new FileReader();
+					let reader = new FileReader();
 					reader.onload = function(e) {
-						show($(".container-backup"), "flex"); // opening
+						show($(".container-backup"), "flex"); // Open the menu
 						try {
-							var temp = JSON.parse(e.target.result); // e.target.result = backup content
-							// showing backup content
+							let temp = JSON.parse(e.target.result); // e.target.result = backup content
+							// Show backup content
 							play.launch_backup.backup.value = e.target.result;
 							show(play.launch_backup.backup, "flex");
 							play.launch_backup.backup_info.classList.remove("error");
@@ -389,9 +379,9 @@
 					Game.toggle_menu("menu-play", "close");
 					window["Backup"] = JSON.parse(play.launch_backup.backup.value);
 					window["Backup"].date.lastConnection = now();
-					// initializing the player
+					// Init the player
 					character_selected = window["Backup"].player.character;
-					var Player = new Character(character_selected);
+					let Player = new Character(character_selected);
 					Player.canMove = player.canMove;
 					Player.direction = player.direction;
 					Player.movement = player.movement;
@@ -400,15 +390,15 @@
 				update_save_backup: function(backup) {save.backup.value = JSON.stringify(backup, null, "\t")},
 				load: function(backup, player) {
 					document.removeEventListener("keydown", esc);
-					// showing loading screen
+					// Show loading screen
 					show(UI.overlay.load);
 					UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style.backgroundColor = "#000";
-					Game.generate(backup); // generating the map
+					Game.generate(backup); // Generate the map
 					Map.player.style.backgroundImage = `url(assets/textures/entity/${player.texture.idle})`;
-					update_hud(backup); // updating hud values
-					// loading overlay/screen animations
+					update_hud(backup); // Update HUD values
+					// Load overlay/screen animations
 					setTimeout(function() {show(UI.menu.load, "flex")}, 600);
 					setTimeout(function() {
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
@@ -419,10 +409,10 @@
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
 						UI.overlay.load.style.backgroundColor = "#000";
-						Game.start(backup, player); // starting the game
+						Game.start(backup, player); // Start game
 						hide(UI.menu.main)
 					}, 4600);
-					// hiding loading screen and showing game
+					// Hide loading screen and showing game
 					setTimeout(function() {
 						hide(UI.menu.load);
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
@@ -434,22 +424,22 @@
 					setTimeout(function() {hide(UI.overlay.load)}, 5800)
 				},
 				generate: function(backup) {
-					// requesting the JSON map data
-					var path = `maps/${backup.player.level}.json`,
+					// Request the map data
+					let path = `maps/${backup.player.level}.json`,
 						map_request = new XMLHttpRequest();
 					map_request.open("GET", path);
 					map_request.responseType = "json";
 					map_request.send();
 					map_request.addEventListener("load", function() {
-						// the request has been accepted, recovering file content and generating the map
-						var r = this.response[backup.player.level],
+						// Request accepted, get file content and generate the map
+						let r = this.response[backup.player.level],
 							map = r.map,
 							uppermap = r.uppermap,
 							entities = r.entity,
 							next_level = r.next_level,
 							part,
 							scale_multiplier = 64;
-						// map parts
+						// Map parts
 						for (i = 0; i < map.length; i++) {
 							part = document.createElement("div");
 							part.className = `part ${map[i].part}`;
@@ -459,7 +449,7 @@
 							part.style.backgroundImage = `url(assets/textures/map/${map[i].texture})`;
 							Map.map.append(part)
 						}
-						// uppermap parts
+						// Uppermap parts
 						for (i = 0; i < uppermap.length; i++) {
 							part = document.createElement("div");
 							part.className = `part ${uppermap[i].part}`;
@@ -469,7 +459,7 @@
 							part.style.backgroundImage = `url(assets/textures/map/${uppermap[i].texture})`;
 							Map.uppermap.append(part)
 						}
-						// entities
+						// Entities
 						for (i = 0; i < entities.length; i++) {
 							part = document.createElement("div");
 							part.className = `entity ${entities[i].entity}`;
@@ -482,7 +472,7 @@
 					})
 				},
 				start: function(backup, player) {
-					UI.menu.options.querySelector(".about").removeChild($(".option-name.credits")); // removing credit button from the option menu when playing the game
+					UI.menu.options.querySelector(".about").removeChild($(".option-name.credits")); // Remove credit button from the option menu when playing the game
 					document.addEventListener("keydown", pause_menu);
 					UI.btn.resume.addEventListener("click", function() {
 						UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
@@ -493,20 +483,20 @@
 							player.movement.on()
 						}, 200)
 					});
-					// player movement
+					// Player movement
 					player.movement.on();
 					window.requestAnimationFrame(player.movement.move);
-					Game.story(backup.player.level) // level subtitle & dialogs
+					Game.story(backup.player.level) // Level subtitle & dialogs
 				},
 				end: function() {
-					player.speed = 0; // setting speed to 0 so the player can't move
-					player.movement.off(); // disabling player movement
-					Game.open_credits() // opening credit menu
+					player.speed = 0; // Set speed to 0 so the player can't move
+					player.movement.off(); // Disable player movement
+					Game.open_credits() // Open credit menu
 				},
 				story: function(map) {
 					update_subtitle(map);
 					switch (map) {
-						case "lobby": // showing lobby dialogs
+						case "lobby": // Show lobby dialogs
 							Map.dialog_content.innerHTML = `${Teller.narrator}: <i>${Dialog.lobby[0].text}</i>`;
 							show(Map.dialog);
 							setTimeout(function() {hide(Map.dialog)}, Dialog.lobby[0].duration);
@@ -522,7 +512,7 @@
 									show(Map.dialog_option2);
 									show(Map.dialog);
 									Map.dialog_option1.addEventListener("click", function() {
-										// continuing the game
+										// Continue the game
 										hide(Map.dialog_option1);
 										hide(Map.dialog_option2);
 										hide(Map.dialog);
@@ -539,7 +529,7 @@
 										}, 1000);
 									});
 									Map.dialog_option2.addEventListener("click", function() {
-										// alternative ending
+										// Alternative end
 										hide(Map.dialog_option1);
 										hide(Map.dialog_option2);
 										hide(Map.dialog);
@@ -550,7 +540,7 @@
 										setTimeout(function() {
 											hide(Map.dialog);
 											game_ended = true;
-											// closing pause menu if opened
+											// Close pause menu if opened
 											UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
 											UI.overlay.pause.style["animation-name"] = "overlay_pause_fade_out";
 											Map.container.classList.remove("blur");
@@ -558,9 +548,9 @@
 												hide(UI.overlay.pause);
 												player.movement.on()
 											}, 200);
-											// closing save menu if opened
+											// Close save menu if opened
 											Game.toggle_menu("menu-save", "close");
-											// closing option menu if opened
+											// Close options menu if opened
 											Game.toggle_menu("menu-options", "close");
 											Game.end()
 										}, Dialog.lobby[5].duration + 1000)
@@ -581,7 +571,7 @@
 					in_fight = true;
 					current_enemy_id = enemy_id;
 					current_enemy = enemy;
-					rogue_damage_mult = 1; // resetting rogue's damage multiplier (stealth ability)
+					rogue_damage_mult = 1; // Reset Rogue damage multiplier (Stealth ability)
 					TempPlayer = new Character(backup.player.character);
 					fight.player_avatar.style.backgroundImage = `url(assets/textures/entity/${TempPlayer.texture.idle})`;
 					fight.enemy_avatar.style.backgroundImage = `url(assets/textures/entity/${enemy}.png)`;
@@ -603,15 +593,15 @@
 				death: function() {
 					game_ended = true;
 					play_sound("pop");
-					// closing pause menu if opened
+					// Close pause menu if opened
 					document.removeEventListener("keydown", pause_menu);
 					UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
 					UI.overlay.pause.style["animation-name"] = "overlay_pause_fade_out";
 					Map.container.classList.remove("blur");
 					setTimeout(function() {hide(UI.overlay.pause)}, 200);
-					// closing save menu if opened
+					// Close save menu if opened
 					Game.toggle_menu("menu-save", "close");
-					// closing option menu if opened
+					// Close option menu if opened
 					Game.toggle_menu("menu-options", "close");
 					player.movement.off();
 					hide(hud.container);
@@ -626,28 +616,29 @@
 					while (Map.map.firstChild) {Map.map.removeChild(Map.map.lastChild)}
 					while (Map.uppermap.firstChild) {Map.uppermap.removeChild(Map.uppermap.lastChild)}
 					while (Map.entities.firstChild) {Map.entities.removeChild(Map.entities.lastChild)}
-					backup.player.level = map; // disabling lobby collisions and enabling dungeon collisions
-					// setting player coords to (0, 0)
+					backup.player.level = map; // Disable lobby collisions and enabling dungeon collisions
+					// Set player coords to (0, 0)
 					backup.player.pos[0] = 0;
 					backup.player.pos[1] = 0;
-					// giving full health and mana to the player when it passes to the next level
+					// Give full health and mana to the player when it passes to the next level
 					backup.player.health = backup.player.health_max;
 					backup.player.mana = backup.player.mana_max;
 					update_hud(backup);
-					Game.generate(backup, map); // generating the next map
-					Game.story(map) // next map story (subtitle/dialogs)
+					Game.generate(backup, map); // Generate the next map
+					Game.story(map) // Next map story (subtitle/dialogs)
 				},
 				toggle_menu: function(m, s) {
-					// m: menu name (str)
-					// s: status (1: open or 0: close)
-					var menu = UI.overlay.menu.querySelector(`.${m}`),
+					// Toggle the display of a specified menu
+					// m -> menu [str]
+					// s -> status (1: open or 0: close) [number]
+					let menu = UI.overlay.menu.querySelector(`.${m}`),
 						st = menu.querySelector(".scrollbox-top"),
 						sb = menu.querySelector(".scrollbox-bottom"),
 						content = menu.querySelector(".content"),
 						scrollable = content.querySelector(".scrollable");
 					switch (s) {
-						case "open": // opening
-							if (play.launch_backup.backup_info.classList.contains("error")) play.launch_backup.backup_info.textContent = ""; // removing JSON error info
+						case "open": // Open the menu
+							if (play.launch_backup.backup_info.classList.contains("error")) play.launch_backup.backup_info.textContent = ""; // Remove JSON error info
 							show(UI.overlay.menu, "flex");
 							UI.overlay.menu.style["-webkit-animation-name"] = "overlay_menu_fade_in";
 							UI.overlay.menu.style["animation-name"] = "overlay_menu_fade_in";
@@ -660,14 +651,14 @@
 							sb.style["animation-name"] = "scrollbox-open";
 							sb.style.height = "50%";
 							scrollable.style.scrollBehavior = "auto";
-							scrollable.scrollTop = 0; /* scrolling to top (without animations) */
+							scrollable.scrollTop = 0; // Scroll to top (animation-less)
 							scrollable.style.scrollBehavior = "smooth";
 							setTimeout(function() {
 								content.style.visibility = "visible";
 								document.addEventListener("keydown", esc)
 							}, 200);
 							break;
-						case "close": // closing with button
+						case "close": // Close with button
 							document.removeEventListener("keydown", esc);
 							content.style.visibility = "hidden";
 							st.style["-webkit-animation-name"] = "scrollbox-close";
@@ -682,16 +673,15 @@
 							setTimeout(function() {
 								hide(menu);
 								hide(UI.overlay.menu)
-							}, 200);
-							break
+							}, 200)
 					}
 				},
-				// keybind methods
+				// Keybinds methods
 				open_keybind: function(k) {
 					current_key = k;
 					keybind.title.textContent = current_key.firstChild.textContent;
 					keybind.tip.textContent = keybind_tip;
-					show(UI.overlay.keybind, "flex"); // showing the menu
+					show(UI.overlay.keybind, "flex"); // Show the menu
 					document.addEventListener("keydown", esc);
 					document.addEventListener("keydown", Game.input_keybind)
 				},
@@ -721,7 +711,7 @@
 					UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style.backgroundColor = "#000";
 					setTimeout(function() {
-						var donut = Math.floor(6 * Math.random() + 1);
+						let donut = Math.floor(6 * Math.random() + 1);
 						credits.copyright.textContent = (donut === 1) ? copyright_fool : copyright;
 						if (game_ended) {
 							hide(UI.btn.close_credits);
@@ -754,10 +744,10 @@
 						setTimeout(function() {hide(UI.overlay.load)}, 600)
 					}, 1200)
 				},
-				version: "1.1.1"
+				version: "1.1.2"
 			}
 
-			var UI = {
+			let UI = {
 				btn: {
 					play: null,
 					options: null,
@@ -785,14 +775,14 @@
 				}
 			};
 
-			var title = {
+			let title = {
 				play: null,
 				options: null,
 				save: null,
 				pause: null
 			};
 
-			var play = {
+			let play = {
 				new_game: {
 					subtitle: null,
 					player_name_tip: null,
@@ -822,7 +812,7 @@
 				}
 			};
 
-			var options = {
+			let options = {
 				keybind: {
 					subtitle: null,
 					forward: null,
@@ -859,14 +849,14 @@
 				}
 			};
 
-			var keybind = {
+			let keybind = {
 				title: null,
 				tip: null,
 				cancel: null,
 				apply: null
 			};
 
-			var credits = {
+			let credits = {
 				title: null,
 				copyright: null,
 				clarisse_job: null,
@@ -874,12 +864,12 @@
 				matteo_job: null
 			};
 
-			var save = {
+			let save = {
 				tip: null,
 				backup: null
 			};
 
-			var Map = {
+			let Map = {
 				container: null,
 				overlay: null,
 				map: null,
@@ -971,12 +961,11 @@
 							cost: 7,
 							damage: 0,
 							healthAmount: 5
-						};
-						break
+						}
 				}
 			}
 
-			var Key = {
+			let Key = {
 				forward: 90,
 				backward: 83,
 				left: 81,
@@ -984,7 +973,7 @@
 				console: 112
 			};
 
-			var player = {
+			let player = {
 				canMove: {
 					top: false,
 					bottom: false,
@@ -1000,7 +989,7 @@
 				speed: 0.1,
 				movement: {
 					on: function() {
-						// allowing player movement
+						// Enable player movement
 						player.canMove.top = true;
 						player.canMove.bottom = true;
 						player.canMove.left = true;
@@ -1009,7 +998,7 @@
 						window.addEventListener("keyup", player.movement.keyup)
 					},
 					off: function() {
-						// disallowing player movement
+						// Disallow player movement
 						player.canMove.top = false;
 						player.canMove.bottom = false;
 						player.canMove.left = false;
@@ -1022,37 +1011,35 @@
 						window.removeEventListener("keyup", player.movement.keyup)
 					},
 					keydown: function(e) {
-						// pressing a key
+						// Press key
 						switch (e.keyCode) {
-							case Key.forward: // forward key
+							case Key.forward: // Forward key
 								player.canMove.top ? player.direction.top = true : player.direction.top = false;
 								break;
-							case Key.backward: // backward key
+							case Key.backward: // Backward key
 								player.canMove.bottom ? player.direction.bottom = true : player.direction.bottom = false;
 								break;
-							case Key.left: // left key
+							case Key.left: // Left key
 								player.canMove.left ? player.direction.left = true : player.direction.left = false;
 								break;
-							case Key.right: // right key
-								player.canMove.right ? player.direction.right = true : player.direction.right = false;
-								break
+							case Key.right: // Right key
+								player.canMove.right ? player.direction.right = true : player.direction.right = false
 						}
 					},
 					keyup: function(e) {
-						// releasing the key
+						// Release key
 						switch (e.keyCode) {
-							case Key.forward: // forward key
+							case Key.forward: // Forward key
 								player.direction.top = false;
 								break;
-							case Key.backward: // backward key
+							case Key.backward: // Backward key
 								player.direction.bottom = false;
 								break;
-							case Key.left: // left key
+							case Key.left: // Left key
 								player.direction.left = false;
 								break;
-							case Key.right: // right key
-								player.direction.right = false;
-								break
+							case Key.right: // Right key
+								player.direction.right = false
 						}
 					},
 					move: function() {
@@ -1061,25 +1048,25 @@
 						if (player.direction.bottom && player.canMove.bottom) window["Backup"].player.pos[1] -= player.speed;
 						if (player.direction.left && player.canMove.left) {
 							window["Backup"].player.pos[0] -= player.speed;
-							// changing player orientation
+							// Change player orientation
 							Map.player.style.transform = "rotateY(180deg)";
 							window["Backup"].player.orientation = "left"
 						}
 						if (player.direction.right && player.canMove.right) {
 							window["Backup"].player.pos[0] += player.speed;
-							// changing player orientation
+							// Change player orientation
 							Map.player.style.transform = "rotateY(0)";
 							window["Backup"].player.orientation = "right"
 						}
-						// console coordinates
+						// Console coordinates
 						$("#console .x").textContent = `Player X: ${window["Backup"].player.pos[0].toFixed(1)}`;
 						$("#console .y").textContent = `Player Y: ${window["Backup"].player.pos[1].toFixed(1)}`;
-						// moving the player
+						// Move the player
 						player.movement.tp(window["Backup"].player.pos[0].toFixed(1), window["Backup"].player.pos[1].toFixed(1));
 						window.requestAnimationFrame(player.movement.move)
 					},
 					tp: function(x, y) {
-						var t = "translateX(" + -x * 64 + "px) translateY(" + y * 64 + "px)";
+						let t = "translateX(" + -x * 64 + "px) translateY(" + y * 64 + "px)";
 						Map.map.style.transform = t;
 						Map.uppermap.style.transform = t;
 						Map.entities.style.transform = t
@@ -1087,13 +1074,13 @@
 				},
 				test_collision: function(x, y) {
 					switch (window["Backup"].player.level) {
-						case "lobby": // lobby collision list
-							// top collisions
+						case "lobby": // Lobby collision list
+							// Top collisions
 							if (x >= -9 && x <= 9 && y >= 6.5 && y <= 7.5) player.canMove.top = false; // hwall1
 							else if (x > -8 && x < -4 && y >= -1.5 && y <= -0.5) player.canMove.top = false; // table1
 							else if (x > 4 && x < 8 && y >= -1.5 && y <= -0.5) player.canMove.top = false; // table2
 							else player.canMove.top = true;
-							// bottom collisions
+							// Bottom collisions
 							if (x >= -9 && x < -1 && y >= -5 && y <= -4) player.canMove.bottom = false; // hwall2
 							else if (x >= -9 && x < -6 && y >= -4.5 && y <= -3.5) player.canMove.bottom = false; // weapons
 							else if (x > 1 && x <= 9 && y >= -5 && y <= -4) player.canMove.bottom = false; // hwall3
@@ -1101,31 +1088,31 @@
 							else if (x > -8 && x < -4 && y <= 3 && y >= 2) player.canMove.bottom = false; // table1
 							else if (x > 4 && x < 8 && y <= 3 && y >= 2) player.canMove.bottom = false; // table2
 							else player.canMove.bottom = true;
-							// left collisions
+							// Left collisions
 							if (x >= -11 && x <= -9 && y >= -4 && y <= 6.5) player.canMove.left = false; // vwall1
 							else if (x >= -2 && x <= -1 && y > -5.5 && y < -4) player.canMove.left = false; // hwall2
 							else if (x >= -7 && x <= -6 && y >= -4.5 && y < -3.5) player.canMove.left = false; // weapons
 							else if (x >= -5 && x <= -4 && y > -1.5 && y < 3) player.canMove.left = false; // table1
 							else if (x >= 7 && x <= 8 && y > -1.5 && y < 3) player.canMove.left = false; // table2
 							else player.canMove.left = true;
-							// right collisions
+							// Right collisions
 							if (x >= 9 && x <= 11 && y >= -4 && y <= 6.5) player.canMove.right = false; // vwall2
 							else if (x >= 1 && x <= 2 && y > -5.5 && y < -4) player.canMove.right = false; // hwall3
 							else if (x >= -8 && x <= -7 && y > -1.5 && y < 3) player.canMove.right = false; // table1
 							else if (x >= 4 && x <= 5 && y > -1.5 && y < 3) player.canMove.right = false; // table2
 							else player.canMove.right = true;
-							// custom cases
+							// Custom cases
 							if (x >= -1 && x <= 1 && y >= -6 && y <= -5) {
-								// exit
+								// Exit
 								if (!custom_case_near && can_enter_dungeon) {
-									custom_case_near = true; // a custom case is near
-									Game.update_map(window["Backup"], "dungeon") // entering the dungeon
+									custom_case_near = true; // Custom case near
+									Game.update_map(window["Backup"], "dungeon") // Enter the dungeon
 								}
 							}
-							else custom_case_near = false; // no custom cases near
+							else custom_case_near = false; // No custom cases near
 							break;
-						case "dungeon":
-							// top
+						case "dungeon": // Dungeon level collision list
+							// Top collisions
 							if (x >= -1 && x < 10 && y >= 0.5 && y <= 1.5) player.canMove.top = false; // hwall1
 							else if (x >= 10 && x < 15 && y >= 3.5 && y <= 4.5) player.canMove.top = false; // hwall3
 							else if (x > 16 && x < 24 && y >= 3.5 && y <= 4.5) player.canMove.top = false; // hwall4
@@ -1137,7 +1124,7 @@
 							else if (x > 11 && x < 17 && y >= 9.5 && y <= 10.5) player.canMove.top = false; // hwall13
 							else if (x >= 4 && x <= 37 && y >= 21.5 && y <= 22.5) player.canMove.top = false; // hwall17
 							else player.canMove.top = true;
-							// bottom
+							// Bottom collisions
 							if (x >= -1 && x <= 11 && y >= -2 && y <= -1) player.canMove.bottom = false; // hwall2
 							else if (x > 11 && x < 31 && y >= 1 && y <= 2) player.canMove.bottom = false; // hwall5
 							else if (x >= 31 && x <= 35 && y >= 0 && y <= 1) player.canMove.bottom = false; // hwall6
@@ -1149,7 +1136,7 @@
 							else if (x >= 4 && x < 10 && y >= 18 && y <= 19) player.canMove.bottom = false; // hwall15
 							else if (x > 18 && x <= 37 && y >= 18 && y <= 19) player.canMove.bottom = false; // hwall16
 							else player.canMove.bottom = true;
-							// left
+							// Left collisions
 							if (x >= -2 && x <= -1 && y >= -1 && y <= 0.5) player.canMove.left = false; // map_border1
 							else if (x >= 9 && x <= 10 && y > 0.5 && y <= 3.5) player.canMove.left = false; // vwall1
 							else if (x >= 30 && x <= 31 && y >= 1 && y < 2) player.canMove.left = false; // hwall5
@@ -1163,7 +1150,7 @@
 							else if (x >= 16 && x <= 17 && y > 9.5 && y < 19) player.canMove.left = false; // vwall13
 							else if (x >= 3 && x <= 4 && y >= 19 && y <= 21.5) player.canMove.left = false; // map_border2
 							else player.canMove.left = true;
-							// right
+							// Right collisions
 							if (x >= 11 && x <= 12 && y >= -1 && y < 2) player.canMove.right = false; // vwall2
 							else if (x >= 35 && x <= 36 && y >= 1 && y <= 11.5) player.canMove.right = false; // vwall5
 							else if (x >= 31.1 && x <= 32.1 && y > 10.6 && y <= 11.5) player.canMove.right = false; // chest
@@ -1173,78 +1160,78 @@
 							else if (x >= 11 && x <= 12 && y > 9.5 && y < 19) player.canMove.right = false; // vwall12
 							else if (x >= 37 && x <= 38 && y >= 19 && y <= 21.5) player.canMove.right = false; // map_border3
 							else player.canMove.right = true;
-							// enemies
+							// Enemies
 							if (x > 12 && x < 14 && y >= 2 && y <= 3.5) {
-								// archer skeleton
+								// Archer skeleton
 								if (!enemy_near && window["Backup"].entity[0].health !== 0) {
 									enemy_near = true;
 									Game.fight(window["Backup"], 0, "skeleton2")
 								}
 							}
 							else if (x > 21 && x < 23 && y >= 2 && y <= 3.5) {
-								// guard skeleton
+								// Guard skeleton
 								if (!enemy_near && window["Backup"].entity[1].health !== 0) {
 									enemy_near = true;
 									Game.fight(window["Backup"], 1, "skeleton1")
 								}
 							}
 							else if (x >= 17 && x <= 18 && y > 14 && y < 16) {
-								// goblin
+								// Goblin
 								if (!enemy_near && window["Backup"].entity[2].health !== 0) {
 									enemy_near = true;
 									Game.fight(window["Backup"], 2, "goblin")
 								}
 							}
 							else enemy_near = false;
-							// custom cases
+							// Custom cases
 							if (x >= -2 && x <= -1 && y >= -1 && y <= 0.5) {
-								// map border
+								// Map border
 								if (!custom_case_near) {
-									custom_case_near = true; // a custom case is near
-									dialog(Dialog.dungeon[1]) // border dialog
+									custom_case_near = true; // Custom case near
+									dialog(Dialog.dungeon[1]) // Border dialog
 								}
 							}
 							else if ((x > 26 && x < 28 && y >= 2 && y <= 3.5) || (x > 26 && x < 28 && y >= 8 && y <= 9.5)) {
-								// chest room
+								// Chest room
 								if (!custom_case_near && !chest_room_visited) {
-									custom_case_near = true; // a custom case is near
+									custom_case_near = true; // Custom case near
 									chest_room_visited = true;
-									dialog(Dialog.dungeon[2]) // chest room dialog
+									dialog(Dialog.dungeon[2]) // Chest room dialog
 								}
 							}
 							else if (x >= 31.1 && x <= 32.9 && y >= 10.6 && y <= 11.6) {
-								// chest
+								// Chest
 								if (!custom_case_near) {
-									custom_case_near = true; // a custom case is near
-									dialog(Dialog.dungeon[3]) // chest dialog
+									custom_case_near = true; // Custom case near
+									dialog(Dialog.dungeon[3]) // Chest dialog
 								}
 							}
 							else if (x >= 10 && x <= 11 && y > 9.5 && y < 11.5) {
-								// corridor monster
+								// Corridor monster
 								if (!custom_case_near && !corridor_visited) {
-									custom_case_near = true; // a custom case is near
+									custom_case_near = true; // Custom case near
 									corridor_visited = true;
-									dialog(Dialog.dungeon[4]) // corridor monster dialog
+									dialog(Dialog.dungeon[4]) // Corridor monster dialog
 								}
 							}
 							else if (x >= 3 && x <= 4 && y >= 19 && y <= 21.5) {
-								// false exit
+								// False exit
 								if (!custom_case_near) {
-									custom_case_near = true; // a custom case is near
-									dialog(Dialog.dungeon[5]) // false exit dialog
+									custom_case_near = true; // Custom case near
+									dialog(Dialog.dungeon[5]) // False exit dialog
 								}
 							}
 							else if (x >= 37 && x <= 38 && y >= 19 && y <= 21.5) {
-								// exit
+								// True exit
 								if (!custom_case_near) {
-									custom_case_near = true; // a custom case is near
-									Game.update_map(window["Backup"], "diamond") // entering "diamond" level
+									custom_case_near = true; // Custom case near
+									Game.update_map(window["Backup"], "diamond") // Enter "diamond" level
 								}
 							}
-							else custom_case_near = false; // no custom cases near
+							else custom_case_near = false; // No custom cases near
 							break;
-						case "diamond":
-							// top
+						case "diamond": // Diamond level collision list
+							// Top collisions
 							if (x >= -1 && x <= 1 && y >= 1 && y <= 2) player.canMove.top = false; // map_border1
 							else if (x > 1 && x < 11 && y >= -11.5 && y <= -10.5) player.canMove.top = false; // hwall1
 							else if (x > 12 && x <= 27 && y >= -11.5 && y <= -10.5) player.canMove.top = false; // hwall2
@@ -1256,7 +1243,7 @@
 							else if (x > 1 && x <= 19 && y >= -17.5 && y <= -16.5) player.canMove.top = false; // hwall9
 							else if (x >= 7 && x < 11 && y >= -22.5 && y <= -21.5) player.canMove.top = false; // hwall12
 							else player.canMove.top = true;
-							// bottom
+							// Bottom collisions
 							if (x > 1 && x <= 27 && y >= -15 && y <= -14) player.canMove.bottom = false; // hwall3
 							else if (x > 20 && x < 22 && y >= -14 && y <= -13) player.canMove.bottom = false; // hwall5
 							else if (x > 26 && x <= 27 && y >= -13 && y <= -12) player.canMove.bottom = false; // table2
@@ -1267,7 +1254,7 @@
 							else if (x > 12 && x <= 19 && y >= -20 && y <= -19) player.canMove.bottom = false; // hwall11
 							else if (x >= 7 && x <= 12 && y >= -25 && y <= -24) player.canMove.bottom = false; // hwall13
 							else player.canMove.bottom = true;
-							// left
+							// Left collisions
 							if (x >= -2 && x <= -1 && y >= -19 && y <= 1) player.canMove.left = false; // vwall1
 							else if (x >= 21 && x <= 22 && y > -12.5 && y <= -11.5) player.canMove.left = false; // hwall4
 							else if (x >= 21 && x <= 22 && y >= -14 && y < -13) player.canMove.left = false; // hwall5
@@ -1278,7 +1265,7 @@
 							else if (x >= 10 && x <= 11 && y > -22.5 && y < -19) player.canMove.left = false; // vwall10
 							else if (x >= 6 && x <= 7 && y >= -24 && y <= -22.5) player.canMove.left = false; // map_border3
 							else player.canMove.left = true;
-							// right
+							// Right collisions
 							if (x >= 1 && x <= 2 && y > -11.5 && y <= 1) player.canMove.right = false; // vwall2
 							else if (x >= 1 && x <= 2 && y > -17.5 && y < -14) player.canMove.right = false; // vwall3
 							else if (x >= 27 && x <= 28 && y >= -14 && y <= -11.5) player.canMove.right = false; // vwall4
@@ -1292,86 +1279,85 @@
 							else if (x >= 19 && x <= 20 && y >= -19 && y <= -17.5) player.canMove.right = false; // vwall9
 							else if (x >= 12 && x <= 13 && y >= -24 && y < -19) player.canMove.right = false; // vwall11
 							else player.canMove.right = true;
-							// enemies
+							// Enemies
 							if (x >= -1 && x <= 1 && y > -9 && y < -7) {
-								// guard skeleton
+								// Guard skeleton
 								if (!enemy_near && window["Backup"].entity[3].health !== 0) {
 									enemy_near = true;
 									Game.fight(window["Backup"], 3, "skeleton1")
 								}
 							}
 							else if (x > 7 && x < 9 && y >= -14 && y <= -11.5) {
-								// goblin
+								// Goblin
 								if (!enemy_near && window["Backup"].entity[4].health !== 0) {
 									enemy_near = true;
 									Game.fight(window["Backup"], 4, "goblin")
 								}
 							}
 							else if (x > 18 && x < 20 && y >= -14 && y <= -11.5) {
-								// archer skeleton 1
+								// Archer skeleton 1
 								if (!enemy_near && window["Backup"].entity[5].health !== 0) {
 									enemy_near = true;
 									Game.fight(window["Backup"], 5, "skeleton2")
 								}
 							}
 							else if (x > 8 && x < 10 && y >= -19 && y <= -17.5) {
-								// archer skeleton 2
+								// Archer skeleton 2
 								if (!enemy_near && window["Backup"].entity[6].health !== 0) {
 									enemy_near = true;
 									Game.fight(window["Backup"], 6, "skeleton2")
 								}
 							}
 							else enemy_near = false;
-							// custom cases
+							// Custom cases
 							if (x > 1 && x < 3 && y >= -14 && y <= -11.5) {
-								// goblin noise
+								// Goblin noise
 								if (!custom_case_near && !goblin_noise_done) {
-									custom_case_near = true; // a custom case is near
+									custom_case_near = true; // Custom case near
 									goblin_noise_done = true;
-									dialog(Dialog.diamond[1]) // goblin noise dialog
+									dialog(Dialog.diamond[1]) // Goblin noise dialog
 								}
 							}
 							else if (x >= 13.1 && x <= 14.9 && y >= -5.4 && y <= -4.4) {
-								// chest
+								// Chest
 								if (!custom_case_near) {
-									custom_case_near = true; // a custom case is near
-									dialog(Dialog.diamond[2]) // chest dialog
+									custom_case_near = true; // Custom case near
+									dialog(Dialog.diamond[2]) // Chest dialog
 								}
 							}
 							else if (x >= -1 && x <= 1 && y >= 1 && y <= 2) {
-								// map border 1
+								// Map border 1
 								if (!custom_case_near) {
-									custom_case_near = true; // a custom case is near
-									dialog(Dialog.dungeon[1]) // border 1 dialog
+									custom_case_near = true; // Custom case near
+									dialog(Dialog.dungeon[1]) // Border 1 dialog
 								}
 							}
 							else if (x >= 6 && x <= 7 && y >= -24 && y <= -22.5) {
-								// map border 2
+								// Map border 2
 								if (!custom_case_near) {
-									custom_case_near = true; // a custom case is near
-									dialog(Dialog.diamond[3]) // border 2 dialog
+									custom_case_near = true; // Custom case near
+									dialog(Dialog.diamond[3]) // Border 2 dialog
 								}
 							}
 							else if ((x > 26 && x <= 27 && y >= -13.5 && y <= -12.5) || (x > 26 && x <= 27 && y >= -13 && y <= -12) || (x >= 26 && x <= 27 && y > -13.5 && y < -12)) {
-								// diamond
+								// Diamond
 								if (!custom_case_near && !diamond_taken) {
-									custom_case_near = true; // a custom case is near
+									custom_case_near = true; // Custom case near
 									diamond_taken = true;
 									game_ended = true;
-									Map.uppermap.removeChild(Map.uppermap.querySelector(".diamond")); // removing the diamond
+									Map.uppermap.removeChild(Map.uppermap.querySelector(".diamond")); // Mask the diamond
 									player.movement.off();
 									play_sound("diamond");
 									dialog(Dialog.diamond[4]);
-									setTimeout(Game.end, Dialog.diamond[4].duration) // main ending
+									setTimeout(Game.end, Dialog.diamond[4].duration) // Main ending
 								}
 							}
-							else custom_case_near = false;
-							break
+							else custom_case_near = false
 					}
 				}
 			};
 
-			var ability_id = {
+			let ability_id = {
 				fireball: "",
 				wand: "",
 				lightning: "",
@@ -1383,7 +1369,7 @@
 				regeneration: ""
 			};
 
-			var ability_desc = {
+			let ability_desc = {
 				fireball: "",
 				wand: "",
 				lightning: "",
@@ -1395,7 +1381,7 @@
 				regeneration: ""
 			};
 
-			var Entity = {
+			const Entity = {
 				goblin: {
 					id: "goblin",
 					texture: "goblin.png",
@@ -1467,7 +1453,7 @@
 				}
 			};
 
-			var enemy_ability_id = {
+			let enemy_ability_id = {
 				kick: "",
 				hammer: "",
 				dagger: "",
@@ -1475,7 +1461,7 @@
 				arrow: ""
 			};
 
-			var hud = {
+			let hud = {
 				container: null,
 				nickname: null,
 				health_info: null,
@@ -1484,7 +1470,7 @@
 				mana_value: null
 			};
 
-			var mini_hud = {
+			let mini_hud = {
 				container: null,
 				health_info: null,
 				health_value: null,
@@ -1494,7 +1480,7 @@
 				enemy_health_value: null
 			};
 
-			var Subtitle = {
+			let Subtitle = {
 				lobby: {
 					text: null,
 					duration: 4000
@@ -1509,13 +1495,13 @@
 				}
 			};
 
-			var Teller = {
+			let Teller = {
 				narrator: null,
 				innkeeper: null,
 				goblin: null
 			}
 
-			var Dialog = {
+			let Dialog = {
 				lobby: [
 					{
 						teller: "narrator",
@@ -1628,7 +1614,7 @@
 				}
 			};
 
-			var fight = {
+			let fight = {
 				title: null,
 				player_attack: null,
 				enemy_attack: null,
@@ -1640,11 +1626,11 @@
 				btn_flee: null
 			};
 
-			// musics
-			var Music = {};
+			// Musics
+			const Music = {};
 
-			// sounds
-			var Sound = {
+			// Sounds
+			const Sound = {
 				click: new Audio("assets/sounds/click.mp3"),
 				fireball: new Audio("assets/sounds/fireball.mp3"),
 				wand: new Audio("assets/sounds/wand.mp3"),
@@ -1662,14 +1648,14 @@
 				diamond: new Audio("assets/sounds/diamond.mp3")
 			};
 
-			// volume
-			var Volume = {
+			// Volume
+			let Volume = {
 				music: 1,
 				sound: 1
 			}
 
-			// other variables
-			var raw_menus = ["menu-play", "menu-options", "menu-save"],
+			// Other variables
+			let raw_menus = ["menu-play", "menu-options", "menu-save"],
 				TempPlayer,
 				is_player_name_ok = false,
 				is_game_name_ok = false,
@@ -1703,13 +1689,10 @@
 				rogue_damage_mult = 1,
 				rogue_discretion = false;
 
-			function $(e) {return document.querySelector(e)}
-
-			function show(e, v) {return e.style.display = (v === undefined) ? "block" : v}
-
-			function hide(e) {return e.style.display = "none"}
-
-			function esc(e) {
+			const $ = function(e) {return document.querySelector(e)},
+			show = function(e, v) {return e.style.display = (v === undefined) ? "block" : v},
+			hide = function(e) {return e.style.display = "none"},
+			esc = function(e) {
 				if (e.keyCode === 27) {
 					if (UI.overlay.keybind.style.display === "flex") Game.close_keybind();
 					else if (UI.menu.credits.style.display === "flex") Game.close_credits();
@@ -1719,9 +1702,8 @@
 						}
 					}
 				}
-			}
-
-			function pause_menu(e) {
+			},
+			pause_menu = function(e) {
 				if (e.keyCode === 27 && UI.overlay.menu.style.display !== "flex") {
 					if (UI.overlay.pause.style.display === "flex") {
 						UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
@@ -1741,9 +1723,8 @@
 						}
 					}
 				}
-			}
-
-			function select_character(c) {
+			},
+			select_character = function(c) {
 				is_character_selected = true;
 				character_selected = c;
 				Game.check_new_game_validity();
@@ -1760,9 +1741,8 @@
 				play.new_game.ability2_desc.textContent = ability_desc[TempPlayer.ability2.id];
 				play.new_game.ult_title.textContent = `${ult_title}: ${ability_id[TempPlayer.ult.id]}`;
 				play.new_game.ult_desc.textContent = ability_desc[TempPlayer.ult.id]
-			}
-
-			function update_hud(backup) {
+			},
+			update_hud = function(backup) {
 				hud.nickname.textContent = backup.player.nickname;
 				hud.health_info.textContent = `${health} (${backup.player.health}/${backup.player.health_max})`;
 				hud.health_value.setAttribute("max", backup.player.health_max);
@@ -1770,9 +1750,8 @@
 				hud.mana_info.textContent = `${mana} (${backup.player.mana}/${backup.player.mana_max})`;
 				hud.mana_value.setAttribute("max", backup.player.mana_max);
 				hud.mana_value.setAttribute("value", backup.player.mana)
-			}
-
-			function update_mini_hud(backup, enemy_id, enemy) {
+			},
+			update_mini_hud = function(backup, enemy_id, enemy) {
 				mini_hud.health_info.textContent = `${health} (${backup.player.health}/${backup.player.health_max})`;
 				mini_hud.health_value.setAttribute("max", backup.player.health_max);
 				mini_hud.health_value.setAttribute("value", backup.player.health);
@@ -1782,21 +1761,18 @@
 				mini_hud.enemy_health_info.textContent = `${health} (${backup.entity[enemy_id].health}/${Entity[enemy].health_max})`;
 				mini_hud.enemy_health_value.setAttribute("max", Entity[enemy].health_max);
 				mini_hud.enemy_health_value.setAttribute("value", backup.entity[enemy_id].health)
-			}
-
-			function update_subtitle(map) {
+			},
+			update_subtitle = function(map) {
 				Map.subtitle.textContent = Subtitle[map].text;
 				show(Map.subtitle);
 				setTimeout(function() {hide(Map.subtitle)}, Subtitle[map].duration)
-			}
-
-			function dialog(dialog) {
+			},
+			dialog = function(dialog) {
 				Map.dialog_content.innerHTML = `${Teller[dialog.teller]}: <i>${dialog.text}</i>`;
 				show(Map.dialog);
 				setTimeout(function() {hide(Map.dialog)}, dialog.duration)
-			}
-
-			function show_player_attack(text) {
+			},
+			show_player_attack = function(text) {
 				hide(UI.menu.fight.querySelector(".actions"));
 				$(".player_attack").textContent = text;
 				show($(".player_attack"));
@@ -1804,9 +1780,8 @@
 					hide($(".player_attack"));
 					enemy_turn(window["Backup"], current_enemy_id, current_enemy)
 				}, 3000)
-			}
-
-			function show_enemy_attack(text) {
+			},
+			show_enemy_attack = function(text) {
 				hide(UI.menu.fight.querySelector(".actions"));
 				$(".enemy_attack").textContent = text;
 				show($(".enemy_attack"));
@@ -1815,9 +1790,8 @@
 					update_ability_use(window["Backup"]);
 					show(UI.menu.fight.querySelector(".actions"))
 				}, 3000)
-			}
-
-			function update_ability_use(backup) {
+			},
+			update_ability_use = function(backup) {
 				if (backup.player.mana - fight.btn_ability1.querySelector(".cost").textContent < 0) {
 					fight.btn_ability1.setAttribute("disabled", "disabled");
 					fight.btn_ability1.querySelector(".ability_name").style.color = "#776952"
@@ -1839,84 +1813,81 @@
 					fight.btn_ult.removeAttribute("disabled");
 					fight.btn_ult.querySelector(".ability_name").style.color = "#000"
 				}
-			}
-
-			function ability1() {
+			},
+			ability1 = function() {
 				if (window["Backup"].player.mana - fight.btn_ability1.querySelector(".cost").textContent >= 0) {
-					// enough mana to use an ability
+					// Enough mana to use an ability
 					window["Backup"].player.mana -= fight.btn_ability1.querySelector(".cost").textContent;
 					if (enemy_block_test(current_enemy)) enemy_block(window["Backup"], current_enemy_id, current_enemy);
 					else if (window["Backup"].entity[current_enemy_id].health - TempPlayer.ability1.damage * rogue_damage_mult <= 0) enemy_death(window["Backup"], current_enemy_id, current_enemy);
 					else {
-						// the enemy is alive and didn't fled
+						// The enemy is alive and didn't fled
 						window["Backup"].entity[current_enemy_id].health -= TempPlayer.ability1.damage * rogue_damage_mult;
 						switch (window["Backup"].player.character) {
 							case "mage":
-								// fireball
+								// Fireball ability
 								play_sound("fireball");
 								break;
 							case "rogue":
-								// double daggers
-								rogue_damage_mult = 1; // resetting rogue's damage multiplier (stealth ability)
+								// Double Daggers ability
+								rogue_damage_mult = 1; // Reset Rogue damage multiplier (Stealth ability)
 								play_sound("dagger");
 								break;
 							case "paladin":
-								// sword strike
+								// Sword Strike ability
 								play_sound("dagger");
 								break
 						}
-						// updating huds
+						// Update HUDs
 						update_mini_hud(window["Backup"], current_enemy_id, current_enemy);
 						update_ability_use(window["Backup"]);
 						show_player_attack(ability_id[TempPlayer.ability1.id])
 					}
 				}
-			}
-
-			function ability2() {
+			},
+			ability2 = function() {
 				if (window["Backup"].player.mana - fight.btn_ability2.querySelector(".cost").textContent >= 0) {
-					// enough mana to use an ability
+					// Enough mana to use an ability
 					window["Backup"].player.mana -= fight.btn_ability2.querySelector(".cost").textContent;
 					if (enemy_block_test(current_enemy)) enemy_block(window["Backup"], current_enemy_id, current_enemy);
 					else if (window["Backup"].entity[current_enemy_id].health - TempPlayer.ability1.damage * rogue_damage_mult <= 0) enemy_death(window["Backup"], current_enemy_id, current_enemy);
 					else {
-						// the enemy is alive and didn't fled
+						// The enemy is alive and didn't fled
 						switch (TempPlayer.id) {
 							case "mage":
-								// wand
+								// Wand ability
 								window["Backup"].entity[current_enemy_id].health -= TempPlayer.ability2.damage;
 								play_sound("wand");
 								break;
 							case "rogue":
-								// stealth
+								// Stealth ability
 								rogue_damage_mult = 2;
 								play_sound("stealth");
 								break;
 							case "paladin":
-								// parade
-								window["Backup"].player.shield = 20; // parade sets the shield to its max value for 1 round, so 1 attack is blocked
+								// Parade ability
+								window["Backup"].player.shield = 20; // Parade sets the shield to its max value for 1 round, so you're fully blocked
 								play_sound("parade");
 								break
 						}
-						// updating huds
+						// Update HUDs
 						update_mini_hud(window["Backup"], current_enemy_id, current_enemy);
 						update_ability_use(window["Backup"]);
 						show_player_attack(ability_id[TempPlayer.ability2.id])
 					}
 				}
-			}
-
-			function ult() {
+			},
+			ult = function() {
 				if (window["Backup"].player.mana - fight.btn_ult.querySelector(".cost").textContent >= 0) {
-					// enough mana to use an ability
+					// Enough mana to use an ability
 					window["Backup"].player.mana -= fight.btn_ult.querySelector(".cost").textContent;
 					if (enemy_block_test(current_enemy)) enemy_block(window["Backup"], current_enemy_id, current_enemy);
 					else if (window["Backup"].entity[current_enemy_id].health - TempPlayer.ability1.damage * rogue_damage_mult <= 0) enemy_death(window["Backup"], current_enemy_id, current_enemy);
 					else {
-						// the enemy is alive and didn't fled
+						// The enemy is alive and didn't fled
 						switch (TempPlayer.id) {
 							case "mage":
-								// lightning - if the enemy you're fighting blocks this ult, no enemy will be hit
+								// Lightning ability - if the enemy you're fighting blocks, no enemy will be hit
 								switch (window["Backup"].player.level) {
 									case "dungeon":
 										window["Backup"].entity[0].health -= TempPlayer.ult.damage;
@@ -1933,52 +1904,51 @@
 								play_sound("lightning");
 								break;
 							case "rogue":
-								// discretion
+								// Discretion ability
 								rogue_discretion = true;
 								window["Backup"].entity[current_enemy_id].scare *= 3;
 								play_sound("discretion");
 								break;
 							case "paladin":
-								// regeneration
+								// Regeneration ability
 								(window["Backup"].player.health > 20) ? window["Backup"].player.health = 25 : window["Backup"].player.health += 5;
 								play_sound("heal");
 								break
 						}
-						// updating huds
+						// Update HUDs
 						update_mini_hud(window["Backup"], current_enemy_id, current_enemy);
 						update_ability_use(window["Backup"]);
 						show_player_attack(ability_id[TempPlayer.ult.id])
 					}
 				}
-			}
-
-			function flee() {
+			},
+			flee = function() {
 				if (confirm("Are you sure you want to run away?\nYou'll recover all your mana points but you'll lost 8 health points.")) {
 					fight.btn_flee.removeEventListener("click", flee);
 					player.movement.on()
 					in_fight = false;
 					enemy_near = false;
-					// replacing the player
+					// Replace the player
 					switch (current_enemy_id) {
-						case 0: // archer skeleton
+						case 0: // Archer skeleton
 							window["Backup"].player.pos[0] -= 1;
 							break;
-						case 1: // guard skeleton
+						case 1: // Guard skeleton
 							window["Backup"].player.pos[0] -= 1;
 							break;
-						case 2: // goblin
+						case 2: // Goblin
 							(window["Backup"].player.pos[1] < 15) ? window["Backup"].player.pos[1] -= 1 : window["Backup"].player.pos[1] += 1;
 							break;
-						case 3: // guard skeleton
+						case 3: // Guard skeleton
 							window["Backup"].player.pos[1] += 1;
 							break;
-						case 4: // goblin
+						case 4: // Goblin
 							window["Backup"].player.pos[0] -= 1;
 							break;
-						case 5: // archer skeleton
+						case 5: // Archer skeleton
 							window["Backup"].player.pos[0] -= 1;
 							break;
-						case 6: // archer skeleton
+						case 6: // Archer skeleton
 							window["Backup"].player.pos[0] -= 1;
 							break
 					}
@@ -1987,11 +1957,10 @@
 					window["Backup"].player.mana = window["Backup"].player.mana_max;
 					update_hud(window["Backup"])
 				}
-			}
-
-			function enemy_turn(backup, enemy_id, enemy) {
-				// enemy flight test
-				var flight_test = Math.floor(20 * Math.random() + 1);
+			},
+			enemy_turn = function(backup, enemy_id, enemy) {
+				// Enemy flight test
+				let flight_test = Math.floor(20 * Math.random() + 1);
 				if (flight_test <= backup.entity[enemy_id].scare) {
 					in_fight = false;
 					enemy_near = false;
@@ -2011,12 +1980,11 @@
 							dialog(Dialog.misc.flight[1]);
 							break;
 						case "skeleton2":
-							dialog(Dialog.misc.flight[2]);
-							break
+							dialog(Dialog.misc.flight[2])
 					}
 				}
 				else {
-					// the enemy didn't fled
+					// The enemy didn't fled
 					if (rogue_discretion) {
 						rogue_discretion = false;
 						backup.entity[enemy_id].scare /= 3
@@ -2026,25 +1994,25 @@
 						show_enemy_attack(player_block_text)
 					}
 					else {
-						var enemy_attack_choice = Math.floor(6 * Math.random() + 1);
+						let enemy_attack_choice = Math.floor(6 * Math.random() + 1);
 						switch (enemy) {
 							case "goblin":
 								if (enemy_attack_choice <= 3) {
-									// kick
+									// Kick ability
 									(backup.player.health - Entity[enemy].ability1.damage <= 0) ? Game.death() : backup.player.health -= Entity[enemy].ability1.damage;
 									play_sound("kick");
 									update_mini_hud(backup, enemy_id, enemy);
 									show_enemy_attack(enemy_ability_id.kick)
 								}
 								else if (enemy_attack_choice > 3 && enemy_attack_choice <= 5) {
-									// hammer
+									// Hammer ability
 									(backup.player.health - Entity[enemy].ability2.damage <= 0) ? Game.death() : backup.player.health -= Entity[enemy].ability2.damage;
 									play_sound("hammer");
 									update_mini_hud(backup, enemy_id, enemy);
 									show_enemy_attack(enemy_ability_id.hammer)
 								}
 								else {
-									// heal
+									// Heal ability
 									(backup.entity[enemy_id].health > 17) ? backup.entity[enemy_id].health = 20 : backup.entity[enemy_id].health += 3;
 									play_sound("heal");
 									update_mini_hud(backup, enemy_id, enemy);
@@ -2053,14 +2021,14 @@
 								break;
 							case "skeleton1":
 								if (enemy_attack_choice <= 4) {
-									// dagger
+									// Dagger ability
 									(backup.player.health - Entity[enemy].ability1.damage <= 0) ? Game.death() : backup.player.health -= Entity[enemy].ability1.damage;
 									play_sound("dagger");
 									update_mini_hud(backup, enemy_id, enemy);
 									show_enemy_attack(enemy_ability_id.dagger)
 								}
 								else {
-									// heal
+									// Heal ability
 									(backup.entity[enemy_id].health > 18) ? backup.entity[enemy_id].health = 20 : backup.entity[enemy_id].health += 2;
 									play_sound("heal");
 									update_mini_hud(backup, enemy_id, enemy);
@@ -2068,18 +2036,16 @@
 								}
 								break;
 							case "skeleton2":
-								// the archer has only 1 attack
+								// The archer has only one attack
 								(backup.player.health - Entity[enemy].ability1.damage <= 0) ? Game.death() : backup.player.health -= Entity[enemy].ability1.damage;
 								play_sound("arrow");
 								update_mini_hud(backup, enemy_id, enemy);
-								show_enemy_attack(enemy_ability_id.arrow);
-								break
+								show_enemy_attack(enemy_ability_id.arrow)
 						}
 					}
 				}
-			}
-
-			function enemy_death(backup, enemy_id, enemy) {
+			},
+			enemy_death = function(backup, enemy_id, enemy) {
 				in_fight = false;
 				enemy_near = false;
 				backup.entity[enemy_id].health = 0;
@@ -2101,40 +2067,34 @@
 						dialog(Dialog.misc.kill[2]);
 						break
 				}
-			}
-
-			function enemy_block_test(enemy) {
-				var block_test = false,
+			},
+			enemy_block_test = function(enemy) {
+				let block_test = false,
 					x = Math.floor(20 * Math.random() + 1);
 				if (x <= Entity[enemy].shield) block_test = true;
 				return block_test
-			}
-
-			function enemy_block(backup, enemy_id, enemy) {
+			},
+			enemy_block = function(backup, enemy_id, enemy) {
 				play_sound("parade");
 				update_mini_hud(backup, enemy_id, enemy);
 				show_player_attack(enemy_block_text)
-			}
-
-			function player_block_test(backup) {
-				var block_test = false,
+			},
+			player_block_test = function(backup) {
+				let block_test = false,
 					x = Math.floor(20 * Math.random() + 1);
 				if (x <= backup.player.shield) block_test = true;
 				if (backup.player.shield === 20) backup.player.shield = 3;
 				return block_test
-			}
-
-			function now() {
-				var D = new Date();
+			},
+			now = function() {
+				let D = new Date();
 				return `${D.getFullYear()}-${D.getMonth() + 1}-${D.getDate()}-${D.getHours()}-${D.getMinutes()}-${D.getSeconds()}`
-			}
-
-			function convert_date(date) {
+			},
+			convert_date = function(date) {
 				date = date.split("-");
 				return `${date[0]}/${date[1]}/${date[2]} ${date[3]}:${date[4]}:${date[5]}`
-			}
-
-			function set_volume_range(input, target, source) {
+			},
+			set_volume_range = function(input, target, source) {
 				if (input.value.length !== 0 && /^\d*\.?\d*$/.test(input.value)) {
 					// a number has been entered
 					if (input.value >= 0 && input.value <= 100) {
@@ -2159,9 +2119,8 @@
 						return target.value = input.value
 					}
 				}
-			}
-
-			function set_volume_nb(input, target, source) {
+			},
+			set_volume_nb = function(input, target, source) {
 				if (source === "sound") {
 					Volume.sound = input.value / 100;
 					Sound.click.volume = Volume.sound;
@@ -2181,16 +2140,16 @@
 					Sound.diamond.volume = Volume.sound
 				} else Volume.music = input.value / 100;
 				return target.value = input.value
-			}
-
-			function play_sound(sound, loop) {
+			},
+			play_sound = function(sound, loop) {
 				Sound[sound].currentTime = 0;
 				Sound[sound].loop = loop;
 				Sound[sound].play()
-			}
+			};
+			// End init
 
 			window.addEventListener("load", function() {
-				// buttons
+				// Buttons
 				UI.btn.play = $(".btn-play");
 				UI.btn.options = $(".btn-options");
 				UI.btn.save = $(".btn-save");
@@ -2199,26 +2158,26 @@
 				UI.btn.copy = $(".btn-copy");
 				UI.btn.exit = $(".btn-exit");
 				UI.btn.close_credits = $(".btn-close-credits");
-				// menus
+				// Menus
 				UI.menu.main = $(".menu-main");
 				UI.menu.play = $(".menu-play .scrollable");
 				UI.menu.options = $(".menu-options .scrollable");
 				UI.menu.load = $(".menu-load");
 				UI.menu.fight = $(".menu-fight");
 				UI.menu.credits = $(".menu-credits");
-				// overlays
+				// Overlays
 				UI.overlay.menu = $(".overlay-menu");
 				UI.overlay.keybind = $(".overlay-keybind");
 				UI.overlay.load = $(".overlay-load");
 				UI.overlay.pause = $(".overlay-pause");
 				UI.overlay.death = $(".overlay-death");
-				// menu titles
+				// Menu titles
 				title.play = $(".content-play .title");
 				title.options = $(".content-options .title");
 				title.save = $(".content-save .title");
 				title.pause = $(".pause-title");
-				// play menu
-				// new game section
+				// Play menu
+				// New game section
 				play.new_game.subtitle = $(".new_game .subtitle");
 				play.new_game.player_name_tip = $(".new_game .player_name_tip");
 				play.new_game.player_name = $(".new_game #player_name");
@@ -2236,50 +2195,50 @@
 				play.new_game.ult_title = $(".ult_info .ability_title");
 				play.new_game.ult_desc = $(".ult_info .ability_desc");
 				play.new_game.play = $(".new_game .btn-new_game");
-				// launch backup section
+				// Launch backup section
 				play.launch_backup.subtitle = $(".launch_backup .subtitle");
 				play.launch_backup.open = $(".launch_backup .btn-open_backup");
 				play.launch_backup.backup_tip = $(".launch_backup .backup_tip");
 				play.launch_backup.backup = $(".launch_backup #backup");
 				play.launch_backup.backup_info = $(".launch_backup .backup_info");
 				play.launch_backup.launch = $(".launch_backup .btn-launch_backup");
-				// option menu
-				// keybind settings
+				// Options menu
+				// Keybinds settings
 				options.keybind.subtitle = $(".option.keybind .subtitle");
 				options.keybind.forward = $(".option.keybind .forward");
 				options.keybind.backward = $(".option.keybind .backward");
 				options.keybind.left = $(".option.keybind .left");
 				options.keybind.right = $(".option.keybind .right");
 				options.keybind.console = $(".option.keybind .console");
-				// keybind menu
+				// Keybinds menu
 				keybind.title = $(".keybind-title");
 				keybind.tip = $(".keybind-tip");
 				keybind.cancel = $(".menu-keybind .actions .btn[data-keybind='cancel']");
 				keybind.apply = $(".menu-keybind .actions .btn[data-keybind='apply']");
-				// audio settings
+				// Audio settings
 				options.audio.subtitle = $(".option.audio .subtitle");
 				options.audio.music = $(".option.audio .music");
 				options.audio.sound = $(".option.audio .sound");
-				// language settings
+				// Language settings
 				options.lang.subtitle = $(".option.lang .subtitle");
 				options.lang.en_US = $(".option.lang .en_US");
 				options.lang.es_ES = $(".option.lang .es_ES");
 				options.lang.fr_FR = $(".option.lang .fr_FR");
-				// about settings
+				// About settings
 				options.about.subtitle = $(".option.about .subtitle");
 				options.about.tutorial = $(".option.about .tutorial");
 				options.about.updates = $(".option.about .updates");
 				options.about.credits = $(".option.about .credits");
-				// credit menu
+				// Credits menu
 				credits.title = $(".credit-title");
 				credits.copyright = $("#copyright");
 				credits.clarisse_job = $(".job.clarisse");
 				credits.lean_job = $(".job.lean");
 				credits.matteo_job = $(".job.matteo");
-				// save menu
+				// Save menu
 				save.tip = $(".save_tip");
 				save.backup = $("#current_backup");
-				// map elements
+				// Map elements
 				Map.container = $(".map-container");
 				Map.overlay = $(".overlay-map");
 				Map.map = $("#map");
@@ -2291,14 +2250,14 @@
 				Map.dialog_content = $(".dialog-content");
 				Map.dialog_option1 = $(".dialog-option-1");
 				Map.dialog_option2 = $(".dialog-option-2");
-				// hud
+				// HUD
 				hud.container = $(".hud");
 				hud.nickname = $(".hud .nickname");
 				hud.health_info = $(".hud .health_info");
 				hud.health_value = $(".hud .health_value");
 				hud.mana_info = $(".hud .mana_info");
 				hud.mana_value = $(".hud .mana_value");
-				// mini hud (fight menu hud)
+				// Mini HUD (fight menu)
 				mini_hud.container = $(".mini_hud");
 				mini_hud.health_info = $(".mini_hud .health_info");
 				mini_hud.health_value = $(".mini_hud .health_value");
@@ -2306,7 +2265,7 @@
 				mini_hud.mana_value = $(".mini_hud .mana_value");
 				mini_hud.enemy_health_info = $(".mini_hud .enemy_health_info");
 				mini_hud.enemy_health_value = $(".mini_hud .enemy_health_value");
-				// fight menu
+				// Fight menu
 				fight.title = $(".menu-fight .fight");
 				fight.player_attack = $(".menu-fight .player_attack");
 				fight.enemy_attack = $(".menu-fight .enemy_attack");
@@ -2316,7 +2275,7 @@
 				fight.btn_ability2 = $(".menu-fight .actions .btn-ability2");
 				fight.btn_ult = $(".menu-fight .actions .btn-ult");
 				fight.btn_flee = $(".menu-fight .actions .btn-flee");
-
+				// Launch game
 				Game.init()
 			})
 		</script>
@@ -2330,10 +2289,10 @@
 				Enable JavaScript in your browser, then retry.<br><br>
 				<a href="">Reload</a>
 			</p>
-			<div class="version">1.1.1</div>
+			<div class="version">1.1.2</div>
 		</noscript>
 		<main>
-			<!-- game content goes here -->
+			<!-- Game content goes here -->
 			<div id="console">
 				<div class="console-title">Console</div>
 				<div class="x"></div>
