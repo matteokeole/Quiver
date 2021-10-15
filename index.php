@@ -46,6 +46,63 @@
 		<link rel="stylesheet" type="text/css" href="assets/textures/map.css">
 		<link rel="stylesheet" type="text/css" href="assets/textures/texture_list.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/main.css">
+		<title lang="en" translate="no">Quiver</title>
+	</head>
+
+	<body onselectstart="return false">
+		<noscript>
+			<p>
+				This game needs JavaScript to work.<br>
+				Enable JavaScript in your browser, then retry.<br><br>
+				<a href="">Reload</a>
+			</p>
+			<div class="version">1.1.23</div>
+		</noscript>
+		<main>
+			<!-- Game content goes here -->
+			<div id="console">
+				<div class="console-title">Console</div>
+				<div class="x"></div>
+				<div class="y"></div>
+			</div>
+			<?php include "assets/ui/menu-main.html"; ?>
+			<div class="overlay overlay-menu">
+				<?php include "assets/ui/menu-play.html"; ?>
+				<?php include "assets/ui/menu-options.html"; ?>
+				<?php include "assets/ui/menu-save.html"; ?>
+			</div>
+			<?php include "assets/ui/menu-keybind.html"; ?>
+			<div class="overlay overlay-load"></div>
+			<?php include "assets/ui/menu-load.html"; ?>
+			<div class="overlay overlay-pause">
+				<?php include "assets/ui/menu-pause.html"; ?>
+			</div>
+			<div class="overlay overlay-death">
+				<?php include "assets/ui/menu-death.html"; ?>
+			</div>
+			<div class="map-container">
+				<div class="overlay overlay-map"></div>
+				<div id="player"></div>
+				<div id="map"></div>
+				<div id="uppermap"></div>
+				<div id="entities"></div>
+				<div class="hud">
+					<div class="nickname"></div>
+					<div class="health_info"></div>
+					<progress class="health_value"></progress>
+					<div class="mana_info"></div>
+					<progress class="mana_value"></progress>
+				</div>
+				<div class="level-subtitle"></div>
+				<div class="dialog">
+					<div class="dialog-content"></div>
+					<button class="dialog-option dialog-option-1"></button>
+					<button class="dialog-option dialog-option-2"></button>
+				</div>
+				<?php include "assets/ui/menu-fight.html"; ?>
+			</div>
+			<?php include "assets/ui/menu-credits.html"; ?>
+		</main>
 		<script>
 			const Game = {
 				init: function() {
@@ -86,7 +143,7 @@
 						alert("Quiver - How To Play\n\n\n\nWanna start your first Quiver game? Here are the basic infos that you need to know before playing.\n\nBefore launching\nYou can change your keybinds, your language and the music/sound volume in the Options menu, before launching a game. No worries, you'll have access to this menu when playing, but in order to follow well the dialogs, we advice you to do your changes before creating a new game.\nWhen initializing your first Quiver game, you'll need to name your game, give yourself a nickname and select a character between the Mage, the Rogue and the Paladin. Be aware that these characters have their own stats, and are played differently. All the character infos are visible in the New Game menu.\n\nAfter launching\nYou'll arrive in a place where you can move with your preset settings, and where the history will begin. Also, don't forget to look at the dialogs, that's important.\n\nExploration\nAfter reading the story, the (real) game will start. Just keep exploring the dungeons and you'll finish the game. Yeah, it's that simple.\n\nMonster Fighting\nActually, it's not that simple. There are monsters in the dungeon and they will do everything to kill you. But you're brave, and you will fight them. The fighting system is pretty simple: it's a round-by-round system, in which you'll use your character's abilities against the monster's abilities. Warning: there are several types of monsters, and they do not have the same abilities. Mostly of their abilities will hurt you, and all your abilities require mana points to be used. If you don't have mana, you can only flee, and lose 8 health points. So, keep a look on your HUD!\nWhen you defeat an enemy, you'll gain recovery health and mana.\n\nGood luck, young explorer!")
 					});
 					$(".option-name.updates").addEventListener("click", function() {
-						alert("Quiver Updates History\n\n\n\nAlpha Updates\n\n\n\n210108 - 01/08/21\n\nThis is the first ever-created version of Quiver. There was only a few UI designs and some useless buttons. The game initial name was Dungeon Quest!\n\n210118 - 01/18/21\n\nQuiver just gets its first level, which was the dungeon entrance! There was not textures, but the main menu could launch a game. There was some textures like the relief texture on the buttons, the darkbrick menu texture and the scroll appearance for the secondary menus. By the way, we were experiencing the very first motion and collision tests on the game.\n\n210120 - 01/20/21\n\nAdded some infos at the top of the backup content (game name, nickname, current level, etc.).\n\n210122 - 01/22/21\n\nRewrite of the generator and motion engines and some bug fixes.\n\n210124 - 01/24/21\n\nThe user now needs to inform all the text fields on the New Game menu, like the game name, the class, etc.\n\n210125 - 01/25/21\n\nAddition of the first level design textures like brick, wood, etc. Even if the collisions with all the objects are disabled, there are collision barriers around the level so the player can't quit the map.\n\n210129 - 01/29/21\n\nThe loading menu with that (beautiful) counter clock has just been added! Thanks Paint 3D. Really. No. I hate Paint 3D.\n\n210207 - 02/07/21\n\nWelcome to this incredibly beautiful main menu background. Thanks Léan :). Also, the update brings the first 2.5D textures to the game. The dungeon entrance is fully designed! Just, the collisions are missing but no worry! These will come soon :D\n\n210220 - 02/20/21\n\nJust some texture updates, like chests. I like chests. Oh, and the counter clock from the loading menu is now finished. Oh, and also the character stats are into the game and ready to be used!\n\n210301 - 03/01/21\n\nThe biggest alpha update, by far. The site is now on Hostinger, at https://quivergame.000webhostapp.com. The player HUD has been added, as well as the dialogs and the mobs. The collisions are finished and work well. The player can pass levels, fight monsters and grab the... wait, I don't want to spoil you! Play the game before.\n\n\n\nRelease Updates\n\n\n\n1.0.0 - 03/07/21\n\nThis is the first released version of Quiver. The game is hosted and playable at https://quivergame.000webhostapp.com. This address is not intended to change.\n\nQuiver 1.0.0 is quite different from its earlier versions. The website had a scaling system which had to set the window scale to 16/9, which was the only supported ratio. The UI was a little different too: the New Game menu and the Launch Backup menu were separated, and the graphic interface was a bit less conscientious. Also, Quiver had not sounds. They'll be implemented with the next update.\n\n1.1.0 - 05/30/21\n\nThis update brings a lot of changes: the source code had been fully re-written, and we added some animations, languages (English, Spanish and French - maybe other languages will be added with the next updates :D) and options. You can now choose your keybinds, regulate the volume of the in-game and music sounds and change your language. The history, the dialogues, the maps and the enemies are the same than that of the previous version. With this update, Quiver is twice as light as before!\n\n1.1.1 - 08/17/21\n\nA small update in which we added a little guide to learn the basics, as well as the update changelog you're reading right now :)\n\n1.1.2 - 12/10/21\n\nSomes changes about the code lisibility. You'll no longer see these green weird progress bars on other browsers than Firefox!")
+						alert("Quiver Updates History\n\n\n\nAlpha Updates\n\n\n\n210108 - 01/08/21\nThis is the first ever-created version of Quiver. There was only a few UI designs and some useless buttons. The game initial name was Dungeon Quest!\n\n210118 - 01/18/21\nQuiver just gets its first level, which was the dungeon entrance! There was not textures, but the main menu could launch a game. There was some textures like the relief texture on the buttons, the darkbrick menu texture and the scroll appearance for the secondary menus. By the way, we were experiencing the very first motion and collision tests on the game.\n\n210120 - 01/20/21\nAdded some infos at the top of the backup content (game name, nickname, current level, etc.).\n\n210122 - 01/22/21\nRewrite of the generator and motion engines and some bug fixes.\n\n210124 - 01/24/21\nThe user now needs to inform all the text fields on the New Game menu, like the game name, the class, etc.\n\n210125 - 01/25/21\nAddition of the first level design textures like brick, wood, etc. Even if the collisions with all the objects are disabled, there are collision barriers around the level so the player can't quit the map.\n\n210129 - 01/29/21\nThe loading menu with that (beautiful) counter clock has just been added! Thanks Paint 3D. Really. No. I hate Paint 3D.\n\n210207 - 02/07/21\nWelcome to this incredibly beautiful main menu background. Thanks Léan :). Also, the update brings the first 2.5D textures to the game. The dungeon entrance is fully designed! Just, the collisions are missing but no worry! These will come soon :D\n\n210220 - 02/20/21\nJust some texture updates, like chests. I like chests. Oh, and the counter clock from the loading menu is now finished. Oh, and also the character stats are into the game and ready to be used!\n\n210301 - 03/01/21\nThe biggest alpha update, by far. The site is now on Hostinger, at https://quivergame.000webhostapp.com. The player HUD has been added, as well as the dialogs and the mobs. The collisions are finished and work well. The player can pass levels, fight monsters and grab the... wait, I don't want to spoil you! Play the game before.\n\n\n\nRelease Updates\n\n\n\n1.0.0 - 03/07/21\nThis is the first released version of Quiver. The game is hosted and playable at https://quivergame.000webhostapp.com. This address is not intended to change. Quiver 1.0.0 is quite different from its earlier versions. The website had a scaling system which had to set the window scale to 16/9, which was the only supported ratio. The UI was a little different too: the New Game menu and the Launch Backup menu were separated, and the graphic interface was a bit less conscientious. Also, Quiver had not sounds. They'll be implemented with the next update.\n\n1.1.0 - 05/30/21\nThis update brings a lot of changes: the source code had been fully re-written, and we added some animations, languages (English, Spanish and French - maybe other languages will be added with the next updates :D) and options. You can now choose your keybinds, regulate the volume of the in-game and music sounds and change your language. The history, the dialogues, the maps and the enemies are the same than that of the previous version. With this update, Quiver is twice as light as before!\n\n1.1.1 - 08/17/21\nA small update in which we added a little guide to learn the basics, as well as the update changelog you're reading right now :)\n\n1.1.2 - 12/10/21\nSomes changes about the code lisibility. You'll no longer see these green weird progress bars on other browsers than Firefox!\n\n1.1.23 - 15/10/21\nLike the previous update, code lisibility and a bug fix (the game logo did not appear on the credits menu).")
 					});
 					$(".option-name.credits").addEventListener("click", Game.open_credits);
 					UI.btn.save.addEventListener("click", function() {Game.update_save_backup(window["Backup"])});
@@ -744,7 +801,7 @@
 						setTimeout(function() {hide(UI.overlay.load)}, 600)
 					}, 1200)
 				},
-				version: "1.1.2"
+				version: "1.1.23"
 			}
 
 			let UI = {
@@ -773,16 +830,14 @@
 					pause: null,
 					death: null
 				}
-			};
-
-			let title = {
+			},
+			title = {
 				play: null,
 				options: null,
 				save: null,
 				pause: null
-			};
-
-			let play = {
+			},
+			play = {
 				new_game: {
 					subtitle: null,
 					player_name_tip: null,
@@ -810,9 +865,8 @@
 					backup_info: null,
 					launch: null
 				}
-			};
-
-			let options = {
+			},
+			options = {
 				keybind: {
 					subtitle: null,
 					forward: null,
@@ -847,29 +901,25 @@
 					updates: null,
 					credits: null
 				}
-			};
-
-			let keybind = {
+			},
+			keybind = {
 				title: null,
 				tip: null,
 				cancel: null,
 				apply: null
-			};
-
-			let credits = {
+			},
+			credits = {
 				title: null,
 				copyright: null,
 				clarisse_job: null,
 				lean_job: null,
 				matteo_job: null
-			};
-
-			let save = {
+			},
+			save = {
 				tip: null,
 				backup: null
-			};
-
-			let Map = {
+			},
+			Map = {
 				container: null,
 				overlay: null,
 				map: null,
@@ -883,97 +933,14 @@
 				dialog_option2: null
 			};
 
-			function Character(c) {
-				switch (c) {
-					case "mage":
-						this.id = "mage";
-						this.texture = {
-							idle: "mage_idle.gif",
-							walking: "mage_walking.gif"
-						};
-						this.health = 20;
-						this.shield = 1;
-						this.mana = 25;
-						this.ability1 = {
-							id: "fireball",
-							cost: 3,
-							damage: 4
-						};
-						this.ability2 = {
-							id: "wand",
-							cost: 2,
-							damage: 3
-						};
-						this.ult = {
-							id: "lightning",
-							cost: 9,
-							damage: 5,
-							hitAllMobs: true
-						};
-						break;
-					case "rogue":
-						this.id = "rogue";
-						this.texture = {
-							idle: "rogue.png",
-							walking: "rogue.png"
-						};
-						this.health = 22;
-						this.shield = 2;
-						this.mana = 15;
-						this.ability1 = {
-							id: "double_daggers",
-							cost: 2,
-							damage: 4
-						};
-						this.ability2 = {
-							id: "stealth",
-							cost: 4,
-							damage: 0,
-						};
-						this.ult = {
-							id: "discretion",
-							cost: 7,
-							damage: 0
-						};
-						break;
-					case "paladin":
-						this.id = "paladin";
-						this.texture = {
-							idle: "paladin.png",
-							walking: "paladin.png"
-						};
-						this.health = 25;
-						this.shield = 3;
-						this.mana = 20;
-						this.ability1 = {
-							id: "sword_strike",
-							cost: 2,
-							damage: 4
-						};
-						this.ability2 = {
-							id: "parade",
-							cost: 4,
-							damage: 0,
-							blockAttack: true
-						};
-						this.ult = {
-							id: "regeneration",
-							cost: 7,
-							damage: 0,
-							healthAmount: 5
-						}
-				}
-			}
-
 			let Key = {
 				forward: 90,
 				backward: 83,
 				left: 81,
 				right: 68,
 				console: 112
-			};
-
-			let player = {
+			},
+			player = {
 				canMove: {
 					top: false,
 					bottom: false,
@@ -1355,9 +1322,8 @@
 							else custom_case_near = false
 					}
 				}
-			};
-
-			let ability_id = {
+			},
+			ability_id = {
 				fireball: "",
 				wand: "",
 				lightning: "",
@@ -1367,9 +1333,8 @@
 				sword_strike: "",
 				parade: "",
 				regeneration: ""
-			};
-
-			let ability_desc = {
+			},
+			ability_desc = {
 				fireball: "",
 				wand: "",
 				lightning: "",
@@ -1379,9 +1344,8 @@
 				sword_strike: "",
 				parade: "",
 				regeneration: ""
-			};
-
-			const Entity = {
+			},
+			Entity = {
 				goblin: {
 					id: "goblin",
 					texture: "goblin.png",
@@ -1451,26 +1415,23 @@
 						}
 					}
 				}
-			};
-
-			let enemy_ability_id = {
+			},
+			enemy_ability_id = {
 				kick: "",
 				hammer: "",
 				dagger: "",
 				heal: "",
 				arrow: ""
-			};
-
-			let hud = {
+			},
+			hud = {
 				container: null,
 				nickname: null,
 				health_info: null,
 				health_value: null,
 				mana_info: null,
 				mana_value: null
-			};
-
-			let mini_hud = {
+			},
+			mini_hud = {
 				container: null,
 				health_info: null,
 				health_value: null,
@@ -1478,9 +1439,8 @@
 				mana_value: null,
 				enemy_health_info: null,
 				enemy_health_value: null
-			};
-
-			let Subtitle = {
+			},
+			Subtitle = {
 				lobby: {
 					text: null,
 					duration: 4000
@@ -1493,15 +1453,13 @@
 					text: null,
 					duration: 4000
 				}
-			};
-
-			let Teller = {
+			},
+			Teller = {
 				narrator: null,
 				innkeeper: null,
 				goblin: null
-			}
-
-			let Dialog = {
+			},
+			Dialog = {
 				lobby: [
 					{
 						teller: "narrator",
@@ -1612,9 +1570,8 @@
 						}
 					]
 				}
-			};
-
-			let fight = {
+			},
+			fight = {
 				title: null,
 				player_attack: null,
 				enemy_attack: null,
@@ -1624,72 +1581,130 @@
 				btn_ability2: null,
 				btn_ult: null,
 				btn_flee: null
-			};
-
-			// Musics
-			const Music = {};
-
-			// Sounds
-			const Sound = {
-				click: new Audio("assets/sounds/click.mp3"),
-				fireball: new Audio("assets/sounds/fireball.mp3"),
-				wand: new Audio("assets/sounds/wand.mp3"),
-				lightning: new Audio("assets/sounds/lightning.mp3"),
-				dagger: new Audio("assets/sounds/dagger.mp3"),
-				stealth: new Audio("assets/sounds/stealth.mp3"),
-				discretion: new Audio("assets/sounds/discretion.mp3"),
-				parade: new Audio("assets/sounds/parade.mp3"),
-				heal: new Audio("assets/sounds/heal.mp3"),
-				kick: new Audio("assets/sounds/kick.mp3"),
-				hammer: new Audio("assets/sounds/hammer.mp3"),
-				arrow: new Audio("assets/sounds/arrow.mp3"),
-				cash: new Audio("assets/sounds/cash.mp3"),
-				pop: new Audio("assets/sounds/pop.mp3"),
-				diamond: new Audio("assets/sounds/diamond.mp3")
-			};
-
+			},
 			// Volume
-			let Volume = {
+			Volume = {
 				music: 1,
 				sound: 1
-			}
-
+			},
 			// Other variables
-			let raw_menus = ["menu-play", "menu-options", "menu-save"],
-				TempPlayer,
-				is_player_name_ok = false,
-				is_game_name_ok = false,
-				is_character_selected = false,
-				character_selected = "",
-				current_key = "",
-				new_keybind = "",
-				keybind_tip = "",
-				ability1_title = "",
-				ability2_title = "",
-				ult_title = "",
-				player_block_text = "",
-				enemy_block_text = "",
-				json_error = "",
-				copy_success = "",
-				enemy_near = false,
-				custom_case_near = false,
-				can_enter_dungeon = false,
-				in_fight = false,
-				current_enemy_id = 0,
-				current_enemy = "",
-				chest_room_visited = false,
-				corridor_visited = false,
-				goblin_noise_done = false,
-				diamond_taken = false,
-				game_ended = false,
-				copyright = "",
-				copyright_fool = "",
-				health = "",
-				mana = "",
-				rogue_damage_mult = 1,
-				rogue_discretion = false;
+			raw_menus = ["menu-play", "menu-options", "menu-save"],
+			TempPlayer,
+			is_player_name_ok = false,
+			is_game_name_ok = false,
+			is_character_selected = false,
+			character_selected = "",
+			current_key = "",
+			new_keybind = "",
+			keybind_tip = "",
+			ability1_title = "",
+			ability2_title = "",
+			ult_title = "",
+			player_block_text = "",
+			enemy_block_text = "",
+			json_error = "",
+			copy_success = "",
+			enemy_near = false,
+			custom_case_near = false,
+			can_enter_dungeon = false,
+			in_fight = false,
+			current_enemy_id = 0,
+			current_enemy = "",
+			chest_room_visited = false,
+			corridor_visited = false,
+			goblin_noise_done = false,
+			diamond_taken = false,
+			game_ended = false,
+			copyright = "",
+			copyright_fool = "",
+			health = "",
+			mana = "",
+			rogue_damage_mult = 1,
+			rogue_discretion = false;
 
+			// Game secondary functions
 			const $ = function(e) {return document.querySelector(e)},
+			Character = function(c) {
+				switch (c) {
+					case "mage":
+						this.id = "mage";
+						this.texture = {
+							idle: "mage_idle.gif",
+							walking: "mage_walking.gif"
+						};
+						this.health = 20;
+						this.shield = 1;
+						this.mana = 25;
+						this.ability1 = {
+							id: "fireball",
+							cost: 3,
+							damage: 4
+						};
+						this.ability2 = {
+							id: "wand",
+							cost: 2,
+							damage: 3
+						};
+						this.ult = {
+							id: "lightning",
+							cost: 9,
+							damage: 5,
+							hitAllMobs: true
+						};
+						break;
+					case "rogue":
+						this.id = "rogue";
+						this.texture = {
+							idle: "rogue.png",
+							walking: "rogue.png"
+						};
+						this.health = 22;
+						this.shield = 2;
+						this.mana = 15;
+						this.ability1 = {
+							id: "double_daggers",
+							cost: 2,
+							damage: 4
+						};
+						this.ability2 = {
+							id: "stealth",
+							cost: 4,
+							damage: 0,
+						};
+						this.ult = {
+							id: "discretion",
+							cost: 7,
+							damage: 0
+						};
+						break;
+					case "paladin":
+						this.id = "paladin";
+						this.texture = {
+							idle: "paladin.png",
+							walking: "paladin.png"
+						};
+						this.health = 25;
+						this.shield = 3;
+						this.mana = 20;
+						this.ability1 = {
+							id: "sword_strike",
+							cost: 2,
+							damage: 4
+						};
+						this.ability2 = {
+							id: "parade",
+							cost: 4,
+							damage: 0,
+							blockAttack: true
+						};
+						this.ult = {
+							id: "regeneration",
+							cost: 7,
+							damage: 0,
+							healthAmount: 5
+						}
+				}
+			},
 			show = function(e, v) {return e.style.display = (v === undefined) ? "block" : v},
 			hide = function(e) {return e.style.display = "none"},
 			esc = function(e) {
@@ -2145,197 +2160,157 @@
 				Sound[sound].currentTime = 0;
 				Sound[sound].loop = loop;
 				Sound[sound].play()
+			},
+			// Musics
+			Music = {},
+			// Sounds
+			Sound = {
+				click: new Audio("assets/sounds/click.mp3"),
+				fireball: new Audio("assets/sounds/fireball.mp3"),
+				wand: new Audio("assets/sounds/wand.mp3"),
+				lightning: new Audio("assets/sounds/lightning.mp3"),
+				dagger: new Audio("assets/sounds/dagger.mp3"),
+				stealth: new Audio("assets/sounds/stealth.mp3"),
+				discretion: new Audio("assets/sounds/discretion.mp3"),
+				parade: new Audio("assets/sounds/parade.mp3"),
+				heal: new Audio("assets/sounds/heal.mp3"),
+				kick: new Audio("assets/sounds/kick.mp3"),
+				hammer: new Audio("assets/sounds/hammer.mp3"),
+				arrow: new Audio("assets/sounds/arrow.mp3"),
+				cash: new Audio("assets/sounds/cash.mp3"),
+				pop: new Audio("assets/sounds/pop.mp3"),
+				diamond: new Audio("assets/sounds/diamond.mp3")
 			};
-			// End init
-
-			window.addEventListener("load", function() {
-				// Buttons
-				UI.btn.play = $(".btn-play");
-				UI.btn.options = $(".btn-options");
-				UI.btn.save = $(".btn-save");
-				UI.btn.create = $(".menu-new_game .btn-create");
-				UI.btn.resume = $(".btn-resume");
-				UI.btn.copy = $(".btn-copy");
-				UI.btn.exit = $(".btn-exit");
-				UI.btn.close_credits = $(".btn-close-credits");
-				// Menus
-				UI.menu.main = $(".menu-main");
-				UI.menu.play = $(".menu-play .scrollable");
-				UI.menu.options = $(".menu-options .scrollable");
-				UI.menu.load = $(".menu-load");
-				UI.menu.fight = $(".menu-fight");
-				UI.menu.credits = $(".menu-credits");
-				// Overlays
-				UI.overlay.menu = $(".overlay-menu");
-				UI.overlay.keybind = $(".overlay-keybind");
-				UI.overlay.load = $(".overlay-load");
-				UI.overlay.pause = $(".overlay-pause");
-				UI.overlay.death = $(".overlay-death");
-				// Menu titles
-				title.play = $(".content-play .title");
-				title.options = $(".content-options .title");
-				title.save = $(".content-save .title");
-				title.pause = $(".pause-title");
-				// Play menu
-				// New game section
-				play.new_game.subtitle = $(".new_game .subtitle");
-				play.new_game.player_name_tip = $(".new_game .player_name_tip");
-				play.new_game.player_name = $(".new_game #player_name");
-				play.new_game.game_name_tip = $(".new_game .game_name_tip");
-				play.new_game.game_name = $(".new_game #game_name");
-				play.new_game.character_selection_tip = $(".new_game .character_selection_tip");
-				play.new_game.character_info = $(".character_info");
-				play.new_game.health_value = $(".health_value");
-				play.new_game.shield_value = $(".shield_value");
-				play.new_game.mana_value = $(".mana_value");
-				play.new_game.ability1_title = $(".ability1_info .ability_title");
-				play.new_game.ability1_desc = $(".ability1_info .ability_desc");
-				play.new_game.ability2_title = $(".ability2_info .ability_title");
-				play.new_game.ability2_desc = $(".ability2_info .ability_desc");
-				play.new_game.ult_title = $(".ult_info .ability_title");
-				play.new_game.ult_desc = $(".ult_info .ability_desc");
-				play.new_game.play = $(".new_game .btn-new_game");
-				// Launch backup section
-				play.launch_backup.subtitle = $(".launch_backup .subtitle");
-				play.launch_backup.open = $(".launch_backup .btn-open_backup");
-				play.launch_backup.backup_tip = $(".launch_backup .backup_tip");
-				play.launch_backup.backup = $(".launch_backup #backup");
-				play.launch_backup.backup_info = $(".launch_backup .backup_info");
-				play.launch_backup.launch = $(".launch_backup .btn-launch_backup");
-				// Options menu
-				// Keybinds settings
-				options.keybind.subtitle = $(".option.keybind .subtitle");
-				options.keybind.forward = $(".option.keybind .forward");
-				options.keybind.backward = $(".option.keybind .backward");
-				options.keybind.left = $(".option.keybind .left");
-				options.keybind.right = $(".option.keybind .right");
-				options.keybind.console = $(".option.keybind .console");
-				// Keybinds menu
-				keybind.title = $(".keybind-title");
-				keybind.tip = $(".keybind-tip");
-				keybind.cancel = $(".menu-keybind .actions .btn[data-keybind='cancel']");
-				keybind.apply = $(".menu-keybind .actions .btn[data-keybind='apply']");
-				// Audio settings
-				options.audio.subtitle = $(".option.audio .subtitle");
-				options.audio.music = $(".option.audio .music");
-				options.audio.sound = $(".option.audio .sound");
-				// Language settings
-				options.lang.subtitle = $(".option.lang .subtitle");
-				options.lang.en_US = $(".option.lang .en_US");
-				options.lang.es_ES = $(".option.lang .es_ES");
-				options.lang.fr_FR = $(".option.lang .fr_FR");
-				// About settings
-				options.about.subtitle = $(".option.about .subtitle");
-				options.about.tutorial = $(".option.about .tutorial");
-				options.about.updates = $(".option.about .updates");
-				options.about.credits = $(".option.about .credits");
-				// Credits menu
-				credits.title = $(".credit-title");
-				credits.copyright = $("#copyright");
-				credits.clarisse_job = $(".job.clarisse");
-				credits.lean_job = $(".job.lean");
-				credits.matteo_job = $(".job.matteo");
-				// Save menu
-				save.tip = $(".save_tip");
-				save.backup = $("#current_backup");
-				// Map elements
-				Map.container = $(".map-container");
-				Map.overlay = $(".overlay-map");
-				Map.map = $("#map");
-				Map.uppermap = $("#uppermap");
-				Map.player = $("#player");
-				Map.entities = $("#entities");
-				Map.subtitle = $(".level-subtitle");
-				Map.dialog = $(".dialog");
-				Map.dialog_content = $(".dialog-content");
-				Map.dialog_option1 = $(".dialog-option-1");
-				Map.dialog_option2 = $(".dialog-option-2");
-				// HUD
-				hud.container = $(".hud");
-				hud.nickname = $(".hud .nickname");
-				hud.health_info = $(".hud .health_info");
-				hud.health_value = $(".hud .health_value");
-				hud.mana_info = $(".hud .mana_info");
-				hud.mana_value = $(".hud .mana_value");
-				// Mini HUD (fight menu)
-				mini_hud.container = $(".mini_hud");
-				mini_hud.health_info = $(".mini_hud .health_info");
-				mini_hud.health_value = $(".mini_hud .health_value");
-				mini_hud.mana_info = $(".mini_hud .mana_info");
-				mini_hud.mana_value = $(".mini_hud .mana_value");
-				mini_hud.enemy_health_info = $(".mini_hud .enemy_health_info");
-				mini_hud.enemy_health_value = $(".mini_hud .enemy_health_value");
-				// Fight menu
-				fight.title = $(".menu-fight .fight");
-				fight.player_attack = $(".menu-fight .player_attack");
-				fight.enemy_attack = $(".menu-fight .enemy_attack");
-				fight.player_avatar = $(".menu-fight .player_avatar .avatar");
-				fight.enemy_avatar = $(".menu-fight .enemy_avatar .avatar");
-				fight.btn_ability1 = $(".menu-fight .actions .btn-ability1");
-				fight.btn_ability2 = $(".menu-fight .actions .btn-ability2");
-				fight.btn_ult = $(".menu-fight .actions .btn-ult");
-				fight.btn_flee = $(".menu-fight .actions .btn-flee");
-				// Launch game
-				Game.init()
-			})
+			// DOM selection
+			// Buttons
+			UI.btn.play = $(".btn-play");
+			UI.btn.options = $(".btn-options");
+			UI.btn.save = $(".btn-save");
+			UI.btn.create = $(".menu-new_game .btn-create");
+			UI.btn.resume = $(".btn-resume");
+			UI.btn.copy = $(".btn-copy");
+			UI.btn.exit = $(".btn-exit");
+			UI.btn.close_credits = $(".btn-close-credits");
+			// Menus
+			UI.menu.main = $(".menu-main");
+			UI.menu.play = $(".menu-play .scrollable");
+			UI.menu.options = $(".menu-options .scrollable");
+			UI.menu.load = $(".menu-load");
+			UI.menu.fight = $(".menu-fight");
+			UI.menu.credits = $(".menu-credits");
+			// Overlays
+			UI.overlay.menu = $(".overlay-menu");
+			UI.overlay.keybind = $(".overlay-keybind");
+			UI.overlay.load = $(".overlay-load");
+			UI.overlay.pause = $(".overlay-pause");
+			UI.overlay.death = $(".overlay-death");
+			// Menu titles
+			title.play = $(".content-play .title");
+			title.options = $(".content-options .title");
+			title.save = $(".content-save .title");
+			title.pause = $(".pause-title");
+			// Play menu
+			// New game section
+			play.new_game.subtitle = $(".new_game .subtitle");
+			play.new_game.player_name_tip = $(".new_game .player_name_tip");
+			play.new_game.player_name = $(".new_game #player_name");
+			play.new_game.game_name_tip = $(".new_game .game_name_tip");
+			play.new_game.game_name = $(".new_game #game_name");
+			play.new_game.character_selection_tip = $(".new_game .character_selection_tip");
+			play.new_game.character_info = $(".character_info");
+			play.new_game.health_value = $(".health_value");
+			play.new_game.shield_value = $(".shield_value");
+			play.new_game.mana_value = $(".mana_value");
+			play.new_game.ability1_title = $(".ability1_info .ability_title");
+			play.new_game.ability1_desc = $(".ability1_info .ability_desc");
+			play.new_game.ability2_title = $(".ability2_info .ability_title");
+			play.new_game.ability2_desc = $(".ability2_info .ability_desc");
+			play.new_game.ult_title = $(".ult_info .ability_title");
+			play.new_game.ult_desc = $(".ult_info .ability_desc");
+			play.new_game.play = $(".new_game .btn-new_game");
+			// Launch backup section
+			play.launch_backup.subtitle = $(".launch_backup .subtitle");
+			play.launch_backup.open = $(".launch_backup .btn-open_backup");
+			play.launch_backup.backup_tip = $(".launch_backup .backup_tip");
+			play.launch_backup.backup = $(".launch_backup #backup");
+			play.launch_backup.backup_info = $(".launch_backup .backup_info");
+			play.launch_backup.launch = $(".launch_backup .btn-launch_backup");
+			// Options menu
+			// Keybinds settings
+			options.keybind.subtitle = $(".option.keybind .subtitle");
+			options.keybind.forward = $(".option.keybind .forward");
+			options.keybind.backward = $(".option.keybind .backward");
+			options.keybind.left = $(".option.keybind .left");
+			options.keybind.right = $(".option.keybind .right");
+			options.keybind.console = $(".option.keybind .console");
+			// Keybinds menu
+			keybind.title = $(".keybind-title");
+			keybind.tip = $(".keybind-tip");
+			keybind.cancel = $(".menu-keybind .actions .btn[data-keybind='cancel']");
+			keybind.apply = $(".menu-keybind .actions .btn[data-keybind='apply']");
+			// Audio settings
+			options.audio.subtitle = $(".option.audio .subtitle");
+			options.audio.music = $(".option.audio .music");
+			options.audio.sound = $(".option.audio .sound");
+			// Language settings
+			options.lang.subtitle = $(".option.lang .subtitle");
+			options.lang.en_US = $(".option.lang .en_US");
+			options.lang.es_ES = $(".option.lang .es_ES");
+			options.lang.fr_FR = $(".option.lang .fr_FR");
+			// About settings
+			options.about.subtitle = $(".option.about .subtitle");
+			options.about.tutorial = $(".option.about .tutorial");
+			options.about.updates = $(".option.about .updates");
+			options.about.credits = $(".option.about .credits");
+			// Credits menu
+			credits.title = $(".credit-title");
+			credits.copyright = $("#copyright");
+			credits.clarisse_job = $(".job.clarisse");
+			credits.lean_job = $(".job.lean");
+			credits.matteo_job = $(".job.matteo");
+			// Save menu
+			save.tip = $(".save_tip");
+			save.backup = $("#current_backup");
+			// Map elements
+			Map.container = $(".map-container");
+			Map.overlay = $(".overlay-map");
+			Map.map = $("#map");
+			Map.uppermap = $("#uppermap");
+			Map.player = $("#player");
+			Map.entities = $("#entities");
+			Map.subtitle = $(".level-subtitle");
+			Map.dialog = $(".dialog");
+			Map.dialog_content = $(".dialog-content");
+			Map.dialog_option1 = $(".dialog-option-1");
+			Map.dialog_option2 = $(".dialog-option-2");
+			// HUD
+			hud.container = $(".hud");
+			hud.nickname = $(".hud .nickname");
+			hud.health_info = $(".hud .health_info");
+			hud.health_value = $(".hud .health_value");
+			hud.mana_info = $(".hud .mana_info");
+			hud.mana_value = $(".hud .mana_value");
+			// Mini HUD (fight menu)
+			mini_hud.container = $(".mini_hud");
+			mini_hud.health_info = $(".mini_hud .health_info");
+			mini_hud.health_value = $(".mini_hud .health_value");
+			mini_hud.mana_info = $(".mini_hud .mana_info");
+			mini_hud.mana_value = $(".mini_hud .mana_value");
+			mini_hud.enemy_health_info = $(".mini_hud .enemy_health_info");
+			mini_hud.enemy_health_value = $(".mini_hud .enemy_health_value");
+			// Fight menu
+			fight.title = $(".menu-fight .fight");
+			fight.player_attack = $(".menu-fight .player_attack");
+			fight.enemy_attack = $(".menu-fight .enemy_attack");
+			fight.player_avatar = $(".menu-fight .player_avatar .avatar");
+			fight.enemy_avatar = $(".menu-fight .enemy_avatar .avatar");
+			fight.btn_ability1 = $(".menu-fight .actions .btn-ability1");
+			fight.btn_ability2 = $(".menu-fight .actions .btn-ability2");
+			fight.btn_ult = $(".menu-fight .actions .btn-ult");
+			fight.btn_flee = $(".menu-fight .actions .btn-flee");
+			// Launch game
+			Game.init()
 		</script>
-		<title translate="no">Quiver</title>
-	</head>
-
-	<body onselectstart="return false">
-		<noscript>
-			<p>
-				This game needs JavaScript to work.<br>
-				Enable JavaScript in your browser, then retry.<br><br>
-				<a href="">Reload</a>
-			</p>
-			<div class="version">1.1.2</div>
-		</noscript>
-		<main>
-			<!-- Game content goes here -->
-			<div id="console">
-				<div class="console-title">Console</div>
-				<div class="x"></div>
-				<div class="y"></div>
-			</div>
-			<?php include "assets/ui/menu-main.html"; ?>
-			<div class="overlay overlay-menu">
-				<?php include "assets/ui/menu-play.html"; ?>
-				<?php include "assets/ui/menu-options.html"; ?>
-				<?php include "assets/ui/menu-save.html"; ?>
-			</div>
-			<?php include "assets/ui/menu-keybind.html"; ?>
-			<div class="overlay overlay-load"></div>
-			<?php include "assets/ui/menu-load.html"; ?>
-			<div class="overlay overlay-pause">
-				<?php include "assets/ui/menu-pause.html"; ?>
-			</div>
-			<div class="overlay overlay-death">
-				<?php include "assets/ui/menu-death.html"; ?>
-			</div>
-			<div class="map-container">
-				<div class="overlay overlay-map"></div>
-				<div id="player"></div>
-				<div id="map"></div>
-				<div id="uppermap"></div>
-				<div id="entities"></div>
-				<div class="hud">
-					<div class="nickname"></div>
-					<div class="health_info"></div>
-					<progress class="health_value"></progress>
-					<div class="mana_info"></div>
-					<progress class="mana_value"></progress>
-				</div>
-				<div class="level-subtitle"></div>
-				<div class="dialog">
-					<div class="dialog-content"></div>
-					<button class="dialog-option dialog-option-1"></button>
-					<button class="dialog-option dialog-option-2"></button>
-				</div>
-				<?php include "assets/ui/menu-fight.html"; ?>
-			</div>
-			<?php include "assets/ui/menu-credits.html"; ?>
-		</main>
 	</body>
 
 </html>

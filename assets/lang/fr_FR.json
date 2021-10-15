@@ -39,8 +39,8 @@
 			"lang:es_ES.text": "Espagnol",
 			"lang:fr_FR.text": "Français",
 			"about.text": "A propos",
-			"about:tutorial.text": "Comment jouer ?",
-			"about:updates.text": "Notes de mise à jour",
+			"about:tutorial.text": "Comment jouer ? (anglais)",
+			"about:updates.text": "Historique des mises à jour (anglais)",
 			"about:credits.text": "Crédits"
 		},
 		"pause.text": "Pause",
