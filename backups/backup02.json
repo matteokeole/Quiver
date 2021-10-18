@@ -1,11 +1,11 @@
 {
-	"name": "s",
+	"name": "Backup #2",
 	"date": {
 		"creation": "2021-5-27-23-4-23",
 		"lastConnection": "2021-5-28-11-10-47"
 	},
 	"player": {
-		"nickname": "s",
+		"nickname": "Player",
 		"character": "mage",
 		"level": "dungeon",
 		"health": 20,
@@ -19,34 +19,26 @@
 		],
 		"orientation": "left"
 	},
-	"entity": [
-		{
+	"entity": [{
 			"health": 0,
 			"scare": 2
-		},
-		{
+		}, {
 			"health": 20,
 			"scare": 1
-		},
-		{
+		}, {
 			"health": 20,
 			"scare": 3
-		},
-		{
+		}, {
 			"health": 20,
 			"scare": 1
-		},
-		{
+		}, {
 			"health": 20,
 			"scare": 3
-		},
-		{
+		}, {
 			"health": 20,
 			"scare": 2
-		},
-		{
+		}, {
 			"health": 20,
 			"scare": 2
-		}
-	]
+	}]
 }

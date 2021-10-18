@@ -1,11 +1,11 @@
 {
-	"name": "s",
+	"name": "Backup #3",
 	"date": {
 		"creation": "2021-5-27-23-4-23",
 		"lastConnection": "2021-5-28-12-19-58"
 	},
 	"player": {
-		"nickname": "s",
+		"nickname": "Player",
 		"character": "rogue",
 		"level": "diamond",
 		"health": 12,
@@ -19,34 +19,26 @@
 		],
 		"orientation": "left"
 	},
-	"entity": [
-		{
+	"entity": [{
 			"health": 20,
 			"scare": 2
-		},
-		{
+		}, {
 			"health": 20,
 			"scare": 1
-		},
-		{
+		}, {
 			"health": 20,
 			"scare": 3
-		},
-		{
+		}, {
 			"health": 20,
 			"scare": 1
-		},
-		{
+		}, {
 			"health": 20,
 			"scare": 3
-		},
-		{
+		}, {
 			"health": 20,
 			"scare": 2
-		},
-		{
+		}, {
 			"health": 20,
 			"scare": 2
-		}
-	]
+	}]
 }

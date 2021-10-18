@@ -9,6 +9,7 @@
 		"new_game.text": "Nuevo juego",
 		"launch_backup.text": "Lanzar una copia de respaldo",
 		"keybind_tip.text": "Presione una tecla",
+		"loading.text": "CARGANDO...",
 		"save.text": "Guardar",
 		"save_tip.text": "Para guardar tu juego, copia el código a continuación y péguelo en un archivo JSON.",
 		"copy.text": "Copiar",

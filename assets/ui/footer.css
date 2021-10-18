@@ -1,0 +1,13 @@
+footer {
+	padding: 8px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	opacity: 1;
+	color: #fff;
+	font-size: 20px;
+	transition-duration: 0.2s
+}
+
+footer .version {float: right}

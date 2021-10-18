@@ -9,6 +9,7 @@
 		"new_game.text": "Nouvelle partie",
 		"launch_backup.text": "Charger une sauvegarde",
 		"keybind_tip.text": "Appuyez sur une touche",
+		"loading.text": "CHARGEMENT...",
 		"save.text": "Sauvegarder",
 		"save_tip.text": "Pour sauvegarder votre partie, copiez le code ci-dessous et collez-le dans un fichier JSON.",
 		"copy.text": "Copier",
@@ -59,9 +60,9 @@
 		},
 		"health.text": "Santé",
 		"mana.text": "Mana",
-		"ability1_title.text": "Première capacité",
-		"ability2_title.text": "Seconde capacité",
-		"ult_title.text": "Ultime",
+		"ability1_title.text": "Première capacité ",
+		"ability2_title.text": "Seconde capacité ",
+		"ult_title.text": "Ultime ",
 		"character": {
 			"mage": {
 				"name.text": "Mage",
@@ -131,9 +132,9 @@
 				{"text": "Vous vous cognez la tete. C'est un mur, ici."}
 			],
 			"diamond": [
-				{"text": "Vous continuez dans le couloir en vous enfoncant encore plus loin dans le donjon."},
-				{"text": "-bleh bleh bleh-"},
-				{"text": "Vous ouvrez le coffre et constatez qu'il est vide. Et poussiereux."},
+				{"text": "Vous continuez dans le couloir en vous enfonçant encore plus loin dans le donjon."},
+				{"text": "*bleh bleh bleh*"},
+				{"text": "Vous ouvrez le coffre et constatez qu'il est vide. Et poussiéreux."},
 				{"text": "Ce couloir est très sombre. Il faudrait une torche pour y voir plus clair."},
 				{"text": "Vous vous emparez du diamant et vous vous enfuyez avec aussi vite que possible."}
 			],

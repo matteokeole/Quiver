@@ -26,6 +26,7 @@
 		<link rel="icon" type="image/x-icon" href="favicon.ico">
 		<link rel="apple-touch-icon" type="image/x-icon" href="favicon.ico">
 		<link rel="stylesheet" type="text/css" href="assets/ui/dialog.css">
+		<link rel="stylesheet" type="text/css" href="assets/ui/footer.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/hud.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu.css">
 		<link rel="stylesheet" type="text/css" href="assets/ui/menu-credits.css">
@@ -49,14 +50,14 @@
 		<title lang="en" translate="no">Quiver</title>
 	</head>
 
-	<body onselectstart="return false">
+	<body>
 		<noscript>
 			<p>
 				This game needs JavaScript to work.<br>
 				Enable JavaScript in your browser, then retry.<br><br>
 				<a href="">Reload</a>
 			</p>
-			<div class="version">1.1.23</div>
+			<div class="version">1.1.3</div>
 		</noscript>
 		<main>
 			<!-- Game content goes here -->
@@ -102,11 +103,14 @@
 				<?php include "assets/ui/menu-fight.html"; ?>
 			</div>
 			<?php include "assets/ui/menu-credits.html"; ?>
+			<?php include "assets/ui/footer.html"; ?>
 		</main>
 		<script>
 			const Game = {
 				init: function() {
 					$("meta[name='version']").setAttribute("version", this.version); // Set the current version as metadata
+					this.resize(); // Print display infos on load
+					footer.version.textContent = `Quiver ${this.version} - Copyright (C) 2021`; // Print the current version on the footer
 					$("title").textContent = `Quiver ${this.version}`; // Print the window title on the last version
 					Game.lang("en_US"); // Default language is english (this setting can be modified in options)
 					// Reset inputs
@@ -120,8 +124,9 @@
 					save.backup.value = empty;
 					show($("main")); // Open game window
 					document.querySelectorAll(".btn:not([disabled]), .option-name").forEach(function(e) {
+						// Click sound
 						e.addEventListener("click", function() {play_sound("click")})
-					}); // Click sound
+					});
 					play.new_game.player_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.player_name)});
 					play.new_game.game_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.game_name)});
 					document.querySelectorAll(".btn[data-function='open']").forEach(function(e) {
@@ -139,12 +144,21 @@
 					document.querySelectorAll(".btn[data-function='refresh']").forEach(function(e) {
 						e.addEventListener("click", function() {location.reload()})
 					});
-					$(".option-name.tutorial").addEventListener("click", function() {
-						alert("Quiver - How To Play\n\n\n\nWanna start your first Quiver game? Here are the basic infos that you need to know before playing.\n\nBefore launching\nYou can change your keybinds, your language and the music/sound volume in the Options menu, before launching a game. No worries, you'll have access to this menu when playing, but in order to follow well the dialogs, we advice you to do your changes before creating a new game.\nWhen initializing your first Quiver game, you'll need to name your game, give yourself a nickname and select a character between the Mage, the Rogue and the Paladin. Be aware that these characters have their own stats, and are played differently. All the character infos are visible in the New Game menu.\n\nAfter launching\nYou'll arrive in a place where you can move with your preset settings, and where the history will begin. Also, don't forget to look at the dialogs, that's important.\n\nExploration\nAfter reading the story, the (real) game will start. Just keep exploring the dungeons and you'll finish the game. Yeah, it's that simple.\n\nMonster Fighting\nActually, it's not that simple. There are monsters in the dungeon and they will do everything to kill you. But you're brave, and you will fight them. The fighting system is pretty simple: it's a round-by-round system, in which you'll use your character's abilities against the monster's abilities. Warning: there are several types of monsters, and they do not have the same abilities. Mostly of their abilities will hurt you, and all your abilities require mana points to be used. If you don't have mana, you can only flee, and lose 8 health points. So, keep a look on your HUD!\nWhen you defeat an enemy, you'll gain recovery health and mana.\n\nGood luck, young explorer!")
-					});
-					$(".option-name.updates").addEventListener("click", function() {
-						alert("Quiver Updates History\n\n\n\nAlpha Updates\n\n\n\n210108 - 01/08/21\nThis is the first ever-created version of Quiver. There was only a few UI designs and some useless buttons. The game initial name was Dungeon Quest!\n\n210118 - 01/18/21\nQuiver just gets its first level, which was the dungeon entrance! There was not textures, but the main menu could launch a game. There was some textures like the relief texture on the buttons, the darkbrick menu texture and the scroll appearance for the secondary menus. By the way, we were experiencing the very first motion and collision tests on the game.\n\n210120 - 01/20/21\nAdded some infos at the top of the backup content (game name, nickname, current level, etc.).\n\n210122 - 01/22/21\nRewrite of the generator and motion engines and some bug fixes.\n\n210124 - 01/24/21\nThe user now needs to inform all the text fields on the New Game menu, like the game name, the class, etc.\n\n210125 - 01/25/21\nAddition of the first level design textures like brick, wood, etc. Even if the collisions with all the objects are disabled, there are collision barriers around the level so the player can't quit the map.\n\n210129 - 01/29/21\nThe loading menu with that (beautiful) counter clock has just been added! Thanks Paint 3D. Really. No. I hate Paint 3D.\n\n210207 - 02/07/21\nWelcome to this incredibly beautiful main menu background. Thanks Léan :). Also, the update brings the first 2.5D textures to the game. The dungeon entrance is fully designed! Just, the collisions are missing but no worry! These will come soon :D\n\n210220 - 02/20/21\nJust some texture updates, like chests. I like chests. Oh, and the counter clock from the loading menu is now finished. Oh, and also the character stats are into the game and ready to be used!\n\n210301 - 03/01/21\nThe biggest alpha update, by far. The site is now on Hostinger, at https://quivergame.000webhostapp.com. The player HUD has been added, as well as the dialogs and the mobs. The collisions are finished and work well. The player can pass levels, fight monsters and grab the... wait, I don't want to spoil you! Play the game before.\n\n\n\nRelease Updates\n\n\n\n1.0.0 - 03/07/21\nThis is the first released version of Quiver. The game is hosted and playable at https://quivergame.000webhostapp.com. This address is not intended to change. Quiver 1.0.0 is quite different from its earlier versions. The website had a scaling system which had to set the window scale to 16/9, which was the only supported ratio. The UI was a little different too: the New Game menu and the Launch Backup menu were separated, and the graphic interface was a bit less conscientious. Also, Quiver had not sounds. They'll be implemented with the next update.\n\n1.1.0 - 05/30/21\nThis update brings a lot of changes: the source code had been fully re-written, and we added some animations, languages (English, Spanish and French - maybe other languages will be added with the next updates :D) and options. You can now choose your keybinds, regulate the volume of the in-game and music sounds and change your language. The history, the dialogues, the maps and the enemies are the same than that of the previous version. With this update, Quiver is twice as light as before!\n\n1.1.1 - 08/17/21\nA small update in which we added a little guide to learn the basics, as well as the update changelog you're reading right now :)\n\n1.1.2 - 12/10/21\nSomes changes about the code lisibility. You'll no longer see these green weird progress bars on other browsers than Firefox!\n\n1.1.23 - 15/10/21\nLike the previous update, code lisibility and a bug fix (the game logo did not appear on the credits menu).")
-					});
+					// About section
+					let howtoplay,
+					updates_history,
+					req1 = new XMLHttpRequest(),
+					req2 = new XMLHttpRequest();
+					// Request play guide
+					req1.open("GET", "howtoplay.txt");
+					req1.send();
+					req1.addEventListener("load", function() {howtoplay = this.response});
+					// Request updates history
+					req2.open("GET", "updates_history.txt");
+					req2.send();
+					req2.addEventListener("load", function() {updates_history = this.response})
+					$(".option-name.tutorial").addEventListener("click", function() {alert(howtoplay)});
+					$(".option-name.updates").addEventListener("click", function() {alert(updates_history)});
 					$(".option-name.credits").addEventListener("click", Game.open_credits);
 					UI.btn.save.addEventListener("click", function() {Game.update_save_backup(window["Backup"])});
 					UI.btn.close_credits.addEventListener("click", Game.close_credits);
@@ -347,8 +361,8 @@
 						}
 					});
 					// Show a check icon on the selected language
-					document.querySelectorAll(".option.lang .option-name").forEach(function(e) {e.querySelector(".icon").style.visibility = "hidden"});
-					$(`.option.lang .option-name.${l}`).querySelector(".icon").style.visibility = "visible"
+					document.querySelectorAll(".option.lang .option-name").forEach(function(e) {e.querySelector(".icon").style.opacity = 0});
+					$(`.option.lang .option-name.${l}`).querySelector(".icon").style.opacity = 1
 				},
 				create_backup: function(player) {
 					let Backup = {
@@ -369,8 +383,7 @@
 							pos: [0, 0],
 							orientation: "right"
 						},
-						entity: [
-							{
+						entity: [{
 								health: Entity.skeleton2.health_max,
 								scare: Entity.skeleton2.scare
 							}, {
@@ -391,8 +404,7 @@
 							}, {
 								health: Entity.skeleton2.health_max,
 								scare: Entity.skeleton2.scare
-							}
-						]
+						}]
 					}
 					return Backup
 				},
@@ -456,8 +468,12 @@
 					Map.player.style.backgroundImage = `url(assets/textures/entity/${player.texture.idle})`;
 					update_hud(backup); // Update HUD values
 					// Load overlay/screen animations
-					setTimeout(function() {show(UI.menu.load, "flex")}, 600);
 					setTimeout(function() {
+						hide(footer.container);
+						show(UI.menu.load, "flex")
+					}, 600);
+					setTimeout(function() {
+						// show(footer.container);
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style.backgroundColor = "transparent"
@@ -532,11 +548,13 @@
 					UI.menu.options.querySelector(".about").removeChild($(".option-name.credits")); // Remove credit button from the option menu when playing the game
 					document.addEventListener("keydown", pause_menu);
 					UI.btn.resume.addEventListener("click", function() {
+						footer.container.style.opacity = 0;
 						UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
 						UI.overlay.pause.style["animation-name"] = "overlay_pause_fade_out";
 						Map.container.classList.remove("blur");
 						setTimeout(function() {
 							hide(UI.overlay.pause);
+							hide(footer.container);
 							player.movement.on()
 						}, 200)
 					});
@@ -715,7 +733,7 @@
 								document.addEventListener("keydown", esc)
 							}, 200);
 							break;
-						case "close": // Close with button
+						case "close": // Close with button or with the Escape key
 							document.removeEventListener("keydown", esc);
 							content.style.visibility = "hidden";
 							st.style["-webkit-animation-name"] = "scrollbox-close";
@@ -777,13 +795,14 @@
 							hide($(".menu-credits .btn-main-menu"));
 							show(UI.btn.close_credits)
 						}
-						show(UI.menu.credits, "flex")
+						show(UI.menu.credits, "flex");
+						hide(footer.container)
 					}, 600);
 					setTimeout(function() {
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style.backgroundColor = "transparent";
-						if (!game_ended)	document.addEventListener("keydown", esc);
+						if (!game_ended) document.addEventListener("keydown", esc);
 						setTimeout(function() {hide(UI.overlay.load)}, 600)
 					}, 1200)
 				},
@@ -793,7 +812,10 @@
 					UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style.backgroundColor = "#000";
-					setTimeout(function() {hide(UI.menu.credits)}, 600);
+					setTimeout(function() {
+						hide(UI.menu.credits);
+						show(footer.container)
+					}, 600);
 					setTimeout(function() {
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
@@ -801,7 +823,11 @@
 						setTimeout(function() {hide(UI.overlay.load)}, 600)
 					}, 1200)
 				},
-				version: "1.1.23"
+				resize: function() {
+					// Print display infos on the footer
+					footer.display.textContent = `Display: ${window.innerWidth} * ${window.innerHeight}`
+				},
+				version: "1.1.3"
 			}
 
 			let UI = {
@@ -914,6 +940,9 @@
 				clarisse_job: null,
 				lean_job: null,
 				matteo_job: null
+			},
+			load = {
+				loading: null
 			},
 			save = {
 				tip: null,
@@ -1582,6 +1611,11 @@
 				btn_ult: null,
 				btn_flee: null
 			},
+			footer = {
+				container: null,
+				display: null,
+				version: null
+			},
 			// Volume
 			Volume = {
 				music: 1,
@@ -1629,8 +1663,8 @@
 					case "mage":
 						this.id = "mage";
 						this.texture = {
-							idle: "mage_idle.gif",
-							walking: "mage_walking.gif"
+							idle: "mage.png",
+							walking: "mage.png"
 						};
 						this.health = 20;
 						this.shield = 1;
@@ -1721,16 +1755,22 @@
 			pause_menu = function(e) {
 				if (e.keyCode === 27 && UI.overlay.menu.style.display !== "flex") {
 					if (UI.overlay.pause.style.display === "flex") {
+						// Hide pause menu
 						UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
 						UI.overlay.pause.style["animation-name"] = "overlay_pause_fade_out";
 						Map.container.classList.remove("blur");
 						setTimeout(function() {
 							hide(UI.overlay.pause);
+							footer.container.style.opacity = 0;
+							setTimeout(function() {hide(footer.container)}, 200);
 							if (!in_fight) player.movement.on()
 						}, 200)
 					} else {
+						// Show pause menu (if the game isn't finished)
 						if (!game_ended) {
 							player.movement.off();
+							show(footer.container);
+							footer.container.style.opacity = 1;
 							Map.container.classList.add("blur");
 							show(UI.overlay.pause, "flex");
 							UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_in";
@@ -2268,6 +2308,8 @@
 			credits.clarisse_job = $(".job.clarisse");
 			credits.lean_job = $(".job.lean");
 			credits.matteo_job = $(".job.matteo");
+			// Load menu
+			load.loading = $(".loading");
 			// Save menu
 			save.tip = $(".save_tip");
 			save.backup = $("#current_backup");
@@ -2308,8 +2350,14 @@
 			fight.btn_ability2 = $(".menu-fight .actions .btn-ability2");
 			fight.btn_ult = $(".menu-fight .actions .btn-ult");
 			fight.btn_flee = $(".menu-fight .actions .btn-flee");
+			// Footer
+			footer.container = $("footer");
+			footer.display = $("footer .display");
+			footer.version = $("footer .version");
 			// Launch game
-			Game.init()
+			Game.init();
+			// Window size
+			window.addEventListener("resize", Game.resize)
 		</script>
 	</body>
 

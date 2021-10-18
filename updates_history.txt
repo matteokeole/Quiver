@@ -1,4 +1,4 @@
-Quiver Updates History
+Updates History
 
 
 
@@ -51,8 +51,11 @@ This update brings a lot of changes: the source code had been fully re-written, 
 1.1.1 - 08/17/21
 A small update in which we added a little guide to learn the basics, as well as the update changelog you're reading right now :)
 
-1.1.2 - 12/10/21
+1.1.2 - 10/12/21
 Somes changes about the code lisibility. You'll no longer see these green weird progress bars on other browsers than Firefox!
 
-1.1.23 - 15/10/21
+1.1.23 - 10/15/21
 Like the previous update, code lisibility and a bug fix (the game logo did not appear on the credits menu).
+
+1.1.3 - 10/18/21
+Added a footer which indicates the game current version and the window size, plus some changes for the french translation.

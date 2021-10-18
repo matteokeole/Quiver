@@ -1,7 +1,6 @@
 /** Icons **/
 
 .icon {
-	display: inline-block;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -13,9 +12,9 @@
 	height: 64px;
 	margin: auto;
 	top: 0;
+	right: 0;
 	bottom: 0;
 	left: 0;
-	right: 0;
 	position: absolute
 }
 
@@ -27,9 +26,9 @@
 .option .icon {
 	width: 24px;
 	height: 32px;
+	float: right;
 	background-position: center;
-	background-size: 100%;
-	float: right
+	background-size: 100%
 }
 
 .icon.key {
