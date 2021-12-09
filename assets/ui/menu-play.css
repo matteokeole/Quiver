@@ -67,6 +67,8 @@
 	font-size: 18px
 }
 
+.icon.health, .icon.shield, .icon.mana {display: inline-block}
+
 .health_value,
 .shield_value,
 .mana_value {
