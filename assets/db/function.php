@@ -34,6 +34,11 @@ class Quiver
         return $connection;
 
     }
+    public function Create_backup($nickname,$backup)
+    {
+        $nickname=htmlspecialchars($nickname);
+        $insert_backup=$this->bdd->prepare("INSERT INTO sauve(json,id_users) VALUES (?,?)");
+    }
     
 }
 
