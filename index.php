@@ -107,14 +107,14 @@
 		</main>
 		<script>
 			const Game = {
-				init: () => {
+				init: function() {
 					$("meta[name='version']").setAttribute("version", this.version); // Set the current version as metadata
 					this.resize(); // Print display infos on load
 					footer.version.textContent = `Quiver ${this.version} - Copyright (C) 2021`; // Print the current version on the footer
 					$("title").textContent = `Quiver ${this.version}`; // Print the window title on the last version
 					Game.lang("en_US"); // Default language is english (this setting can be modified in options)
 					// Reset inputs
-					document.addEventListener("keydown", e => {
+					document.addEventListener("keydown", function(e) {
 						if (e.keyCode === Key.console) ($("#console").style.display !== "block") ? show($("#console")) : hide($("#console"))
 					});
 					let empty = "";
@@ -123,26 +123,26 @@
 					play.launch_backup.backup.value = empty;
 					save.backup.value = empty;
 					show($("main")); // Open game window
-					document.querySelectorAll(".btn:not([disabled]), .option-name").forEach(e => {
+					document.querySelectorAll(".btn:not([disabled]), .option-name").forEach(function(e) {
 						// Click sound
-						e.addEventListener("click", () => {play_sound("click")})
+						e.addEventListener("click", function() {play_sound("click")})
 					});
-					play.new_game.player_name.addEventListener("keyup", () => {Game.check_input_value(play.new_game.player_name)});
-					play.new_game.game_name.addEventListener("keyup", () => {Game.check_input_value(play.new_game.game_name)});
-					document.querySelectorAll(".btn[data-function='open']").forEach(e => {
-						e.addEventListener("click", () => {Game.toggle_menu(this.getAttribute("data-target"), "open")})
+					play.new_game.player_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.player_name)});
+					play.new_game.game_name.addEventListener("keyup", function() {Game.check_input_value(play.new_game.game_name)});
+					document.querySelectorAll(".btn[data-function='open']").forEach(function(e) {
+						e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), "open")})
 					});
-					document.querySelectorAll(".btn[data-function='close']").forEach(e => {
-						e.addEventListener("click", () => {Game.toggle_menu(this.getAttribute("data-target"), "close")})
+					document.querySelectorAll(".btn[data-function='close']").forEach(function(e) {
+						e.addEventListener("click", function() {Game.toggle_menu(this.getAttribute("data-target"), "close")})
 					});
-					document.querySelectorAll(".btn[data-character]").forEach(e => {
-						e.addEventListener("click", () => {select_character(this.getAttribute("data-character"))})
+					document.querySelectorAll(".btn[data-character]").forEach(function(e) {
+						e.addEventListener("click", function() {select_character(this.getAttribute("data-character"))})
 					});
-					document.querySelectorAll(".option-name[data-function='keybind']").forEach(e => {
-						e.addEventListener("click", () => {Game.open_keybind(e)})
+					document.querySelectorAll(".option-name[data-function='keybind']").forEach(function(e) {
+						e.addEventListener("click", function() {Game.open_keybind(e)})
 					});
-					document.querySelectorAll(".btn[data-function='refresh']").forEach(e => {
-						e.addEventListener("click", () => {location.reload()})
+					document.querySelectorAll(".btn[data-function='refresh']").forEach(function(e) {
+						e.addEventListener("click", function() {location.reload()})
 					});
 					// About section
 					let howtoplay,
@@ -152,17 +152,17 @@
 					// Request play guide
 					req1.open("GET", "howtoplay.txt");
 					req1.send();
-					req1.addEventListener("load", () => {howtoplay = this.response});
+					req1.addEventListener("load", function() {howtoplay = this.response});
 					// Request updates history
 					req2.open("GET", "updates_history.txt");
 					req2.send();
-					req2.addEventListener("load", () => {updates_history = this.response})
-					$(".option-name.tutorial").addEventListener("click", () => {alert(howtoplay)});
-					$(".option-name.updates").addEventListener("click", () => {alert(updates_history)});
+					req2.addEventListener("load", function() {updates_history = this.response})
+					$(".option-name.tutorial").addEventListener("click", function() {alert(howtoplay)});
+					$(".option-name.updates").addEventListener("click", function() {alert(updates_history)});
 					$(".option-name.credits").addEventListener("click", Game.open_credits);
-					UI.btn.save.addEventListener("click", () => {Game.update_save_backup(window["Backup"])});
+					UI.btn.save.addEventListener("click", function() {Game.update_save_backup(window["Backup"])});
 					UI.btn.close_credits.addEventListener("click", Game.close_credits);
-					UI.btn.copy.addEventListener("click", () => {
+					UI.btn.copy.addEventListener("click", function() {
 						// Copy backup content
 						save.backup.select();
 						save.backup.setSelectionRange(0, save.backup.value.length);
@@ -170,27 +170,27 @@
 						this.textContent = copy_success
 					});
 					$("#open_backup").onchange = Game.open_backup;
-					play.launch_backup.launch.addEventListener("click", () => {Game.launch_backup()});
-					document.querySelectorAll(".subtitle").forEach(e => {
-						e.addEventListener("click", () => {e.parentNode.parentNode.scrollTop = (this.parentNode.offsetTop - 60)})
+					play.launch_backup.launch.addEventListener("click", function() {Game.launch_backup()});
+					document.querySelectorAll(".subtitle").forEach(function(e) {
+						e.addEventListener("click", function() {e.parentNode.parentNode.scrollTop = (this.parentNode.offsetTop - 60)})
 					});
 					keybind.cancel.addEventListener("click", Game.close_keybind);
 					// Music volume
 					// Chrome/Safari/Firefox
-					$(".music .volume").addEventListener("input", () => {set_volume_nb(this, this.nextElementSibling, "music")});
+					$(".music .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling, "music")});
 					// IE
-					$(".music .volume").addEventListener("change", () => {set_volume_nb(this, this.nextElementSibling, "music")});
+					$(".music .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling, "music")});
 					// Volume number
-					$(".music .volume_nb").addEventListener("keyup", () => {set_volume_range(this, this.previousElementSibling, "music")});
+					$(".music .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling, "music")});
 					// Sound volume
 					// Chrome/Safari/Firefox
-					$(".sound .volume").addEventListener("input", () => {set_volume_nb(this, this.nextElementSibling, "sound")});
+					$(".sound .volume").addEventListener("input", function() {set_volume_nb(this, this.nextElementSibling, "sound")});
 					// IE
-					$(".sound .volume").addEventListener("change", () => {set_volume_nb(this, this.nextElementSibling, "sound")});
+					$(".sound .volume").addEventListener("change", function() {set_volume_nb(this, this.nextElementSibling, "sound")});
 					// Volume number
-					$(".sound .volume_nb").addEventListener("keyup", () => {set_volume_range(this, this.previousElementSibling, "sound")})
+					$(".sound .volume_nb").addEventListener("keyup", function() {set_volume_range(this, this.previousElementSibling, "sound")})
 				},
-				check_input_value: input => {
+				check_input_value: function(input) {
 					if (/^\s+$/.test(input.value) || input.value.length === 0) {
 						// The input value is composed only of whitespaces or is empty
 						(input.getAttribute("id") === "player_name") ? is_player_name_ok = false : is_game_name_ok = false;
@@ -201,13 +201,13 @@
 					else is_game_name_ok = true; // No errors
 					Game.check_new_game_validity()
 				},
-				check_new_game_validity: () => {
+				check_new_game_validity: function() {
 					if (is_player_name_ok && is_game_name_ok && is_character_selected) {
 						play.new_game.play.removeAttribute("disabled");
 						play.new_game.play.addEventListener("click", Game.launch_new_game)
 					}
 				},
-				lang: l => {
+				lang: function(l) {
 					// Change the UI language
 					// l -> language [str]
 					// JSON lang file request
@@ -216,15 +216,15 @@
 					request.open("GET", path);
 					request.responseType = "json";
 					request.send();
-					request.addEventListener("load", () => {
+					request.addEventListener("load", function() {
 						// Request accepted
 						let r = this.response[l]; // Get file content
 						$("html").setAttribute("lang", r["lang"]);
 						// Apply new language to the interface
 						// Buttons
-						document.querySelectorAll(".btn-class").forEach(e => {e.querySelector(".character_title").textContent = r.character[e.classList[2]]["name.text"]});
-						document.querySelectorAll(".btn-options").forEach(e => {e.textContent = r["options.text"]});
-						document.querySelectorAll(".btn-main-menu").forEach(e => {e.textContent = r["main_menu.text"]});
+						document.querySelectorAll(".btn-class").forEach(function(e) {e.querySelector(".character_title").textContent = r.character[e.classList[2]]["name.text"]});
+						document.querySelectorAll(".btn-options").forEach(function(e) {e.textContent = r["options.text"]});
+						document.querySelectorAll(".btn-main-menu").forEach(function(e) {e.textContent = r["main_menu.text"]});
 						UI.btn.play.textContent = r["play.text"];
 						UI.btn.resume.textContent = r["resume.text"];
 						UI.btn.save.textContent = r["save.text"];
@@ -361,10 +361,10 @@
 						}
 					});
 					// Show a check icon on the selected language
-					document.querySelectorAll(".option.lang .option-name").forEach(e => {e.querySelector(".icon").style.opacity = 0});
+					document.querySelectorAll(".option.lang .option-name").forEach(function(e) {e.querySelector(".icon").style.opacity = 0});
 					$(`.option.lang .option-name.${l}`).querySelector(".icon").style.opacity = 1
 				},
-				create_backup: player => {
+				create_backup: function(player) {
 					let Backup = {
 						name: play.new_game.game_name.value,
 						date: {
@@ -408,7 +408,7 @@
 					}
 					return Backup
 				},
-				launch_new_game: () => {
+				launch_new_game: function() {
 					Game.toggle_menu("menu-play", "close");
 					// Init player
 					let Player = new Character(character_selected);
@@ -419,11 +419,11 @@
 					window["Backup"] = Game.create_backup(Player);
 					Game.load(window["Backup"], Player)
 				},
-				open_backup: e => {
+				open_backup: function(e) {
 					let file = e.target.files[0];
 					if (!file) return;
 					let reader = new FileReader();
-					reader.addEventListener("load", e => {
+					reader.onload = function(e) {
 						show($(".container-backup"), "flex"); // Open the menu
 						try {
 							let temp = JSON.parse(e.target.result); // e.target.result = backup content
@@ -441,10 +441,10 @@
 							return e
 						}
 						UI.menu.play.scrollTop = UI.menu.play.scrollHeight
-					})
+					}
 					reader.readAsText(file)
 				},
-				launch_backup: () => {
+				launch_backup: function() {
 					Game.toggle_menu("menu-play", "close");
 					window["Backup"] = JSON.parse(play.launch_backup.backup.value);
 					window["Backup"].date.lastConnection = now();
@@ -456,8 +456,8 @@
 					Player.movement = player.movement;
 					Game.load(window["Backup"], Player)
 				},
-				update_save_backup: backup => {save.backup.value = JSON.stringify(backup, null, "\t")},
-				load: (backup, player) => {
+				update_save_backup: function(backup) {save.backup.value = JSON.stringify(backup, null, "\t")},
+				load: function(backup, player) {
 					document.removeEventListener("keydown", esc);
 					// Show loading screen
 					show(UI.overlay.load);
@@ -468,17 +468,17 @@
 					Map.player.style.backgroundImage = `url(assets/textures/entity/${player.texture.idle})`;
 					update_hud(backup); // Update HUD values
 					// Load overlay/screen animations
-					setTimeout(() => {
+					setTimeout(function() {
 						hide(footer.container);
 						show(UI.menu.load, "flex")
 					}, 600);
-					setTimeout(() => {
+					setTimeout(function() {
 						// show(footer.container);
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style.backgroundColor = "transparent"
 					}, 1200);
-					setTimeout(() => {
+					setTimeout(function() {
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
 						UI.overlay.load.style.backgroundColor = "#000";
@@ -486,7 +486,7 @@
 						hide(UI.menu.main)
 					}, 4600);
 					// Hide loading screen and showing game
-					setTimeout(() => {
+					setTimeout(function() {
 						hide(UI.menu.load);
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
@@ -494,16 +494,16 @@
 						show(Map.overlay, "flex");
 						show(Map.container, "flex")
 					}, 5200);
-					setTimeout(() => {hide(UI.overlay.load)}, 5800)
+					setTimeout(function() {hide(UI.overlay.load)}, 5800)
 				},
-				generate: backup => {
+				generate: function(backup) {
 					// Request the map data
 					let path = `maps/${backup.player.level}.json`,
 						map_request = new XMLHttpRequest();
 					map_request.open("GET", path);
 					map_request.responseType = "json";
 					map_request.send();
-					map_request.addEventListener("load", () => {
+					map_request.addEventListener("load", function() {
 						// Request accepted, get file content and generate the map
 						let r = this.response[backup.player.level],
 							map = r.map,
@@ -544,15 +544,15 @@
 						}
 					})
 				},
-				start: (backup, player) => {
+				start: function(backup, player) {
 					UI.menu.options.querySelector(".about").removeChild($(".option-name.credits")); // Remove credit button from the option menu when playing the game
 					document.addEventListener("keydown", pause_menu);
-					UI.btn.resume.addEventListener("click", () => {
+					UI.btn.resume.addEventListener("click", function() {
 						footer.container.style.opacity = 0;
 						UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
 						UI.overlay.pause.style["animation-name"] = "overlay_pause_fade_out";
 						Map.container.classList.remove("blur");
-						setTimeout(() => {
+						setTimeout(function() {
 							hide(UI.overlay.pause);
 							hide(footer.container);
 							player.movement.on()
@@ -563,63 +563,63 @@
 					window.requestAnimationFrame(player.movement.move);
 					Game.story(backup.player.level) // Level subtitle & dialogs
 				},
-				end: () => {
+				end: function() {
 					player.speed = 0; // Set speed to 0 so the player can't move
 					player.movement.off(); // Disable player movement
 					Game.open_credits() // Open credit menu
 				},
-				story: map => {
+				story: function(map) {
 					update_subtitle(map);
 					switch (map) {
 						case "lobby": // Show lobby dialogs
 							Map.dialog_content.innerHTML = `${Teller.narrator}: <i>${Dialog.lobby[0].text}</i>`;
 							show(Map.dialog);
-							setTimeout(() => {hide(Map.dialog)}, Dialog.lobby[0].duration);
-							setTimeout(() => {
+							setTimeout(function() {hide(Map.dialog)}, Dialog.lobby[0].duration);
+							setTimeout(function() {
 								Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[1].text.split("%s").join(window["Backup"].player.nickname)}</i>`;
 								show(Map.dialog);
-								setTimeout(() => {hide(Map.dialog)}, Dialog.lobby[1].duration);
-								setTimeout(() => {
+								setTimeout(function() {hide(Map.dialog)}, Dialog.lobby[1].duration);
+								setTimeout(function() {
 									Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[2].text}</i>`;
 									Map.dialog_option1.textContent = `-> ${Dialog.lobby[2].options[0]}`;
 									Map.dialog_option2.textContent = `-> ${Dialog.lobby[2].options[1]}`;
 									show(Map.dialog_option1);
 									show(Map.dialog_option2);
 									show(Map.dialog);
-									Map.dialog_option1.addEventListener("click", () => {
+									Map.dialog_option1.addEventListener("click", function() {
 										// Continue the game
 										hide(Map.dialog_option1);
 										hide(Map.dialog_option2);
 										hide(Map.dialog);
-										setTimeout(() => {
+										setTimeout(function() {
 											Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[3].text}</i>`;
 											show(Map.dialog);
-											setTimeout(() => {hide(Map.dialog)}, Dialog.lobby[3].duration);
-											setTimeout(() => {
+											setTimeout(function() {hide(Map.dialog)}, Dialog.lobby[3].duration);
+											setTimeout(function() {
 												can_enter_dungeon = true;
 												Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[4].text}</i>`;
 												show(Map.dialog);
-												setTimeout(() => {hide(Map.dialog)}, Dialog.lobby[4].duration)
+												setTimeout(function() {hide(Map.dialog)}, Dialog.lobby[4].duration)
 											}, Dialog.lobby[3].duration + 1000)
 										}, 1000);
 									});
-									Map.dialog_option2.addEventListener("click", () => {
+									Map.dialog_option2.addEventListener("click", function() {
 										// Alternative end
 										hide(Map.dialog_option1);
 										hide(Map.dialog_option2);
 										hide(Map.dialog);
-										setTimeout(() => {
+										setTimeout(function() {
 											Map.dialog_content.innerHTML = `${Teller.innkeeper}: <i>${Dialog.lobby[5].text}</i>`;
 											show(Map.dialog);
 										}, 1000)
-										setTimeout(() => {
+										setTimeout(function() {
 											hide(Map.dialog);
 											game_ended = true;
 											// Close pause menu if opened
 											UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
 											UI.overlay.pause.style["animation-name"] = "overlay_pause_fade_out";
 											Map.container.classList.remove("blur");
-											setTimeout(() => {
+											setTimeout(function() {
 												hide(UI.overlay.pause);
 												player.movement.on()
 											}, 200);
@@ -641,7 +641,7 @@
 							break
 					}
 				},
-				fight: (backup, enemy_id, enemy) => {
+				fight: function(backup, enemy_id, enemy) {
 					player.movement.off();
 					in_fight = true;
 					current_enemy_id = enemy_id;
@@ -665,7 +665,7 @@
 					fight.btn_ult.addEventListener("click", ult);
 					fight.btn_flee.addEventListener("click", flee)
 				},
-				death: () => {
+				death: function() {
 					game_ended = true;
 					play_sound("pop");
 					// Close pause menu if opened
@@ -673,7 +673,7 @@
 					UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
 					UI.overlay.pause.style["animation-name"] = "overlay_pause_fade_out";
 					Map.container.classList.remove("blur");
-					setTimeout(() => {hide(UI.overlay.pause)}, 200);
+					setTimeout(function() {hide(UI.overlay.pause)}, 200);
 					// Close save menu if opened
 					Game.toggle_menu("menu-save", "close");
 					// Close option menu if opened
@@ -687,7 +687,7 @@
 					UI.overlay.death.style["-webkit-animation-name"] = "overlay_pause_fade_in";
 					UI.overlay.death.style["animation-name"] = "overlay_pause_fade_in"
 				},
-				update_map: (backup, map) => {
+				update_map: function(backup, map) {
 					while (Map.map.firstChild) {Map.map.removeChild(Map.map.lastChild)}
 					while (Map.uppermap.firstChild) {Map.uppermap.removeChild(Map.uppermap.lastChild)}
 					while (Map.entities.firstChild) {Map.entities.removeChild(Map.entities.lastChild)}
@@ -702,7 +702,7 @@
 					Game.generate(backup, map); // Generate the next map
 					Game.story(map) // Next map story (subtitle/dialogs)
 				},
-				toggle_menu: (m, s) => {
+				toggle_menu: function(m, s) {
 					// Toggle the display of a specified menu
 					// m -> menu [str]
 					// s -> status (1: open or 0: close) [number]
@@ -728,7 +728,7 @@
 							scrollable.style.scrollBehavior = "auto";
 							scrollable.scrollTop = 0; // Scroll to top (animation-less)
 							scrollable.style.scrollBehavior = "smooth";
-							setTimeout(() => {
+							setTimeout(function() {
 								content.style.visibility = "visible";
 								document.addEventListener("keydown", esc)
 							}, 200);
@@ -745,14 +745,14 @@
 							UI.overlay.menu.style["-webkit-animation-name"] = "overlay_menu_fade_out";
 							UI.overlay.menu.style["animation-name"] = "overlay_menu_fade_out";
 							UI.overlay.menu.style.backgroundColor = "transparent";
-							setTimeout(() => {
+							setTimeout(function() {
 								hide(menu);
 								hide(UI.overlay.menu)
 							}, 200)
 					}
 				},
 				// Keybinds methods
-				open_keybind: k => {
+				open_keybind: function(k) {
 					current_key = k;
 					keybind.title.textContent = current_key.firstChild.textContent;
 					keybind.tip.textContent = keybind_tip;
@@ -760,32 +760,32 @@
 					document.addEventListener("keydown", esc);
 					document.addEventListener("keydown", Game.input_keybind)
 				},
-				close_keybind: () => {
+				close_keybind: function() {
 					document.removeEventListener("keydown", Game.input_keybind);
 					keybind.apply.removeEventListener("click", Game.apply_keybind);
 					keybind.apply.setAttribute("disabled", "disabled");
 					hide(UI.overlay.keybind)
 				},
-				input_keybind: e => {
+				input_keybind: function(e) {
 					new_keybind = e;
 					keybind.tip.textContent = new_keybind.key;
 					keybind.apply.removeAttribute("disabled");
 					keybind.apply.addEventListener("click", Game.apply_keybind);
 				},
-				apply_keybind: () => {
+				apply_keybind: function() {
 					keybind.apply.removeEventListener("click", Game.apply_keybind);
 					keybind.apply.setAttribute("disabled", "disabled");
 					Key[current_key.classList[1]] = new_keybind.keyCode;
 					current_key.querySelector(".key").innerHTML = new_keybind.key;
 					Game.close_keybind()
 				},
-				open_credits: () => {
+				open_credits: function() {
 					Game.toggle_menu("menu-options", "close");
 					show(UI.overlay.load);
 					UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style.backgroundColor = "#000";
-					setTimeout(() => {
+					setTimeout(function() {
 						let donut = Math.floor(6 * Math.random() + 1);
 						credits.copyright.textContent = (donut === 1) ? copyright_fool : copyright;
 						if (game_ended) {
@@ -798,32 +798,32 @@
 						show(UI.menu.credits, "flex");
 						hide(footer.container)
 					}, 600);
-					setTimeout(() => {
+					setTimeout(function() {
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style.backgroundColor = "transparent";
 						if (!game_ended) document.addEventListener("keydown", esc);
-						setTimeout(() => {hide(UI.overlay.load)}, 600)
+						setTimeout(function() {hide(UI.overlay.load)}, 600)
 					}, 1200)
 				},
-				close_credits: () => {
+				close_credits: function() {
 					document.removeEventListener("keydown", esc);
 					show(UI.overlay.load);
 					UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style["animation-name"] = "overlay_load_fade_in";
 					UI.overlay.load.style.backgroundColor = "#000";
-					setTimeout(() => {
+					setTimeout(function() {
 						hide(UI.menu.credits);
 						show(footer.container)
 					}, 600);
-					setTimeout(() => {
+					setTimeout(function() {
 						UI.overlay.load.style["-webkit-animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style["animation-name"] = "overlay_load_fade_out";
 						UI.overlay.load.style.backgroundColor = "transparent";
-						setTimeout(() => {hide(UI.overlay.load)}, 600)
+						setTimeout(function() {hide(UI.overlay.load)}, 600)
 					}, 1200)
 				},
-				resize: () => {
+				resize: function() {
 					// Print display infos on the footer
 					footer.display.textContent = `Display: ${window.innerWidth} * ${window.innerHeight}`
 				},
@@ -984,7 +984,7 @@
 				},
 				speed: 0.1,
 				movement: {
-					on: () => {
+					on: function() {
 						// Enable player movement
 						player.canMove.top = true;
 						player.canMove.bottom = true;
@@ -993,7 +993,7 @@
 						window.addEventListener("keydown", player.movement.keydown);
 						window.addEventListener("keyup", player.movement.keyup)
 					},
-					off: () => {
+					off: function() {
 						// Disallow player movement
 						player.canMove.top = false;
 						player.canMove.bottom = false;
@@ -1006,7 +1006,7 @@
 						window.removeEventListener("keydown", player.movement.keydown);
 						window.removeEventListener("keyup", player.movement.keyup)
 					},
-					keydown: e => {
+					keydown: function(e) {
 						// Press key
 						switch (e.keyCode) {
 							case Key.forward: // Forward key
@@ -1022,7 +1022,7 @@
 								player.canMove.right ? player.direction.right = true : player.direction.right = false
 						}
 					},
-					keyup: e => {
+					keyup: function(e) {
 						// Release key
 						switch (e.keyCode) {
 							case Key.forward: // Forward key
@@ -1038,7 +1038,7 @@
 								player.direction.right = false
 						}
 					},
-					move: () => {
+					move: function() {
 						player.test_collision(window["Backup"].player.pos[0].toFixed(1), window["Backup"].player.pos[1].toFixed(1));
 						if (player.direction.top && player.canMove.top) window["Backup"].player.pos[1] += player.speed;
 						if (player.direction.bottom && player.canMove.bottom) window["Backup"].player.pos[1] -= player.speed;
@@ -1061,14 +1061,14 @@
 						player.movement.tp(window["Backup"].player.pos[0].toFixed(1), window["Backup"].player.pos[1].toFixed(1));
 						window.requestAnimationFrame(player.movement.move)
 					},
-					tp: (x, y) => {
+					tp: function(x, y) {
 						let t = "translateX(" + -x * 64 + "px) translateY(" + y * 64 + "px)";
 						Map.map.style.transform = t;
 						Map.uppermap.style.transform = t;
 						Map.entities.style.transform = t
 					}
 				},
-				test_collision: (x, y) => {
+				test_collision: function(x, y) {
 					switch (window["Backup"].player.level) {
 						case "lobby": // Lobby collision list
 							// Top collisions
@@ -1348,8 +1348,7 @@
 									setTimeout(Game.end, Dialog.diamond[4].duration) // Main ending
 								}
 							}
-							else custom_case_near = false;
-							break
+							else custom_case_near = false
 					}
 				}
 			},
@@ -1658,8 +1657,8 @@
 			rogue_discretion = false;
 
 			// Game secondary functions
-			const $ = e => {return document.querySelector(e)},
-			Character = c => {
+			const $ = function(e) {return document.querySelector(e)},
+			Character = function(c) {
 				switch (c) {
 					case "mage":
 						this.id = "mage";
@@ -1738,12 +1737,11 @@
 							damage: 0,
 							healthAmount: 5
 						}
-						break
 				}
 			},
-			show = (e, v) => {return e.style.display = (v === undefined) ? "block" : v},
-			hide = e => {return e.style.display = "none"},
-			esc = e => {
+			show = function(e, v) {return e.style.display = (v === undefined) ? "block" : v},
+			hide = function(e) {return e.style.display = "none"},
+			esc = function(e) {
 				if (e.keyCode === 27) {
 					if (UI.overlay.keybind.style.display === "flex") Game.close_keybind();
 					else if (UI.menu.credits.style.display === "flex") Game.close_credits();
@@ -1754,17 +1752,17 @@
 					}
 				}
 			},
-			pause_menu = e => {
+			pause_menu = function(e) {
 				if (e.keyCode === 27 && UI.overlay.menu.style.display !== "flex") {
 					if (UI.overlay.pause.style.display === "flex") {
 						// Hide pause menu
 						UI.overlay.pause.style["-webkit-animation-name"] = "overlay_pause_fade_out";
 						UI.overlay.pause.style["animation-name"] = "overlay_pause_fade_out";
 						Map.container.classList.remove("blur");
-						setTimeout(() => {
+						setTimeout(function() {
 							hide(UI.overlay.pause);
 							footer.container.style.opacity = 0;
-							setTimeout(() => {hide(footer.container)}, 200);
+							setTimeout(function() {hide(footer.container)}, 200);
 							if (!in_fight) player.movement.on()
 						}, 200)
 					} else {
@@ -1781,13 +1779,13 @@
 					}
 				}
 			},
-			select_character = c => {
+			select_character = function(c) {
 				is_character_selected = true;
 				character_selected = c;
 				Game.check_new_game_validity();
 				TempPlayer = new Character(c);
 				show(play.new_game.character_info);
-				document.querySelectorAll(".btn[data-character").forEach(e => {e.style.backgroundImage = "url(assets/textures/btn/btn-class.png)"});
+				document.querySelectorAll(".btn[data-character").forEach(function(e) {e.style.backgroundImage = "url(assets/textures/btn/btn-class.png)"});
 				$(`.btn[data-character=${c}]`).style.backgroundImage = "url(assets/textures/btn/btn-class-selected.png)";
 				play.new_game.health_value.textContent = TempPlayer.health;
 				play.new_game.shield_value.textContent = TempPlayer.shield;
@@ -1799,7 +1797,7 @@
 				play.new_game.ult_title.textContent = `${ult_title}: ${ability_id[TempPlayer.ult.id]}`;
 				play.new_game.ult_desc.textContent = ability_desc[TempPlayer.ult.id]
 			},
-			update_hud = backup => {
+			update_hud = function(backup) {
 				hud.nickname.textContent = backup.player.nickname;
 				hud.health_info.textContent = `${health} (${backup.player.health}/${backup.player.health_max})`;
 				hud.health_value.setAttribute("max", backup.player.health_max);
@@ -1808,7 +1806,7 @@
 				hud.mana_value.setAttribute("max", backup.player.mana_max);
 				hud.mana_value.setAttribute("value", backup.player.mana)
 			},
-			update_mini_hud = (backup, enemy_id, enemy) => {
+			update_mini_hud = function(backup, enemy_id, enemy) {
 				mini_hud.health_info.textContent = `${health} (${backup.player.health}/${backup.player.health_max})`;
 				mini_hud.health_value.setAttribute("max", backup.player.health_max);
 				mini_hud.health_value.setAttribute("value", backup.player.health);
@@ -1819,17 +1817,17 @@
 				mini_hud.enemy_health_value.setAttribute("max", Entity[enemy].health_max);
 				mini_hud.enemy_health_value.setAttribute("value", backup.entity[enemy_id].health)
 			},
-			update_subtitle = map => {
+			update_subtitle = function(map) {
 				Map.subtitle.textContent = Subtitle[map].text;
 				show(Map.subtitle);
 				setTimeout(function() {hide(Map.subtitle)}, Subtitle[map].duration)
 			},
-			dialog = dialog => {
+			dialog = function(dialog) {
 				Map.dialog_content.innerHTML = `${Teller[dialog.teller]}: <i>${dialog.text}</i>`;
 				show(Map.dialog);
 				setTimeout(function() {hide(Map.dialog)}, dialog.duration)
 			},
-			show_player_attack = text => {
+			show_player_attack = function(text) {
 				hide(UI.menu.fight.querySelector(".actions"));
 				$(".player_attack").textContent = text;
 				show($(".player_attack"));
@@ -1838,17 +1836,17 @@
 					enemy_turn(window["Backup"], current_enemy_id, current_enemy)
 				}, 3000)
 			},
-			show_enemy_attack = text => {
+			show_enemy_attack = function(text) {
 				hide(UI.menu.fight.querySelector(".actions"));
 				$(".enemy_attack").textContent = text;
 				show($(".enemy_attack"));
-				setTimeout(() => {
+				setTimeout(function() {
 					hide($(".enemy_attack"));
 					update_ability_use(window["Backup"]);
 					show(UI.menu.fight.querySelector(".actions"))
 				}, 3000)
 			},
-			update_ability_use = backup => {
+			update_ability_use = function(backup) {
 				if (backup.player.mana - fight.btn_ability1.querySelector(".cost").textContent < 0) {
 					fight.btn_ability1.setAttribute("disabled", "disabled");
 					fight.btn_ability1.querySelector(".ability_name").style.color = "#776952"
@@ -1871,7 +1869,7 @@
 					fight.btn_ult.querySelector(".ability_name").style.color = "#000"
 				}
 			},
-			ability1 = () => {
+			ability1 = function() {
 				if (window["Backup"].player.mana - fight.btn_ability1.querySelector(".cost").textContent >= 0) {
 					// Enough mana to use an ability
 					window["Backup"].player.mana -= fight.btn_ability1.querySelector(".cost").textContent;
@@ -1902,7 +1900,7 @@
 					}
 				}
 			},
-			ability2 = () => {
+			ability2 = function() {
 				if (window["Backup"].player.mana - fight.btn_ability2.querySelector(".cost").textContent >= 0) {
 					// Enough mana to use an ability
 					window["Backup"].player.mana -= fight.btn_ability2.querySelector(".cost").textContent;
@@ -1934,7 +1932,7 @@
 					}
 				}
 			},
-			ult = () => {
+			ult = function() {
 				if (window["Backup"].player.mana - fight.btn_ult.querySelector(".cost").textContent >= 0) {
 					// Enough mana to use an ability
 					window["Backup"].player.mana -= fight.btn_ult.querySelector(".cost").textContent;
@@ -1979,7 +1977,7 @@
 					}
 				}
 			},
-			flee = () => {
+			flee = function() {
 				if (confirm("Are you sure you want to run away?\nYou'll recover all your mana points but you'll lost 8 health points.")) {
 					fight.btn_flee.removeEventListener("click", flee);
 					player.movement.on()
@@ -2015,7 +2013,7 @@
 					update_hud(window["Backup"])
 				}
 			},
-			enemy_turn = (backup, enemy_id, enemy) => {
+			enemy_turn = function(backup, enemy_id, enemy) {
 				// Enemy flight test
 				let flight_test = Math.floor(20 * Math.random() + 1);
 				if (flight_test <= backup.entity[enemy_id].scare) {
@@ -2037,8 +2035,7 @@
 							dialog(Dialog.misc.flight[1]);
 							break;
 						case "skeleton2":
-							dialog(Dialog.misc.flight[2]);
-							break
+							dialog(Dialog.misc.flight[2])
 					}
 				}
 				else {
@@ -2098,13 +2095,12 @@
 								(backup.player.health - Entity[enemy].ability1.damage <= 0) ? Game.death() : backup.player.health -= Entity[enemy].ability1.damage;
 								play_sound("arrow");
 								update_mini_hud(backup, enemy_id, enemy);
-								show_enemy_attack(enemy_ability_id.arrow);
-								break
+								show_enemy_attack(enemy_ability_id.arrow)
 						}
 					}
 				}
 			},
-			enemy_death = (backup, enemy_id, enemy) => {
+			enemy_death = function(backup, enemy_id, enemy) {
 				in_fight = false;
 				enemy_near = false;
 				backup.entity[enemy_id].health = 0;
@@ -2127,33 +2123,33 @@
 						break
 				}
 			},
-			enemy_block_test = enemy => {
+			enemy_block_test = function(enemy) {
 				let block_test = false,
 					x = Math.floor(20 * Math.random() + 1);
 				if (x <= Entity[enemy].shield) block_test = true;
 				return block_test
 			},
-			enemy_block = (backup, enemy_id, enemy) => {
+			enemy_block = function(backup, enemy_id, enemy) {
 				play_sound("parade");
 				update_mini_hud(backup, enemy_id, enemy);
 				show_player_attack(enemy_block_text)
 			},
-			player_block_test = backup => {
+			player_block_test = function(backup) {
 				let block_test = false,
 					x = Math.floor(20 * Math.random() + 1);
 				if (x <= backup.player.shield) block_test = true;
 				if (backup.player.shield === 20) backup.player.shield = 3;
 				return block_test
 			},
-			now = () => {
+			now = function() {
 				let D = new Date();
 				return `${D.getFullYear()}-${D.getMonth() + 1}-${D.getDate()}-${D.getHours()}-${D.getMinutes()}-${D.getSeconds()}`
 			},
-			convert_date = date => {
+			convert_date = function(date) {
 				date = date.split("-");
 				return `${date[0]}/${date[1]}/${date[2]} ${date[3]}:${date[4]}:${date[5]}`
 			},
-			set_volume_range = (input, target, source) => {
+			set_volume_range = function(input, target, source) {
 				if (input.value.length !== 0 && /^\d*\.?\d*$/.test(input.value)) {
 					// a number has been entered
 					if (input.value >= 0 && input.value <= 100) {
@@ -2179,7 +2175,7 @@
 					}
 				}
 			},
-			set_volume_nb = (input, target, source) => {
+			set_volume_nb = function(input, target, source) {
 				if (source === "sound") {
 					Volume.sound = input.value / 100;
 					Sound.click.volume = Volume.sound;
@@ -2200,7 +2196,7 @@
 				} else Volume.music = input.value / 100;
 				return target.value = input.value
 			},
-			play_sound = (sound, loop) => {
+			play_sound = function(sound, loop) {
 				Sound[sound].currentTime = 0;
 				Sound[sound].loop = loop;
 				Sound[sound].play()
