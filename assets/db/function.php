@@ -53,8 +53,4 @@ class Quiver
 }
 
 $game = new Quiver();
-var_dump($game->get_backup('paul','asas'));
-
-//var_dump($game);
-
 ?>
