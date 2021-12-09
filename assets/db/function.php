@@ -30,13 +30,15 @@ class Quiver
         $password=htmlspecialchars($password);
         $password=md5($password);
         $connection_query=$this->bdd->query("SELECT nickname FROM users where email='$email'and password='$password';");
+        $connection=$connection_query->fetch();
+        return $connection;
 
     }
     
 }
 
 $game = new Quiver();
-var_dump($game->inscription('mat','123@e','123'));
+var_dump($game->conection('123@e','123'));
 
 //var_dump($game);
 
