@@ -34,16 +34,27 @@ class Quiver
         return $connection;
 
     }
-    public function Create_backup($nickname,$backup)
+    public function Create_backup($nickname,$backup,$email)
     {
         $nickname=htmlspecialchars($nickname);
-        $insert_backup=$this->bdd->prepare("INSERT INTO sauve(json,id_users) VALUES (?,?)");
+        $insert_backup=$this->bdd->prepare("INSERT INTO `backup` ( `json`, `id_users`) VALUES ( ?, (SELECT id_users FROM users WHERE nickname=? AND email=?))");
+        $insert_backup->execute(array($backup,$nickname,$email));
+        return  "saved";
+    }
+    public function get_backup($nickname,$email)
+    {
+        $email=htmlspecialchars($email);
+        $password=htmlspecialchars($password);
+        $password=md5($password);
+        $connection_query=$this->bdd->query("SELECT json FROM users where email='$email'and password='$password';");
+        $connection=$connection_query->fetch();
+        return $connection;
     }
     
 }
 
 $game = new Quiver();
-var_dump($game->conection('123@e','123'));
+var_dump($game->Create_backup('paul','json{dddddd}','asas'));
 
 //var_dump($game);
 
